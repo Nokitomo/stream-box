@@ -1,0 +1,72 @@
+name: Scrape AnimeUnity Catalog
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_pages:
+        description: "Optional limit for archive pages (testing)"
+        required: false
+        type: string
+      max_items:
+        description: "Optional limit for items (testing)"
+        required: false
+        type: string
+      detail_concurrency:
+        description: "Optional detail concurrency override"
+        required: false
+        type: string
+  schedule:
+    - cron: "15 2 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape-animeunity-catalog
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run AnimeUnity Scraper
+        env:
+          MAX_PAGES: ${{ github.event.inputs.max_pages }}
+          MAX_ITEMS: ${{ github.event.inputs.max_items }}
+          DETAIL_CONCURRENCY: ${{ github.event.inputs.detail_concurrency }}
+        run: |
+          ARGS=(--out data/providers/animeunity/catalog.json)
+          if [ -n "${MAX_PAGES}" ]; then ARGS+=(--max-pages "${MAX_PAGES}"); fi
+          if [ -n "${MAX_ITEMS}" ]; then ARGS+=(--max-items "${MAX_ITEMS}"); fi
+          if [ -n "${DETAIL_CONCURRENCY}" ]; then ARGS+=(--detail-concurrency "${DETAIL_CONCURRENCY}"); fi
+          node scripts/scrapers/animeunity-catalog.mjs "${ARGS[@]}"
+
+      - name: Validate JSON
+        run: |
+          node -e "const fs=require('fs'); const p='data/providers/animeunity/catalog.json'; const raw=fs.readFileSync(p,'utf8'); const json=JSON.parse(raw); if(!Array.isArray(json.items)){throw new Error('items is not an array');} console.log('items:', json.items.length);"
+
+      - name: Commit and Push Updated JSON
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/providers/animeunity/catalog.json
+          if git diff --staged --quiet; then
+            echo "No catalog changes to commit."
+            exit 0
+          fi
+          git commit -m "chore(data): update animeunity catalog"
+          git push
