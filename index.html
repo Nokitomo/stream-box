@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netflix Italia - Clone UI</title>
+  <meta name="description" content="Clone UI della homepage pubblica di Netflix, realizzato in HTML, CSS e JavaScript." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <a class="brand" href="#" aria-label="Netflix home">
+          <svg viewBox="0 0 111 30" aria-hidden="true" class="brand-wordmark">
+            <path fill="currentColor" d="M105.06 14.28c-.83-.44-1.83-.64-3.23-.64-2.97 0-5.1 1.42-5.1 4.08 0 2.37 1.73 3.4 4.69 4.25 2.34.67 3.04 1.1 3.04 2.05 0 .97-.84 1.6-2.56 1.6-1.66 0-3.22-.53-4.61-1.39v3.26c1.15.57 2.85.97 4.74.97 3.53 0 5.79-1.7 5.79-4.48 0-2.13-1.26-3.3-4.37-4.2-2.45-.72-3.35-1.13-3.35-2.1 0-.78.74-1.42 2.22-1.42 1.66 0 2.82.39 4.02 1.01l-1.28-2.99ZM90.39 13.64c-3.73 0-6.18 2.95-6.18 7.37 0 4.44 2.48 7.45 6.32 7.45 1.87 0 3.45-.5 4.64-1.48v-3.26c-1.07.89-2.37 1.4-4.05 1.4-2.33 0-3.67-1.36-3.88-3.7h8.34v-1.63c0-4.05-1.97-6.15-5.19-6.15Zm-3.03 5.56c.31-1.6 1.22-2.48 2.7-2.48 1.59 0 2.37 1 2.49 2.48h-5.19ZM72.73 28.17h3.1V8.56h-3.1v19.61Zm-11.03-14.2c-1.91 0-3.49.71-4.73 2.06v-1.76h-3.1v13.9h3.1v-7.61c0-2.32 1.18-3.6 3.17-3.6 1.75 0 2.73 1.1 2.73 3.15v8.06h3.09v-8.63c0-3.51-1.69-5.57-4.26-5.57Zm-17.53 0c-3.85 0-6.45 2.91-6.45 7.25 0 4.37 2.61 7.24 6.45 7.24 3.85 0 6.45-2.87 6.45-7.24 0-4.34-2.6-7.25-6.45-7.25Zm0 11.63c-1.98 0-3.22-1.63-3.22-4.38 0-2.71 1.24-4.38 3.22-4.38 1.98 0 3.22 1.67 3.22 4.38 0 2.75-1.24 4.38-3.22 4.38Zm-16.99-7.62c0-1.03.86-1.67 2.33-1.67 1.34 0 2.57.37 3.7 1.04v-2.9c-1.08-.47-2.53-.78-4.17-.78-3.4 0-5.55 1.6-5.55 4.28 0 2.14 1.28 3.18 4.15 4.02 2.12.62 2.82 1.07 2.82 2.02 0 .98-.84 1.55-2.43 1.55-1.64 0-3.3-.54-4.79-1.46v3c1.28.68 3.1 1.1 4.96 1.1 3.41 0 5.55-1.69 5.55-4.33 0-2.07-1.06-3.12-4.01-4-2.11-.63-2.56-.95-2.56-1.87Zm-10.03-4.01-2.99 9.66-3.15-9.66H7.83l4.78 13.9h3.32l4.78-13.9h-3.56ZM0 28.17h3.18V8.56H0v19.61Z"/>
+          </svg>
+        </a>
+
+        <div class="nav-actions">
+          <button class="lang-btn" type="button" aria-label="Seleziona lingua">
+            <span>Italiano</span>
+          </button>
+          <a class="signin-btn" href="#">Accedi</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-backdrop"></div>
+        <div class="hero-noise"></div>
+        <div class="container hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">Netflix</p>
+            <h1>Film, serie TV e tanto altro, senza limiti.</h1>
+            <p class="subheadline">A partire da 6,99 €. Disdici quando vuoi.</p>
+            <p class="hero-support">Vuoi guardare Netflix? Inserisci l'indirizzo email per abbonarti o riattivare il tuo abbonamento.</p>
+
+            <form class="cta-form" id="ctaForm">
+              <label class="email-field">
+                <input type="email" id="email" placeholder=" " aria-label="Indirizzo email" required>
+                <span>Indirizzo email</span>
+              </label>
+              <button class="cta-btn" type="submit">Inizia <span aria-hidden="true">›</span></button>
+            </form>
+          </div>
+        </div>
+        <div class="hero-curve" aria-hidden="true"></div>
+      </section>
+
+      <section class="promo-strip container">
+        <div class="promo-card">
+          <div>
+            <p class="promo-kicker">Tutto ciò che ami di Netflix a soli 6,99 €.</p>
+            <p class="promo-text">Approfitta del nostro piano con pubblicità: è il più conveniente.</p>
+          </div>
+          <button class="ghost-btn" type="button">Scopri di più</button>
+        </div>
+      </section>
+
+      <section class="content-section container">
+        <div class="section-heading">
+          <h2>I titoli del momento</h2>
+          <div class="slider-controls">
+            <button class="slider-btn" type="button" data-dir="prev" aria-label="Scorri a sinistra">‹</button>
+            <button class="slider-btn" type="button" data-dir="next" aria-label="Scorri a destra">›</button>
+          </div>
+        </div>
+
+        <div class="poster-rail" id="posterRail">
+          <article class="poster-card featured-card" style="--bg:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">1</span>
+            <div class="poster-meta"><h3>WWE WrestleMania</h3><p>Evento • Adrenalina pura</p></div>
+          </article>
+          <article class="poster-card" style="--bg:url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">2</span>
+            <div class="poster-meta"><h3>ONE PIECE</h3><p>Avventura</p></div>
+          </article>
+          <article class="poster-card" style="--bg:url('https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">3</span>
+            <div class="poster-meta"><h3>La legge di Lidia Poët</h3><p>Dramma</p></div>
+          </article>
+          <article class="poster-card" style="--bg:url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">4</span>
+            <div class="poster-meta"><h3>THRASH – Furia dall’Oceano</h3><p>Azione</p></div>
+          </article>
+          <article class="poster-card" style="--bg:url('https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">5</span>
+            <div class="poster-meta"><h3>Bridgerton</h3><p>Romance</p></div>
+          </article>
+          <article class="poster-card" style="--bg:url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">6</span>
+            <div class="poster-meta"><h3>Non abbiam bisogno di parole</h3><p>Commedia</p></div>
+          </article>
+          <article class="poster-card" style="--bg:url('https://images.unsplash.com/photo-1499364615650-ec38552f4f34?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">7</span>
+            <div class="poster-meta"><h3>Peaky Blinders: The Immortal Man</h3><p>Crime</p></div>
+          </article>
+          <article class="poster-card" style="--bg:url('https://images.unsplash.com/photo-1502139214982-d0ad755818d8?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">8</span>
+            <div class="poster-meta"><h3>Oi Vita Mia</h3><p>Dramma</p></div>
+          </article>
+          <article class="poster-card" style="--bg:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">9</span>
+            <div class="poster-meta"><h3>Peaky Blinders</h3><p>Crime</p></div>
+          </article>
+          <article class="poster-card" style="--bg:url('https://images.unsplash.com/photo-1505685296765-3a2736de412f?auto=format&fit=crop&w=900&q=80')">
+            <span class="rank">10</span>
+            <div class="poster-meta"><h3>Stranger Things</h3><p>Sci-fi</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section container">
+        <div class="section-heading simple"><h2>Motivi in più per abbonarsi</h2></div>
+        <div class="benefit-grid">
+          <article class="benefit-card">
+            <h3>Goditi Netflix sulla tua TV</h3>
+            <p>Guarda Netflix su smart TV, Playstation, Xbox, Chromecast, Apple TV, lettori Blu-ray e molti altri dispositivi.</p>
+            <div class="benefit-icon tv"></div>
+          </article>
+          <article class="benefit-card">
+            <h3>Scarica le tue serie da guardare offline</h3>
+            <p>Salva facilmente i tuoi preferiti così avrai sempre qualcosa da guardare.</p>
+            <div class="benefit-icon download"></div>
+          </article>
+          <article class="benefit-card">
+            <h3>Guarda Netflix ovunque</h3>
+            <p>Cellulare, tablet, laptop e TV: scegli tu cosa usare per guardare in streaming film e serie TV senza limiti.</p>
+            <div class="benefit-icon scope"></div>
+          </article>
+          <article class="benefit-card">
+            <h3>Crea profili per i bambini</h3>
+            <p>I bambini scoprono nuove avventure in compagnia dei loro personaggi preferiti in uno spazio tutto loro già incluso nel tuo abbonamento.</p>
+            <div class="benefit-icon kids"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section container faq-section">
+        <div class="section-heading simple"><h2>Domande frequenti</h2></div>
+        <div class="faq-list" id="faqList">
+          <article class="faq-item active">
+            <button class="faq-question" type="button" aria-expanded="true">Cos'è Netflix?<span>+</span></button>
+            <div class="faq-answer">
+              <p>Netflix è un servizio di streaming che offre una varietà di serie TV, film, documentari pluripremiati e tanto altro su una vasta gamma di dispositivi connessi a Internet.</p>
+              <p>Guarda quello che vuoi, quando vuoi. Il tutto a una quota mensile ridotta. C'è sempre qualcosa di nuovo da scoprire: aggiungiamo nuovi film e serie TV ogni settimana.</p>
+            </div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">Quanto costa Netflix?<span>+</span></button>
+            <div class="faq-answer">
+              <p>Guarda Netflix su smartphone, tablet, Smart TV, laptop o dispositivi per lo streaming, il tutto per un importo mensile fisso. Piani da 6,99 € a 19,99 €/mese.</p>
+            </div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">Dove posso guardare Netflix?<span>+</span></button>
+            <div class="faq-answer">
+              <p>Guarda Netflix dove vuoi, quando vuoi. Accedi al tuo account per guardare subito Netflix dal tuo computer su netflix.com oppure da qualsiasi dispositivo connesso a Internet che supporta l'app Netflix.</p>
+            </div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">Come posso disdire?<span>+</span></button>
+            <div class="faq-answer">
+              <p>Netflix è flessibile. Puoi facilmente disdire il tuo contratto online con due clic. Nessuna penale: attiva o disdici il tuo account in qualsiasi momento.</p>
+            </div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">Netflix è adatto ai bambini?<span>+</span></button>
+            <div class="faq-answer">
+              <p>L'area Netflix Bambini, già inclusa nell'abbonamento, offre ai genitori un maggiore controllo sui contenuti e ai più piccoli uno spazio dedicato dove guardare serie TV e film per tutta la famiglia.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="bottom-cta">
+          <p>Vuoi guardare Netflix? Inserisci l'indirizzo email per abbonarti o riattivare il tuo abbonamento.</p>
+          <form class="cta-form compact" id="bottomCtaForm">
+            <label class="email-field">
+              <input type="email" placeholder=" " aria-label="Indirizzo email" required>
+              <span>Indirizzo email</span>
+            </label>
+            <button class="cta-btn" type="submit">Inizia <span aria-hidden="true">›</span></button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      <p class="footer-title">Domande? Chiama il numero <a href="#">800 931 413</a></p>
+      <div class="footer-links">
+        <a href="#">Domande frequenti</a>
+        <a href="#">Centro assistenza</a>
+        <a href="#">Account</a>
+        <a href="#">Media Center</a>
+        <a href="#">Rapporti con gli investitori</a>
+        <a href="#">Opportunità di lavoro</a>
+        <a href="#">Riscatta carte regalo</a>
+        <a href="#">Acquista carte regalo</a>
+        <a href="#">Come guardare Netflix</a>
+        <a href="#">Condizioni di utilizzo</a>
+        <a href="#">Privacy</a>
+        <a href="#">Preferenze per i cookie</a>
+        <a href="#">Informazioni sull'azienda</a>
+        <a href="#">Contattaci</a>
+        <a href="#">Test di velocità</a>
+      </div>
+      <button class="lang-btn footer-lang" type="button">Italiano</button>
+      <p class="country">Netflix Italia</p>
+      <p class="disclaimer">Questa è una ricostruzione front-end ispirata alla homepage pubblica di Netflix per fini di studio UI.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
