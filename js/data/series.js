@@ -1,4 +1,7 @@
-export const seriesCatalog = [
+window.NetflixClone = window.NetflixClone || {};
+window.NetflixClone.data = window.NetflixClone.data || {};
+
+window.NetflixClone.data.seriesCatalog = [
   {
     id: "stranger-things",
     title: "Stranger Things",

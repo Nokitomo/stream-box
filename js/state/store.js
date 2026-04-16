@@ -1,110 +1,174 @@
-import { featuredId } from "../data/catalog.js";
+window.NetflixClone = window.NetflixClone || {};
 
-const STORAGE_KEY = "netflix-clone-my-list";
+(function initStore(app) {
+  const data = app.data || {};
+  const storage = app.storage || {};
+  const defaultHero = data.featuredId || "";
 
-function loadStoredList() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      return new Set();
-    }
-
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) {
-      return new Set();
-    }
-
-    return new Set(parsed);
-  } catch (error) {
-    return new Set();
-  }
-}
-
-function persistList(listSet) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify([...listSet]));
-}
-
-export function createStore() {
-  const listeners = new Set();
-  const state = {
-    activeTab: "home",
-    query: "",
-    heroId: featuredId,
-    selectedId: null,
-    myList: loadStoredList()
-  };
-
-  function notify() {
-    listeners.forEach((listener) => listener(state));
+  function loadMyList() {
+    return new Set(storage.loadArray(storage.keys.myList));
   }
 
-  return {
-    getState() {
-      return state;
-    },
+  function saveMyList(myListSet) {
+    storage.saveArray(storage.keys.myList, [...myListSet]);
+  }
 
-    subscribe(listener) {
-      listeners.add(listener);
-      return () => listeners.delete(listener);
-    },
+  function loadProgressMap() {
+    const map = storage.loadObject(storage.keys.progress);
+    const normalized = {};
 
-    setActiveTab(tab) {
-      if (state.activeTab === tab) {
-        return;
+    Object.keys(map).forEach((id) => {
+      normalized[id] = storage.clampProgress(map[id]);
+    });
+
+    return normalized;
+  }
+
+  function saveProgressMap(progressMap) {
+    storage.saveObject(storage.keys.progress, progressMap);
+  }
+
+  app.createStore = function createStore(initialRoute) {
+    const listeners = new Set();
+    const state = {
+      activeTab: "home",
+      query: "",
+      heroId: defaultHero,
+      selectedId: null,
+      myList: loadMyList(),
+      progressMap: loadProgressMap()
+    };
+
+    function notify() {
+      listeners.forEach((listener) => listener(state));
+    }
+
+    function setRoute(route) {
+      let dirty = false;
+      const safeTab = ["home", "series", "movie", "new", "my-list"].includes(route.tab) ? route.tab : "home";
+      const safeQuery = typeof route.query === "string" ? route.query : "";
+      const safeTitle = route.title || null;
+
+      if (state.activeTab !== safeTab) {
+        state.activeTab = safeTab;
+        dirty = true;
       }
 
-      state.activeTab = tab;
-      notify();
-    },
-
-    setQuery(query) {
-      if (state.query === query) {
-        return;
+      if (state.query !== safeQuery) {
+        state.query = safeQuery;
+        dirty = true;
       }
 
-      state.query = query;
-      notify();
-    },
-
-    setHero(id) {
-      if (!id || state.heroId === id) {
-        return;
+      if (state.selectedId !== safeTitle) {
+        state.selectedId = safeTitle;
+        dirty = true;
       }
 
-      state.heroId = id;
-      notify();
-    },
-
-    openModal(id) {
-      if (state.selectedId === id) {
-        return;
-      }
-
-      state.selectedId = id;
-      notify();
-    },
-
-    closeModal() {
-      if (!state.selectedId) {
-        return;
-      }
-
-      state.selectedId = null;
-      notify();
-    },
-
-    toggleList(id) {
-      if (state.myList.has(id)) {
-        state.myList.delete(id);
-        persistList(state.myList);
+      if (dirty) {
         notify();
-        return false;
       }
-
-      state.myList.add(id);
-      persistList(state.myList);
-      notify();
-      return true;
     }
+
+    if (initialRoute) {
+      setRoute(initialRoute);
+    }
+
+    return {
+      getState() {
+        return state;
+      },
+
+      subscribe(listener) {
+        listeners.add(listener);
+        return () => listeners.delete(listener);
+      },
+
+      setRoute,
+
+      setActiveTab(tab) {
+        if (state.activeTab === tab) {
+          return;
+        }
+
+        state.activeTab = tab;
+        notify();
+      },
+
+      setQuery(query) {
+        if (state.query === query) {
+          return;
+        }
+
+        state.query = query;
+        notify();
+      },
+
+      setHero(id) {
+        if (!id || state.heroId === id) {
+          return;
+        }
+
+        state.heroId = id;
+        notify();
+      },
+
+      openModal(id) {
+        if (state.selectedId === id) {
+          return;
+        }
+
+        state.selectedId = id;
+        notify();
+      },
+
+      closeModal() {
+        if (!state.selectedId) {
+          return;
+        }
+
+        state.selectedId = null;
+        notify();
+      },
+
+      toggleList(id) {
+        if (state.myList.has(id)) {
+          state.myList.delete(id);
+          saveMyList(state.myList);
+          notify();
+          return false;
+        }
+
+        state.myList.add(id);
+        saveMyList(state.myList);
+        notify();
+        return true;
+      },
+
+      getProgress(id, fallback) {
+        if (typeof state.progressMap[id] === "number") {
+          return state.progressMap[id];
+        }
+
+        return storage.clampProgress(fallback);
+      },
+
+      setProgress(id, value) {
+        const next = storage.clampProgress(value);
+        if (state.progressMap[id] === next) {
+          return next;
+        }
+
+        state.progressMap[id] = next;
+        saveProgressMap(state.progressMap);
+        notify();
+        return next;
+      },
+
+      bumpProgress(id, delta, fallback) {
+        const current = this.getProgress(id, fallback);
+        const next = storage.clampProgress(current + delta);
+        return this.setProgress(id, next);
+      }
+    };
   };
-}
+})(window.NetflixClone);

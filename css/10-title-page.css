@@ -1,0 +1,154 @@
+.title-page {
+  background: #141414;
+}
+
+.title-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  background: rgba(20, 20, 20, 0.92);
+  backdrop-filter: blur(5px);
+}
+
+.title-header-inner {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title-home-link {
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.9rem;
+}
+
+.title-main {
+  padding-top: 64px;
+}
+
+.title-hero {
+  position: relative;
+  min-height: min(86vh, 840px);
+  display: grid;
+  align-items: end;
+  padding: 4.2rem 0;
+}
+
+.title-backdrop,
+.title-gradient {
+  position: absolute;
+  inset: 0;
+}
+
+.title-backdrop {
+  background-size: cover;
+  background-position: center;
+}
+
+.title-gradient {
+  background:
+    linear-gradient(75deg, rgba(0, 0, 0, 0.78) 22%, rgba(0, 0, 0, 0.24) 56%, rgba(0, 0, 0, 0.75) 90%),
+    linear-gradient(180deg, rgba(20, 20, 20, 0) 64%, #141414 94%);
+}
+
+.title-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.title-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+}
+
+.title-hero h1 {
+  margin: 0.75rem 0 0;
+  font-size: clamp(1.9rem, 4.4vw, 4rem);
+  max-width: 16ch;
+  line-height: 1.02;
+}
+
+.title-meta,
+.title-cast {
+  margin: 0.9rem 0 0;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.title-desc {
+  margin: 0.85rem 0 0;
+  max-width: 66ch;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.55;
+}
+
+.title-actions {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.title-section {
+  padding-bottom: 3.2rem;
+}
+
+.title-section h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.title-similar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.similar-card {
+  border: 0;
+  background: #1d1d1d;
+  border-radius: 10px;
+  overflow: hidden;
+  color: #fff;
+  text-align: left;
+  padding: 0;
+}
+
+.similar-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.similar-content {
+  padding: 0.7rem;
+}
+
+.similar-title {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.similar-meta {
+  margin: 0.28rem 0 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+@media (max-width: 980px) {
+  .title-similar-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .title-similar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title-actions .btn {
+    flex: 1;
+  }
+}

@@ -28,10 +28,6 @@
     width: 100%;
   }
 
-  .profile-btn span {
-    display: none;
-  }
-
   .hero {
     min-height: 66vh;
     padding-bottom: 4.6rem;

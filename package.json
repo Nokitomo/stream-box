@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "lint": "node scripts/lint-static.js",
+    "test": "node scripts/test-static.js",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

@@ -1,9 +1,8 @@
-import { movieCatalog } from "./movies.js";
-import { seriesCatalog } from "./series.js";
+window.NetflixClone = window.NetflixClone || {};
+window.NetflixClone.data = window.NetflixClone.data || {};
 
-export const featuredId = "stranger-things";
-
-export const rowConfigs = [
+window.NetflixClone.data.featuredId = "stranger-things";
+window.NetflixClone.data.rowConfigs = [
   { id: "continue", title: "Continua a guardare" },
   { id: "trending", title: "Di tendenza adesso" },
   { id: "top10", title: "Top 10 in Italia oggi", top10: true },
@@ -15,4 +14,7 @@ export const rowConfigs = [
   { id: "new-release", title: "Nuove uscite" }
 ];
 
-export const mediaCatalog = [...seriesCatalog, ...movieCatalog];
+window.NetflixClone.data.mediaCatalog = [
+  ...(window.NetflixClone.data.seriesCatalog || []),
+  ...(window.NetflixClone.data.movieCatalog || [])
+];

@@ -1,4 +1,7 @@
-export const movieCatalog = [
+window.NetflixClone = window.NetflixClone || {};
+window.NetflixClone.data = window.NetflixClone.data || {};
+
+window.NetflixClone.data.movieCatalog = [
   {
     id: "extraction-2",
     title: "Tyler Rake 2",
