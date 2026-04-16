@@ -1,11 +1,12 @@
 window.NetflixClone = window.NetflixClone || {};
 
 (function initRendererFactory(app) {
-  const mediaCatalog = app.data.mediaCatalog || [];
-  const rowConfigs = app.data.rowConfigs || [];
-  const featuredId = app.data.featuredId || "";
-  const mediaById = new Map(mediaCatalog.map((item) => [item.id, item]));
   const fallbackBackdrop = "assets/backdrop-fallback.svg";
+  let mediaCatalog = [];
+  let rowConfigs = [];
+  let featuredId = "";
+  let mediaById = new Map();
+  let maxItemsPerRow = 120;
 
   function matchesTab(item, activeTab, myListSet) {
     if (activeTab === "home") {
@@ -55,7 +56,9 @@ window.NetflixClone = window.NetflixClone || {};
 
   function buildRows(state, visibleItems, store) {
     if (state.activeTab === "my-list") {
-      const listItems = visibleItems.filter((item) => state.myList.has(item.id));
+      const listItems = visibleItems
+        .filter((item) => state.myList.has(item.id))
+        .slice(0, maxItemsPerRow);
       if (listItems.length === 0) {
         return [];
       }
@@ -76,6 +79,8 @@ window.NetflixClone = window.NetflixClone || {};
             .filter((item) => item.rank > 0)
             .sort((a, b) => a.rank - b.rank)
             .slice(0, 10);
+        } else {
+          items = items.slice(0, maxItemsPerRow);
         }
 
         return { id: row.id, title: row.title, top10: row.top10, items };
@@ -183,6 +188,13 @@ window.NetflixClone = window.NetflixClone || {};
   }
 
   app.initRenderer = function initRenderer(store) {
+    const data = app.data || {};
+    mediaCatalog = Array.isArray(data.mediaCatalog) ? data.mediaCatalog : [];
+    rowConfigs = Array.isArray(data.rowConfigs) ? data.rowConfigs : [];
+    featuredId = data.featuredId || "";
+    mediaById = new Map(mediaCatalog.map((item) => [item.id, item]));
+    maxItemsPerRow = Number(data.maxItemsPerRow) > 0 ? Number(data.maxItemsPerRow) : 120;
+
     const toast = document.getElementById("appToast");
     let toastTimeout = null;
 

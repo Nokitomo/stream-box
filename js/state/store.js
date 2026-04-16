@@ -1,9 +1,7 @@
 window.NetflixClone = window.NetflixClone || {};
 
 (function initStore(app) {
-  const data = app.data || {};
   const storage = app.storage || {};
-  const defaultHero = data.featuredId || "";
 
   function loadMyList() {
     return new Set(storage.loadArray(storage.keys.myList));
@@ -29,6 +27,8 @@ window.NetflixClone = window.NetflixClone || {};
   }
 
   app.createStore = function createStore(initialRoute) {
+    const data = app.data || {};
+    const defaultHero = data.featuredId || "";
     const listeners = new Set();
     const state = {
       activeTab: "home",

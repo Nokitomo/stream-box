@@ -1,6 +1,10 @@
 window.NetflixClone = window.NetflixClone || {};
 
-(function boot(app) {
+(async function boot(app) {
+  if (typeof app.data?.loadProviderCatalog === "function") {
+    await app.data.loadProviderCatalog();
+  }
+
   const route = app.urlState.parseRoute();
   const store = app.createStore(route);
   const renderer = app.initRenderer(store);

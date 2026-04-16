@@ -1,6 +1,10 @@
 window.NetflixClone = window.NetflixClone || {};
 
-(function bootTitlePage(app) {
+(async function bootTitlePage(app) {
+  if (typeof app.data?.loadProviderCatalog === "function") {
+    await app.data.loadProviderCatalog();
+  }
+
   const data = app.data || {};
   const storage = app.storage || {};
   const mediaCatalog = data.mediaCatalog || [];
