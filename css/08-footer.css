@@ -1,0 +1,27 @@
+.app-footer {
+  padding: 3.6rem 0 2.7rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.footer-title {
+  margin: 0 0 1.15rem;
+  font-size: 0.96rem;
+}
+
+.footer-title a,
+.footer-links a {
+  text-decoration: underline;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem 1.2rem;
+  font-size: 0.86rem;
+}
+
+.footer-note {
+  margin: 1.3rem 0 0;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.44);
+}

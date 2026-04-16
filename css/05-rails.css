@@ -1,0 +1,59 @@
+.rails-section {
+  margin-top: -2.1rem;
+  position: relative;
+  z-index: 3;
+}
+
+.rail-block {
+  margin: 0 0 2.1rem;
+}
+
+.rail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.7rem;
+}
+
+.rail-title {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.33rem);
+  font-weight: 700;
+}
+
+.rail-controls {
+  display: inline-flex;
+  gap: 0.42rem;
+}
+
+.rail-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(20, 20, 20, 0.72);
+}
+
+.rail-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 240px);
+  gap: 0.55rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 0.45rem 0.2rem;
+}
+
+.rail-track::-webkit-scrollbar {
+  display: none;
+}
+
+.rail-empty {
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1.1rem;
+  color: rgba(255, 255, 255, 0.78);
+}

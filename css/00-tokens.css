@@ -1,0 +1,17 @@
+:root {
+  --bg: #141414;
+  --bg-elevated: #1f1f1f;
+  --text: #fff;
+  --muted: rgba(255, 255, 255, 0.72);
+  --line: rgba(255, 255, 255, 0.16);
+  --netflix-red: #e50914;
+  --netflix-red-dark: #b20710;
+  --focus: #46d4ff;
+  --header-height: 68px;
+  --container: 1460px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.38);
+  --shadow-strong: 0 16px 45px rgba(0, 0, 0, 0.62);
+}

@@ -1,0 +1,124 @@
+.media-card {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #101010;
+  box-shadow: var(--shadow-soft);
+  scroll-snap-align: start;
+  transform-origin: center bottom;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.media-card:hover,
+.media-card:focus-within {
+  transform: scale(1.12) translateY(-10px);
+  box-shadow: var(--shadow-strong);
+  z-index: 8;
+}
+
+.media-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 0.72rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 2%, rgba(0, 0, 0, 0.95) 90%);
+}
+
+.card-topline {
+  display: flex;
+  gap: 0.42rem;
+  align-items: center;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.card-match {
+  color: #5be07b;
+  font-weight: 700;
+}
+
+.card-badge {
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 3px;
+  padding: 0.05rem 0.25rem;
+}
+
+.card-title {
+  margin: 0.42rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.card-genres {
+  margin: 0.35rem 0 0;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.card-actions {
+  margin-top: 0.58rem;
+  display: flex;
+  gap: 0.42rem;
+}
+
+.card-action {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: rgba(30, 30, 30, 0.82);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.86rem;
+}
+
+.card-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.card-progress span {
+  display: block;
+  height: 100%;
+  background: var(--netflix-red);
+}
+
+.media-card.is-top10 {
+  overflow: visible;
+  padding-left: 2.2rem;
+  background: transparent;
+  box-shadow: none;
+}
+
+.media-card.is-top10:hover,
+.media-card.is-top10:focus-within {
+  transform: none;
+}
+
+.media-card.is-top10 img {
+  border-radius: var(--radius-sm);
+}
+
+.top-rank {
+  position: absolute;
+  left: 0;
+  bottom: 0.7rem;
+  font-size: 5.2rem;
+  line-height: 0.8;
+  font-weight: 900;
+  color: #000;
+  -webkit-text-stroke: 2px #7f7f7f;
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}

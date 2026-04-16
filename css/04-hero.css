@@ -1,0 +1,67 @@
+.hero {
+  position: relative;
+  min-height: min(82vh, 900px);
+  display: grid;
+  align-items: end;
+  padding: calc(var(--header-height) + 3rem) 0 6rem;
+}
+
+.hero-backdrop,
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-backdrop {
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.04);
+}
+
+.hero-gradient {
+  background:
+    linear-gradient(77deg, rgba(0, 0, 0, 0.8) 18%, rgba(0, 0, 0, 0.34) 52%, rgba(0, 0, 0, 0.8) 88%),
+    linear-gradient(180deg, rgba(20, 20, 20, 0) 60%, #141414 92%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-kicker {
+  margin: 0 0 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4.1rem);
+  line-height: 1.02;
+  max-width: 14ch;
+}
+
+.hero-meta {
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+
+.hero-description {
+  margin: 0.9rem 0 0;
+  max-width: min(58ch, 88vw);
+  color: var(--muted);
+  line-height: 1.55;
+  font-size: 1.03rem;
+}
+
+.hero-actions {
+  margin-top: 1.45rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.72rem;
+}
