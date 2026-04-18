@@ -57,6 +57,11 @@ async function run() {
     );
   }
 
+  const mockDataSource = path.join(root, "data", "mocks");
+  if (await pathExists(mockDataSource)) {
+    await copyPath("data/mocks");
+  }
+
   console.log("[build-static] dist ready");
 }
 

@@ -15,8 +15,17 @@ const requiredFiles = [
   'js/main.js',
   'js/pages/title-page.js',
   'js/pages/player-page.js',
+  'js/player/player-contract.js',
+  'js/player/player-storage.js',
+  'js/player/player-episodes.js',
+  'js/player/player-tracks.js',
+  'js/player/player-adapter.js',
+  'js/player/player-engine.js',
+  'js/player/player-ui.js',
+  'js/player/player-view.js',
   'js/data/catalog-loader.js',
-  'js/compat/polyfills.js'
+  'js/compat/polyfills.js',
+  'data/mocks/player/streams-by-id.json'
 ];
 
 requiredFiles.forEach((file) => {
@@ -38,5 +47,8 @@ const playerHtml = readFileSync(join(root, 'html/player.html'), 'utf8');
 assert(playerHtml.includes('id="playerMeta"'), 'Player senza sezione metadata');
 assert(playerHtml.includes('../js/data/catalog-loader.js'), 'Manca loader catalogo JSON nella pagina player');
 assert(playerHtml.includes('player-page.js'), 'Manca pagina player script');
+assert(playerHtml.includes('id="playerPageRoot"'), 'Player senza root pagina');
+assert(playerHtml.includes('js/player/player-engine.js'), 'Manca engine player');
+assert(playerHtml.includes('js/player/player-ui.js'), 'Manca modulo UI player');
 
 console.log('test-static: ok');

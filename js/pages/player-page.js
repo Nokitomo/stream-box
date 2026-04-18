@@ -3,121 +3,397 @@
   var utils = StreamBox.utils;
   var data = StreamBox.data;
   var store = StreamBox.store;
-  var templates = StreamBox.templates;
-
+  var tvNav = StreamBox.tvNav;
+  var adapter = StreamBox.playerAdapter;
+  var ui = StreamBox.playerUI;
+  var engineFactory = StreamBox.playerEngine;
+  var episodesLib = StreamBox.playerEpisodes;
+  var tracksLib = StreamBox.playerTracks;
+  var storage = StreamBox.playerStorage;
+  var view = StreamBox.playerView;
+  var SPEEDS = [0.25, 0.5, 1, 1.25, 1.35, 1.5, 1.75, 2];
   var refs = {};
-
+  var state = {};
   function init(payload) {
     store.init(payload || {});
     refs.root = utils.byId('playerPageRoot');
-    refs.provider = utils.byId('playerProvider');
-    refs.progress = utils.byId('playerProgressFill');
     refs.meta = utils.byId('playerMeta');
-
     var query = utils.parseQuery(global.location.search || '');
     var id = query.id;
-    if (!id) {
-      refs.root.innerHTML = '<p>ID titolo mancante.</p>';
-      return;
-    }
-
+    if (!id) return writePageError('ID titolo mancante.');
     var summary = data.getSummaryById(id);
-    if (!summary) {
-      var resolvedId = data.resolveCatalogId(id, query.provider || '');
-      if (resolvedId) {
-        summary = data.getSummaryById(resolvedId);
-        id = resolvedId;
-      }
-    }
-    if (!summary) {
-      refs.root.innerHTML = '<p>Titolo non presente nel catalogo.</p>';
-      return;
-    }
-
-    store.addHistory(id);
-    renderLoading(summary);
-    data.getDetailById(id).then(function (detail) {
-      render(summary, detail || {});
+    if (!summary) summary = data.getSummaryById(data.resolveCatalogId(id, query.provider || ''));
+    if (!summary) return writePageError('Titolo non presente nel catalogo.');
+    store.addHistory(summary.id);
+    refs.root.innerHTML = '<p>Preparazione player per <strong>' + utils.escapeHtml(summary.title) + '</strong>...</p>';
+    data.getDetailById(summary.id).then(function (detail) {
+      startWithDetail(summary, detail || {}, query);
     }, function () {
-      render(summary, {});
+      startWithDetail(summary, {}, query);
     });
   }
-
-  function renderLoading(summary) {
-    refs.root.innerHTML = '<p>Preparazione pagina player per <strong>' + utils.escapeHtml(summary.title) + '</strong>...</p>';
+  function writePageError(message) {
+    if (refs.root) refs.root.innerHTML = '<p>' + utils.escapeHtml(message || 'Errore') + '</p>';
   }
-
-  function row(label, value) {
-    return '<li><strong>' + utils.escapeHtml(label) + ':</strong> ' + utils.escapeHtml(value || '-') + '</li>';
+  function startWithDetail(summary, detail, query) {
+    adapter.resolvePayload(summary, detail, query).then(function (result) {
+      mountPlayer(summary, detail, query, result.payload, result.links);
+    }, function (error) {
+      writePageError('Errore inizializzazione player: ' + utils.safeText(error && error.message || error));
+    });
   }
-
-  function progressPercent(id) {
-    var history = store.getHistory();
-    for (var i = 0; i < history.length; i += 1) {
-      if (String(history[i]) === String(id)) return 35;
+  function mountPlayer(summary, detail, query, payload, links) {
+    refs.ui = ui.mount(refs.root, refs.meta, summary, detail, links);
+    state.summary = summary;
+    state.detail = detail;
+    state.query = query;
+    state.payload = payload;
+    state.links = links;
+    state.navigator = episodesLib.createNavigator(payload, payload.defaults.seasonIndex, payload.defaults.episodeIndex);
+    state.panelSeasonIndex = payload.defaults.seasonIndex;
+    state.activeStreamIndex = payload.defaults.streamIndex || 0;
+    state.preferences = storage.loadPreferences(payload.content.id);
+    state.playbackRate = Number(state.preferences.playbackRate) || 1;
+    state.subtitleIndex = -1;
+    state.uploadedSubtitles = [];
+    state.startupTimer = null;
+    state.startupProgress = false;
+    state.retryState = { key: '', count: 0, lastAttempt: 0 };
+    state.lastProgressSave = 0;
+    state.qualityOptions = [];
+    state.subtitleOptions = [];
+    state.locked = false;
+    state.engine = engineFactory.create(refs.ui.video);
+    bindCoreButtons();
+    bindTabs();
+    bindLists();
+    bindSubtitleUpload();
+    bindVideoState();
+    bindFavoriteButtons();
+    bindTvNavigation();
+    applyLockState(false);
+    ui.setActiveTab(refs.ui, 'server');
+    loadCurrentEpisode(loadStoredPosition());
+  }
+  function bindCoreButtons() {
+    refs.ui.playPause.onclick = function () {
+      if (state.locked) return;
+      state.engine.togglePlayPause();
+      ui.setPlayState(refs.ui, state.engine.isPaused());
+    };
+    refs.ui.seekBack.onclick = function () {
+      if (state.locked) return;
+      state.engine.seekBy(-10);
+    };
+    refs.ui.seekFwd.onclick = function () {
+      if (state.locked) return;
+      state.engine.seekBy(10);
+    };
+    refs.ui.nextEpisode.onclick = function () {
+      if (state.locked) return;
+      if (!state.navigator.goNextEpisode()) return;
+      state.panelSeasonIndex = state.navigator.toState().seasonIndex;
+      state.activeStreamIndex = 0;
+      loadCurrentEpisode(0);
+    };
+    refs.ui.pip.onclick = function () {
+      if (state.locked) return;
+      if (!state.engine.canPictureInPicture()) return ui.setRuntimeStatus(refs.ui, 'PIP non supportato', 'warn');
+      state.engine.enterPictureInPicture().catch(function () { ui.setRuntimeStatus(refs.ui, 'PIP non disponibile', 'warn'); });
+    };
+    refs.ui.fullscreen.onclick = function () {
+      if (state.locked) return;
+      toggleFullscreen();
+    };
+    refs.ui.lock.onclick = function () { applyLockState(!state.locked); };
+  }
+  function bindTabs() {
+    for (var i = 0; i < refs.ui.tabs.length; i += 1) {
+      refs.ui.tabs[i].onclick = function () { ui.setActiveTab(refs.ui, this.getAttribute('data-tab') || 'server'); };
     }
-    return 0;
   }
-
-  function render(summary, detail) {
-    var watchLink = (detail.links && detail.links.watch) || (detail.links && detail.links.source) || summary.sourceLink || '';
-    var providerPage = (detail.links && detail.links.page) || '';
-    var pageLink = utils.resolvePath('html/title.html') + '?id=' + encodeURIComponent(summary.id) + '&provider=' + encodeURIComponent(summary.provider || '');
-    var back = templates.backdrop((detail.images && detail.images.background) || summary.backdrop);
-
-    refs.root.innerHTML = '' +
-      '<img class="detail-backdrop" src="' + utils.escapeHtml(back) + '" alt="' + utils.escapeHtml(summary.title) + '">' +
-      '<div class="player-wrap">' +
-        '<div class="player-frame">' +
-          '<h1 class="player-title">' + utils.escapeHtml(summary.title) + '</h1>' +
-          '<p class="player-provider" id="playerProvider">Riproduzione interna non abilitata in questa versione.</p>' +
-          '<div class="actions-row">' +
-            '<a class="btn btn-primary" href="' + utils.escapeHtml(pageLink) + '">Apri pagina titolo</a>' +
-            (watchLink ? '<a class="btn" target="_blank" rel="noopener" href="' + utils.escapeHtml(watchLink) + '">Apri sul provider</a>' : '') +
-            (providerPage ? '<a class="btn" target="_blank" rel="noopener" href="' + utils.escapeHtml(providerPage) + '">Pagina provider</a>' : '') +
-            '<button id="playerFavBtn" class="btn btn-sm">' + (store.isFavorite(summary.id) ? 'Rimuovi preferito' : 'Aggiungi preferito') + '</button>' +
-            '<button id="playerWatchBtn" class="btn btn-sm">' + (store.isWatchlist(summary.id) ? 'Rimuovi watchlist' : 'Aggiungi watchlist') + '</button>' +
-          '</div>' +
-          '<div class="player-progress"><div id="playerProgressFill" class="player-progress-fill"></div></div>' +
-        '</div>' +
-      '</div>';
-
-    refs.provider = utils.byId('playerProvider');
-    refs.progress = utils.byId('playerProgressFill');
-    refs.meta = utils.byId('playerMeta');
-
-    if (refs.provider) refs.provider.innerHTML = 'Provider: ' + utils.escapeHtml(summary.provider || '-');
-    if (refs.progress) refs.progress.style.width = progressPercent(summary.id) + '%';
-    renderMeta(summary, detail, watchLink, providerPage);
-    bindActions(summary.id);
-  }
-
-  function renderMeta(summary, detail, watchLink, providerPage) {
-    refs.meta.innerHTML = '' +
-      '<h2 class="section-title">Metadata</h2>' +
-      '<ul class="kv-list">' +
-        row('Tipo', detail.type || summary.type) +
-        row('Anno', detail.year || summary.year) +
-        row('Durata', detail.duration || summary.duration) +
-        row('Voto', detail.score || summary.score) +
-        row('Qualita', detail.quality) +
-        row('Watch Link', watchLink || '-') +
-        row('Source Page', providerPage || '-') +
-      '</ul>';
-  }
-
-  function bindActions(id) {
-    var favBtn = utils.byId('playerFavBtn');
-    var watchBtn = utils.byId('playerWatchBtn');
-    if (favBtn) favBtn.onclick = function () {
-      store.toggleFavorite(id);
-      favBtn.innerHTML = store.isFavorite(id) ? 'Rimuovi preferito' : 'Aggiungi preferito';
+  function bindLists() {
+    refs.ui.listServers.onclick = function (event) {
+      if (state.locked) return;
+      var btn = event.target.closest('[data-item-id]');
+      if (!btn) return;
+      state.activeStreamIndex = Number(btn.getAttribute('data-item-id').replace('srv-', '')) || 0;
+      loadCurrentEpisode(state.engine.getCurrentTime());
     };
-    if (watchBtn) watchBtn.onclick = function () {
-      store.toggleWatchlist(id);
-      watchBtn.innerHTML = store.isWatchlist(id) ? 'Rimuovi watchlist' : 'Aggiungi watchlist';
+    refs.ui.listQuality.onclick = function (event) {
+      if (state.locked) return;
+      var option = findQualityOption(event.target.closest('[data-item-id]'));
+      if (!option) return;
+      state.engine.selectQuality(option.raw);
+      persistPreference({ qualityId: option.id });
+      view.renderTracks(state, refs, SPEEDS);
+    };
+    refs.ui.listAudio.onclick = function (event) {
+      if (state.locked) return;
+      var btn = event.target.closest('[data-item-id]');
+      if (!btn) return;
+      var index = Number(btn.getAttribute('data-item-id').replace('aud-', '')) || 0;
+      state.engine.selectAudioTrack(index);
+      persistPreference({ audioIndex: index });
+      view.renderTracks(state, refs, SPEEDS);
+    };
+    refs.ui.listSubtitle.onclick = function (event) {
+      if (state.locked) return;
+      var btn = event.target.closest('[data-item-id]');
+      if (!btn) return;
+      var selectedId = btn.getAttribute('data-item-id');
+      for (var i = 0; i < state.subtitleOptions.length; i += 1) {
+        if (state.subtitleOptions[i].id !== selectedId) continue;
+        state.subtitleIndex = state.subtitleOptions[i].index;
+        state.engine.selectSubtitle(state.subtitleIndex);
+        persistPreference({ subtitleId: selectedId });
+        break;
+      }
+      view.renderTracks(state, refs, SPEEDS);
+    };
+    refs.ui.listSpeed.onclick = function (event) {
+      if (state.locked) return;
+      var btn = event.target.closest('[data-item-id]');
+      if (!btn) return;
+      state.playbackRate = Number(btn.getAttribute('data-item-id').replace('spd-', '')) || 1;
+      state.engine.setPlaybackRate(state.playbackRate);
+      persistPreference({ playbackRate: state.playbackRate });
+      view.renderTracks(state, refs, SPEEDS);
+    };
+    refs.ui.listSeasons.onclick = function (event) {
+      if (state.locked) return;
+      var btn = event.target.closest('[data-item-id]');
+      if (!btn) return;
+      state.panelSeasonIndex = Number(btn.getAttribute('data-item-id').replace('season-', '')) || 0;
+      view.renderEpisodes(state, refs);
+    };
+    refs.ui.listEpisodes.onclick = function (event) {
+      if (state.locked) return;
+      var btn = event.target.closest('[data-item-id]');
+      if (!btn) return;
+      var episodeIndex = Number(btn.getAttribute('data-item-id').replace('episode-', '')) || 0;
+      state.navigator.setIndexes(state.panelSeasonIndex, episodeIndex);
+      state.activeStreamIndex = 0;
+      loadCurrentEpisode(loadStoredPosition());
+      view.renderEpisodes(state, refs);
     };
   }
-
-  StreamBox.playerPage = { init: init };
-})(window);
+  function bindSubtitleUpload() {
+    refs.ui.subtitleFile.onchange = function (event) {
+      var file = event.target && event.target.files && event.target.files[0];
+      if (!file) return;
+      tracksLib.toVttBlobUrl(file, function (blobUrl) {
+        state.uploadedSubtitles.unshift(tracksLib.normalizeUploadedSubtitle(file.name, blobUrl, file.type));
+        refreshSubtitleTracks();
+        state.subtitleIndex = 0;
+        state.engine.selectSubtitle(0);
+        view.renderTracks(state, refs, SPEEDS);
+        ui.setRuntimeStatus(refs.ui, 'Subtitle locale aggiunto', 'ok');
+        refs.ui.subtitleFile.value = '';
+      }, function () {
+        ui.setRuntimeStatus(refs.ui, 'Impossibile leggere file subtitle', 'error');
+      });
+    };
+  }
+  function bindVideoState() {
+    refs.ui.video.addEventListener('pause', function () { ui.setPlayState(refs.ui, true); persistProgress(true); });
+    refs.ui.video.addEventListener('play', function () { ui.setPlayState(refs.ui, false); });
+    global.addEventListener('beforeunload', function () {
+      persistProgress(true);
+      if (state.engine) state.engine.destroy();
+    });
+  }
+  function bindFavoriteButtons() {
+    refreshFavoriteButtons();
+    refs.ui.favBtn.onclick = function () { store.toggleFavorite(state.summary.id); refreshFavoriteButtons(); };
+    refs.ui.watchBtn.onclick = function () { store.toggleWatchlist(state.summary.id); refreshFavoriteButtons(); };
+  }
+  function bindTvNavigation() {
+    if (!tvNav || !tvNav.bindKeyboard) return;
+    tvNav.bindKeyboard({ bindKey: 'player', getFocusable: function () { return tvNav.getFocusable(document); } });
+  }
+  function refreshFavoriteButtons() {
+    refs.ui.favBtn.innerHTML = store.isFavorite(state.summary.id) ? 'Rimuovi preferito' : 'Aggiungi preferito';
+    refs.ui.watchBtn.innerHTML = store.isWatchlist(state.summary.id) ? 'Rimuovi watchlist' : 'Aggiungi watchlist';
+  }
+  function applyLockState(locked) {
+    state.locked = !!locked;
+    ui.setLockState(refs.ui, state.locked);
+  }
+  function persistPreference(patch) {
+    if (!patch) return;
+    var key;
+    if (!state.preferences || typeof state.preferences !== 'object') state.preferences = {};
+    for (key in patch) if (Object.prototype.hasOwnProperty.call(patch, key)) state.preferences[key] = patch[key];
+    storage.savePreferences(state.payload.content.id, patch);
+  }
+  function loadStoredPosition() {
+    var episode = state.navigator.getCurrentEpisode();
+    if (!episode) return 0;
+    var stored = storage.loadProgress(state.payload.content.id, episode.link);
+    return stored && stored.position ? Number(stored.position) || 0 : 0;
+  }
+  function loadCurrentEpisode(startTime) {
+    clearStartupGuard(false);
+    var episode = state.navigator.getCurrentEpisode();
+    if (!episode) return blockPlayback('Episodio non disponibile.');
+    if (!episode.streams || !episode.streams.length) return blockPlayback('Nessuno stream disponibile per questo episodio.');
+    if (state.activeStreamIndex >= episode.streams.length) state.activeStreamIndex = 0;
+    var stream = episode.streams[state.activeStreamIndex];
+    ui.setOverlay(refs.ui, 'Caricamento stream in corso...');
+    ui.setRuntimeStatus(refs.ui, 'Caricamento stream...', 'warn');
+    armStartupGuard();
+    state.engine.setSource(stream, {
+      startTime: startTime || 0,
+      playbackRate: state.playbackRate,
+      onReady: function () {
+        clearStartupGuard(true);
+        ui.setOverlay(refs.ui, '');
+        ui.setRuntimeStatus(refs.ui, 'Riproduzione pronta', 'ok');
+        state.engine.setPlaybackRate(state.playbackRate);
+        refreshSubtitleTracks();
+        applySavedTrackPreferences();
+        view.renderAll(state, refs, SPEEDS);
+        if (state.payload.defaults.autoplay) state.engine.play().catch(function () {});
+      },
+      onProgress: function (progress) {
+        if (progress.currentTime >= 0.5) clearStartupGuard(true);
+        ui.setProgress(refs.ui, progress.currentTime, progress.duration);
+        persistProgress(false, progress.currentTime, progress.duration);
+      },
+      onEnded: function () {
+        ui.setPlayState(refs.ui, true);
+        ui.setRuntimeStatus(refs.ui, 'Episodio terminato', 'neutral');
+      },
+      onTracksChanged: function () { view.renderTracks(state, refs, SPEEDS); },
+      onError: handleEngineError
+    });
+  }
+  function refreshSubtitleTracks() {
+    var episode = state.navigator.getCurrentEpisode();
+    var stream = episode && episode.streams ? episode.streams[state.activeStreamIndex] : null;
+    state.subtitleOptions = tracksLib.buildSubtitleOptions(stream, state.uploadedSubtitles);
+    var playable = [];
+    for (var i = 0; i < state.subtitleOptions.length; i += 1) if (state.subtitleOptions[i].track) playable.push(state.subtitleOptions[i].track);
+    if (state.subtitleIndex >= playable.length) state.subtitleIndex = -1;
+    state.engine.setSubtitleTracks(playable, state.subtitleIndex);
+  }
+  function applySavedTrackPreferences() {
+    var prefs = state.preferences || {};
+    var qualityId = utils.safeText(prefs.qualityId || '');
+    var subtitleId = utils.safeText(prefs.subtitleId || '');
+    var i;
+    if (qualityId) {
+      var quality = state.engine.listQualityOptions();
+      for (i = 0; i < quality.length; i += 1) {
+        var qualityEntryId = quality[i].auto ? 'ql-auto' : ('ql-' + quality[i].index);
+        if (qualityEntryId !== qualityId) continue;
+        state.engine.selectQuality(quality[i]);
+        break;
+      }
+    }
+    if (isFinite(Number(prefs.audioIndex)) && Number(prefs.audioIndex) >= 0) {
+      state.engine.selectAudioTrack(Number(prefs.audioIndex));
+    }
+    if (subtitleId) {
+      for (i = 0; i < state.subtitleOptions.length; i += 1) {
+        if (state.subtitleOptions[i].id !== subtitleId) continue;
+        state.subtitleIndex = state.subtitleOptions[i].index;
+        state.engine.selectSubtitle(state.subtitleIndex);
+        break;
+      }
+    }
+  }
+  function armStartupGuard() {
+    clearStartupGuard(false);
+    state.startupProgress = false;
+    state.startupTimer = global.setTimeout(function () {
+      if (state.startupProgress) return;
+      switchToNextServer('Startup timeout: provo server successivo.');
+    }, 8000);
+  }
+  function clearStartupGuard(progressSeen) {
+    if (progressSeen) state.startupProgress = true;
+    if (state.startupTimer) global.clearTimeout(state.startupTimer);
+    state.startupTimer = null;
+  }
+  function handleEngineError(error) {
+    clearStartupGuard(false);
+    var status = parseStatus(error);
+    if ((status === 403 || status === 503) && canRetryToken()) return retryCurrentStream();
+    switchToNextServer('Errore stream, provo server successivo.');
+  }
+  function parseStatus(error) {
+    var status = Number(error && error.status) || 0;
+    if (status) return status;
+    var text = utils.safeText(error && error.message || '');
+    var match = text.match(/\b(403|503)\b/);
+    return match ? Number(match[1]) : 0;
+  }
+  function canRetryToken() {
+    var episode = state.navigator.getCurrentEpisode();
+    var stream = episode.streams[state.activeStreamIndex];
+    var key = episode.link + '|' + stream.server;
+    var now = Date.now();
+    if (state.retryState.key !== key) state.retryState = { key: key, count: 0, lastAttempt: 0 };
+    return state.retryState.count < 1 && now - state.retryState.lastAttempt > 3000;
+  }
+  function retryCurrentStream() {
+    var navState = state.navigator.toState();
+    state.retryState.count += 1;
+    state.retryState.lastAttempt = Date.now();
+    ui.setRuntimeStatus(refs.ui, 'Token stream scaduto: refresh in corso...', 'warn');
+    adapter.refreshStreams(state.payload, navState.seasonIndex, navState.episodeIndex).then(function (streams) {
+      var episode = state.navigator.getCurrentEpisode();
+      if (streams && streams.length) episode.streams = streams;
+      loadCurrentEpisode(state.engine.getCurrentTime());
+    }, function () {
+      switchToNextServer('Refresh stream fallito.');
+    });
+  }
+  function switchToNextServer(message) {
+    var episode = state.navigator.getCurrentEpisode();
+    if (state.activeStreamIndex < episode.streams.length - 1) {
+      state.activeStreamIndex += 1;
+      ui.setRuntimeStatus(refs.ui, message || 'Cambio server...', 'warn');
+      loadCurrentEpisode(state.engine.getCurrentTime());
+      return;
+    }
+    blockPlayback('Riproduzione non disponibile. Nessun altro server valido.');
+  }
+  function blockPlayback(message) {
+    ui.setOverlay(refs.ui, message, 'Torna alla scheda', 'playerGoBackBtn');
+    ui.setRuntimeStatus(refs.ui, 'Errore riproduzione', 'error');
+    var backBtn = utils.byId('playerGoBackBtn');
+    if (backBtn) backBtn.onclick = function () { global.location.href = state.links.titlePage || '../index.html'; };
+  }
+  function persistProgress(force, current, duration) {
+    var now = Date.now();
+    if (!force && now - state.lastProgressSave < 5000) return;
+    state.lastProgressSave = now;
+    var episode = state.navigator.getCurrentEpisode();
+    if (!episode) return;
+    var position = typeof current === 'number' ? current : state.engine.getCurrentTime();
+    var total = typeof duration === 'number' ? duration : state.engine.getDuration();
+    storage.saveProgress(state.payload.content.id, episode.link, position, total);
+  }
+  function findQualityOption(btn) {
+    if (!btn) return null;
+    var id = btn.getAttribute('data-item-id');
+    for (var i = 0; i < state.qualityOptions.length; i += 1) if (state.qualityOptions[i].id === id) return state.qualityOptions[i];
+    return null;
+  }
+  function toggleFullscreen() {
+    var target = refs.ui.video;
+    var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || document.mozFullScreenElement;
+    if (!fsElement) {
+      var request = target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen || target.mozRequestFullScreen;
+      if (!request) return ui.setRuntimeStatus(refs.ui, 'Fullscreen non supportato', 'warn');
+      var result = request.call(target);
+      if (result && result.catch) result.catch(function () {});
+      return;
+    }
+    var exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen;
+    if (exit) exit.call(document);
+  }
+  StreamBox.playerPage = { init: init };})(window);
