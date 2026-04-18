@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs/promises";
 import path from "node:path";
+import { spawn } from "node:child_process";
 
 const root = process.cwd();
 const distDir = path.join(root, "dist");
@@ -20,6 +21,28 @@ async function pathExists(targetPath) {
   }
 }
 
+function isAccessError(error) {
+  const code = String(error && error.code || "").toUpperCase();
+  return code === "EPERM" || code === "EACCES";
+}
+
+async function runCatalogBuildInto(targetDir) {
+  const scriptPath = path.join(root, "scripts", "scrapers", "build-app-catalog.mjs");
+  await fs.mkdir(targetDir, { recursive: true });
+  await new Promise((resolve, reject) => {
+    const child = spawn(
+      process.execPath,
+      [scriptPath, "--out-dir", targetDir],
+      { stdio: "inherit", cwd: root }
+    );
+    child.on("error", reject);
+    child.on("exit", (code) => {
+      if (code === 0) resolve();
+      else reject(new Error(`catalog build failed with exit code ${code}`));
+    });
+  });
+}
+
 async function run() {
   await fs.rm(distDir, { recursive: true, force: true });
   await fs.mkdir(distDir, { recursive: true });
@@ -32,7 +55,14 @@ async function run() {
 
   const appDataSource = path.join(root, "data", "app");
   if (await pathExists(appDataSource)) {
-    await copyPath("data/app");
+    try {
+      await copyPath("data/app");
+    } catch (error) {
+      if (!isAccessError(error)) throw error;
+      const outDir = path.join(distDir, "data", "app");
+      console.warn("[build-static] data/app non leggibile, rigenero catalogo in dist/data/app");
+      await runCatalogBuildInto(outDir);
+    }
   } else {
     const fallbackDir = path.join(distDir, "data", "app");
     await fs.mkdir(fallbackDir, { recursive: true });
