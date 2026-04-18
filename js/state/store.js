@@ -2,6 +2,7 @@
   var StreamBox = global.StreamBox = global.StreamBox || {};
   var utils = StreamBox.utils;
   var storage = StreamBox.storage;
+  var MAX_ROW_CARDS = 30;
 
   var state = {
     catalog: null,
@@ -129,6 +130,7 @@
     for (var i = 0; i < rowConfigs.length; i += 1) {
       var row = rowConfigs[i];
       if (!row || !row.id || row.id === 'continue') continue;
+      if (String(row.id).indexOf('provider-') === 0) continue;
       var rowItems = [];
       for (var j = 0; j < visible.items.length; j += 1) {
         var item = visible.items[j];
@@ -144,7 +146,7 @@
       rows.push({
         id: row.id,
         title: row.title || row.id,
-        items: row.top10 === true ? rowItems.slice(0, 10) : rowItems,
+        items: row.top10 === true ? rowItems.slice(0, Math.min(10, MAX_ROW_CARDS)) : rowItems.slice(0, MAX_ROW_CARDS),
         top10: row.top10 === true
       });
     }
@@ -157,7 +159,7 @@
       rows.unshift({
         id: custom.id,
         title: custom.title || 'Sezione personalizzata',
-        items: items,
+        items: items.slice(0, MAX_ROW_CARDS),
         custom: true
       });
     }

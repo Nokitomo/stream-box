@@ -7,6 +7,8 @@
   var templates = StreamBox.templates;
   var modal = StreamBox.modal;
   var tvNav = StreamBox.tvNav;
+  var MAX_HOME_ROWS = 10;
+  var MAX_PERSONAL_ROW_CARDS = 30;
 
   var refs = {};
   var catalog = null;
@@ -157,7 +159,7 @@
       seen[id] = true;
       var item = data.getSummaryById(id);
       if (item) unique.push(item);
-      if (unique.length >= 36) break;
+      if (unique.length >= MAX_PERSONAL_ROW_CARDS) break;
     }
     if (!unique.length) return null;
     return { id: rowId, title: title, items: unique };
@@ -223,6 +225,7 @@
     if (historyRow) rows.unshift(historyRow);
     if (watchRow) rows.unshift(watchRow);
     if (favRow) rows.unshift(favRow);
+    if (rows.length > MAX_HOME_ROWS) rows = rows.slice(0, MAX_HOME_ROWS);
 
     renderHero(chooseHero(rows));
     renderStatus(payload, rows.length);
