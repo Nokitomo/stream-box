@@ -117,16 +117,6 @@
     return parts.length ? ('?' + parts.join('&')) : '';
   }
 
-  function setLoading(node, isLoading, label) {
-    if (!node) return;
-    if (isLoading) {
-      node.setAttribute('aria-busy', 'true');
-      node.innerHTML = '<p>' + escapeHtml(label || 'Caricamento in corso...') + '</p>';
-      return;
-    }
-    node.removeAttribute('aria-busy');
-  }
-
   function byId(id) {
     return document.getElementById(id);
   }
@@ -161,7 +151,6 @@
     unique: unique,
     parseQuery: parseQuery,
     toQuery: toQuery,
-    setLoading: setLoading,
     byId: byId,
     debounce: debounce,
     sortByKey: sortByKey,

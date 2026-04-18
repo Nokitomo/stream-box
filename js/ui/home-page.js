@@ -40,7 +40,6 @@
     refs.sort = utils.byId('sortFilter');
     refs.reset = utils.byId('resetFilters');
     refs.save = utils.byId('saveFilters');
-    refs.loadMore = utils.byId('loadMoreRows');
     refs.status = utils.byId('homeStatus');
     refs.hero = utils.byId('heroMount');
     refs.rails = utils.byId('railsMount');
@@ -275,20 +274,14 @@
     refs.rails.innerHTML = '';
     if (!rows.length) {
       refs.rails.innerHTML = '<p>Nessun risultato con i filtri attuali.</p>';
-      refs.loadMore.className = 'btn hidden';
       return;
     }
     for (var i = 0; i < rows.length; i += 1) refs.rails.insertAdjacentHTML('beforeend', templates.rowSection(rows[i]));
-    refs.loadMore.className = 'btn hidden';
     if (global.requestAnimationFrame) {
       global.requestAnimationFrame(function () { tvNav.refreshRails(refs.rails, true); });
     } else {
       setTimeout(function () { tvNav.refreshRails(refs.rails, true); }, 0);
     }
-  }
-
-  function renderStatus(info, rowsCount) {
-    refs.status.innerHTML = 'Risultati: <strong>' + info.total + '</strong> · Sezioni: <strong>' + rowsCount + '</strong> · Scroll: <strong>infinito</strong>';
   }
 
   function render() {
@@ -305,7 +298,6 @@
 
     syncCategoryMenuState();
     renderHero(chooseHero(rows));
-    renderStatus(payload, rows.length);
     renderRows(rows);
   }
 

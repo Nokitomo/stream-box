@@ -16,11 +16,9 @@
     <header class="page-header">
       <div class="container header-inner">
         <a class="brand" href="index.html">STREAMBOX</a>
-        <div class="header-tools">
-          <div class="category-menu" id="categoryMenuWrap">
-            <button data-tv-focus="1" class="btn btn-sm" id="categoryMenuToggle" type="button" aria-haspopup="true" aria-expanded="false">Categorie</button>
-            <div class="category-menu-panel hidden" id="categoryMenuPanel" role="menu" aria-label="Categorie home"></div>
-          </div>
+        <div class="category-menu" id="categoryMenuWrap">
+          <button data-tv-focus="1" class="btn btn-sm" id="categoryMenuToggle" type="button" aria-haspopup="true" aria-expanded="false">Categorie</button>
+          <div class="category-menu-panel hidden" id="categoryMenuPanel" role="menu" aria-label="Categorie home"></div>
         </div>
       </div>
     </header>
@@ -38,12 +36,11 @@
         <button data-tv-focus="1" id="resetFilters" class="btn btn-ghost" type="button">Reset</button>
       </form>
 
-      <p id="homeStatus" class="badge">Caricamento...</p>
+      <p id="homeStatus" class="badge hidden" aria-live="polite"></p>
 
       <section id="heroMount" class="hero" aria-live="polite"></section>
 
       <section class="rails" id="railsMount" aria-live="polite"></section>
-      <p><button id="loadMoreRows" class="btn hidden" type="button" aria-hidden="true">Carica altri risultati</button></p>
     </main>
   </div>
 
