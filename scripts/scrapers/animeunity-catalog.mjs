@@ -10,6 +10,7 @@ import {
   uniqueBy,
   writeShardedJson,
   asyncMapLimit,
+  sleep,
   createHttpClient,
 } from "./shared.mjs";
 
@@ -32,6 +33,13 @@ const config = {
   detailConcurrency: Math.max(1, toInt(args["detail-concurrency"], 8)),
   timeoutMs: Math.max(5000, toInt(args.timeout, 30000)),
   retries: Math.max(0, toInt(args.retries, 3)),
+  explicitIds: uniqueBy(
+    String(args.ids || "")
+      .split(",")
+      .map((value) => toInt(value, 0))
+      .filter((id) => id > 0),
+    (id) => String(id)
+  ),
 };
 
 const http = createHttpClient({
@@ -134,42 +142,135 @@ function normalizeRelated(infoRelated, baseUrl) {
     .filter((item) => item.id && item.title);
 }
 
-function buildNormalizedEntry(archiveItem, info, htmlAnime, baseUrl, includeRaw) {
-  const merged = {
-    ...(htmlAnime || {}),
-    ...(info || {}),
-  };
+function firstText(...values) {
+  for (const value of values) {
+    const text = normalizeText(value);
+    if (text) return text;
+  }
+  return "";
+}
 
-  const title = normalizeText(
-    merged.title_eng || merged.title || merged.title_it || archiveItem?.title || ""
+function pickIds(info, htmlAnime, archiveItem) {
+  return {
+    malId:
+      toNumber(info?.mal_id) ??
+      toNumber(htmlAnime?.mal_id) ??
+      toNumber(archiveItem?.mal_id),
+    anilistId:
+      toNumber(info?.anilist_id) ??
+      toNumber(htmlAnime?.anilist_id) ??
+      toNumber(archiveItem?.anilist_id),
+    crunchyId:
+      info?.crunchy_id ??
+      htmlAnime?.crunchy_id ??
+      archiveItem?.crunchy_id ??
+      undefined,
+    disneyId:
+      info?.disney_id ??
+      htmlAnime?.disney_id ??
+      archiveItem?.disney_id ??
+      undefined,
+    netflixId:
+      info?.netflix_id ??
+      htmlAnime?.netflix_id ??
+      archiveItem?.netflix_id ??
+      undefined,
+    primeId:
+      info?.prime_id ??
+      htmlAnime?.prime_id ??
+      archiveItem?.prime_id ??
+      undefined,
+  };
+}
+
+function countKnownIds(ids) {
+  return Object.values(ids || {}).filter((value) => {
+    if (value === undefined || value === null) return false;
+    if (typeof value === "number") return Number.isFinite(value) && value > 0;
+    if (typeof value === "string") {
+      const text = normalizeText(value);
+      return text !== "" && text !== "0";
+    }
+    return false;
+  }).length;
+}
+
+function hasMeaningfulAnimeData(payload) {
+  if (!payload || typeof payload !== "object") return false;
+  if (firstText(payload.title_eng, payload.title, payload.title_it, payload.name)) return true;
+  if (firstText(payload.plot, payload.synopsis)) return true;
+  if (Array.isArray(payload.genres) && payload.genres.length > 0) return true;
+  if (toNumber(payload.mal_id) || toNumber(payload.anilist_id)) return true;
+  return false;
+}
+
+function isSoftIncomplete(entry) {
+  return (
+    !normalizeText(entry?.title) ||
+    !normalizeText(entry?.synopsis) ||
+    !Array.isArray(entry?.genres) ||
+    entry.genres.length === 0 ||
+    countKnownIds(entry?.ids) === 0
   );
-  const slug = normalizeText(archiveItem?.slug || merged.slug || "");
-  const id = archiveItem?.id ?? merged.id ?? null;
-  const plot = normalizeText(merged.plot || "");
-  const type = normalizeText(merged.type || "");
-  const status = normalizeText(merged.status || "");
-  const season = normalizeText(merged.season || "");
-  const yearMatch = String(merged.date || merged.year || "").match(/\d{4}/);
+}
+
+function buildNormalizedEntry(archiveItem, info, htmlAnime, baseUrl, includeRaw) {
+  const title = firstText(
+    info?.title_eng,
+    info?.title,
+    info?.title_it,
+    htmlAnime?.title_eng,
+    htmlAnime?.title,
+    htmlAnime?.title_it,
+    archiveItem?.title_eng,
+    archiveItem?.title,
+    archiveItem?.title_it
+  );
+  const slug = firstText(archiveItem?.slug, info?.slug, htmlAnime?.slug);
+  const id = archiveItem?.id ?? info?.id ?? htmlAnime?.id ?? null;
+  const plot = firstText(info?.plot, htmlAnime?.plot, archiveItem?.plot);
+  const type = firstText(info?.type, htmlAnime?.type, archiveItem?.type);
+  const status = firstText(info?.status, htmlAnime?.status, archiveItem?.status);
+  const season = firstText(info?.season, htmlAnime?.season, archiveItem?.season);
+  const yearMatch = String(info?.date || htmlAnime?.date || archiveItem?.date || "").match(/\d{4}/);
   const year = yearMatch?.[0] || undefined;
   const score =
-    toFloat(merged.score, undefined) ??
+    toFloat(info?.score, undefined) ??
+    toFloat(htmlAnime?.score, undefined) ??
     toFloat(archiveItem?.score, undefined) ??
     undefined;
   const episodesCount =
-    toInt(merged.episodes_count, 0) ||
+    toInt(info?.episodes_count, 0) ||
+    toInt(htmlAnime?.episodes_count, 0) ||
     toInt(archiveItem?.episodes_count, 0) ||
     undefined;
 
   const image = normalizeImageUrl(
-    merged.imageurl || archiveItem?.imageurl || archiveItem?.imageUrl || ""
+    info?.imageurl || htmlAnime?.imageurl || archiveItem?.imageurl || archiveItem?.imageUrl || ""
   );
-  const cover = normalizeImageUrl(merged.cover || "");
-  const background = normalizeImageUrl(merged.imageurl_cover || cover || image || "");
-  const genres = normalizeGenreList(merged.genres || []);
+  const cover = normalizeImageUrl(info?.cover || htmlAnime?.cover || archiveItem?.cover || "");
+  const background = normalizeImageUrl(
+    info?.imageurl_cover || htmlAnime?.imageurl_cover || archiveItem?.imageurl_cover || cover || image || ""
+  );
+  const genres = normalizeGenreList(
+    (Array.isArray(info?.genres) && info.genres.length > 0
+      ? info.genres
+      : Array.isArray(htmlAnime?.genres) && htmlAnime.genres.length > 0
+      ? htmlAnime.genres
+      : archiveItem?.genres) || []
+  );
   const tags = uniqueBy(
-    [type, status, season, year].filter(Boolean),
+    [...genres, type, status, season, year].filter(Boolean),
     (value) => value.toLowerCase()
   );
+  const ids = pickIds(info, htmlAnime, archiveItem);
+
+  const relatedRaw =
+    (Array.isArray(info?.related) && info.related.length > 0
+      ? info.related
+      : Array.isArray(htmlAnime?.related) && htmlAnime.related.length > 0
+      ? htmlAnime.related
+      : []) || [];
 
   return {
     id,
@@ -184,23 +285,25 @@ function buildNormalizedEntry(archiveItem, info, htmlAnime, baseUrl, includeRaw)
     score,
     episodesCount,
     dubbed:
-      merged.dub === 1 || merged.dub === true || merged.dub === "1" || undefined,
-    studio: normalizeText(merged.studio || "") || undefined,
+      info?.dub === 1 ||
+      info?.dub === true ||
+      info?.dub === "1" ||
+      htmlAnime?.dub === 1 ||
+      htmlAnime?.dub === true ||
+      htmlAnime?.dub === "1" ||
+      archiveItem?.dub === 1 ||
+      archiveItem?.dub === true ||
+      archiveItem?.dub === "1" ||
+      undefined,
+    studio: firstText(info?.studio, htmlAnime?.studio, archiveItem?.studio) || undefined,
     image: background || image || cover || undefined,
     poster: image || undefined,
     cover: cover || undefined,
     background: background || undefined,
     genres,
     tags,
-    ids: {
-      malId: toNumber(merged.mal_id),
-      anilistId: toNumber(merged.anilist_id),
-      crunchyId: merged.crunchy_id || undefined,
-      disneyId: merged.disney_id || undefined,
-      netflixId: merged.netflix_id || undefined,
-      primeId: merged.prime_id || undefined,
-    },
-    related: normalizeRelated(info?.related, baseUrl),
+    ids,
+    related: normalizeRelated(relatedRaw, baseUrl),
     ...(includeRaw
       ? {
           raw: {
@@ -210,6 +313,45 @@ function buildNormalizedEntry(archiveItem, info, htmlAnime, baseUrl, includeRaw)
           },
         }
       : {}),
+  };
+}
+
+async function fetchAnimeDetailsWithRetry(baseUrl, id, slug, maxAttempts = 3) {
+  let lastInfo = null;
+  let lastHtml = null;
+  let infoAttempts = 0;
+  let htmlAttempts = 0;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    const [info, htmlAnime] = await Promise.all([
+      fetchAnimeInfo(baseUrl, id),
+      fetchAnimeHtmlData(baseUrl, id, slug),
+    ]);
+
+    if (info) {
+      lastInfo = info;
+      infoAttempts += 1;
+    }
+    if (htmlAnime) {
+      lastHtml = htmlAnime;
+      htmlAttempts += 1;
+    }
+
+    if (hasMeaningfulAnimeData(lastInfo) || hasMeaningfulAnimeData(lastHtml)) {
+      break;
+    }
+    if (attempt < maxAttempts) {
+      await sleep(250 * attempt);
+    }
+  }
+
+  return {
+    info: lastInfo || {},
+    htmlAnime: lastHtml || {},
+    infoMissing: !hasMeaningfulAnimeData(lastInfo),
+    htmlMissing: !hasMeaningfulAnimeData(lastHtml),
+    infoAttempts,
+    htmlAttempts,
   };
 }
 
@@ -312,104 +454,160 @@ async function run() {
   const start = Date.now();
   console.log("[animeunity] start");
   console.log(
-    `[animeunity] config baseUrl=${config.baseUrl} outDir=${config.outDir} shardSize=${config.shardSize} includeRaw=${config.includeRaw} maxPages=${config.maxPages} maxItems=${config.maxItems} detailConcurrency=${config.detailConcurrency}`
+    `[animeunity] config baseUrl=${config.baseUrl} outDir=${config.outDir} shardSize=${config.shardSize} includeRaw=${config.includeRaw} maxPages=${config.maxPages} maxItems=${config.maxItems} detailConcurrency=${config.detailConcurrency} ids=${config.explicitIds.length}`
   );
 
-  let session = await createSession(config.baseUrl);
-  const archiveMap = new Map();
-  let totalFromApi = undefined;
+  let archiveItems = [];
+  if (config.explicitIds.length > 0) {
+    archiveItems = config.explicitIds.map((id) => ({ id }));
+    console.log(`[animeunity] explicit ids mode enabled (${archiveItems.length} ids)`);
+  } else {
+    let session = await createSession(config.baseUrl);
+    const archiveMap = new Map();
+    let totalFromApi = undefined;
 
-  for (let page = 1; page <= config.maxPages; page += 1) {
-    const offset = (page - 1) * PAGE_SIZE;
-    let archivePage = await fetchArchivePage(config.baseUrl, session, offset);
-    if (!archivePage) {
-      session = await createSession(config.baseUrl);
-      archivePage = await fetchArchivePage(config.baseUrl, session, offset);
-    }
-    if (!archivePage) {
-      console.warn(`[animeunity] archive page ${page} failed`);
-      break;
-    }
-
-    const records = archivePage.records || [];
-    totalFromApi = archivePage.total ?? totalFromApi;
-    if (records.length === 0) {
-      console.log(`[animeunity] archive page ${page}: no records, stop`);
-      break;
-    }
-
-    for (const record of records) {
-      if (!record?.id) continue;
-      if (!archiveMap.has(record.id)) {
-        archiveMap.set(record.id, record);
+    for (let page = 1; page <= config.maxPages; page += 1) {
+      const offset = (page - 1) * PAGE_SIZE;
+      let archivePage = await fetchArchivePage(config.baseUrl, session, offset);
+      if (!archivePage) {
+        session = await createSession(config.baseUrl);
+        archivePage = await fetchArchivePage(config.baseUrl, session, offset);
       }
-      if (archiveMap.size >= config.maxItems) break;
+      if (!archivePage) {
+        console.warn(`[animeunity] archive page ${page} failed`);
+        break;
+      }
+
+      const records = archivePage.records || [];
+      totalFromApi = archivePage.total ?? totalFromApi;
+      if (records.length === 0) {
+        console.log(`[animeunity] archive page ${page}: no records, stop`);
+        break;
+      }
+
+      for (const record of records) {
+        if (!record?.id) continue;
+        if (!archiveMap.has(record.id)) {
+          archiveMap.set(record.id, record);
+        }
+        if (archiveMap.size >= config.maxItems) break;
+      }
+
+      console.log(
+        `[animeunity] archive page ${page}: +${records.length} (unique=${archiveMap.size}${
+          totalFromApi ? ` / total=${totalFromApi}` : ""
+        })`
+      );
+
+      if (archiveMap.size >= config.maxItems) {
+        console.log("[animeunity] reached max-items limit");
+        break;
+      }
+      if (totalFromApi && archiveMap.size >= totalFromApi) {
+        console.log("[animeunity] reached full archive count");
+        break;
+      }
+      if (records.length < PAGE_SIZE) {
+        break;
+      }
     }
 
-    console.log(
-      `[animeunity] archive page ${page}: +${records.length} (unique=${archiveMap.size}${
-        totalFromApi ? ` / total=${totalFromApi}` : ""
-      })`
-    );
-
-    if (archiveMap.size >= config.maxItems) {
-      console.log("[animeunity] reached max-items limit");
-      break;
-    }
-    if (totalFromApi && archiveMap.size >= totalFromApi) {
-      console.log("[animeunity] reached full archive count");
-      break;
-    }
-    if (records.length < PAGE_SIZE) {
-      break;
-    }
+    archiveItems = Array.from(archiveMap.values()).slice(0, config.maxItems);
   }
 
-  const archiveItems = Array.from(archiveMap.values()).slice(0, config.maxItems);
   console.log(`[animeunity] enriching ${archiveItems.length} items`);
 
-  let failures = 0;
-  const enriched = await asyncMapLimit(
+  let hardFailures = 0;
+  let detailInfoMissing = 0;
+  let detailHtmlMissing = 0;
+  let detailBothMissing = 0;
+
+  const enrichedWithMeta = await asyncMapLimit(
     archiveItems,
     config.detailConcurrency,
     async (record, index) => {
       const id = record.id;
       try {
-        const [info, htmlAnime] = await Promise.all([
-          fetchAnimeInfo(config.baseUrl, id),
-          fetchAnimeHtmlData(config.baseUrl, id, record.slug),
-        ]);
+        const detail = await fetchAnimeDetailsWithRetry(config.baseUrl, id, record.slug, 3);
+        if (detail.infoMissing) detailInfoMissing += 1;
+        if (detail.htmlMissing) detailHtmlMissing += 1;
+        if (detail.infoMissing && detail.htmlMissing) detailBothMissing += 1;
+
         const entry = buildNormalizedEntry(
           record,
-          info || {},
-          htmlAnime,
+          detail.info,
+          detail.htmlAnime,
           config.baseUrl,
           config.includeRaw
         );
+        const softIncomplete = isSoftIncomplete(entry);
+
         if ((index + 1) % 100 === 0 || index + 1 === archiveItems.length) {
           console.log(
-            `[animeunity] metadata ${index + 1}/${archiveItems.length} (failures=${failures})`
+            `[animeunity] metadata ${index + 1}/${archiveItems.length} (hardFailures=${hardFailures})`
           );
         }
-        return entry;
-      } catch (err) {
-        failures += 1;
         return {
+          entry,
+          meta: {
+            softIncomplete,
+          },
+        };
+      } catch (err) {
+        hardFailures += 1;
+        const fallbackEntry = {
           id,
           slug: record.slug || undefined,
           link: buildAnimeLink(config.baseUrl, id, record.slug),
           title: normalizeText(
             record?.title_eng || record?.title || record?.title_it || ""
           ),
-          synopsis: "",
-          raw: {
-            archive: record,
-          },
+          synopsis: normalizeText(record?.plot || ""),
+          genres: normalizeGenreList(record?.genres || []),
+          tags: normalizeGenreList(record?.genres || []),
+          ids: pickIds({}, {}, record),
+          related: [],
+          ...(config.includeRaw
+            ? {
+                raw: {
+                  archive: record,
+                },
+              }
+            : {}),
           error: String(err?.message || err),
+        };
+        return {
+          entry: fallbackEntry,
+          meta: {
+            softIncomplete: true,
+          },
         };
       }
     }
   );
+
+  const enriched = enrichedWithMeta.map((item) => item.entry);
+  const softFailures = enrichedWithMeta.reduce(
+    (count, item) => count + (item?.meta?.softIncomplete ? 1 : 0),
+    0
+  );
+
+  const missingFields = {
+    title: 0,
+    synopsis: 0,
+    genres: 0,
+    tags: 0,
+    ids: 0,
+    related: 0,
+  };
+  for (const item of enriched) {
+    if (!normalizeText(item?.title)) missingFields.title += 1;
+    if (!normalizeText(item?.synopsis)) missingFields.synopsis += 1;
+    if (!Array.isArray(item?.genres) || item.genres.length === 0) missingFields.genres += 1;
+    if (!Array.isArray(item?.tags) || item.tags.length === 0) missingFields.tags += 1;
+    if (countKnownIds(item?.ids) === 0) missingFields.ids += 1;
+    if (!Array.isArray(item?.related) || item.related.length === 0) missingFields.related += 1;
+  }
 
   enriched.sort((a, b) => String(a.title || "").localeCompare(String(b.title || ""), "it"));
 
@@ -426,7 +624,13 @@ async function run() {
     stats: {
       archiveUniqueItems: archiveItems.length,
       enrichedItems: enriched.length,
-      failures,
+      failures: hardFailures + softFailures,
+      hardFailures,
+      softFailures,
+      detailInfoMissing,
+      detailHtmlMissing,
+      detailBothMissing,
+      missingFields,
       elapsedSeconds: Number(((Date.now() - start) / 1000).toFixed(2)),
     },
     items: enriched,
