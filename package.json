@@ -6,6 +6,10 @@
     "lint": "node scripts/lint-static.js",
     "test": "node scripts/test-static.js",
     "dev": "vite",
+    "dev:local": "node scripts/dev-vercel-local.mjs --port 3000",
+    "dev:local:debug": "node scripts/dev-vercel-local.mjs --port 3000 --debug",
+    "dev:vercel": "vercel dev --listen 3000",
+    "dev:vercel:debug": "vercel dev --listen 3000 --debug",
     "build": "node scripts/build-static-site.mjs",
     "build:vite": "vite build",
     "preview": "vite preview",
@@ -15,6 +19,7 @@
     "scrape:all": "npm run scrape:animeunity && npm run scrape:streamingunity && npm run catalog:build-app"
   },
   "devDependencies": {
+    "vercel": "^49.0.1",
     "vite": "^5.4.0"
   }
 }
