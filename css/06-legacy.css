@@ -1,0 +1,31 @@
+/* IE11 and old browser fallback helpers */
+.header-inner,
+.filters,
+.actions-row,
+.meta-list,
+.hero-actions,
+.header-tools {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.header-tools { -ms-flex-pack: end; justify-content: flex-end; }
+.title-layout,
+.detail-columns {
+  display: -ms-grid;
+}
+@media (min-width: 961px) {
+  .title-layout {
+    -ms-grid-columns: 280px 16px 1fr;
+  }
+  .title-layout > :first-child { -ms-grid-column: 1; }
+  .title-layout > :last-child { -ms-grid-column: 3; }
+  .detail-columns {
+    -ms-grid-columns: 1fr 12px 1fr;
+  }
+  .detail-columns > :nth-child(1) { -ms-grid-column: 1; }
+  .detail-columns > :nth-child(2) { -ms-grid-column: 3; }
+}
+input::-ms-clear,
+input::-ms-reveal { display: none; }

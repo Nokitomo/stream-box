@@ -1,104 +1,112 @@
-window.NetflixClone = window.NetflixClone || {};
+(function (global) {
+  var StreamBox = global.StreamBox = global.StreamBox || {};
+  var utils = StreamBox.utils;
 
-(function initTemplates(app) {
-  function escapeHtml(value) {
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
+  function poster() {
+    var candidates = [];
+    for (var i = 0; i < arguments.length; i += 1) candidates.push(arguments[i]);
+    var value = utils.pickImage(candidates);
+    return value || utils.resolvePath('assets/poster-fallback.svg');
   }
 
-  function renderProgress(progress) {
-    if (!progress) {
-      return "";
+  function backdrop() {
+    var candidates = [];
+    for (var i = 0; i < arguments.length; i += 1) candidates.push(arguments[i]);
+    var value = utils.pickImage(candidates);
+    return value || utils.resolvePath('assets/backdrop-fallback.svg');
+  }
+
+  function badge(text) {
+    return '<span class="badge">' + utils.escapeHtml(text) + '</span>';
+  }
+
+  function card(item, opts) {
+    var options = opts || {};
+    var rank = options.rank ? '<span class="badge">#' + options.rank + '</span>' : '';
+    var provider = badge(item.provider || 'catalog');
+    var meta = [item.year, item.maturity, item.duration].filter(Boolean).map(badge).join('');
+    return '' +
+      '<article class="title-card">' +
+        '<button type="button" data-tv-focus="1" data-action="open-modal" data-id="' + utils.escapeHtml(item.id) + '">' +
+          '<img class="title-thumb" loading="lazy" src="' + utils.escapeHtml(poster(item.poster, item.backdrop)) + '" alt="' + utils.escapeHtml(item.title) + '">' +
+          '<div class="title-meta">' +
+            '<h3 class="title-name">' + utils.escapeHtml(item.title) + '</h3>' +
+            '<div class="title-info">' + rank + provider + meta + '</div>' +
+          '</div>' +
+        '</button>' +
+      '</article>';
+  }
+
+  function rowSection(row) {
+    var list = row.items || [];
+    var cards = '';
+    for (var i = 0; i < list.length; i += 1) cards += card(list[i], row.top10 ? { rank: i + 1 } : null);
+    return '' +
+      '<section class="rail" data-row-id="' + utils.escapeHtml(row.id) + '">' +
+        '<div class="rail-head">' +
+          '<h2 class="section-title">' + utils.escapeHtml(row.title) + '</h2>' +
+          (row.custom ? '<button class="btn btn-sm btn-ghost" data-tv-focus="1" data-action="remove-row" data-row-id="' + utils.escapeHtml(row.id) + '">Rimuovi</button>' : '') +
+        '</div>' +
+        '<div class="card-grid">' + cards + '</div>' +
+      '</section>';
+  }
+
+  function options(values, selected, label) {
+    var html = '<option value="">' + utils.escapeHtml(label || 'Tutti') + '</option>';
+    for (var i = 0; i < values.length; i += 1) {
+      var val = String(values[i]);
+      var active = String(selected || '') === val ? ' selected' : '';
+      html += '<option value="' + utils.escapeHtml(val) + '"' + active + '>' + utils.escapeHtml(val) + '</option>';
     }
-
-    return `<div class="card-progress"><span style="width:${Math.max(4, Math.min(progress, 100))}%"></span></div>`;
+    return html;
   }
 
-  function renderTopRank(index, isTop10) {
-    if (!isTop10) {
-      return "";
+  function detailFacts(detail) {
+    var tags = (detail.tags || []).slice(0, 8).map(badge).join('');
+    var genres = (detail.genres || []).slice(0, 8).map(badge).join('');
+    var kv = [];
+    kv.push('<li><strong>Provider:</strong> ' + utils.escapeHtml(detail.provider || '-') + '</li>');
+    kv.push('<li><strong>Tipo:</strong> ' + utils.escapeHtml(detail.type || '-') + '</li>');
+    kv.push('<li><strong>Anno:</strong> ' + utils.escapeHtml(detail.year || '-') + '</li>');
+    kv.push('<li><strong>Voto:</strong> ' + utils.escapeHtml(detail.score || '-') + '</li>');
+    kv.push('<li><strong>Durata:</strong> ' + utils.escapeHtml(detail.duration || '-') + '</li>');
+    kv.push('<li><strong>Maturita:</strong> ' + utils.escapeHtml(detail.maturity || '-') + '</li>');
+    return '' +
+      '<div class="meta-list">' + genres + tags + '</div>' +
+      '<ul class="kv-list">' + kv.join('') + '</ul>';
+  }
+
+  function relatedCards(related, providerHint) {
+    var list = related || [];
+    if (!list.length) return '<p>Nessun titolo correlato disponibile.</p>';
+    var html = '';
+    for (var i = 0; i < list.length && i < 24; i += 1) {
+      var item = list[i];
+      var targetId = utils.safeText(item.catalogId || '');
+      var href = '#';
+      if (targetId) {
+        href = utils.resolvePath('html/title.html') +
+          '?id=' + encodeURIComponent(targetId) +
+          '&provider=' + encodeURIComponent(providerHint || '');
+      }
+      html += '' +
+        '<article class="title-card">' +
+          '<a href="' + utils.escapeHtml(href) + '">' +
+            '<img class="title-thumb" loading="lazy" src="' + utils.escapeHtml(poster(item.image, item.imageFallback)) + '" alt="' + utils.escapeHtml(item.title || '') + '">' +
+            '<div class="title-meta"><h3 class="title-name">' + utils.escapeHtml(item.title || '') + '</h3></div>' +
+          '</a>' +
+        '</article>';
     }
-
-    return `<span class="top-rank" aria-hidden="true">${index}</span>`;
+    return '<div class="similar-grid">' + html + '</div>';
   }
 
-  function renderListSymbol(isInList) {
-    return isInList ? "✓" : "+";
-  }
-
-  function renderCard(item, options) {
-    const isTop10 = options.isTop10;
-    const index = options.index;
-    const isInList = options.isInList;
-    const progress = options.progress;
-    const genres = item.genres.slice(0, 3).join(" • ");
-    const staggerIndex = options.staggerIndex;
-
-    return `
-      <article class="media-card ${isTop10 ? "is-top10" : ""}" data-id="${item.id}" tabindex="0" style="--stagger-index:${staggerIndex}">
-        ${renderTopRank(index, isTop10)}
-        <img src="${item.poster}" data-fallback="assets/poster-fallback.svg" alt="${escapeHtml(item.title)}" loading="lazy" />
-        <div class="card-overlay">
-          <div class="card-topline">
-            <span class="card-match">${item.match}% compatibile</span>
-            <span>${item.year}</span>
-            <span class="card-badge">${item.maturity}</span>
-          </div>
-          <h3 class="card-title">${escapeHtml(item.title)}</h3>
-          <p class="card-genres">${escapeHtml(genres)}</p>
-          <div class="card-actions">
-            <button class="card-action" type="button" data-action="play" aria-label="Riproduci ${escapeHtml(item.title)}">▶</button>
-            <button class="card-action" type="button" data-action="toggle-list" aria-label="Aggiungi ${escapeHtml(item.title)} a La mia lista">${renderListSymbol(isInList)}</button>
-            <button class="card-action" type="button" data-action="details" aria-label="Maggiori dettagli su ${escapeHtml(item.title)}">i</button>
-            <button class="card-action" type="button" data-action="open-page" aria-label="Apri scheda completa di ${escapeHtml(item.title)}">↗</button>
-          </div>
-        </div>
-        ${renderProgress(progress)}
-      </article>
-    `;
-  }
-
-  function renderRow(row, items, myListSet, getProgress) {
-    const cards = items
-      .map((item, index) =>
-        renderCard(item, {
-          isTop10: row.top10,
-          index: index + 1,
-          isInList: myListSet.has(item.id),
-          progress: getProgress(item.id, item.progress),
-          staggerIndex: index % 10
-        })
-      )
-      .join("");
-
-    return `
-      <section class="rail-block" data-row="${row.id}">
-        <div class="rail-header">
-          <h2 class="rail-title">${escapeHtml(row.title)}</h2>
-          <div class="rail-controls">
-            <button class="rail-btn" type="button" data-scroll="prev" aria-label="Scorri a sinistra">‹</button>
-            <button class="rail-btn" type="button" data-scroll="next" aria-label="Scorri a destra">›</button>
-          </div>
-        </div>
-        <div class="rail-track">${cards}</div>
-      </section>
-    `;
-  }
-
-  function renderEmptyState() {
-    return `
-      <article class="rail-empty">
-        Nessun titolo trovato. Prova con un altro nome o cambia categoria.
-      </article>
-    `;
-  }
-
-  app.templates = {
-    renderRow,
-    renderEmptyState
+  StreamBox.templates = {
+    poster: poster,
+    backdrop: backdrop,
+    card: card,
+    rowSection: rowSection,
+    options: options,
+    detailFacts: detailFacts,
+    relatedCards: relatedCards
   };
-})(window.NetflixClone);
+})(window);

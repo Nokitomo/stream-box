@@ -78,9 +78,25 @@ function toNumber(value) {
 function normalizeImageUrl(value) {
   const text = normalizeText(value);
   if (!text) return "";
-  if (/^https?:\/\//i.test(text)) return text;
-  if (text.startsWith("//")) return `https:${text}`;
-  return text;
+  let candidate = text;
+  if (candidate.startsWith("//")) candidate = `https:${candidate}`;
+  if (!/^https?:\/\//i.test(candidate)) return candidate;
+  try {
+    const parsed = new URL(candidate);
+    const host = String(parsed.hostname || "").toLowerCase();
+    if (host.includes("animeworld.so") || host.includes("forbiddenlol.cloud")) {
+      const fileName = normalizeText(parsed.pathname.split("/").pop() || "");
+      if (fileName) {
+        candidate = `https://img.animeunity.so/anime/${fileName}`;
+      }
+    }
+  } catch {
+    return candidate;
+  }
+  if (/\/anime\/640x960(?:$|[/?#])/i.test(candidate)) {
+    return "";
+  }
+  return candidate;
 }
 
 function buildAnimeLink(baseUrl, id, slug) {
@@ -297,7 +313,7 @@ function buildNormalizedEntry(archiveItem, info, htmlAnime, baseUrl, includeRaw)
       undefined,
     studio: firstText(info?.studio, htmlAnime?.studio, archiveItem?.studio) || undefined,
     image: background || image || cover || undefined,
-    poster: image || undefined,
+    poster: image || cover || background || undefined,
     cover: cover || undefined,
     background: background || undefined,
     genres,

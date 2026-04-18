@@ -1,17 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Poster non disponibile">
-  <defs>
-    <linearGradient id="a" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#1d1d1d" />
-      <stop offset="1" stop-color="#0d0d0d" />
-    </linearGradient>
-  </defs>
-  <rect width="640" height="360" fill="url(#a)" />
-  <rect x="24" y="24" width="592" height="312" rx="12" fill="none" stroke="#2d2d2d" stroke-width="2" />
-  <g fill="#e50914">
-    <path d="M272 92h20l56 176h-20z" />
-    <path d="M312 92h20v176h-20z" />
-  </g>
-  <text x="320" y="292" text-anchor="middle" fill="#9b9b9b" font-size="24" font-family="Arial, sans-serif">
-    Poster non disponibile
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450" role="img" aria-label="Poster fallback">
+  <rect width="300" height="450" fill="#111" />
+  <rect x="18" y="18" width="264" height="414" fill="#1d1d1d" stroke="#2f2f2f" stroke-width="4" />
+  <path d="M80 140h140v170H80z" fill="#2f2f2f" />
+  <path d="M100 170l36 58 30-42 34 54H100z" fill="#444" />
+  <circle cx="122" cy="170" r="12" fill="#666" />
+  <text x="150" y="360" fill="#e50914" font-size="28" text-anchor="middle" font-family="Inter,Arial,sans-serif">NO POSTER</text>
 </svg>

@@ -1,61 +1,70 @@
-window.NetflixClone = window.NetflixClone || {};
+(function (global) {
+  var StreamBox = global.StreamBox = global.StreamBox || {};
+  var NS = 'streambox.v1.';
 
-(function initStorage(app) {
-  const keys = {
-    myList: "netflix-clone-my-list",
-    progress: "netflix-clone-progress-map"
-  };
-
-  function loadArray(key) {
+  function load(key, fallback) {
     try {
-      const raw = localStorage.getItem(key);
-      if (!raw) {
-        return [];
-      }
-
-      const parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (error) {
-      return [];
+      var raw = global.localStorage.getItem(NS + key);
+      if (!raw) return fallback;
+      return JSON.parse(raw);
+    } catch (_) {
+      return fallback;
     }
   }
 
-  function saveArray(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  function loadObject(key) {
+  function save(key, value) {
     try {
-      const raw = localStorage.getItem(key);
-      if (!raw) {
-        return {};
-      }
-
-      const parsed = JSON.parse(raw);
-      if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
-        return {};
-      }
-
-      return parsed;
-    } catch (error) {
-      return {};
+      global.localStorage.setItem(NS + key, JSON.stringify(value));
+      return true;
+    } catch (_) {
+      return false;
     }
   }
 
-  function saveObject(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+  function remove(key) {
+    try { global.localStorage.removeItem(NS + key); } catch (_) {}
   }
 
-  function clampProgress(value) {
-    return Math.max(0, Math.min(100, Number(value) || 0));
+  function toggleArrayItem(key, id) {
+    var list = load(key, []);
+    var next = [];
+    var found = false;
+    for (var i = 0; i < list.length; i += 1) {
+      if (String(list[i]) === String(id)) {
+        found = true;
+      } else {
+        next.push(list[i]);
+      }
+    }
+    if (!found) next.unshift(id);
+    if (next.length > 800) next = next.slice(0, 800);
+    save(key, next);
+    return { list: next, added: !found };
   }
 
-  app.storage = {
-    keys,
-    loadArray,
-    saveArray,
-    loadObject,
-    saveObject,
-    clampProgress
+  function pushHistory(id) {
+    var list = load('history', []);
+    var next = [id];
+    for (var i = 0; i < list.length; i += 1) {
+      if (String(list[i]) !== String(id)) next.push(list[i]);
+      if (next.length >= 120) break;
+    }
+    save('history', next);
+    return next;
+  }
+
+  StreamBox.storage = {
+    load: load,
+    save: save,
+    remove: remove,
+    toggleArrayItem: toggleArrayItem,
+    pushHistory: pushHistory,
+    keys: {
+      favorites: 'favorites',
+      watchlist: 'watchlist',
+      history: 'history',
+      savedFilters: 'savedFilters',
+      customRows: 'customRows'
+    }
   };
-})(window.NetflixClone);
+})(window);

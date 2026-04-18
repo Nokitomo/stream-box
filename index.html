@@ -1,123 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Netflix Italia - Media Center Clone</title>
-  <meta
-    name="description"
-    content="Clone statico della home media center Netflix realizzato con HTML, CSS e JavaScript."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>StreamBox Catalog</title>
+  <meta name="description" content="Catalogo streaming personale basato su StreamingUnity e AnimeUnity.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
   <div class="app-shell">
-    <header class="main-header" id="mainHeader">
+    <header class="page-header">
       <div class="container header-inner">
-        <div class="header-left">
-          <a class="brand" href="index.html" aria-label="Netflix home">
-            <svg viewBox="0 0 111 30" aria-hidden="true" class="brand-wordmark">
-              <path fill="currentColor" d="M105.06 14.28c-.83-.44-1.83-.64-3.23-.64-2.97 0-5.1 1.42-5.1 4.08 0 2.37 1.73 3.4 4.69 4.25 2.34.67 3.04 1.1 3.04 2.05 0 .97-.84 1.6-2.56 1.6-1.66 0-3.22-.53-4.61-1.39v3.26c1.15.57 2.85.97 4.74.97 3.53 0 5.79-1.7 5.79-4.48 0-2.13-1.26-3.3-4.37-4.2-2.45-.72-3.35-1.13-3.35-2.1 0-.78.74-1.42 2.22-1.42 1.66 0 2.82.39 4.02 1.01l-1.28-2.99ZM90.39 13.64c-3.73 0-6.18 2.95-6.18 7.37 0 4.44 2.48 7.45 6.32 7.45 1.87 0 3.45-.5 4.64-1.48v-3.26c-1.07.89-2.37 1.4-4.05 1.4-2.33 0-3.67-1.36-3.88-3.7h8.34v-1.63c0-4.05-1.97-6.15-5.19-6.15Zm-3.03 5.56c.31-1.6 1.22-2.48 2.7-2.48 1.59 0 2.37 1 2.49 2.48h-5.19ZM72.73 28.17h3.1V8.56h-3.1v19.61Zm-11.03-14.2c-1.91 0-3.49.71-4.73 2.06v-1.76h-3.1v13.9h3.1v-7.61c0-2.32 1.18-3.6 3.17-3.6 1.75 0 2.73 1.1 2.73 3.15v8.06h3.09v-8.63c0-3.51-1.69-5.57-4.26-5.57Zm-17.53 0c-3.85 0-6.45 2.91-6.45 7.25 0 4.37 2.61 7.24 6.45 7.24 3.85 0 6.45-2.87 6.45-7.24 0-4.34-2.6-7.25-6.45-7.25Zm0 11.63c-1.98 0-3.22-1.63-3.22-4.38 0-2.71 1.24-4.38 3.22-4.38 1.98 0 3.22 1.67 3.22 4.38 0 2.75-1.24 4.38-3.22 4.38Zm-16.99-7.62c0-1.03.86-1.67 2.33-1.67 1.34 0 2.57.37 3.7 1.04v-2.9c-1.08-.47-2.53-.78-4.17-.78-3.4 0-5.55 1.6-5.55 4.28 0 2.14 1.28 3.18 4.15 4.02 2.12.62 2.82 1.07 2.82 2.02 0 .98-.84 1.55-2.43 1.55-1.64 0-3.3-.54-4.79-1.46v3c1.28.68 3.1 1.1 4.96 1.1 3.41 0 5.55-1.69 5.55-4.33 0-2.07-1.06-3.12-4.01-4-2.11-.63-2.56-.95-2.56-1.87Zm-10.03-4.01-2.99 9.66-3.15-9.66H7.83l4.78 13.9h3.32l4.78-13.9h-3.56ZM0 28.17h3.18V8.56H0v19.61Z" />
-            </svg>
-          </a>
-
-          <nav class="primary-nav" aria-label="Navigazione principale">
-            <button class="nav-link is-active" type="button" data-tab="home">Home</button>
-            <button class="nav-link" type="button" data-tab="series">Serie TV</button>
-            <button class="nav-link" type="button" data-tab="movie">Film</button>
-            <button class="nav-link" type="button" data-tab="new">Nuovi e popolari</button>
-            <button class="nav-link" type="button" data-tab="my-list">La mia lista</button>
-          </nav>
-        </div>
-
-        <div class="header-right">
-          <label class="search-box" for="searchInput">
-            <span class="icon-wrap" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M10 18a8 8 0 1 1 5.29-14l4.35 4.34-1.41 1.42-4.34-4.35A6 6 0 1 0 16 10a5.95 5.95 0 0 0-1.2-3.59l1.58-1.23A8 8 0 0 1 10 18Zm4.6-1.18 5.42 5.43-1.41 1.41-5.42-5.42Z" fill="currentColor"/></svg>
-            </span>
-            <input id="searchInput" type="search" placeholder="Titoli, persone, generi" autocomplete="off" />
-          </label>
+        <a class="brand" href="index.html">STREAMBOX</a>
+        <div class="header-tools">
+          <a data-tv-focus="1" class="btn btn-sm" href="html/title.html">Title page</a>
+          <a data-tv-focus="1" class="btn btn-sm" href="html/player.html">Player page</a>
         </div>
       </div>
     </header>
 
-    <main>
-      <section class="hero" id="heroSection" hidden>
-        <div class="hero-backdrop" id="heroBackdrop"></div>
-        <div class="hero-gradient"></div>
+    <main class="container main-content">
+      <form id="filtersForm" class="filters" novalidate>
+        <label class="sr-only" for="searchInput">Cerca titolo</label>
+        <input data-tv-focus="1" id="searchInput" class="input" type="search" placeholder="Cerca titolo, descrizione, cast...">
+        <select data-tv-focus="1" id="providerFilter" class="select"></select>
+        <select data-tv-focus="1" id="typeFilter" class="select"></select>
+        <select data-tv-focus="1" id="genreFilter" class="select"></select>
+        <select data-tv-focus="1" id="yearFilter" class="select"></select>
+        <select data-tv-focus="1" id="sortFilter" class="select"></select>
+        <button data-tv-focus="1" id="saveFilters" class="btn" type="button">Salva filtro</button>
+        <button data-tv-focus="1" id="resetFilters" class="btn btn-ghost" type="button">Reset</button>
+      </form>
 
-        <div class="container hero-content">
-          <p class="hero-kicker" id="heroKicker"></p>
-          <h1 id="heroTitle"></h1>
-          <p class="hero-meta" id="heroMeta"></p>
-          <p class="hero-description" id="heroDescription"></p>
+      <p id="homeStatus" class="badge">Caricamento...</p>
 
-          <div class="hero-actions">
-            <button class="btn btn-play" id="heroPlayBtn" type="button">Riproduci</button>
-            <button class="btn btn-more" id="heroInfoBtn" type="button">Altre info</button>
-          </div>
-        </div>
-      </section>
+      <section id="heroMount" class="hero" aria-live="polite"></section>
 
-      <section class="container rails-section" id="railsRoot" aria-live="polite"></section>
+      <section class="rails" id="railsMount" aria-live="polite"></section>
+      <p><button data-tv-focus="1" id="loadMoreRows" class="btn hidden" type="button">Carica altri risultati</button></p>
     </main>
-
-    <footer class="app-footer container">
-      <p class="footer-title">Navigazione rapida del media center</p>
-      <div class="footer-links">
-        <button class="footer-link" type="button" data-tab="home">Home</button>
-        <button class="footer-link" type="button" data-tab="series">Serie TV</button>
-        <button class="footer-link" type="button" data-tab="movie">Film</button>
-        <button class="footer-link" type="button" data-tab="new">Nuovi e popolari</button>
-        <button class="footer-link" type="button" data-tab="my-list">La mia lista</button>
-        <a class="footer-link" href="#railsRoot">Continua a guardare</a>
-        <a class="footer-link" href="#railsRoot">Top 10 in Italia</a>
-        <a class="footer-link" href="#railsRoot">Solo su Netflix</a>
-        <a class="footer-link" href="#railsRoot">Azione</a>
-        <a class="footer-link" href="#railsRoot">Crime</a>
-        <a class="footer-link" href="#railsRoot">Commedie</a>
-        <a class="footer-link" href="#railsRoot">Sci-fi e fantasy</a>
-      </div>
-    </footer>
   </div>
 
-  <div class="details-modal" id="detailsModal" hidden>
-    <div class="modal-backdrop" data-close-modal></div>
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" type="button" data-close-modal aria-label="Chiudi dettagli">×</button>
-      <div class="modal-artwork" id="modalArtwork"></div>
-      <div class="modal-content">
-        <h2 id="modalTitle">Titolo</h2>
-        <p class="modal-meta" id="modalMeta"></p>
-        <p class="modal-description" id="modalDescription"></p>
-        <p class="modal-cast" id="modalCast"></p>
-
-        <div class="modal-actions">
-          <button class="btn btn-play" type="button" data-modal-action="play">Riproduci</button>
-          <button class="btn btn-more" type="button" data-modal-action="toggle-list" id="modalToggleList">Aggiungi a La mia lista</button>
-          <button class="btn btn-more" type="button" data-modal-action="open-page" id="modalOpenPage">Scheda completa</button>
-          <a class="btn btn-more" id="modalOpenSource" href="#" target="_blank" rel="noopener noreferrer" hidden>Apri sorgente</a>
-        </div>
-      </div>
+  <div id="titleModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Dettagli titolo">
+    <div id="titleModalMask" class="modal-mask"></div>
+    <div class="modal-body">
+      <div id="titleModalContent" class="modal-content"></div>
     </div>
   </div>
 
-  <div class="toast" id="appToast" hidden></div>
-
-  <script defer src="js/data/catalog.js"></script>
-  <script defer src="js/data/catalog-loader.js"></script>
-  <script defer src="js/state/storage.js"></script>
-  <script defer src="js/state/store.js"></script>
-  <script defer src="js/state/url-state.js"></script>
-  <script defer src="js/ui/templates.js"></script>
-  <script defer src="js/ui/render.js"></script>
-  <script defer src="js/ui/interactions.js"></script>
-  <script defer src="js/main.js"></script>
+  <script src="js/compat/polyfills.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/state/storage.js"></script>
+  <script src="js/state/url-state.js"></script>
+  <script src="js/data/catalog-loader.js"></script>
+  <script src="js/state/store.js"></script>
+  <script src="js/ui/templates.js"></script>
+  <script src="js/ui/modal.js"></script>
+  <script src="js/ui/home-page.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

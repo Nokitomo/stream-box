@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>StreamBox - Scheda Titolo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="page-header">
+      <div class="container header-inner">
+        <a class="brand" href="../index.html">STREAMBOX</a>
+        <div class="header-tools">
+          <a class="btn btn-sm" href="../index.html">Home</a>
+          <a class="btn btn-sm" href="player.html">Player</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container main-content stack">
+      <div id="titleStatus" class="badge">Caricamento...</div>
+      <section id="titlePageRoot" class="page-panel" aria-live="polite"></section>
+      <section id="titleFacts" class="page-panel" aria-live="polite"></section>
+      <section id="titleSimilar" class="page-panel" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <script src="../js/compat/polyfills.js"></script>
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/state/storage.js"></script>
+  <script src="../js/state/url-state.js"></script>
+  <script src="../js/data/catalog-loader.js"></script>
+  <script src="../js/state/store.js"></script>
+  <script src="../js/ui/templates.js"></script>
+  <script src="../js/pages/title-page.js"></script>
+  <script src="../js/pages/title-bootstrap.js"></script>
+</body>
+</html>

@@ -25,8 +25,7 @@ async function run() {
   await fs.mkdir(distDir, { recursive: true });
 
   await copyPath("index.html");
-  await copyPath("title.html");
-  await copyPath("player.html");
+  await copyPath("html");
   await copyPath("assets");
   await copyPath("css");
   await copyPath("js");
@@ -49,7 +48,7 @@ async function run() {
           rowConfigs: [],
           providers: [],
           detailChunks: [],
-          items: [],
+          items: []
         },
         null,
         2

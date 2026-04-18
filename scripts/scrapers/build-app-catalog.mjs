@@ -25,6 +25,191 @@ function slugify(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+function isAnimeUnityItalianVariant(title) {
+  return /\((?:ita|italian)\)/i.test(normalizeText(title || ""));
+}
+
+function normalizeAnimeUnityBaseTitle(title) {
+  return normalizeText(title || "")
+    .replace(/\s*[\[(](?:ita|italian)[\])]\s*/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function finiteNumber(value) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : undefined;
+}
+
+function hasAnyImage(item) {
+  return Boolean(
+    normalizeText(item?.poster || "") ||
+      normalizeText(item?.cover || "") ||
+      normalizeText(item?.image || "") ||
+      normalizeText(item?.background || "")
+  );
+}
+
+function scoreAnimeUnityCounterpart(target, candidate) {
+  let score = 0;
+  const targetIds = target?.ids && typeof target.ids === "object" ? target.ids : {};
+  const candidateIds = candidate?.ids && typeof candidate.ids === "object" ? candidate.ids : {};
+
+  if (
+    finiteNumber(targetIds.malId) &&
+    finiteNumber(candidateIds.malId) &&
+    finiteNumber(targetIds.malId) === finiteNumber(candidateIds.malId)
+  ) {
+    score += 120;
+  }
+  if (
+    finiteNumber(targetIds.anilistId) &&
+    finiteNumber(candidateIds.anilistId) &&
+    finiteNumber(targetIds.anilistId) === finiteNumber(candidateIds.anilistId)
+  ) {
+    score += 120;
+  }
+
+  const targetYear = toYear(target?.year);
+  const candidateYear = toYear(candidate?.year);
+  if (targetYear && candidateYear && targetYear === candidateYear) {
+    score += 20;
+  }
+
+  const targetType = normalizeText(target?.type || "").toLowerCase();
+  const candidateType = normalizeText(candidate?.type || "").toLowerCase();
+  if (targetType && candidateType && targetType === candidateType) {
+    score += 20;
+  }
+
+  if (normalizeText(candidate?.poster || "")) score += 10;
+  if (normalizeText(candidate?.cover || "")) score += 8;
+  if (normalizeText(candidate?.background || "")) score += 6;
+  if (normalizeText(candidate?.image || "")) score += 4;
+
+  return score;
+}
+
+function pickAnimeUnityCounterpart(target, lookup) {
+  const title = normalizeText(target?.title || "");
+  if (!isAnimeUnityItalianVariant(title)) return null;
+
+  const targetIds = target?.ids && typeof target.ids === "object" ? target.ids : {};
+  const candidates = [];
+
+  const malId = finiteNumber(targetIds.malId);
+  const anilistId = finiteNumber(targetIds.anilistId);
+  if (malId && lookup.byMalId.has(malId)) candidates.push(...lookup.byMalId.get(malId));
+  if (anilistId && lookup.byAnilistId.has(anilistId))
+    candidates.push(...lookup.byAnilistId.get(anilistId));
+
+  const baseTitle = normalizeAnimeUnityBaseTitle(title);
+  if (lookup.byBaseTitle.has(baseTitle)) {
+    const byTitle = lookup.byBaseTitle.get(baseTitle);
+    if (byTitle.length === 1) {
+      const only = byTitle[0];
+      const targetYear = toYear(target?.year);
+      const candidateYear = toYear(only?.year);
+      const targetType = normalizeText(target?.type || "").toLowerCase();
+      const candidateType = normalizeText(only?.type || "").toLowerCase();
+      const yearOk = !targetYear || !candidateYear || targetYear === candidateYear;
+      const typeOk = !targetType || !candidateType || targetType === candidateType;
+      if (yearOk && typeOk) candidates.push(only);
+    }
+  }
+
+  const dedup = new Map();
+  for (const item of candidates) {
+    if (!item) continue;
+    const key = normalizeText(item?.id || item?.slug || item?.title || "");
+    if (!key) continue;
+    dedup.set(key, item);
+  }
+
+  let best = null;
+  let bestScore = -1;
+  for (const candidate of dedup.values()) {
+    if (!hasAnyImage(candidate)) continue;
+    const score = scoreAnimeUnityCounterpart(target, candidate);
+    if (score > bestScore) {
+      best = candidate;
+      bestScore = score;
+    }
+  }
+
+  if (!best) return null;
+
+  const hasStrongIdMatch =
+    (malId &&
+      finiteNumber(best?.ids?.malId) &&
+      malId === finiteNumber(best?.ids?.malId)) ||
+    (anilistId &&
+      finiteNumber(best?.ids?.anilistId) &&
+      anilistId === finiteNumber(best?.ids?.anilistId));
+
+  if (!hasStrongIdMatch) {
+    const base = normalizeAnimeUnityBaseTitle(title);
+    const bucket = lookup.byBaseTitle.get(base) || [];
+    if (bucket.length !== 1) return null;
+  }
+
+  return best;
+}
+
+function applyAnimeUnityItalianImageOverrides(items) {
+  if (!Array.isArray(items) || items.length === 0) return [];
+  const cloned = items.map((item) => ({ ...item }));
+
+  const byMalId = new Map();
+  const byAnilistId = new Map();
+  const byBaseTitle = new Map();
+
+  for (const item of cloned) {
+    const title = normalizeText(item?.title || "");
+    if (!title || isAnimeUnityItalianVariant(title)) continue;
+
+    const ids = item?.ids && typeof item.ids === "object" ? item.ids : {};
+    const malId = finiteNumber(ids.malId);
+    const anilistId = finiteNumber(ids.anilistId);
+    const baseTitle = normalizeAnimeUnityBaseTitle(title);
+
+    if (malId) {
+      if (!byMalId.has(malId)) byMalId.set(malId, []);
+      byMalId.get(malId).push(item);
+    }
+    if (anilistId) {
+      if (!byAnilistId.has(anilistId)) byAnilistId.set(anilistId, []);
+      byAnilistId.get(anilistId).push(item);
+    }
+    if (baseTitle) {
+      if (!byBaseTitle.has(baseTitle)) byBaseTitle.set(baseTitle, []);
+      byBaseTitle.get(baseTitle).push(item);
+    }
+  }
+
+  const lookup = { byMalId, byAnilistId, byBaseTitle };
+
+  return cloned.map((item) => {
+    const title = normalizeText(item?.title || "");
+    if (!isAnimeUnityItalianVariant(title)) return item;
+
+    const counterpart = pickAnimeUnityCounterpart(item, lookup);
+    if (!counterpart) return item;
+
+    return {
+      ...item,
+      image: normalizeText(counterpart.image || item.image || "") || item.image,
+      poster: normalizeText(counterpart.poster || counterpart.image || item.poster || "") || item.poster,
+      cover: normalizeText(counterpart.cover || item.cover || "") || item.cover,
+      background:
+        normalizeText(counterpart.background || counterpart.image || item.background || "") ||
+        item.background,
+      logo: normalizeText(counterpart.logo || item.logo || "") || item.logo,
+    };
+  });
+}
+
 function detectType(item) {
   const raw = normalizeText(item?.type || "").toLowerCase();
   if (raw.includes("movie") || raw.includes("film")) return "movie";
@@ -266,7 +451,11 @@ async function run() {
   for (const payload of providerPayloads) {
     const provider = normalizeText(payload?.index?.provider || "");
     if (!provider) continue;
-    for (const item of payload.items) {
+    const sourceItems =
+      provider === "animeunity"
+        ? applyAnimeUnityItalianImageOverrides(payload.items)
+        : payload.items;
+    for (const item of sourceItems) {
       const mapped = buildSummaryAndDetail(item, provider);
       if (!mapped) continue;
       summaries.push(mapped.summary);
