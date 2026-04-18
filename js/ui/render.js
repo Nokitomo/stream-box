@@ -125,10 +125,11 @@ window.NetflixClone = window.NetflixClone || {};
     const heroPlayBtn = document.getElementById("heroPlayBtn");
     const heroInfoBtn = document.getElementById("heroInfoBtn");
 
+    if (heroSection) {
+      heroSection.hidden = false;
+    }
+
     if (!hero) {
-      if (heroSection) {
-        heroSection.style.display = "";
-      }
       applyBackdropWithFallback(heroBackdrop, fallbackBackdrop);
       heroKicker.textContent = "Catalogo provider";
       heroTitle.textContent = "Nessun titolo disponibile";

@@ -10,6 +10,24 @@ window.NetflixClone.data = window.NetflixClone.data || {};
     return String(value ?? "").replace(/\s+/g, " ").trim();
   }
 
+  function resolveDetailChunkPath(chunkPath) {
+    const normalized = normalizeText(chunkPath);
+    if (!normalized) {
+      return "";
+    }
+
+    if (
+      normalized.startsWith("http://") ||
+      normalized.startsWith("https://") ||
+      normalized.startsWith("/") ||
+      normalized.startsWith("data/app/")
+    ) {
+      return normalized;
+    }
+
+    return `data/app/${normalized.replace(/^\.?\//, "")}`;
+  }
+
   async function fetchJson(url) {
     const response = await fetch(url, { cache: "no-store" });
     if (!response.ok) {
@@ -65,7 +83,7 @@ window.NetflixClone.data = window.NetflixClone.data || {};
       return null;
     }
 
-    const chunkPath = normalizeText(summary.detailChunk || "");
+    const chunkPath = resolveDetailChunkPath(summary.detailChunk || "");
     if (!chunkPath) {
       return summary;
     }

@@ -18,6 +18,7 @@ window.NetflixClone = window.NetflixClone || {};
   const progressMap = storage.loadObject(storage.keys.progress);
   const fallbackPoster = "assets/poster-fallback.svg";
   const fallbackBackdrop = "assets/backdrop-fallback.svg";
+  const titleLookupByProvider = new Map();
 
   if (!baseItem) {
     document.body.innerHTML = "<p style='padding:2rem;color:white;'>Nessun titolo disponibile.</p>";
@@ -78,6 +79,85 @@ window.NetflixClone = window.NetflixClone || {};
     return entries.map((entry) => `<span class="title-chip">${entry}</span>`).join("");
   }
 
+  function normalizeLookupText(value) {
+    return String(value ?? "")
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function buildProviderLookup() {
+    for (const candidate of mediaCatalog) {
+      const provider = String(candidate.provider || "").trim();
+      if (!provider) {
+        continue;
+      }
+
+      const titleKey = normalizeLookupText(candidate.title);
+      if (!titleKey) {
+        continue;
+      }
+
+      if (!titleLookupByProvider.has(provider)) {
+        titleLookupByProvider.set(provider, new Map());
+      }
+
+      const providerMap = titleLookupByProvider.get(provider);
+      if (!providerMap.has(titleKey)) {
+        providerMap.set(titleKey, []);
+      }
+      providerMap.get(titleKey).push(candidate.id);
+    }
+  }
+
+  function findRelatedAppId(entry) {
+    const provider = String(item.provider || "").trim();
+    const providerPrefix = provider ? `${provider}-` : "";
+
+    if (providerPrefix && entry?.id !== undefined && entry?.id !== null) {
+      const byProviderId = `${providerPrefix}${String(entry.id).trim()}`;
+      if (mediaById.has(byProviderId)) {
+        return byProviderId;
+      }
+    }
+
+    if (providerPrefix && entry?.slug) {
+      const byProviderSlug = `${providerPrefix}${String(entry.slug).trim()}`;
+      if (mediaById.has(byProviderSlug)) {
+        return byProviderSlug;
+      }
+    }
+
+    const providerLookup = titleLookupByProvider.get(provider);
+    if (!providerLookup) {
+      return null;
+    }
+
+    const titleKey = normalizeLookupText(entry?.title);
+    if (!titleKey) {
+      return null;
+    }
+
+    const byTitle = providerLookup.get(titleKey) || [];
+    if (byTitle.length === 0) {
+      return null;
+    }
+
+    if (byTitle.length === 1) {
+      return byTitle[0];
+    }
+
+    const year = String(entry?.year || "").trim();
+    if (!year) {
+      return byTitle[0];
+    }
+
+    const byYear = byTitle.find((candidateId) => String(mediaById.get(candidateId)?.year || "") === year);
+    return byYear || byTitle[0];
+  }
+
   function renderMetadata() {
     const facts = [
       ["Stato", item.status],
@@ -104,27 +184,53 @@ window.NetflixClone = window.NetflixClone || {};
       .filter(Boolean);
     document.getElementById("titleTags").innerHTML = toLabelList([...new Set(tagList)]);
 
-    const ids = item.ids && typeof item.ids === "object" ? item.ids : {};
-    const idEntries = Object.entries(ids).filter((entry) => entry[1]);
-    document.getElementById("titleIds").innerHTML =
-      idEntries.length > 0
-        ? idEntries.map(([key, value]) => `<li><strong>${key}:</strong> ${value}</li>`).join("")
-        : "<li>Nessun id disponibile.</li>";
-
-    const related = Array.isArray(item.related) ? item.related.slice(0, 12) : [];
+    const related = Array.isArray(item.related) ? item.related : [];
     document.getElementById("titleRelated").innerHTML =
       related.length > 0
         ? related
-            .map(
-              (entry) => `
-          <a class="title-related-card" href="${entry.link || "#"}" target="_blank" rel="noopener noreferrer">
-            <span>${entry.title || "Titolo"}</span>
-            <small>${entry.type || ""} ${entry.year ? `• ${entry.year}` : ""}</small>
-          </a>
-        `
-            )
+            .map((entry) => {
+              const relatedId = findRelatedAppId(entry);
+              const relatedSummary = relatedId ? mediaById.get(relatedId) : null;
+              const relatedImage =
+                relatedSummary?.poster ||
+                relatedSummary?.backdrop ||
+                entry.image ||
+                fallbackPoster;
+              const relatedTitle = relatedSummary?.title || entry.title || "Titolo correlato";
+              const relatedMetaBits = [];
+              if (entry.type) relatedMetaBits.push(entry.type);
+              if (entry.year) relatedMetaBits.push(entry.year);
+              return `
+          <button class="similar-card title-related-card${relatedId ? "" : " is-unavailable"}" type="button" ${
+                relatedId ? `data-id="${relatedId}"` : "disabled"
+              }>
+            <img src="${relatedImage}" data-fallback="${fallbackPoster}" alt="${relatedTitle}" loading="lazy" />
+            <div class="similar-content">
+              <p class="similar-title">${relatedTitle}</p>
+              <p class="similar-meta">${relatedMetaBits.join(" • ")}</p>
+            </div>
+          </button>
+        `;
+            })
             .join("")
         : "<p class='title-empty'>Nessun contenuto correlato disponibile.</p>";
+
+    document
+      .getElementById("titleRelated")
+      .querySelectorAll("img[data-fallback]")
+      .forEach((img) => {
+        img.addEventListener(
+          "error",
+          () => {
+            if (img.dataset.failed === "true") {
+              return;
+            }
+            img.dataset.failed = "true";
+            img.src = img.dataset.fallback;
+          },
+          { once: true }
+        );
+      });
 
     const sourceLink = item.links?.source || item.sourceLink || item.links?.page || "";
     const sourceAnchor = document.getElementById("titleSourceLink");
@@ -182,7 +288,63 @@ window.NetflixClone = window.NetflixClone || {};
     });
   }
 
+  function bindRelatedNavigation() {
+    const root = document.getElementById("titleRelated");
+    root.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-id]");
+      if (!card) {
+        return;
+      }
+      window.location.href = `title.html?id=${encodeURIComponent(card.dataset.id)}`;
+    });
+  }
+
+  function bindRelatedControls() {
+    const track = document.getElementById("titleRelated");
+    const prevButton = document.getElementById("titleRelatedPrev");
+    const nextButton = document.getElementById("titleRelatedNext");
+    if (!track || !prevButton || !nextButton) {
+      return;
+    }
+
+    function stepSize() {
+      return Math.max(280, Math.round(track.clientWidth * 0.9));
+    }
+
+    function updateButtons() {
+      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+      const canScroll = maxScroll > 6;
+
+      prevButton.hidden = !canScroll;
+      nextButton.hidden = !canScroll;
+
+      if (!canScroll) {
+        prevButton.disabled = true;
+        nextButton.disabled = true;
+        return;
+      }
+
+      prevButton.disabled = track.scrollLeft <= 4;
+      nextButton.disabled = track.scrollLeft >= maxScroll - 4;
+    }
+
+    prevButton.addEventListener("click", () => {
+      track.scrollBy({ left: -stepSize(), behavior: "smooth" });
+    });
+
+    nextButton.addEventListener("click", () => {
+      track.scrollBy({ left: stepSize(), behavior: "smooth" });
+    });
+
+    track.addEventListener("scroll", updateButtons, { passive: true });
+    window.addEventListener("resize", updateButtons);
+    requestAnimationFrame(updateButtons);
+  }
+
+  buildProviderLookup();
   renderHero();
   renderMetadata();
+  bindRelatedNavigation();
+  bindRelatedControls();
   renderSimilar();
 })(window.NetflixClone);

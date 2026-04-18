@@ -105,7 +105,7 @@
 
 .title-meta-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 0.9rem;
 }
 
@@ -152,22 +152,77 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
+.title-related-rail {
+  position: relative;
+}
+
 .title-related-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 0.9rem;
+  padding: 0 2.8rem 0.25rem;
 }
 
 .title-related-card {
-  display: block;
-  border-radius: 10px;
-  background: #1d1d1d;
-  padding: 0.75rem;
-  color: #fff;
+  flex: 0 0 calc((100% - 2.7rem) / 4);
+  scroll-snap-align: start;
 }
 
-.title-related-card small {
-  color: rgba(255, 255, 255, 0.7);
+.title-related-grid::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.title-rail-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(20, 20, 20, 0.82);
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.title-rail-btn.is-prev {
+  left: 0;
+}
+
+.title-rail-btn.is-next {
+  right: 0;
+}
+
+.title-rail-btn:hover:not(:disabled),
+.title-rail-btn:focus-visible:not(:disabled) {
+  background: rgba(34, 34, 34, 0.92);
+  border-color: rgba(255, 255, 255, 0.56);
+  transform: translateY(-50%) scale(1.03);
+}
+
+.title-rail-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.title-related-card.is-unavailable {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .title-similar-grid {
@@ -209,9 +264,12 @@
 }
 
 @media (max-width: 980px) {
-  .title-meta-grid,
-  .title-related-grid {
+  .title-meta-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .title-related-card {
+    flex-basis: calc((100% - 0.9rem) / 2);
   }
 
   .title-similar-grid {
@@ -221,9 +279,20 @@
 
 @media (max-width: 620px) {
   .title-meta-grid,
-  .title-related-grid,
   .title-similar-grid {
     grid-template-columns: 1fr;
+  }
+
+  .title-related-card {
+    flex-basis: min(82vw, 360px);
+  }
+
+  .title-related-grid {
+    padding-inline: 0;
+  }
+
+  .title-rail-btn {
+    display: none;
   }
 
   .title-actions .btn {
