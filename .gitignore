@@ -6,3 +6,4 @@ Thumbs.db
 
 # local generated test catalogs
 data/providers/**/*.test.json
+.vercel
