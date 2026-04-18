@@ -3,8 +3,6 @@
   var utils = StreamBox.utils;
   var storage = StreamBox.storage;
 
-  var PAGE_SIZE = 24;
-  var CARDS_PER_ROW_PAGE = 12;
   var state = {
     catalog: null,
     items: [],
@@ -112,8 +110,7 @@
     var matched = [];
     for (var i = 0; i < state.items.length; i += 1) if (matchItem(state.items[i], f)) matched.push(state.items[i]);
     var sorted = sortItems(matched, f.sort);
-    var limit = Math.max(PAGE_SIZE, f.page * PAGE_SIZE);
-    return { total: sorted.length, items: sorted.slice(0, limit) };
+    return { total: sorted.length, items: sorted };
   }
 
   function applyRowFilter(items, filter) {
@@ -147,7 +144,7 @@
       rows.push({
         id: row.id,
         title: row.title || row.id,
-        items: rowItems.slice(0, row.top10 === true ? 10 : Math.max(CARDS_PER_ROW_PAGE, state.filters.page * CARDS_PER_ROW_PAGE)),
+        items: row.top10 === true ? rowItems.slice(0, 10) : rowItems,
         top10: row.top10 === true
       });
     }
@@ -160,12 +157,12 @@
       rows.unshift({
         id: custom.id,
         title: custom.title || 'Sezione personalizzata',
-        items: items.slice(0, Math.max(CARDS_PER_ROW_PAGE, state.filters.page * CARDS_PER_ROW_PAGE)),
+        items: items,
         custom: true
       });
     }
 
-    return { rows: rows, total: visible.total, page: state.filters.page, pageSize: PAGE_SIZE };
+    return { rows: rows, total: visible.total, page: state.filters.page, pageSize: visible.total };
   }
 
   function options() {

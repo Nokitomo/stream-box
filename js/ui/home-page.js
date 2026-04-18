@@ -6,6 +6,7 @@
   var urlState = StreamBox.urlState;
   var templates = StreamBox.templates;
   var modal = StreamBox.modal;
+  var tvNav = StreamBox.tvNav;
 
   var refs = {};
   var catalog = null;
@@ -74,13 +75,6 @@
       render();
     });
 
-    refs.loadMore.addEventListener('click', function () {
-      var filters = store.getFilters();
-      store.setFilters({ page: filters.page + 1 }, false);
-      syncUrl(false);
-      render();
-    });
-
     refs.hero.addEventListener('click', function (event) {
       var btn = event.target.closest('[data-action="open-modal"]');
       if (btn) modal.openById(btn.getAttribute('data-id'));
@@ -98,91 +92,19 @@
         render();
       }
     });
+    tvNav.bindRailControls(refs.rails);
 
     bindTvKeyboard();
   }
 
   function bindTvKeyboard() {
-    document.addEventListener('keydown', function (event) {
-      var key = event.key || '';
-      var code = event.keyCode;
-      if (!isArrow(key, code)) return;
-      if (isTypingElement(document.activeElement)) return;
-      var focusables = getFocusable();
-      if (!focusables.length) return;
-      var current = document.activeElement;
-      if (!current || !current.getAttribute || current.getAttribute('data-tv-focus') !== '1') {
-        focusables[0].focus();
-        event.preventDefault();
-        return;
-      }
-      var next = moveByKey(current, focusables, key, code);
-      if (next) {
-        next.focus();
-        event.preventDefault();
+    tvNav.bindKeyboard({
+      bindKey: 'home',
+      ignoreTyping: true,
+      getFocusable: function () {
+        return tvNav.getFocusable(document);
       }
     });
-  }
-
-  function isArrow(key, code) {
-    return key === 'ArrowRight' || key === 'ArrowLeft' || key === 'ArrowUp' || key === 'ArrowDown' || code === 37 || code === 38 || code === 39 || code === 40;
-  }
-
-  function isTypingElement(node) {
-    if (!node || !node.tagName) return false;
-    var tag = node.tagName.toLowerCase();
-    return tag === 'input' || tag === 'select' || tag === 'textarea';
-  }
-
-  function getFocusable() {
-    var nodes = document.querySelectorAll('[data-tv-focus="1"]');
-    var out = [];
-    for (var i = 0; i < nodes.length; i += 1) {
-      if (nodes[i].offsetParent !== null) out.push(nodes[i]);
-    }
-    return out;
-  }
-
-  function moveByKey(current, focusables, key, code) {
-    var direction = key;
-    if (!direction) {
-      if (code === 37) direction = 'ArrowLeft';
-      if (code === 38) direction = 'ArrowUp';
-      if (code === 39) direction = 'ArrowRight';
-      if (code === 40) direction = 'ArrowDown';
-    }
-    if (direction === 'ArrowRight' || direction === 'ArrowLeft') {
-      var idx = focusables.indexOf(current);
-      if (idx < 0) return focusables[0];
-      var step = direction === 'ArrowRight' ? 1 : -1;
-      var nextIndex = Math.max(0, Math.min(focusables.length - 1, idx + step));
-      return focusables[nextIndex];
-    }
-    return moveSpatial(current, focusables, direction === 'ArrowDown' ? 1 : -1);
-  }
-
-  function moveSpatial(current, focusables, verticalDirection) {
-    var base = current.getBoundingClientRect();
-    var baseX = base.left + base.width / 2;
-    var chosen = null;
-    var best = Infinity;
-    for (var i = 0; i < focusables.length; i += 1) {
-      var node = focusables[i];
-      if (node === current) continue;
-      var box = node.getBoundingClientRect();
-      var nodeY = box.top + box.height / 2;
-      var baseY = base.top + base.height / 2;
-      var deltaY = nodeY - baseY;
-      if (verticalDirection > 0 && deltaY <= 2) continue;
-      if (verticalDirection < 0 && deltaY >= -2) continue;
-      var nodeX = box.left + box.width / 2;
-      var score = Math.abs(deltaY) * 10 + Math.abs(nodeX - baseX);
-      if (score < best) {
-        best = score;
-        chosen = node;
-      }
-    }
-    return chosen;
   }
 
   function syncFilterInputs() {
@@ -271,33 +193,24 @@
       '</div>';
   }
 
-  function renderRows(rows, info) {
+  function renderRows(rows) {
     refs.rails.innerHTML = '';
-    var index = 0;
-
-    function chunk() {
-      var end = Math.min(rows.length, index + 2);
-      for (; index < end; index += 1) refs.rails.insertAdjacentHTML('beforeend', templates.rowSection(rows[index]));
-      if (index < rows.length) {
-        setTimeout(chunk, 0);
-      } else {
-        var visibleNow = info.page * info.pageSize;
-        var hasMore = info.total > visibleNow;
-        refs.loadMore.className = hasMore ? 'btn' : 'btn hidden';
-      }
-    }
-
     if (!rows.length) {
       refs.rails.innerHTML = '<p>Nessun risultato con i filtri attuali.</p>';
       refs.loadMore.className = 'btn hidden';
       return;
     }
-
-    chunk();
+    for (var i = 0; i < rows.length; i += 1) refs.rails.insertAdjacentHTML('beforeend', templates.rowSection(rows[i]));
+    refs.loadMore.className = 'btn hidden';
+    if (global.requestAnimationFrame) {
+      global.requestAnimationFrame(function () { tvNav.refreshRails(refs.rails, true); });
+    } else {
+      setTimeout(function () { tvNav.refreshRails(refs.rails, true); }, 0);
+    }
   }
 
   function renderStatus(info, rowsCount) {
-    refs.status.innerHTML = 'Risultati: <strong>' + info.total + '</strong> · Pagina rail: <strong>' + info.page + '</strong> · Sezioni: <strong>' + rowsCount + '</strong>';
+    refs.status.innerHTML = 'Risultati: <strong>' + info.total + '</strong> · Sezioni: <strong>' + rowsCount + '</strong> · Scroll: <strong>infinito</strong>';
   }
 
   function render() {
@@ -313,7 +226,7 @@
 
     renderHero(chooseHero(rows));
     renderStatus(payload, rows.length);
-    renderRows(rows, payload);
+    renderRows(rows);
   }
 
   StreamBox.homePage = {

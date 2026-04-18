@@ -41,16 +41,32 @@
 .stack { display: flex; flex-direction: column; gap: 16px; }
 .hero { margin-bottom: 24px; }
 .rails { display: flex; flex-direction: column; gap: 24px; }
+.rail { display: flex; flex-direction: column; gap: 10px; }
 .rail-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 }
-.card-grid {
+.rail-body {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: 46px minmax(0, 1fr) 46px;
+  gap: 10px;
+  align-items: center;
+}
+.rail-track {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.rail-track::-webkit-scrollbar { display: none; }
+.rail-strip {
+  display: flex;
   gap: 12px;
+  width: max-content;
+}
+.rail-strip > .title-card {
+  flex: 0 0 clamp(150px, 14vw, 220px);
 }
 .page-panel {
   background: #111;

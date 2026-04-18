@@ -6,20 +6,24 @@
 @media (max-width: 720px) {
   .header-inner { flex-wrap: wrap; padding: 8px 0; }
   .brand { font-size: 1.35rem; }
-  .card-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); }
+  .rail-body { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 8px; }
+  .rail-nav { width: 38px; height: 72px; font-size: 1.6rem; }
+  .rail-strip > .title-card { flex-basis: clamp(132px, 38vw, 168px); }
   .hero-wrap, .hero-overlay { min-height: 250px; }
   .hero-overlay { padding: 14px; }
   .filters > * { flex: 1 1 46%; }
 }
 @media (max-width: 430px) {
   .container { padding: 0 10px; }
-  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .rail-body { grid-template-columns: 32px minmax(0, 1fr) 32px; gap: 6px; }
+  .rail-nav { width: 32px; height: 60px; font-size: 1.3rem; }
+  .rail-strip > .title-card { flex-basis: 140px; }
   .title-meta { padding: 8px; }
   .title-name { font-size: 0.86rem; }
   .hero-title { font-size: 1.35rem; }
 }
 @media (min-width: 1800px) {
   .container { max-width: 2200px; }
-  .card-grid { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+  .rail-strip > .title-card { flex-basis: 240px; }
   .hero-wrap, .hero-overlay { min-height: 430px; }
 }

@@ -26,8 +26,8 @@
     var provider = badge(item.provider || 'catalog');
     var meta = [item.year, item.maturity, item.duration].filter(Boolean).map(badge).join('');
     return '' +
-      '<article class="title-card">' +
-        '<button type="button" data-tv-focus="1" data-action="open-modal" data-id="' + utils.escapeHtml(item.id) + '">' +
+      '<article class="title-card" data-rail-card="1">' +
+        '<button class="card-action" type="button" data-tv-focus="1" data-action="open-modal" data-id="' + utils.escapeHtml(item.id) + '">' +
           '<img class="title-thumb" loading="lazy" src="' + utils.escapeHtml(poster(item.poster, item.backdrop)) + '" alt="' + utils.escapeHtml(item.title) + '">' +
           '<div class="title-meta">' +
             '<h3 class="title-name">' + utils.escapeHtml(item.title) + '</h3>' +
@@ -47,7 +47,13 @@
           '<h2 class="section-title">' + utils.escapeHtml(row.title) + '</h2>' +
           (row.custom ? '<button class="btn btn-sm btn-ghost" data-tv-focus="1" data-action="remove-row" data-row-id="' + utils.escapeHtml(row.id) + '">Rimuovi</button>' : '') +
         '</div>' +
-        '<div class="card-grid">' + cards + '</div>' +
+        '<div class="rail-body">' +
+          '<button type="button" class="rail-nav rail-nav-prev" data-tv-focus="1" data-action="rail-prev" data-row-id="' + utils.escapeHtml(row.id) + '" aria-label="Scorri a sinistra">‹</button>' +
+          '<div class="rail-track" data-rail-track="1">' +
+            '<div class="rail-strip">' + cards + '</div>' +
+          '</div>' +
+          '<button type="button" class="rail-nav rail-nav-next" data-tv-focus="1" data-action="rail-next" data-row-id="' + utils.escapeHtml(row.id) + '" aria-label="Scorri a destra">›</button>' +
+        '</div>' +
       '</section>';
   }
 
@@ -80,7 +86,7 @@
     var list = related || [];
     if (!list.length) return '<p>Nessun titolo correlato disponibile.</p>';
     var html = '';
-    for (var i = 0; i < list.length && i < 24; i += 1) {
+    for (var i = 0; i < list.length; i += 1) {
       var item = list[i];
       var targetId = utils.safeText(item.catalogId || '');
       var href = '#';
@@ -90,14 +96,23 @@
           '&provider=' + encodeURIComponent(providerHint || '');
       }
       html += '' +
-        '<article class="title-card">' +
-          '<a href="' + utils.escapeHtml(href) + '">' +
+        '<article class="title-card" data-rail-card="1">' +
+          '<a data-tv-focus="1" class="card-action" href="' + utils.escapeHtml(href) + '">' +
             '<img class="title-thumb" loading="lazy" src="' + utils.escapeHtml(poster(item.image, item.imageFallback)) + '" alt="' + utils.escapeHtml(item.title || '') + '">' +
             '<div class="title-meta"><h3 class="title-name">' + utils.escapeHtml(item.title || '') + '</h3></div>' +
           '</a>' +
         '</article>';
     }
-    return '<div class="similar-grid">' + html + '</div>';
+    return '' +
+      '<div class="rail rail-inline" data-row-id="related">' +
+        '<div class="rail-body">' +
+          '<button type="button" class="rail-nav rail-nav-prev" data-tv-focus="1" data-action="rail-prev" data-row-id="related" aria-label="Scorri correlati a sinistra">‹</button>' +
+          '<div class="rail-track" data-rail-track="1">' +
+            '<div class="rail-strip">' + html + '</div>' +
+          '</div>' +
+          '<button type="button" class="rail-nav rail-nav-next" data-tv-focus="1" data-action="rail-next" data-row-id="related" aria-label="Scorri correlati a destra">›</button>' +
+        '</div>' +
+      '</div>';
   }
 
   StreamBox.templates = {

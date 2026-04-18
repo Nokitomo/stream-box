@@ -39,8 +39,9 @@
   overflow: hidden;
   background: #111;
 }
-.title-card button {
+.card-action {
   width: 100%;
+  display: block;
   border: 0;
   padding: 0;
   background: transparent;
@@ -67,6 +68,18 @@
   color: #c2c2c2;
   font-size: 0.8rem;
 }
+.rail-nav {
+  width: 46px;
+  height: 92px;
+  border: 1px solid #2f2f2f;
+  border-radius: 4px;
+  background: #121212;
+  color: #f5f5f5;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+}
+.rail-nav:hover { background: #1a1a1a; }
 .hero-wrap {
   min-height: 320px;
   border: 1px solid #2f2f2f;

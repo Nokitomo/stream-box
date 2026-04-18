@@ -4,6 +4,7 @@
   var data = StreamBox.data;
   var store = StreamBox.store;
   var templates = StreamBox.templates;
+  var tvNav = StreamBox.tvNav;
 
   var refs = {};
 
@@ -13,6 +14,8 @@
     refs.status = utils.byId('titleStatus');
     refs.similar = utils.byId('titleSimilar');
     refs.facts = utils.byId('titleFacts');
+    bindRelatedControls();
+    bindTvNavigation();
 
     var query = utils.parseQuery(global.location.search || '');
     var id = query.id;
@@ -77,7 +80,7 @@
     var source = (detail.links && detail.links.source) || summary.sourceLink || '';
 
     refs.status.innerHTML = '' +
-      '<a class="btn btn-sm" href="../index.html">Torna home</a> ' +
+      '<a data-tv-focus="1" class="btn btn-sm" href="../index.html">Torna home</a> ' +
       '<span class="badge">' + utils.escapeHtml(summary.provider) + '</span>';
 
     refs.root.innerHTML = '' +
@@ -86,8 +89,8 @@
         '<div>' +
           '<img class="poster-large" src="' + utils.escapeHtml(poster) + '" alt="' + utils.escapeHtml(summary.title) + '">' +
           '<div class="actions-row">' +
-            '<button id="titleFavBtn" class="btn btn-sm">' + (store.isFavorite(summary.id) ? 'Rimuovi preferito' : 'Aggiungi preferito') + '</button>' +
-            '<button id="titleWatchBtn" class="btn btn-sm">' + (store.isWatchlist(summary.id) ? 'Rimuovi watchlist' : 'Aggiungi watchlist') + '</button>' +
+            '<button data-tv-focus="1" id="titleFavBtn" class="btn btn-sm">' + (store.isFavorite(summary.id) ? 'Rimuovi preferito' : 'Aggiungi preferito') + '</button>' +
+            '<button data-tv-focus="1" id="titleWatchBtn" class="btn btn-sm">' + (store.isWatchlist(summary.id) ? 'Rimuovi watchlist' : 'Aggiungi watchlist') + '</button>' +
           '</div>' +
         '</div>' +
         '<div>' +
@@ -100,8 +103,8 @@
           '</div>' +
           '<p>' + utils.escapeHtml((detail.synopsis || summary.description || '').substring(0, 1200)) + '</p>' +
           '<div class="actions-row">' +
-            '<a class="btn btn-primary" href="' + utils.escapeHtml(utils.resolvePath('html/player.html') + '?id=' + encodeURIComponent(summary.id) + '&provider=' + encodeURIComponent(summary.provider || '')) + '">Apri player</a>' +
-            (source ? '<a class="btn" target="_blank" rel="noopener" href="' + utils.escapeHtml(source) + '">Apri provider</a>' : '') +
+            '<a data-tv-focus="1" class="btn btn-primary" href="' + utils.escapeHtml(utils.resolvePath('html/player.html') + '?id=' + encodeURIComponent(summary.id) + '&provider=' + encodeURIComponent(summary.provider || '')) + '">Apri player</a>' +
+            (source ? '<a data-tv-focus="1" class="btn" target="_blank" rel="noopener" href="' + utils.escapeHtml(source) + '">Apri provider</a>' : '') +
           '</div>' +
           '<div class="detail-columns">' +
             '<div class="detail-box"><h3 class="section-title">Cast</h3><p>' + utils.escapeHtml(castValue) + '</p></div>' +
@@ -178,6 +181,25 @@
       );
     }
     refs.similar.innerHTML = '<h2 class="section-title">Titoli simili</h2>' + templates.relatedCards(mapped, providerHint);
+    if (global.requestAnimationFrame) {
+      global.requestAnimationFrame(function () { tvNav.refreshRails(refs.similar, true); });
+    } else {
+      setTimeout(function () { tvNav.refreshRails(refs.similar, true); }, 0);
+    }
+  }
+
+  function bindRelatedControls() {
+    if (!refs.similar) return;
+    tvNav.bindRailControls(refs.similar);
+  }
+
+  function bindTvNavigation() {
+    tvNav.bindKeyboard({
+      bindKey: 'title',
+      getFocusable: function () {
+        return tvNav.getFocusable(document);
+      }
+    });
   }
 
   StreamBox.titlePage = { init: init };
