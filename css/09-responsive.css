@@ -9,7 +9,7 @@
   }
 
   .rail-track {
-    grid-auto-columns: minmax(210px, 210px);
+    grid-auto-columns: minmax(272px, 272px);
   }
 
   .footer-links {
@@ -39,7 +39,7 @@
   }
 
   .rail-track {
-    grid-auto-columns: minmax(178px, 178px);
+    grid-auto-columns: minmax(224px, 224px);
   }
 
   .footer-links {
@@ -90,7 +90,7 @@
   }
 
   .rail-track {
-    grid-auto-columns: minmax(146px, 146px);
+    grid-auto-columns: minmax(178px, 178px);
   }
 
   .media-card:hover,

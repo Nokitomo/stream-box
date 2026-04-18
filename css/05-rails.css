@@ -37,7 +37,7 @@
 .rail-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(240px, 240px);
+  grid-auto-columns: minmax(312px, 312px);
   gap: 0.55rem;
   overflow-x: auto;
   overscroll-behavior-inline: contain;

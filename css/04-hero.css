@@ -4,6 +4,7 @@
   display: grid;
   align-items: end;
   padding: calc(var(--header-height) + 3rem) 0 6rem;
+  overflow: hidden;
 }
 
 .hero-backdrop,
