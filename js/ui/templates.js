@@ -36,9 +36,10 @@ window.NetflixClone = window.NetflixClone || {};
     const isInList = options.isInList;
     const progress = options.progress;
     const genres = item.genres.slice(0, 3).join(" • ");
+    const staggerIndex = options.staggerIndex;
 
     return `
-      <article class="media-card ${isTop10 ? "is-top10" : ""}" data-id="${item.id}" tabindex="0">
+      <article class="media-card ${isTop10 ? "is-top10" : ""}" data-id="${item.id}" tabindex="0" style="--stagger-index:${staggerIndex}">
         ${renderTopRank(index, isTop10)}
         <img src="${item.poster}" data-fallback="assets/poster-fallback.svg" alt="${escapeHtml(item.title)}" loading="lazy" />
         <div class="card-overlay">
@@ -68,7 +69,8 @@ window.NetflixClone = window.NetflixClone || {};
           isTop10: row.top10,
           index: index + 1,
           isInList: myListSet.has(item.id),
-          progress: getProgress(item.id, item.progress)
+          progress: getProgress(item.id, item.progress),
+          staggerIndex: index % 10
         })
       )
       .join("");

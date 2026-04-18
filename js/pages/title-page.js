@@ -300,6 +300,7 @@ window.NetflixClone = window.NetflixClone || {};
   }
 
   function bindRelatedControls() {
+    const RELATED_SCROLL_ANIMATION_MS = 420;
     const track = document.getElementById("titleRelated");
     const prevButton = document.getElementById("titleRelatedPrev");
     const nextButton = document.getElementById("titleRelatedNext");
@@ -329,10 +330,26 @@ window.NetflixClone = window.NetflixClone || {};
     }
 
     prevButton.addEventListener("click", () => {
+      clearTimeout(Number(track.dataset.scrollAnimationTimeout) || 0);
+      track.classList.remove("is-scrolling-prev", "is-scrolling-next");
+      track.classList.add("is-scrolling", "is-scrolling-prev");
+      const timeoutId = window.setTimeout(() => {
+        track.classList.remove("is-scrolling", "is-scrolling-prev", "is-scrolling-next");
+        track.dataset.scrollAnimationTimeout = "";
+      }, RELATED_SCROLL_ANIMATION_MS);
+      track.dataset.scrollAnimationTimeout = String(timeoutId);
       track.scrollBy({ left: -stepSize(), behavior: "smooth" });
     });
 
     nextButton.addEventListener("click", () => {
+      clearTimeout(Number(track.dataset.scrollAnimationTimeout) || 0);
+      track.classList.remove("is-scrolling-prev", "is-scrolling-next");
+      track.classList.add("is-scrolling", "is-scrolling-next");
+      const timeoutId = window.setTimeout(() => {
+        track.classList.remove("is-scrolling", "is-scrolling-prev", "is-scrolling-next");
+        track.dataset.scrollAnimationTimeout = "";
+      }, RELATED_SCROLL_ANIMATION_MS);
+      track.dataset.scrollAnimationTimeout = String(timeoutId);
       track.scrollBy({ left: stepSize(), behavior: "smooth" });
     });
 

@@ -7,6 +7,8 @@
   scroll-snap-align: start;
   transform-origin: center bottom;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
+  animation: cardReveal 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--stagger-index, 0) * 36ms);
 }
 
 .media-card:hover,
@@ -103,7 +105,8 @@
 
 .media-card.is-top10:hover,
 .media-card.is-top10:focus-within {
-  transform: none;
+  transform: scale(1.08) translateY(-8px);
+  z-index: 9;
 }
 
 .media-card.is-top10 img {
@@ -121,4 +124,15 @@
   -webkit-text-stroke: 2px #7f7f7f;
   text-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
   pointer-events: none;
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

@@ -1,11 +1,22 @@
 window.NetflixClone = window.NetflixClone || {};
 
 (function initInteractionsFactory(app) {
+  const RAIL_SCROLL_ANIMATION_MS = 420;
+
   function scrollTrack(trigger, direction) {
     const track = trigger.closest(".rail-block")?.querySelector(".rail-track");
     if (!track) {
       return;
     }
+
+    clearTimeout(Number(track.dataset.scrollAnimationTimeout) || 0);
+    track.classList.remove("is-scrolling-prev", "is-scrolling-next");
+    track.classList.add("is-scrolling", direction > 0 ? "is-scrolling-next" : "is-scrolling-prev");
+    const timeoutId = window.setTimeout(() => {
+      track.classList.remove("is-scrolling", "is-scrolling-prev", "is-scrolling-next");
+      track.dataset.scrollAnimationTimeout = "";
+    }, RAIL_SCROLL_ANIMATION_MS);
+    track.dataset.scrollAnimationTimeout = String(timeoutId);
 
     const delta = Math.min(track.clientWidth * 0.9, 820) * direction;
     track.scrollBy({ left: delta, behavior: "smooth" });

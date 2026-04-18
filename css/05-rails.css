@@ -32,6 +32,12 @@
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(20, 20, 20, 0.72);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.rail-btn:hover {
+  transform: translateY(-1px) scale(1.05);
+  background: rgba(36, 36, 36, 0.84);
 }
 
 .rail-track {
@@ -42,12 +48,51 @@
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.2rem;
   scrollbar-width: none;
   padding: 0.45rem 0.2rem;
 }
 
 .rail-track::-webkit-scrollbar {
   display: none;
+}
+
+.rail-track.is-scrolling-next .media-card {
+  animation: railCardSlideNext 0.42s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rail-track.is-scrolling-prev .media-card {
+  animation: railCardSlidePrev 0.42s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes railCardSlideNext {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(-16px) scale(0.985);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes railCardSlidePrev {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(16px) scale(0.985);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
 }
 
 .rail-empty {

@@ -171,12 +171,51 @@
 .title-related-card {
   flex: 0 0 calc((100% - 2.7rem) / 4);
   scroll-snap-align: start;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .title-related-grid::-webkit-scrollbar {
   width: 0;
   height: 0;
   display: none;
+}
+
+.title-related-grid.is-scrolling-next .title-related-card {
+  animation: relatedSlideNext 0.42s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.title-related-grid.is-scrolling-prev .title-related-card {
+  animation: relatedSlidePrev 0.42s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes relatedSlideNext {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(-14px) scale(0.985);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes relatedSlidePrev {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(14px) scale(0.985);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
 }
 
 .title-rail-btn {

@@ -7,6 +7,8 @@ window.NetflixClone = window.NetflixClone || {};
   let featuredId = "";
   let mediaById = new Map();
   let maxItemsPerRow = 120;
+  let modalCloseTimeout = null;
+  const MODAL_CLOSE_ANIMATION_MS = 240;
 
   function matchesTab(item, activeTab, myListSet) {
     if (activeTab === "home") {
@@ -184,9 +186,28 @@ window.NetflixClone = window.NetflixClone || {};
     const item = mediaById.get(state.selectedId);
 
     if (!item) {
-      modal.hidden = true;
+      if (modal.classList.contains("is-open")) {
+        modal.classList.remove("is-open");
+        modal.classList.add("is-closing");
+        clearTimeout(modalCloseTimeout);
+        modalCloseTimeout = setTimeout(() => {
+          modal.hidden = true;
+          modal.classList.remove("is-closing");
+        }, MODAL_CLOSE_ANIMATION_MS);
+      } else {
+        modal.hidden = true;
+        modal.classList.remove("is-open");
+        modal.classList.remove("is-closing");
+      }
       return;
     }
+
+    clearTimeout(modalCloseTimeout);
+    modal.hidden = false;
+    modal.classList.remove("is-closing");
+    requestAnimationFrame(() => {
+      modal.classList.add("is-open");
+    });
 
     applyBackdropWithFallback(document.getElementById("modalArtwork"), item.backdrop);
     document.getElementById("modalTitle").textContent = item.title;
@@ -207,7 +228,6 @@ window.NetflixClone = window.NetflixClone || {};
     } else {
       openSourceButton.hidden = true;
     }
-    modal.hidden = false;
   }
 
   app.initRenderer = function initRenderer(store) {
