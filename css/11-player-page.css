@@ -64,6 +64,13 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
+.player-open-source {
+  display: inline-block;
+  margin-top: 0.7rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: underline;
+}
+
 .player-controls {
   display: flex;
   align-items: center;

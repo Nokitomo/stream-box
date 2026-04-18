@@ -6,10 +6,13 @@
     "lint": "node scripts/lint-static.js",
     "test": "node scripts/test-static.js",
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/build-static-site.mjs",
+    "build:vite": "vite build",
     "preview": "vite preview",
-    "scrape:animeunity": "node scripts/scrapers/animeunity-catalog.mjs",
-    "scrape:streamingunity": "node scripts/scrapers/streamingunity-catalog.mjs"
+    "catalog:build-app": "node scripts/scrapers/build-app-catalog.mjs",
+    "scrape:animeunity": "node scripts/scrapers/animeunity-catalog.mjs --out-dir data/providers/animeunity",
+    "scrape:streamingunity": "node scripts/scrapers/streamingunity-catalog.mjs --out-dir data/providers/streamingunity",
+    "scrape:all": "npm run scrape:animeunity && npm run scrape:streamingunity && npm run catalog:build-app"
   },
   "devDependencies": {
     "vite": "^5.4.0"

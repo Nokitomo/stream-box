@@ -28,6 +28,8 @@
       <div class="player-center">
         <h1 id="playerTitle">Titolo</h1>
         <p id="playerMeta">Playback simulato</p>
+        <p id="playerProvider"></p>
+        <a class="player-open-source" id="playerOpenSource" href="#" target="_blank" rel="noopener noreferrer" hidden>Apri sorgente provider</a>
       </div>
 
       <div class="player-controls">
@@ -42,10 +44,8 @@
     </div>
   </main>
 
-  <script defer src="js/data/series.js"></script>
-  <script defer src="js/data/movies.js"></script>
   <script defer src="js/data/catalog.js"></script>
-  <script defer src="js/data/provider-catalog.js"></script>
+  <script defer src="js/data/catalog-loader.js"></script>
   <script defer src="js/state/storage.js"></script>
   <script defer src="js/pages/player-page.js"></script>
 </body>

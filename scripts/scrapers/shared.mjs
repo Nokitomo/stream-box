@@ -34,6 +34,26 @@ export function toFloat(value, fallback) {
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
+export function toBool(value, fallback = false) {
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  const text = normalizeText(value).toLowerCase();
+  if (!text) {
+    return fallback;
+  }
+
+  if (["1", "true", "yes", "y", "on"].includes(text)) {
+    return true;
+  }
+  if (["0", "false", "no", "n", "off"].includes(text)) {
+    return false;
+  }
+
+  return fallback;
+}
+
 export function normalizeText(value) {
   return String(value ?? "")
     .replace(/\s+/g, " ")
@@ -103,6 +123,71 @@ export async function writeJsonAtomic(filePath, payload, pretty = false) {
   const json = JSON.stringify(payload, null, pretty ? 2 : 0);
   await fs.writeFile(tempPath, `${json}\n`, "utf8");
   await fs.rename(tempPath, filePath);
+}
+
+export async function writeShardedJson({
+  outDir,
+  indexFileName = "index.json",
+  chunksDirName = "chunks",
+  shardSize = 300,
+  items = [],
+  indexPayload = {},
+  pretty = true,
+}) {
+  const safeShardSize = Math.max(1, Number(shardSize) || 300);
+  const rootDir = path.resolve(outDir);
+  const chunksDir = path.join(rootDir, chunksDirName);
+
+  await fs.mkdir(rootDir, { recursive: true });
+  await fs.rm(chunksDir, { recursive: true, force: true });
+  await fs.mkdir(chunksDir, { recursive: true });
+
+  const chunksMeta = [];
+  for (let start = 0, chunkIndex = 0; start < items.length; start += safeShardSize, chunkIndex += 1) {
+    const chunkItems = items.slice(start, start + safeShardSize);
+    const fileName = `chunk-${String(chunkIndex + 1).padStart(4, "0")}.json`;
+    const relativePath = `${chunksDirName}/${fileName}`;
+    const filePath = path.join(rootDir, relativePath);
+    await writeJsonAtomic(
+      filePath,
+      {
+        ...indexPayload,
+        chunk: chunkIndex + 1,
+        shardSize: safeShardSize,
+        count: chunkItems.length,
+        items: chunkItems,
+      },
+      pretty
+    );
+
+    chunksMeta.push({
+      chunk: chunkIndex + 1,
+      file: relativePath,
+      count: chunkItems.length,
+      from: start,
+      to: start + chunkItems.length - 1,
+    });
+  }
+
+  const indexPath = path.join(rootDir, indexFileName);
+  await writeJsonAtomic(
+    indexPath,
+    {
+      ...indexPayload,
+      count: items.length,
+      shardSize: safeShardSize,
+      chunks: chunksMeta,
+    },
+    pretty
+  );
+
+  return {
+    indexPath,
+    chunksDir,
+    chunks: chunksMeta,
+    count: items.length,
+    shardSize: safeShardSize,
+  };
 }
 
 export function sleep(ms) {

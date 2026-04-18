@@ -36,11 +36,35 @@
         <p class="title-meta" id="titleMeta"></p>
         <p class="title-desc" id="titleDescription"></p>
         <p class="title-cast" id="titleCast"></p>
+        <p class="title-cast" id="titleProvider"></p>
         <div class="title-actions">
           <a class="btn btn-play" id="titlePlay" href="player.html">Riproduci</a>
           <button class="btn btn-more" id="titleToggleList" type="button">Aggiungi a La mia lista</button>
+          <a class="btn btn-more" id="titleSourceLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Apri sorgente</a>
         </div>
       </div>
+    </section>
+
+    <section class="container title-section title-meta-section">
+      <div class="title-meta-grid">
+        <article class="title-meta-card">
+          <h2>Dettagli completi</h2>
+          <ul id="titleFacts"></ul>
+        </article>
+        <article class="title-meta-card">
+          <h2>Tag e generi</h2>
+          <div id="titleTags" class="title-chip-wrap"></div>
+        </article>
+        <article class="title-meta-card">
+          <h2>ID provider</h2>
+          <ul id="titleIds"></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="container title-section">
+      <h2>Correlati provider</h2>
+      <div class="title-related-grid" id="titleRelated"></div>
     </section>
 
     <section class="container title-section">
@@ -49,10 +73,8 @@
     </section>
   </main>
 
-  <script defer src="js/data/series.js"></script>
-  <script defer src="js/data/movies.js"></script>
   <script defer src="js/data/catalog.js"></script>
-  <script defer src="js/data/provider-catalog.js"></script>
+  <script defer src="js/data/catalog-loader.js"></script>
   <script defer src="js/state/storage.js"></script>
   <script defer src="js/pages/title-page.js"></script>
 </body>

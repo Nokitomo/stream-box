@@ -3,12 +3,12 @@ import path from "node:path";
 import {
   parseCliArgs,
   toInt,
+  toBool,
   toFloat,
   normalizeText,
   decodeHtmlEntities,
-  pickTranslation,
   uniqueBy,
-  writeJsonAtomic,
+  writeShardedJson,
   asyncMapLimit,
   createHttpClient,
 } from "./shared.mjs";
@@ -21,13 +21,14 @@ const args = parseCliArgs(process.argv.slice(2));
 
 const config = {
   baseUrl: String(args.baseUrl || "https://www.animeunity.so").replace(/\/+$/, ""),
-  outPath: path.resolve(
+  outDir: path.resolve(
     process.cwd(),
-    String(args.out || "data/providers/animeunity/catalog.json")
+    String(args["out-dir"] || "data/providers/animeunity")
   ),
+  shardSize: Math.max(50, toInt(args["shard-size"], 250)),
+  includeRaw: toBool(args["include-raw"], false),
   maxPages: toInt(args["max-pages"], Number.POSITIVE_INFINITY),
   maxItems: toInt(args["max-items"], Number.POSITIVE_INFINITY),
-  archiveConcurrency: Math.max(1, toInt(args["archive-concurrency"], 1)),
   detailConcurrency: Math.max(1, toInt(args["detail-concurrency"], 8)),
   timeoutMs: Math.max(5000, toInt(args.timeout, 30000)),
   retries: Math.max(0, toInt(args.retries, 3)),
@@ -133,7 +134,7 @@ function normalizeRelated(infoRelated, baseUrl) {
     .filter((item) => item.id && item.title);
 }
 
-function buildNormalizedEntry(archiveItem, info, htmlAnime, baseUrl) {
+function buildNormalizedEntry(archiveItem, info, htmlAnime, baseUrl, includeRaw) {
   const merged = {
     ...(htmlAnime || {}),
     ...(info || {}),
@@ -200,11 +201,15 @@ function buildNormalizedEntry(archiveItem, info, htmlAnime, baseUrl) {
       primeId: merged.prime_id || undefined,
     },
     related: normalizeRelated(info?.related, baseUrl),
-    raw: {
-      archive: archiveItem,
-      infoApi: info || null,
-      htmlAnime: htmlAnime || null,
-    },
+    ...(includeRaw
+      ? {
+          raw: {
+            archive: archiveItem,
+            infoApi: info || null,
+            htmlAnime: htmlAnime || null,
+          },
+        }
+      : {}),
   };
 }
 
@@ -307,7 +312,7 @@ async function run() {
   const start = Date.now();
   console.log("[animeunity] start");
   console.log(
-    `[animeunity] config baseUrl=${config.baseUrl} maxPages=${config.maxPages} maxItems=${config.maxItems} detailConcurrency=${config.detailConcurrency}`
+    `[animeunity] config baseUrl=${config.baseUrl} outDir=${config.outDir} shardSize=${config.shardSize} includeRaw=${config.includeRaw} maxPages=${config.maxPages} maxItems=${config.maxItems} detailConcurrency=${config.detailConcurrency}`
   );
 
   let session = await createSession(config.baseUrl);
@@ -374,7 +379,13 @@ async function run() {
           fetchAnimeInfo(config.baseUrl, id),
           fetchAnimeHtmlData(config.baseUrl, id, record.slug),
         ]);
-        const entry = buildNormalizedEntry(record, info || {}, htmlAnime, config.baseUrl);
+        const entry = buildNormalizedEntry(
+          record,
+          info || {},
+          htmlAnime,
+          config.baseUrl,
+          config.includeRaw
+        );
         if ((index + 1) % 100 === 0 || index + 1 === archiveItems.length) {
           console.log(
             `[animeunity] metadata ${index + 1}/${archiveItems.length} (failures=${failures})`
@@ -400,7 +411,10 @@ async function run() {
     }
   );
 
+  enriched.sort((a, b) => String(a.title || "").localeCompare(String(b.title || ""), "it"));
+
   const payload = {
+    schemaVersion: 2,
     provider: "animeunity",
     generatedAt: new Date().toISOString(),
     source: {
@@ -418,8 +432,24 @@ async function run() {
     items: enriched,
   };
 
-  await writeJsonAtomic(config.outPath, payload, false);
-  console.log(`[animeunity] done -> ${config.outPath}`);
+  const shardResult = await writeShardedJson({
+    outDir: config.outDir,
+    shardSize: config.shardSize,
+    items: payload.items,
+    indexPayload: {
+      schemaVersion: payload.schemaVersion,
+      provider: payload.provider,
+      generatedAt: payload.generatedAt,
+      source: payload.source,
+      stats: payload.stats,
+      includeRaw: config.includeRaw,
+    },
+    pretty: true,
+  });
+
+  console.log(
+    `[animeunity] done -> ${shardResult.indexPath} (chunks=${shardResult.chunks.length}, items=${shardResult.count})`
+  );
 }
 
 run().catch((err) => {

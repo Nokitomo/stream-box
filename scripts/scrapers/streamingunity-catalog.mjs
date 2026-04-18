@@ -4,15 +4,15 @@ import {
   parseCliArgs,
   toInt,
   toFloat,
+  toBool,
   normalizeText,
   extractDataPage,
   decodeHtmlEntities,
   pickTranslation,
   uniqueBy,
-  writeJsonAtomic,
+  writeShardedJson,
   asyncMapLimit,
   createHttpClient,
-  toAbsoluteUrl,
 } from "./shared.mjs";
 
 const USER_AGENT =
@@ -20,22 +20,27 @@ const USER_AGENT =
 const DEFAULT_CDN = "https://cdn.streamingunity.biz";
 const DEFAULT_LOCALE = "it";
 const PAGE_SIZE = 60;
+const ARCHIVE_MIN_YEAR = 1910;
+const ARCHIVE_GENRE_IDS = [
+  4, 13, 11, 19, 12, 2, 24, 1, 16, 8, 22, 7, 25, 26, 14, 6, 37, 18, 15, 3, 10, 23, 5, 21, 9,
+  17, 20,
+];
 
 const args = parseCliArgs(process.argv.slice(2));
 const dnsServersRaw = normalizeText(String(args.dns || "1.1.1.1,1.0.0.1"));
 
 const config = {
   baseUrl: String(args.baseUrl || "https://streamingunity.biz").replace(/\/+$/, ""),
-  outPath: path.resolve(
-    process.cwd(),
-    String(args.out || "data/providers/streamingunity/catalog.json")
-  ),
+  outDir: path.resolve(process.cwd(), String(args["out-dir"] || "data/providers/streamingunity")),
+  shardSize: Math.max(50, toInt(args["shard-size"], 250)),
+  includeRaw: toBool(args["include-raw"], false),
   maxPages: toInt(args["max-pages"], Number.POSITIVE_INFINITY),
   maxItems: toInt(args["max-items"], Number.POSITIVE_INFINITY),
-  detailConcurrency: Math.max(1, toInt(args["detail-concurrency"], 10)),
+  detailConcurrency: Math.max(1, toInt(args["detail-concurrency"], 6)),
   timeoutMs: Math.max(5000, toInt(args.timeout, 30000)),
   retries: Math.max(0, toInt(args.retries, 3)),
   locale: normalizeText(String(args.locale || DEFAULT_LOCALE)) || DEFAULT_LOCALE,
+  minYear: Math.max(1900, toInt(args["min-year"], ARCHIVE_MIN_YEAR)),
   dnsServers: dnsServersRaw
     .split(",")
     .map((item) => normalizeText(item))
@@ -70,9 +75,7 @@ function resolvePlot(title, locale = DEFAULT_LOCALE) {
 }
 
 function resolveCdnUrl(pageProps) {
-  const candidate = normalizeText(
-    pageProps?.cdn_url || pageProps?.cdnUrl || pageProps?.cdn || ""
-  );
+  const candidate = normalizeText(pageProps?.cdn_url || pageProps?.cdnUrl || pageProps?.cdn || "");
   if (!candidate) return DEFAULT_CDN;
   if (/^https?:\/\//i.test(candidate)) return candidate.replace(/\/+$/, "");
   return `https://${candidate.replace(/^\/+/, "").replace(/\/+$/, "")}`;
@@ -81,12 +84,7 @@ function resolveCdnUrl(pageProps) {
 function buildImageUrl(image, cdnUrl) {
   if (!image) return "";
   const raw = normalizeText(
-    image.original_url_field ||
-      image.url ||
-      image.src ||
-      image.path ||
-      image.filename ||
-      ""
+    image.original_url_field || image.url || image.src || image.path || image.filename || ""
   );
   if (!raw) return "";
   if (/^https?:\/\//i.test(raw)) return raw;
@@ -97,13 +95,9 @@ function pickImage(images, cdnUrl, types, locale = DEFAULT_LOCALE) {
   if (!Array.isArray(images) || images.length === 0) return "";
   for (const type of types) {
     const normalized = String(type).toLowerCase();
-    const matches = images.filter(
-      (item) => String(item?.type || "").toLowerCase() === normalized
-    );
+    const matches = images.filter((item) => String(item?.type || "").toLowerCase() === normalized);
     if (matches.length === 0) continue;
-    const localized = matches.find(
-      (item) => String(item?.lang || "").toLowerCase() === locale
-    );
+    const localized = matches.find((item) => String(item?.lang || "").toLowerCase() === locale);
     const fallback = localized || matches.find((item) => !item?.lang) || matches[0];
     const url = buildImageUrl(fallback, cdnUrl);
     if (url) return url;
@@ -125,10 +119,7 @@ function normalizeGenres(genres) {
   if (!Array.isArray(genres)) return [];
   return uniqueBy(
     genres
-      .map((genre) => {
-        const translated = pickTranslation(genre?.translations, "name", DEFAULT_LOCALE);
-        return translated || normalizeText(genre?.name || "");
-      })
+      .map((genre) => pickTranslation(genre?.translations, "name", DEFAULT_LOCALE) || normalizeText(genre?.name || ""))
       .filter(Boolean),
     (value) => value.toLowerCase()
   );
@@ -146,9 +137,7 @@ function normalizeKeywords(keywords) {
 
 function findRelated(sliders, baseUrl, cdnUrl) {
   if (!Array.isArray(sliders)) return [];
-  const related = sliders.find(
-    (slider) => String(slider?.name || "").toLowerCase() === "related"
-  );
+  const related = sliders.find((slider) => String(slider?.name || "").toLowerCase() === "related");
   const titles = Array.isArray(related?.titles) ? related.titles : [];
   return titles
     .map((item) => {
@@ -161,9 +150,7 @@ function findRelated(sliders, baseUrl, cdnUrl) {
         title: resolveTitleName(item, DEFAULT_LOCALE),
         type: String(item?.type || "").toLowerCase() === "tv" ? "series" : "movie",
         year: String(item?.release_date || item?.last_air_date || "").match(/\d{4}/)?.[0],
-        image:
-          pickImage(item?.images || [], cdnUrl, ["poster", "cover", "background"]) ||
-          undefined,
+        image: pickImage(item?.images || [], cdnUrl, ["poster", "cover", "background"]) || undefined,
         link: `${baseUrl}/it/titles/${id}${slug ? `-${slug}` : ""}`,
       };
     })
@@ -179,6 +166,7 @@ function buildStreamingEntry({
   baseUrl,
   locale,
   previewFallback,
+  includeRaw,
 }) {
   const title = titleData || {};
   const cdnUrl = resolveCdnUrl(pageProps || {});
@@ -187,9 +175,7 @@ function buildStreamingEntry({
     normalizeText(archiveItem?.slug || "") ||
     normalizeText(previewFallback?.slug || "");
 
-  const titleName =
-    resolveTitleName(title, locale) ||
-    normalizeText(archiveItem?.name || archiveItem?.title || "");
+  const titleName = resolveTitleName(title, locale) || normalizeText(archiveItem?.name || archiveItem?.title || "");
   const synopsis =
     resolvePlot(title, locale) ||
     pickTranslation(archiveItem?.translations, "plot", locale) ||
@@ -216,12 +202,7 @@ function buildStreamingEntry({
 
   const imageSet = title?.images || previewFallback?.images || archiveItem?.images || [];
   const poster = pickImage(imageSet, cdnUrl, ["poster", "cover", "background"], locale);
-  const background = pickImage(
-    imageSet,
-    cdnUrl,
-    ["background", "cover", "cover_mobile"],
-    locale
-  );
+  const background = pickImage(imageSet, cdnUrl, ["background", "cover", "cover_mobile"], locale);
   const cover = pickImage(imageSet, cdnUrl, ["cover", "cover_mobile", "poster"], locale);
   const logo = pickImage(imageSet, cdnUrl, ["logo"], locale);
 
@@ -242,24 +223,16 @@ function buildStreamingEntry({
       toFloat(previewFallback?.score, undefined) ??
       undefined,
     year: year || undefined,
-    runtime:
-      toInt(title?.runtime, undefined) ?? toInt(previewFallback?.runtime, undefined),
+    runtime: toInt(title?.runtime, undefined) ?? toInt(previewFallback?.runtime, undefined),
     releaseDate: releaseDate || undefined,
     lastAirDate: lastAirDate || undefined,
     age: toInt(title?.age, undefined) ?? toInt(archiveItem?.age, undefined),
-    quality:
-      normalizeText(title?.quality || "") ||
-      normalizeText(previewFallback?.quality || "") ||
-      undefined,
+    quality: normalizeText(title?.quality || "") || normalizeText(previewFallback?.quality || "") || undefined,
     seasonsCount:
       toInt(title?.seasons_count, undefined) ??
       toInt(archiveItem?.seasons_count, undefined) ??
       toInt(previewFallback?.seasons_count, undefined),
-    subIta:
-      archiveItem?.sub_ita === 1 ||
-      title?.sub_ita === 1 ||
-      title?.sub_ita === true ||
-      undefined,
+    subIta: archiveItem?.sub_ita === 1 || title?.sub_ita === 1 || title?.sub_ita === true || undefined,
     dubIta: title?.dub_ita === 1 || title?.dub_ita === true || undefined,
     image: poster || background || cover || undefined,
     poster: poster || undefined,
@@ -290,9 +263,7 @@ function buildStreamingEntry({
           number: toInt(season?.number, undefined),
           name: normalizeText(season?.name || "") || undefined,
           episodesCount: toInt(season?.episodes_count, undefined),
-          releaseDate:
-            normalizeText(season?.release_date_it || season?.release_date || "") ||
-            undefined,
+          releaseDate: normalizeText(season?.release_date_it || season?.release_date || "") || undefined,
         }))
       : [],
     loadedSeason: loadedSeason
@@ -308,42 +279,39 @@ function buildStreamingEntry({
                   normalizeText(episode?.name || "") ||
                   undefined,
                 releaseDate:
-                  normalizeText(
-                    episode?.release_date_it || episode?.release_date || ""
-                  ) || undefined,
+                  normalizeText(episode?.release_date_it || episode?.release_date || "") || undefined,
               }))
             : [],
         }
       : undefined,
     related: findRelated(sliders, baseUrl, cdnUrl),
-    raw: {
-      archive: archiveItem,
-      title: titleData || null,
-      preview: previewFallback || null,
-    },
+    ...(includeRaw
+      ? {
+          raw: {
+            archive: archiveItem,
+            title: titleData || null,
+            preview: previewFallback || null,
+          },
+        }
+      : {}),
   };
 }
 
-async function fetchArchiveHtmlPage(baseUrl, locale, pageNumber = 1) {
-  const pageQuery = pageNumber > 1 ? `?page=${pageNumber}` : "";
-  const response = await http.request({
-    url: `${baseUrl}/${locale}/archive${pageQuery}`,
-    headers: {
-      accept: "text/html,application/xhtml+xml",
-      referer: `${baseUrl}/${locale}`,
-    },
-  });
-  if (response.statusCode < 200 || response.statusCode >= 400) {
-    return null;
-  }
-  const pageData = extractDataPage(response.body);
-  if (!pageData?.props) return null;
-  return pageData;
+function buildArchiveUrl(baseUrl, locale, filters = {}, page = 1) {
+  const params = new URLSearchParams();
+  params.set("lang", locale);
+  params.set("page", String(page));
+
+  if (filters.type) params.set("type", filters.type);
+  if (filters.year) params.set("year", String(filters.year));
+  if (filters.genreId) params.append("genre[]", String(filters.genreId));
+
+  return `${baseUrl}/${locale}/archive?${params.toString()}`;
 }
 
-async function fetchArchiveJsonPage(baseUrl, locale, pageNumber) {
+async function fetchArchivePage(baseUrl, locale, filters = {}, page = 1) {
   const response = await http.requestJson({
-    url: `${baseUrl}/${locale}/archive?lang=${locale}&page=${pageNumber}`,
+    url: buildArchiveUrl(baseUrl, locale, filters, page),
     headers: {
       accept: "application/json, text/plain, */*",
       "x-requested-with": "XMLHttpRequest",
@@ -351,14 +319,30 @@ async function fetchArchiveJsonPage(baseUrl, locale, pageNumber) {
     },
   });
 
+  if (response.statusCode === 422 || response.statusCode === 503) {
+    const body = String(response.body || "");
+    if (/page .* superiore a 20|page limit reached/i.test(body)) {
+      return { limited: true, records: [], total: 0, lastPage: 20 };
+    }
+    return null;
+  }
+
   if (response.statusCode < 200 || response.statusCode >= 400) {
     return null;
   }
+
   const data = response.data;
   if (!data || !Array.isArray(data.data)) {
     return null;
   }
-  return data;
+
+  return {
+    limited: false,
+    records: data.data,
+    total: toInt(data.total, data.data.length),
+    lastPage: toInt(data.last_page, 1),
+    currentPage: toInt(data.current_page, page),
+  };
 }
 
 async function fetchTitlePage(baseUrl, locale, id, slug) {
@@ -395,148 +379,256 @@ async function fetchPreview(baseUrl, id) {
   return response.data || null;
 }
 
-async function run() {
-  const start = Date.now();
-  console.log("[streamingunity] start");
-  console.log(
-    `[streamingunity] config baseUrl=${config.baseUrl} locale=${config.locale} maxPages=${config.maxPages} maxItems=${config.maxItems} detailConcurrency=${config.detailConcurrency} dns=${config.dnsServers.join(",")}`
-  );
+async function buildArchiveSegments(baseUrl, locale) {
+  const nowYear = new Date().getFullYear();
+  const segments = [];
+  let probes = 0;
 
-  const firstPage = await fetchArchiveHtmlPage(config.baseUrl, config.locale, 1);
-  if (!firstPage?.props) {
-    throw new Error("Unable to load StreamingUnity archive page");
+  for (const type of ["movie", "tv"]) {
+    for (let year = nowYear; year >= config.minYear; year -= 1) {
+      const firstPage = await fetchArchivePage(baseUrl, locale, { type, year }, 1);
+      probes += 1;
+      if (!firstPage || firstPage.total <= 0) {
+        continue;
+      }
+
+      if (firstPage.limited || firstPage.lastPage > 20) {
+        for (const genreId of ARCHIVE_GENRE_IDS) {
+          const firstByGenre = await fetchArchivePage(baseUrl, locale, { type, year, genreId }, 1);
+          probes += 1;
+          if (!firstByGenre || firstByGenre.total <= 0) {
+            continue;
+          }
+          segments.push({
+            filters: { type, year, genreId },
+            firstPage: firstByGenre,
+            mode: "split-genre",
+          });
+        }
+        continue;
+      }
+
+      segments.push({
+        filters: { type, year },
+        firstPage,
+        mode: "year",
+      });
+    }
   }
 
-  const firstTitles = Array.isArray(firstPage.props.titles) ? firstPage.props.titles : [];
-  const totalCount = toInt(firstPage.props.totalCount, firstTitles.length);
-  const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
-  const pagesToFetch = Math.min(config.maxPages, totalPages);
+  for (const type of ["movie", "tv"]) {
+    const fallbackFirst = await fetchArchivePage(baseUrl, locale, { type }, 1);
+    probes += 1;
+    if (!fallbackFirst || fallbackFirst.total <= 0) {
+      continue;
+    }
+    segments.push({
+      filters: { type },
+      firstPage: fallbackFirst,
+      mode: "fallback-top-pages",
+      maxPages: Math.min(20, fallbackFirst.lastPage || 1),
+    });
+  }
 
+  return {
+    probes,
+    segments,
+  };
+}
+
+function buildSegmentLabel(segment) {
+  const bits = [];
+  if (segment.filters.type) bits.push(segment.filters.type);
+  if (segment.filters.year) bits.push(String(segment.filters.year));
+  if (segment.filters.genreId) bits.push(`g${segment.filters.genreId}`);
+  return bits.join("|") || "all";
+}
+
+async function collectArchiveItems(baseUrl, locale, segments) {
   const archiveMap = new Map();
-  for (const item of firstTitles) {
-    if (item?.id) archiveMap.set(item.id, item);
-  }
+  let archivePagesFetched = 0;
+  let segmentCount = 0;
 
-  console.log(
-    `[streamingunity] archive page 1: +${firstTitles.length} (unique=${archiveMap.size} / total=${totalCount} / pages=${totalPages})`
-  );
+  for (const segment of segments) {
+    segmentCount += 1;
+    const maxPages = Math.min(segment.maxPages || segment.firstPage.lastPage || 1, 20);
+    const segmentLabel = buildSegmentLabel(segment);
+    let pageRecords = segment.firstPage.records || [];
 
-  for (let page = 2; page <= pagesToFetch; page += 1) {
-    if (archiveMap.size >= config.maxItems) break;
-    let payload = await fetchArchiveJsonPage(config.baseUrl, config.locale, page);
-    let records = payload?.data;
-
-    if (!Array.isArray(records)) {
-      const htmlFallback = await fetchArchiveHtmlPage(config.baseUrl, config.locale, page);
-      records = Array.isArray(htmlFallback?.props?.titles) ? htmlFallback.props.titles : [];
-    }
-
-    if (!Array.isArray(records) || records.length === 0) {
-      console.warn(`[streamingunity] archive page ${page}: empty/fail`);
-      break;
-    }
-
-    for (const record of records) {
+    for (const record of pageRecords) {
       if (!record?.id) continue;
       if (!archiveMap.has(record.id)) archiveMap.set(record.id, record);
       if (archiveMap.size >= config.maxItems) break;
     }
+    archivePagesFetched += 1;
+
+    for (let page = 2; page <= maxPages; page += 1) {
+      if (archiveMap.size >= config.maxItems) break;
+      if (archivePagesFetched >= config.maxPages) break;
+      const nextPage = await fetchArchivePage(baseUrl, locale, segment.filters, page);
+      if (!nextPage || nextPage.limited) {
+        break;
+      }
+      pageRecords = nextPage.records || [];
+      if (pageRecords.length === 0) {
+        break;
+      }
+
+      for (const record of pageRecords) {
+        if (!record?.id) continue;
+        if (!archiveMap.has(record.id)) archiveMap.set(record.id, record);
+        if (archiveMap.size >= config.maxItems) break;
+      }
+
+      archivePagesFetched += 1;
+    }
 
     console.log(
-      `[streamingunity] archive page ${page}: +${records.length} (unique=${archiveMap.size})`
+      `[streamingunity] segment ${segmentCount}/${segments.length} ${segment.mode}:${segmentLabel} -> unique=${archiveMap.size}`
     );
+
+    if (archiveMap.size >= config.maxItems) {
+      break;
+    }
+    if (archivePagesFetched >= config.maxPages) {
+      console.log("[streamingunity] reached max-pages limit");
+      break;
+    }
   }
 
-  const archiveItems = Array.from(archiveMap.values()).slice(0, config.maxItems);
+  return {
+    archiveItems: Array.from(archiveMap.values()).slice(0, config.maxItems),
+    archivePagesFetched,
+  };
+}
+
+async function run() {
+  const start = Date.now();
+  console.log("[streamingunity] start");
+  console.log(
+    `[streamingunity] config baseUrl=${config.baseUrl} outDir=${config.outDir} shardSize=${config.shardSize} includeRaw=${config.includeRaw} locale=${config.locale} maxPages=${config.maxPages} maxItems=${config.maxItems} detailConcurrency=${config.detailConcurrency} dns=${config.dnsServers.join(",")}`
+  );
+
+  const unfilteredFirst = await fetchArchivePage(config.baseUrl, config.locale, {}, 1);
+  if (!unfilteredFirst) {
+    throw new Error("Unable to load StreamingUnity archive page");
+  }
+  const totalCount = toInt(unfilteredFirst.total, 0);
+  const totalPages = toInt(unfilteredFirst.lastPage, 1);
+
+  const { probes, segments } = await buildArchiveSegments(config.baseUrl, config.locale);
+  console.log(
+    `[streamingunity] built ${segments.length} archive segments (probes=${probes}, totalCount=${totalCount}, totalPages=${totalPages})`
+  );
+
+  const { archiveItems, archivePagesFetched } = await collectArchiveItems(
+    config.baseUrl,
+    config.locale,
+    segments
+  );
+  console.log(`[streamingunity] archive unique collected: ${archiveItems.length}`);
   console.log(`[streamingunity] enriching ${archiveItems.length} items`);
 
   let failures = 0;
-  const items = await asyncMapLimit(
-    archiveItems,
-    config.detailConcurrency,
-    async (record, index) => {
-      const id = record.id;
-      const slug =
-        normalizeText(record.slug || "") ||
-        pickTranslation(record.translations, "slug", config.locale);
+  const items = await asyncMapLimit(archiveItems, config.detailConcurrency, async (record, index) => {
+    const id = record.id;
+    const slug = normalizeText(record.slug || "") || pickTranslation(record.translations, "slug", config.locale);
 
-      try {
-        let titlePage = await fetchTitlePage(config.baseUrl, config.locale, id, slug);
-        let titleData = titlePage?.props?.title || null;
-        let loadedSeason = titlePage?.props?.loadedSeason || null;
-        let sliders = titlePage?.props?.sliders || [];
-        let previewFallback = null;
+    try {
+      const titlePage = await fetchTitlePage(config.baseUrl, config.locale, id, slug);
+      const titleData = titlePage?.props?.title || null;
+      const loadedSeason = titlePage?.props?.loadedSeason || null;
+      const sliders = titlePage?.props?.sliders || [];
+      let previewFallback = null;
 
-        if (!titleData || !titleData.id) {
-          previewFallback = await fetchPreview(config.baseUrl, id);
-        }
-
-        const entry = buildStreamingEntry({
-          archiveItem: record,
-          titleData,
-          loadedSeason,
-          sliders,
-          pageProps: titlePage?.props || firstPage.props,
-          baseUrl: config.baseUrl,
-          locale: config.locale,
-          previewFallback,
-        });
-
-        if ((index + 1) % 100 === 0 || index + 1 === archiveItems.length) {
-          console.log(
-            `[streamingunity] metadata ${index + 1}/${archiveItems.length} (failures=${failures})`
-          );
-        }
-
-        return entry;
-      } catch (err) {
-        failures += 1;
-        return {
-          id,
-          slug: slug || undefined,
-          link: `${config.baseUrl}/${config.locale}/titles/${id}${slug ? `-${slug}` : ""}`,
-          title: decodeHtmlEntities(
-            normalizeText(record?.name || record?.title || "") || `Title ${id}`
-          ),
-          synopsis:
-            decodeHtmlEntities(
-              pickTranslation(record?.translations, "plot", config.locale) || ""
-            ) || "",
-          raw: {
-            archive: record,
-          },
-          error: String(err?.message || err),
-        };
+      if (!titleData || !titleData.id) {
+        previewFallback = await fetchPreview(config.baseUrl, id);
       }
+
+      const entry = buildStreamingEntry({
+        archiveItem: record,
+        titleData,
+        loadedSeason,
+        sliders,
+        pageProps: titlePage?.props || {},
+        baseUrl: config.baseUrl,
+        locale: config.locale,
+        previewFallback,
+        includeRaw: config.includeRaw,
+      });
+
+      if ((index + 1) % 100 === 0 || index + 1 === archiveItems.length) {
+        console.log(`[streamingunity] metadata ${index + 1}/${archiveItems.length} (failures=${failures})`);
+      }
+
+      return entry;
+    } catch (err) {
+      failures += 1;
+      return {
+        id,
+        slug: slug || undefined,
+        link: `${config.baseUrl}/${config.locale}/titles/${id}${slug ? `-${slug}` : ""}`,
+        title: decodeHtmlEntities(normalizeText(record?.name || record?.title || "") || `Title ${id}`),
+        synopsis: decodeHtmlEntities(pickTranslation(record?.translations, "plot", config.locale) || "") || "",
+        ...(config.includeRaw
+          ? {
+              raw: {
+                archive: record,
+              },
+            }
+          : {}),
+        error: String(err?.message || err),
+      };
     }
-  );
+  });
+
+  items.sort((a, b) => String(a.title || "").localeCompare(String(b.title || ""), "it"));
 
   const payload = {
+    schemaVersion: 2,
     provider: "streamingunity",
     generatedAt: new Date().toISOString(),
     source: {
       baseUrl: config.baseUrl,
       locale: config.locale,
       archivePath: `/${config.locale}/archive`,
-      archiveApiQuery: `/${config.locale}/archive?lang=${config.locale}&page=:page`,
       detailPath: `/${config.locale}/titles/:id-:slug`,
       previewPath: "/api/titles/preview/:id",
       dnsServers: config.dnsServers,
+      segmentedArchive: true,
     },
     stats: {
       archiveUniqueItems: archiveItems.length,
       enrichedItems: items.length,
       totalCount,
       totalPages,
-      pagesFetched: Math.min(pagesToFetch, totalPages),
+      archiveSegments: segments.length,
+      archiveSegmentProbes: probes,
+      archivePagesFetched,
       failures,
       elapsedSeconds: Number(((Date.now() - start) / 1000).toFixed(2)),
     },
     items,
   };
 
-  await writeJsonAtomic(config.outPath, payload, false);
-  console.log(`[streamingunity] done -> ${config.outPath}`);
+  const shardResult = await writeShardedJson({
+    outDir: config.outDir,
+    shardSize: config.shardSize,
+    items: payload.items,
+    indexPayload: {
+      schemaVersion: payload.schemaVersion,
+      provider: payload.provider,
+      generatedAt: payload.generatedAt,
+      source: payload.source,
+      stats: payload.stats,
+      includeRaw: config.includeRaw,
+    },
+    pretty: true,
+  });
+
+  console.log(
+    `[streamingunity] done -> ${shardResult.indexPath} (chunks=${shardResult.chunks.length}, items=${shardResult.count})`
+  );
 }
 
 run().catch((err) => {

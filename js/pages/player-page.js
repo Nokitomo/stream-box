@@ -1,27 +1,30 @@
 window.NetflixClone = window.NetflixClone || {};
 
 (async function bootPlayerPage(app) {
-  if (typeof app.data?.loadProviderCatalog === "function") {
-    await app.data.loadProviderCatalog();
+  if (typeof app.data?.loadCatalogIndex === "function") {
+    await app.data.loadCatalogIndex();
   }
 
   const data = app.data || {};
   const storage = app.storage || {};
+  const getCatalogItemDetails = data.getCatalogItemDetails || (async () => null);
   const mediaCatalog = data.mediaCatalog || [];
   const featuredId = data.featuredId || "";
   const mediaById = new Map(mediaCatalog.map((item) => [item.id, item]));
   const params = new URLSearchParams(window.location.search);
   const requestedId = params.get("id");
-  const item = mediaById.get(requestedId) || mediaById.get(featuredId) || mediaCatalog[0];
+  const baseItem = mediaById.get(requestedId) || mediaById.get(featuredId) || mediaCatalog[0];
   const progressMap = storage.loadObject(storage.keys.progress);
   const fallbackBackdrop = "assets/backdrop-fallback.svg";
   let playing = true;
   let timer = null;
 
-  if (!item) {
+  if (!baseItem) {
     document.body.innerHTML = "<p style='padding:2rem;color:white;'>Nessun titolo disponibile.</p>";
     return;
   }
+
+  const item = (await getCatalogItemDetails(baseItem.id)) || baseItem;
 
   function getProgress() {
     if (typeof progressMap[item.id] === "number") {
@@ -71,6 +74,17 @@ window.NetflixClone = window.NetflixClone || {};
   document.getElementById("playerBackdrop").style.backgroundImage = `url("${item.backdrop}"), url("${fallbackBackdrop}")`;
   document.getElementById("playerTitle").textContent = item.title;
   document.getElementById("playerMeta").textContent = `${item.year} • ${item.maturity} • ${item.duration}`;
+  document.getElementById("playerProvider").textContent = item.provider
+    ? `Provider: ${item.provider}`
+    : "Provider: N/D";
+  const sourceLink = item.links?.watch || item.links?.source || item.sourceLink || "";
+  const sourceAnchor = document.getElementById("playerOpenSource");
+  if (sourceLink) {
+    sourceAnchor.href = sourceLink;
+    sourceAnchor.hidden = false;
+  } else {
+    sourceAnchor.hidden = true;
+  }
   backToTitle.href = `title.html?id=${encodeURIComponent(item.id)}`;
   drawProgress();
 

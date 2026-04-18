@@ -116,6 +116,7 @@ window.NetflixClone = window.NetflixClone || {};
   }
 
   function updateHero(hero) {
+    const heroSection = document.getElementById("heroSection");
     const heroBackdrop = document.getElementById("heroBackdrop");
     const heroKicker = document.getElementById("heroKicker");
     const heroTitle = document.getElementById("heroTitle");
@@ -123,6 +124,20 @@ window.NetflixClone = window.NetflixClone || {};
     const heroDescription = document.getElementById("heroDescription");
     const heroPlayBtn = document.getElementById("heroPlayBtn");
     const heroInfoBtn = document.getElementById("heroInfoBtn");
+
+    if (!hero) {
+      if (heroSection) {
+        heroSection.style.display = "";
+      }
+      applyBackdropWithFallback(heroBackdrop, fallbackBackdrop);
+      heroKicker.textContent = "Catalogo provider";
+      heroTitle.textContent = "Nessun titolo disponibile";
+      heroMeta.textContent = "Esegui gli scraper per generare i JSON.";
+      heroDescription.textContent = "Il catalogo verra caricato automaticamente appena i dati saranno disponibili.";
+      heroPlayBtn.dataset.id = "";
+      heroInfoBtn.dataset.id = "";
+      return;
+    }
 
     applyBackdropWithFallback(heroBackdrop, hero.backdrop);
     heroKicker.textContent = hero.kicker;
@@ -184,6 +199,13 @@ window.NetflixClone = window.NetflixClone || {};
 
     const openPageButton = document.getElementById("modalOpenPage");
     openPageButton.dataset.id = item.id;
+    const openSourceButton = document.getElementById("modalOpenSource");
+    if (item.sourceLink) {
+      openSourceButton.href = item.sourceLink;
+      openSourceButton.hidden = false;
+    } else {
+      openSourceButton.hidden = true;
+    }
     modal.hidden = false;
   }
 

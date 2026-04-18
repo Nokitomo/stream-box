@@ -1,12 +1,17 @@
 window.NetflixClone = window.NetflixClone || {};
 window.NetflixClone.data = window.NetflixClone.data || {};
 
-window.NetflixClone.data.featuredId = "stranger-things";
+window.NetflixClone.data.featuredId = "";
+window.NetflixClone.data.maxItemsPerRow = 120;
 window.NetflixClone.data.rowConfigs = [
   { id: "continue", title: "Continua a guardare" },
   { id: "trending", title: "Di tendenza adesso" },
-  { id: "top10", title: "Top 10 in Italia oggi", top10: true },
-  { id: "netflix-only", title: "Solo su Netflix" },
+  { id: "top10", title: "Top 10 del catalogo", top10: true },
+  { id: "catalog-all", title: "Catalogo completo" },
+  { id: "provider-animeunity", title: "AnimeUnity" },
+  { id: "provider-streamingunity", title: "StreamingUnity" },
+  { id: "movies", title: "Film" },
+  { id: "series", title: "Serie TV" },
   { id: "action", title: "Azione ad alta tensione" },
   { id: "crime", title: "Crime e thriller" },
   { id: "comedy", title: "Commedie da non perdere" },
@@ -14,7 +19,4 @@ window.NetflixClone.data.rowConfigs = [
   { id: "new-release", title: "Nuove uscite" }
 ];
 
-window.NetflixClone.data.mediaCatalog = [
-  ...(window.NetflixClone.data.seriesCatalog || []),
-  ...(window.NetflixClone.data.movieCatalog || [])
-];
+window.NetflixClone.data.mediaCatalog = [];

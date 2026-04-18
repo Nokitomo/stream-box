@@ -15,6 +15,18 @@ on:
         description: "Optional detail concurrency override"
         required: false
         type: string
+      shard_size:
+        description: "Optional shard size override"
+        required: false
+        type: string
+      include_raw:
+        description: "Include raw provider payload (true/false)"
+        required: false
+        type: string
+      min_year:
+        description: "Minimum archive year for segmented crawl"
+        required: false
+        type: string
   schedule:
     - cron: "15 3 * * 1"
 
@@ -53,25 +65,41 @@ jobs:
           MAX_PAGES: ${{ github.event.inputs.max_pages }}
           MAX_ITEMS: ${{ github.event.inputs.max_items }}
           DETAIL_CONCURRENCY: ${{ github.event.inputs.detail_concurrency }}
+          SHARD_SIZE: ${{ github.event.inputs.shard_size }}
+          INCLUDE_RAW: ${{ github.event.inputs.include_raw }}
+          MIN_YEAR: ${{ github.event.inputs.min_year }}
         run: |
-          ARGS=(--out data/providers/streamingunity/catalog.json --dns 1.1.1.1,1.0.0.1)
+          ARGS=(--out-dir data/providers/streamingunity --dns 1.1.1.1,1.0.0.1)
           if [ -n "${MAX_PAGES}" ]; then ARGS+=(--max-pages "${MAX_PAGES}"); fi
           if [ -n "${MAX_ITEMS}" ]; then ARGS+=(--max-items "${MAX_ITEMS}"); fi
           if [ -n "${DETAIL_CONCURRENCY}" ]; then ARGS+=(--detail-concurrency "${DETAIL_CONCURRENCY}"); fi
+          if [ -n "${SHARD_SIZE}" ]; then ARGS+=(--shard-size "${SHARD_SIZE}"); fi
+          if [ -n "${INCLUDE_RAW}" ]; then ARGS+=(--include-raw "${INCLUDE_RAW}"); fi
+          if [ -n "${MIN_YEAR}" ]; then ARGS+=(--min-year "${MIN_YEAR}"); fi
           node scripts/scrapers/streamingunity-catalog.mjs "${ARGS[@]}"
+
+      - name: Build App Catalog
+        run: |
+          npm run catalog:build-app
 
       - name: Validate JSON
         run: |
-          node -e "const fs=require('fs'); const p='data/providers/streamingunity/catalog.json'; const raw=fs.readFileSync(p,'utf8'); const json=JSON.parse(raw); if(!Array.isArray(json.items)){throw new Error('items is not an array');} console.log('items:', json.items.length);"
+          node -e "const fs=require('fs'); const path=require('path'); const providerIndex='data/providers/streamingunity/index.json'; const index=JSON.parse(fs.readFileSync(providerIndex,'utf8')); if(!Array.isArray(index.chunks)||index.chunks.length===0){throw new Error('streamingunity chunks missing');} const chunk=JSON.parse(fs.readFileSync(path.join('data/providers/streamingunity',index.chunks[0].file),'utf8')); if(!Array.isArray(chunk.items)){throw new Error('streamingunity chunk items missing');} const appIndex=JSON.parse(fs.readFileSync('data/app/catalog-index.json','utf8')); if(!Array.isArray(appIndex.items)){throw new Error('app catalog index invalid');} console.log('streamingunity items:', index.count, 'app items:', appIndex.totalItems);"
+
+      - name: Build Static Site
+        run: |
+          npm run lint
+          npm run test
+          npm run build
 
       - name: Commit and Push Updated JSON
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/providers/streamingunity/catalog.json
+          git add data/providers/streamingunity data/app
           if git diff --staged --quiet; then
             echo "No catalog changes to commit."
             exit 0
           fi
-          git commit -m "chore(data): update streamingunity catalog"
+          git commit -m "chore(data): update streamingunity catalog and app index"
           git push

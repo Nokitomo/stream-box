@@ -103,6 +103,7 @@
           <button class="btn btn-play" type="button" data-modal-action="play">Riproduci</button>
           <button class="btn btn-more" type="button" data-modal-action="toggle-list" id="modalToggleList">Aggiungi a La mia lista</button>
           <button class="btn btn-more" type="button" data-modal-action="open-page" id="modalOpenPage">Scheda completa</button>
+          <a class="btn btn-more" id="modalOpenSource" href="#" target="_blank" rel="noopener noreferrer" hidden>Apri sorgente</a>
         </div>
       </div>
     </div>
@@ -110,10 +111,8 @@
 
   <div class="toast" id="appToast" hidden></div>
 
-  <script defer src="js/data/series.js"></script>
-  <script defer src="js/data/movies.js"></script>
   <script defer src="js/data/catalog.js"></script>
-  <script defer src="js/data/provider-catalog.js"></script>
+  <script defer src="js/data/catalog-loader.js"></script>
   <script defer src="js/state/storage.js"></script>
   <script defer src="js/state/store.js"></script>
   <script defer src="js/state/url-state.js"></script>

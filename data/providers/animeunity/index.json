@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 2,
+  "provider": "animeunity",
+  "generatedAt": "2026-04-18T13:34:44.890Z",
+  "source": {
+    "baseUrl": "https://www.animeunity.so",
+    "archivePath": "/archivio/get-animes",
+    "detailPath": "/info_api/:id",
+    "detailHtmlPath": "/anime/:id-:slug"
+  },
+  "stats": {
+    "archiveUniqueItems": 6954,
+    "enrichedItems": 6954,
+    "failures": 0,
+    "elapsedSeconds": 2501.63
+  },
+  "includeRaw": false,
+  "count": 6954,
+  "shardSize": 250,
+  "chunks": [
+    {
+      "chunk": 1,
+      "file": "chunks/chunk-0001.json",
+      "count": 250,
+      "from": 0,
+      "to": 249
+    },
+    {
+      "chunk": 2,
+      "file": "chunks/chunk-0002.json",
+      "count": 250,
+      "from": 250,
+      "to": 499
+    },
+    {
+      "chunk": 3,
+      "file": "chunks/chunk-0003.json",
+      "count": 250,
+      "from": 500,
+      "to": 749
+    },
+    {
+      "chunk": 4,
+      "file": "chunks/chunk-0004.json",
+      "count": 250,
+      "from": 750,
+      "to": 999
+    },
+    {
+      "chunk": 5,
+      "file": "chunks/chunk-0005.json",
+      "count": 250,
+      "from": 1000,
+      "to": 1249
+    },
+    {
+      "chunk": 6,
+      "file": "chunks/chunk-0006.json",
+      "count": 250,
+      "from": 1250,
+      "to": 1499
+    },
+    {
+      "chunk": 7,
+      "file": "chunks/chunk-0007.json",
+      "count": 250,
+      "from": 1500,
+      "to": 1749
+    },
+    {
+      "chunk": 8,
+      "file": "chunks/chunk-0008.json",
+      "count": 250,
+      "from": 1750,
+      "to": 1999
+    },
+    {
+      "chunk": 9,
+      "file": "chunks/chunk-0009.json",
+      "count": 250,
+      "from": 2000,
+      "to": 2249
+    },
+    {
+      "chunk": 10,
+      "file": "chunks/chunk-0010.json",
+      "count": 250,
+      "from": 2250,
+      "to": 2499
+    },
+    {
+      "chunk": 11,
+      "file": "chunks/chunk-0011.json",
+      "count": 250,
+      "from": 2500,
+      "to": 2749
+    },
+    {
+      "chunk": 12,
+      "file": "chunks/chunk-0012.json",
+      "count": 250,
+      "from": 2750,
+      "to": 2999
+    },
+    {
+      "chunk": 13,
+      "file": "chunks/chunk-0013.json",
+      "count": 250,
+      "from": 3000,
+      "to": 3249
+    },
+    {
+      "chunk": 14,
+      "file": "chunks/chunk-0014.json",
+      "count": 250,
+      "from": 3250,
+      "to": 3499
+    },
+    {
+      "chunk": 15,
+      "file": "chunks/chunk-0015.json",
+      "count": 250,
+      "from": 3500,
+      "to": 3749
+    },
+    {
+      "chunk": 16,
+      "file": "chunks/chunk-0016.json",
+      "count": 250,
+      "from": 3750,
+      "to": 3999
+    },
+    {
+      "chunk": 17,
+      "file": "chunks/chunk-0017.json",
+      "count": 250,
+      "from": 4000,
+      "to": 4249
+    },
+    {
+      "chunk": 18,
+      "file": "chunks/chunk-0018.json",
+      "count": 250,
+      "from": 4250,
+      "to": 4499
+    },
+    {
+      "chunk": 19,
+      "file": "chunks/chunk-0019.json",
+      "count": 250,
+      "from": 4500,
+      "to": 4749
+    },
+    {
+      "chunk": 20,
+      "file": "chunks/chunk-0020.json",
+      "count": 250,
+      "from": 4750,
+      "to": 4999
+    },
+    {
+      "chunk": 21,
+      "file": "chunks/chunk-0021.json",
+      "count": 250,
+      "from": 5000,
+      "to": 5249
+    },
+    {
+      "chunk": 22,
+      "file": "chunks/chunk-0022.json",
+      "count": 250,
+      "from": 5250,
+      "to": 5499
+    },
+    {
+      "chunk": 23,
+      "file": "chunks/chunk-0023.json",
+      "count": 250,
+      "from": 5500,
+      "to": 5749
+    },
+    {
+      "chunk": 24,
+      "file": "chunks/chunk-0024.json",
+      "count": 250,
+      "from": 5750,
+      "to": 5999
+    },
+    {
+      "chunk": 25,
+      "file": "chunks/chunk-0025.json",
+      "count": 250,
+      "from": 6000,
+      "to": 6249
+    },
+    {
+      "chunk": 26,
+      "file": "chunks/chunk-0026.json",
+      "count": 250,
+      "from": 6250,
+      "to": 6499
+    },
+    {
+      "chunk": 27,
+      "file": "chunks/chunk-0027.json",
+      "count": 250,
+      "from": 6500,
+      "to": 6749
+    },
+    {
+      "chunk": 28,
+      "file": "chunks/chunk-0028.json",
+      "count": 204,
+      "from": 6750,
+      "to": 6953
+    }
+  ]
+}
