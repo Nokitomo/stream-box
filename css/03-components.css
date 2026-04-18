@@ -10,6 +10,40 @@
 .btn-primary:hover { background: #f1242d; }
 .btn-ghost { background: transparent; }
 .btn-sm { padding: 6px 9px; font-size: 0.875rem; }
+.category-menu {
+  position: relative;
+}
+.category-menu-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 40;
+  min-width: 260px;
+  max-width: min(88vw, 360px);
+  max-height: min(62vh, 520px);
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid #2f2f2f;
+  border-radius: 6px;
+  background: #0f0f0f;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+.category-option {
+  width: 100%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #f5f5f5;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+.category-option:hover {
+  background: #1a1a1a;
+}
+.category-option.active {
+  border-color: #e50914;
+  background: rgba(229, 9, 20, 0.16);
+}
 .input,
 .select {
   background: #0d0d0d;

@@ -2,36 +2,22 @@
   var StreamBox = global.StreamBox = global.StreamBox || {};
   var utils = StreamBox.utils;
   var storage = StreamBox.storage;
+  var engine = StreamBox.catalogEngine;
   var MAX_ROW_CARDS = 30;
+  var MAX_DYNAMIC_ROWS = 10;
+  var MIN_DYNAMIC_ROW_ITEMS = 8;
 
   var state = {
     catalog: null,
     items: [],
-    filters: { q: '', provider: '', type: '', genre: '', year: '', sort: 'match-desc', page: 1 },
+    filters: engine.normalizeFilters({ q: '', provider: '', type: '', genre: '', year: '', sort: 'match-desc', page: 1 }),
     favorites: [],
     watchlist: [],
     history: [],
     savedFilters: [],
-    customRows: []
+    customRows: [],
+    optionCache: { providers: [], types: [], genres: [], years: [] }
   };
-
-  function num(value, fallback) {
-    var n = parseInt(value, 10);
-    return isFinite(n) && n > 0 ? n : fallback;
-  }
-
-  function normalizeFilters(raw) {
-    var data = raw || {};
-    return {
-      q: utils.safeText(data.q),
-      provider: utils.safeText(data.provider),
-      type: utils.safeText(data.type),
-      genre: utils.safeText(data.genre),
-      year: utils.safeText(data.year),
-      sort: utils.safeText(data.sort) || 'match-desc',
-      page: num(data.page, 1)
-    };
-  }
 
   function hydratePersistent() {
     state.favorites = storage.load(storage.keys.favorites, []);
@@ -43,153 +29,83 @@
 
   function init(catalog) {
     state.catalog = catalog || { rowConfigs: [], items: [] };
-    state.items = state.catalog.items || [];
+    state.items = engine.enrichItems((state.catalog && state.catalog.items) || []);
+    state.optionCache = engine.buildOptionCache(state.items);
     hydratePersistent();
   }
 
   function setFilters(next, resetPage) {
-    state.filters = normalizeFilters(Object.assign({}, state.filters, next || {}));
+    state.filters = engine.normalizeFilters(Object.assign({}, state.filters, next || {}));
     if (resetPage) state.filters.page = 1;
   }
 
   function getFilters() {
-    return normalizeFilters(state.filters);
+    return engine.normalizeFilters(state.filters);
   }
 
   function toQuery() {
-    var q = getFilters();
-    if (q.page <= 1) delete q.page;
-    return q;
-  }
-
-  function itemHas(item, listKey, value) {
-    if (!value) return true;
-    var list = item && item[listKey];
-    if (!list || !list.length) return false;
-    var low = value.toLowerCase();
-    for (var i = 0; i < list.length; i += 1) {
-      if (String(list[i]).toLowerCase() === low) return true;
-    }
-    return false;
-  }
-
-  function matchItem(item, f) {
-    if (!item) return false;
-    if (f.provider && String(item.provider) !== f.provider) return false;
-    if (f.type && String(item.type) !== f.type) return false;
-    if (f.year && String(item.year) !== f.year) return false;
-    if (f.genre && !itemHas(item, 'genres', f.genre)) return false;
-    if (f.q) {
-      var q = f.q.toLowerCase();
-      var text = (
-        String(item.title || '') + ' ' +
-        String(item.description || '') + ' ' +
-        String((item.genres || []).join(' ')) + ' ' +
-        String(item.cast || '')
-      ).toLowerCase();
-      if (text.indexOf(q) === -1) return false;
-    }
-    return true;
-  }
-
-  function sortItems(items, mode) {
-    var out = items.slice();
-    if (mode === 'newest') return utils.sortByKey(out, 'year', true);
-    if (mode === 'oldest') return utils.sortByKey(out, 'year', false);
-    if (mode === 'title-az') return utils.sortByKey(out, 'title', false);
-    if (mode === 'title-za') return utils.sortByKey(out, 'title', true);
-    return out.sort(function (a, b) {
-      var ma = utils.toNumber(a.match, 0);
-      var mb = utils.toNumber(b.match, 0);
-      if (mb !== ma) return mb - ma;
-      return String(a.title || '').localeCompare(String(b.title || ''), 'it');
-    });
+    var query = getFilters();
+    if (query.page <= 1) delete query.page;
+    return query;
   }
 
   function getVisibleBase() {
-    var f = getFilters();
-    var matched = [];
-    for (var i = 0; i < state.items.length; i += 1) if (matchItem(state.items[i], f)) matched.push(state.items[i]);
-    var sorted = sortItems(matched, f.sort);
-    return { total: sorted.length, items: sorted };
-  }
-
-  function applyRowFilter(items, filter) {
-    if (!filter) return items;
-    var f = normalizeFilters(filter);
-    var out = [];
-    for (var i = 0; i < items.length; i += 1) if (matchItem(items[i], f)) out.push(items[i]);
-    return sortItems(out, f.sort || 'match-desc');
+    var filters = getFilters();
+    var visibleItems = engine.filterAndSort(state.items, filters);
+    return {
+      total: visibleItems.length,
+      items: visibleItems
+    };
   }
 
   function getRows() {
     var visible = getVisibleBase();
-    var rows = [];
-    var rowConfigs = (state.catalog && state.catalog.rowConfigs) || [];
-
-    for (var i = 0; i < rowConfigs.length; i += 1) {
-      var row = rowConfigs[i];
-      if (!row || !row.id || row.id === 'continue') continue;
-      if (String(row.id).indexOf('provider-') === 0) continue;
-      var rowItems = [];
-      for (var j = 0; j < visible.items.length; j += 1) {
-        var item = visible.items[j];
-        var itemRows = item.rows || [];
-        for (var r = 0; r < itemRows.length; r += 1) {
-          if (itemRows[r] === row.id) {
-            rowItems.push(item);
-            break;
-          }
-        }
+    var activeCategory = String(state.filters.genre || '');
+    var activeCategoryLabel = '';
+    var genreOptions = (state.optionCache && state.optionCache.genres) || [];
+    for (var g = 0; g < genreOptions.length; g += 1) {
+      if (String(genreOptions[g].value) === activeCategory) {
+        activeCategoryLabel = String(genreOptions[g].label || '');
+        break;
       }
-      if (!rowItems.length) continue;
-      rows.push({
-        id: row.id,
-        title: row.title || row.id,
-        items: row.top10 === true ? rowItems.slice(0, Math.min(10, MAX_ROW_CARDS)) : rowItems.slice(0, MAX_ROW_CARDS),
-        top10: row.top10 === true
-      });
     }
+    var rows = engine.buildDynamicRows(visible.items, {
+      maxRows: MAX_DYNAMIC_ROWS,
+      maxCards: MAX_ROW_CARDS,
+      minItems: MIN_DYNAMIC_ROW_ITEMS,
+      activeCategory: activeCategory,
+      activeCategoryLabel: activeCategoryLabel
+    });
 
-    for (var c = 0; c < state.customRows.length; c += 1) {
-      var custom = state.customRows[c];
+    for (var i = 0; i < state.customRows.length; i += 1) {
+      var custom = state.customRows[i];
       if (!custom || !custom.id) continue;
-      var items = applyRowFilter(visible.items, custom.filters);
-      if (!items.length) continue;
+      var customItems = engine.applyRowFilter(visible.items, custom.filters);
+      if (!customItems.length) continue;
       rows.unshift({
         id: custom.id,
         title: custom.title || 'Sezione personalizzata',
-        items: items.slice(0, MAX_ROW_CARDS),
+        items: customItems.slice(0, MAX_ROW_CARDS),
         custom: true
       });
     }
 
-    return { rows: rows, total: visible.total, page: state.filters.page, pageSize: visible.total };
-  }
-
-  function options() {
-    var providerSet = {};
-    var typeSet = {};
-    var genreSet = {};
-    var yearSet = {};
-    for (var i = 0; i < state.items.length; i += 1) {
-      var it = state.items[i];
-      providerSet[it.provider] = true;
-      typeSet[it.type] = true;
-      yearSet[String(it.year)] = true;
-      var genres = it.genres || [];
-      for (var g = 0; g < genres.length; g += 1) genreSet[genres[g]] = true;
-    }
     return {
-      providers: Object.keys(providerSet).sort(),
-      types: Object.keys(typeSet).sort(),
-      genres: Object.keys(genreSet).sort(),
-      years: Object.keys(yearSet).sort(function (a, b) { return parseInt(b, 10) - parseInt(a, 10); })
+      rows: rows,
+      total: visible.total,
+      page: state.filters.page,
+      pageSize: visible.total
     };
   }
 
+  function options() {
+    return engine.cloneOptions(state.optionCache);
+  }
+
   function hasIn(list, id) {
-    for (var i = 0; i < list.length; i += 1) if (String(list[i]) === String(id)) return true;
+    for (var i = 0; i < list.length; i += 1) {
+      if (String(list[i]) === String(id)) return true;
+    }
     return false;
   }
 
@@ -211,8 +127,12 @@
   }
 
   function saveCurrentFilter(name) {
-    var id = 'custom-' + new Date().getTime();
-    var record = { id: id, title: utils.safeText(name) || ('Filtro ' + (state.customRows.length + 1)), filters: getFilters() };
+    var rowId = 'custom-' + new Date().getTime();
+    var record = {
+      id: rowId,
+      title: utils.safeText(name) || ('Filtro ' + (state.customRows.length + 1)),
+      filters: getFilters()
+    };
     state.savedFilters.unshift(record);
     state.customRows.unshift(record);
     state.savedFilters = state.savedFilters.slice(0, 30);
@@ -224,7 +144,9 @@
 
   function removeCustomRow(id) {
     var next = [];
-    for (var i = 0; i < state.customRows.length; i += 1) if (state.customRows[i].id !== id) next.push(state.customRows[i]);
+    for (var i = 0; i < state.customRows.length; i += 1) {
+      if (state.customRows[i].id !== id) next.push(state.customRows[i]);
+    }
     state.customRows = next;
     storage.save(storage.keys.customRows, state.customRows);
   }

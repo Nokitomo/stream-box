@@ -17,8 +17,10 @@
       <div class="container header-inner">
         <a class="brand" href="index.html">STREAMBOX</a>
         <div class="header-tools">
-          <a data-tv-focus="1" class="btn btn-sm" href="html/title.html">Title page</a>
-          <a data-tv-focus="1" class="btn btn-sm" href="html/player.html">Player page</a>
+          <div class="category-menu" id="categoryMenuWrap">
+            <button data-tv-focus="1" class="btn btn-sm" id="categoryMenuToggle" type="button" aria-haspopup="true" aria-expanded="false">Categorie</button>
+            <div class="category-menu-panel hidden" id="categoryMenuPanel" role="menu" aria-label="Categorie home"></div>
+          </div>
         </div>
       </div>
     </header>
@@ -57,6 +59,9 @@
   <script src="js/state/storage.js"></script>
   <script src="js/state/url-state.js"></script>
   <script src="js/data/catalog-loader.js"></script>
+  <script src="js/state/category-taxonomy.js"></script>
+  <script src="js/state/home-sections.js"></script>
+  <script src="js/state/catalog-engine.js"></script>
   <script src="js/state/store.js"></script>
   <script src="js/ui/templates.js"></script>
   <script src="js/ui/tv-nav.js"></script>

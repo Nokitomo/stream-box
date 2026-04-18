@@ -44,6 +44,9 @@
     refs.status = utils.byId('homeStatus');
     refs.hero = utils.byId('heroMount');
     refs.rails = utils.byId('railsMount');
+    refs.categoryWrap = utils.byId('categoryMenuWrap');
+    refs.categoryToggle = utils.byId('categoryMenuToggle');
+    refs.categoryPanel = utils.byId('categoryMenuPanel');
   }
 
   function bindEvents() {
@@ -95,8 +98,34 @@
       }
     });
     tvNav.bindRailControls(refs.rails);
+    bindCategoryMenuEvents();
 
     bindTvKeyboard();
+  }
+
+  function bindCategoryMenuEvents() {
+    if (!refs.categoryToggle || !refs.categoryPanel) return;
+    refs.categoryToggle.addEventListener('click', function () {
+      setCategoryMenuOpen(refs.categoryPanel.className.indexOf('hidden') !== -1);
+    });
+    refs.categoryPanel.addEventListener('click', function (event) {
+      var option = event.target.closest('[data-category-value]');
+      if (!option) return;
+      event.preventDefault();
+      var value = String(option.getAttribute('data-category-value') || '');
+      refs.genre.value = value;
+      applyFilters(true);
+      setCategoryMenuOpen(false);
+    });
+    document.addEventListener('click', function (event) {
+      if (!refs.categoryWrap || refs.categoryPanel.className.indexOf('hidden') !== -1) return;
+      if (refs.categoryWrap.contains(event.target)) return;
+      setCategoryMenuOpen(false);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape' && event.keyCode !== 27) return;
+      setCategoryMenuOpen(false);
+    });
   }
 
   function bindTvKeyboard() {
@@ -117,6 +146,7 @@
     refs.genre.value = f.genre;
     refs.year.value = f.year;
     refs.sort.value = f.sort;
+    syncCategoryMenuState();
   }
 
   function fillFilterOptions() {
@@ -131,6 +161,51 @@
       '<option value="oldest">Piu datati</option>' +
       '<option value="title-az">Titolo A-Z</option>' +
       '<option value="title-za">Titolo Z-A</option>';
+    renderCategoryMenu(opt.genres || []);
+  }
+
+  function categoryLabelByValue(value) {
+    var target = String(value || '');
+    var genres = store.options().genres || [];
+    for (var i = 0; i < genres.length; i += 1) {
+      if (String(genres[i].value) === target) return String(genres[i].label || target);
+    }
+    return '';
+  }
+
+  function renderCategoryMenu(values) {
+    if (!refs.categoryPanel) return;
+    var items = values || [];
+    var html = '<button class="category-option" data-tv-focus="1" data-category-value="">Tutte le categorie</button>';
+    for (var i = 0; i < items.length; i += 1) {
+      var value = String((items[i] && items[i].value) || '');
+      if (!value) continue;
+      var label = String((items[i] && items[i].label) || value);
+      html += '<button class="category-option" data-tv-focus="1" data-category-value="' + utils.escapeHtml(value) + '">' + utils.escapeHtml(label) + '</button>';
+    }
+    refs.categoryPanel.innerHTML = html;
+    syncCategoryMenuState();
+  }
+
+  function setCategoryMenuOpen(open) {
+    if (!refs.categoryPanel || !refs.categoryToggle) return;
+    var shouldOpen = open === true;
+    refs.categoryToggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    refs.categoryPanel.className = shouldOpen ? 'category-menu-panel' : 'category-menu-panel hidden';
+  }
+
+  function syncCategoryMenuState() {
+    if (!refs.categoryPanel || !refs.categoryToggle) return;
+    var active = String((store.getFilters() && store.getFilters().genre) || '');
+    var options = refs.categoryPanel.querySelectorAll('[data-category-value]');
+    for (var i = 0; i < options.length; i += 1) {
+      var option = options[i];
+      var value = String(option.getAttribute('data-category-value') || '');
+      if (value === active) option.className = 'category-option active';
+      else option.className = 'category-option';
+    }
+    var label = categoryLabelByValue(active);
+    refs.categoryToggle.innerHTML = active ? ('Categorie: ' + utils.escapeHtml(label || active)) : 'Categorie';
   }
 
   function applyFilters(resetPage) {
@@ -143,6 +218,7 @@
       sort: refs.sort.value
     }, resetPage);
     syncUrl(true);
+    syncCategoryMenuState();
     render();
   }
 
@@ -227,6 +303,7 @@
     if (favRow) rows.unshift(favRow);
     if (rows.length > MAX_HOME_ROWS) rows = rows.slice(0, MAX_HOME_ROWS);
 
+    syncCategoryMenuState();
     renderHero(chooseHero(rows));
     renderStatus(payload, rows.length);
     renderRows(rows);

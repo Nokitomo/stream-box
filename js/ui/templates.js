@@ -60,9 +60,18 @@
   function options(values, selected, label) {
     var html = '<option value="">' + utils.escapeHtml(label || 'Tutti') + '</option>';
     for (var i = 0; i < values.length; i += 1) {
-      var val = String(values[i]);
+      var entry = values[i];
+      var val = '';
+      var text = '';
+      if (entry && typeof entry === 'object') {
+        val = String(entry.value == null ? '' : entry.value);
+        text = String(entry.label == null ? val : entry.label);
+      } else {
+        val = String(entry == null ? '' : entry);
+        text = val;
+      }
       var active = String(selected || '') === val ? ' selected' : '';
-      html += '<option value="' + utils.escapeHtml(val) + '"' + active + '>' + utils.escapeHtml(val) + '</option>';
+      html += '<option value="' + utils.escapeHtml(val) + '"' + active + '>' + utils.escapeHtml(text) + '</option>';
     }
     return html;
   }

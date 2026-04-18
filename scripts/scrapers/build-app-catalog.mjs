@@ -5,6 +5,30 @@ import { parseCliArgs, toInt, normalizeText, toFloat, writeJsonAtomic } from "./
 
 const args = parseCliArgs(process.argv.slice(2));
 const nowYear = new Date().getFullYear();
+const CATEGORY_SIGNAL_DEFS = [
+  { value: "acclamati-dalla-critica", terms: ["acclaimed", "critically acclaimed", "award winning", "oscar", "golden globe", "festival"] },
+  { value: "anime", terms: ["anime", "animazione", "animation", "cartoon", "ova", "ona"] },
+  { value: "astrologia", terms: ["astrologia", "astrology", "zodiac", "oroscopo", "horoscope"] },
+  { value: "azione", terms: ["azione", "action", "shounen", "battle", "martial arts", "superhero"] },
+  { value: "bambini-e-famiglie", terms: ["family", "famiglia", "kids", "children", "per famiglie", "cartoon"] },
+  { value: "campione-d-incassi", terms: ["box office", "blockbuster", "highest grossing", "campione d incassi"] },
+  { value: "commedie", terms: ["comedy", "commedia", "humor", "sitcom", "comic"] },
+  { value: "documentari", terms: ["documentary", "documentario", "docu"] },
+  { value: "drammi", terms: ["drama", "dramma", "drammatico", "melodrama"] },
+  { value: "europei", terms: ["europe", "european", "europa"] },
+  { value: "fantascienza", terms: ["sci fi", "sci-fi", "science fiction", "fantascienza", "cyberpunk", "space opera"] },
+  { value: "fantasy", terms: ["fantasy", "fantastico", "magia", "magic", "isekai", "supernatural", "soprannaturale"] },
+  { value: "horror", terms: ["horror", "orrore", "slasher", "creepy"] },
+  { value: "internazionali", terms: ["international", "internazionale", "global"] },
+  { value: "italiani", terms: ["italy", "italia", "italian", "italiano"] },
+  { value: "musica-e-musical", terms: ["music", "musica", "musical", "concert", "band"] },
+  { value: "reality", terms: ["reality", "reality show"] },
+  { value: "romantici", terms: ["romance", "romantico", "romantica", "love", "sentimentale"] },
+  { value: "sport", terms: ["sport", "sports", "basket", "football", "calcio", "tennis"] },
+  { value: "thriller", terms: ["thriller", "suspense", "psicologico", "psychological", "crime thriller"] },
+  { value: "avventura", terms: ["adventure", "avventura", "journey", "quest"] },
+  { value: "crime", terms: ["crime", "gangster", "mafia", "detective", "mystery", "noir", "police"] },
+];
 
 const config = {
   providerDirs: [
@@ -227,6 +251,67 @@ function toYear(value) {
   return match ? Number(match[0]) : null;
 }
 
+function normalizeToken(value) {
+  return normalizeText(value || "")
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['"`]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function maturityAge(value) {
+  const match = String(value ?? "").match(/\d{1,2}/);
+  return match ? Number(match[0]) : 0;
+}
+
+function hasAnyToken(tokens, terms) {
+  const tokenText = ` ${tokens.join(" ")} `;
+  return terms.some((term) => {
+    const normalized = normalizeToken(term);
+    if (!normalized) return false;
+    if (tokens.includes(normalized)) return true;
+    return tokenText.includes(` ${normalized} `);
+  });
+}
+
+function computeCategoryTags({
+  provider,
+  genres,
+  tags,
+  keywords,
+  score,
+  match,
+  views,
+  dailyViews,
+  maturity,
+}) {
+  const tokens = [];
+  for (const value of [...(genres || []), ...(tags || []), ...(keywords || [])]) {
+    const normalized = normalizeToken(value);
+    if (normalized) tokens.push(normalized);
+  }
+
+  const out = [];
+  const push = (value) => {
+    if (!value || out.includes(value)) return;
+    out.push(value);
+  };
+
+  for (const def of CATEGORY_SIGNAL_DEFS) {
+    if (hasAnyToken(tokens, def.terms || [])) push(def.value);
+  }
+
+  if (provider === "animeunity" || hasAnyToken(tokens, ["anime", "animation", "animazione", "cartoon"])) push("anime");
+  if ((maturity > 0 && maturity <= 13) || hasAnyToken(tokens, ["kids", "children", "family", "famiglia"])) push("bambini-e-famiglie");
+  if (score >= 8) push("acclamati-dalla-critica");
+  if (views >= 50000 || dailyViews >= 90 || (match >= 97 && score >= 7.5)) push("campione-d-incassi");
+
+  return out;
+}
+
 function toMatch(score) {
   const numeric = toFloat(score, 0);
   if (numeric <= 0) return 85;
@@ -291,6 +376,8 @@ function buildSummaryAndDetail(item, provider) {
   const type = detectType(item);
   const year = toYear(item?.year || item?.releaseDate || item?.lastAirDate) || nowYear;
   const genres = [...new Set([...normalizeArray(item?.genres), ...normalizeArray(item?.tags)])];
+  const tags = normalizeArray(item?.tags);
+  const keywords = normalizeArray(item?.keywords);
   const cast = normalizeArray(item?.cast);
   const directors = normalizeArray(item?.directors);
   const people = [...cast, ...directors];
@@ -298,6 +385,20 @@ function buildSummaryAndDetail(item, provider) {
   const score = toFloat(item?.score, 0);
   const match = toMatch(score);
   const isNew = year >= nowYear - 1;
+  const views = Number(item?.stats?.views) || 0;
+  const dailyViews = Number(item?.stats?.dailyViews) || 0;
+  const maturity = toMaturity(item);
+  const categoryTags = computeCategoryTags({
+    provider,
+    genres,
+    tags,
+    keywords,
+    score,
+    match,
+    views,
+    dailyViews,
+    maturity: maturityAge(maturity),
+  });
   const rows = computeRows(type, genres, isNew, provider);
   const localId = normalizeText(item?.id || item?.slug || slugify(title) || `${provider}-${year}`);
   const id = `${provider}-${localId}`;
@@ -314,7 +415,7 @@ function buildSummaryAndDetail(item, provider) {
     kicker: `${provider === "animeunity" ? "AnimeUnity" : "StreamingUnity"} ${type === "movie" ? "Film" : "Serie"}`,
     type,
     year,
-    maturity: toMaturity(item),
+    maturity,
     duration: toDuration(item, type),
     genres: genres.length > 0 ? genres : ["Anime"],
     cast: people.length > 0 ? people.slice(0, 6).join(", ") : "N/D",
@@ -327,6 +428,9 @@ function buildSummaryAndDetail(item, provider) {
     poster: poster || "assets/poster-fallback.svg",
     backdrop: backdrop || "assets/backdrop-fallback.svg",
     score,
+    views,
+    dailyViews,
+    categoryTags,
     sourceLink,
     detailChunk: "",
   };

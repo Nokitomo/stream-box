@@ -1,6 +1,7 @@
 (function (global) {
   var StreamBox = global.StreamBox = global.StreamBox || {};
   var utils = StreamBox.utils;
+  var MIN_CARDS_FOR_INFINITE_LOOP = 7;
 
   function normalizeArrowDirection(key, code) {
     if (key === 'ArrowRight' || key === 'Right') return 'ArrowRight';
@@ -177,6 +178,9 @@
     if (!strip) return;
     var cards = strip.querySelectorAll('.title-card');
     if (cards.length < 2) return;
+    // Avoid visible duplicated cards on sparse rows (e.g. 2-6 items).
+    if (cards.length < MIN_CARDS_FOR_INFINITE_LOOP) return;
+    if (track.clientWidth && strip.scrollWidth <= (track.clientWidth + 20)) return;
     var cloneCount = Math.min(cards.length, 8);
     var before = document.createDocumentFragment();
     var after = document.createDocumentFragment();
