@@ -11,6 +11,15 @@ Per testare in locale lo stesso backend che gira su Vercel (stesse Function in `
 
 Con `npm run dev:local`, frontend statico e endpoint `/api/*` girano insieme sullo stesso host, usando direttamente gli handler reali in `api/*.mjs`.
 
+## Sviluppo rapido con Vite
+
+Ora anche `npm run dev` esegue in locale le route `/api/*` tramite middleware Vite che carica gli stessi handler in `api/*.mjs`.
+
+- Comando:
+  - `npm run dev`
+- URL default:
+  - `http://localhost:5173`
+
 ## Modalita Vercel CLI ufficiale
 
 Se vuoi usare il runtime ufficiale Vercel in locale:
