@@ -194,9 +194,9 @@
     }
     refs.similar.innerHTML = '<h2 class="section-title">Titoli simili</h2>' + templates.relatedCards(mapped, providerHint);
     if (global.requestAnimationFrame) {
-      global.requestAnimationFrame(function () { tvNav.refreshRails(refs.similar, true); });
+      global.requestAnimationFrame(function () { tvNav.refreshRails(refs.similar, false); });
     } else {
-      setTimeout(function () { tvNav.refreshRails(refs.similar, true); }, 0);
+      setTimeout(function () { tvNav.refreshRails(refs.similar, false); }, 0);
     }
   }
 

@@ -1,6 +1,7 @@
 (function (global) {
   var StreamBox = global.StreamBox = global.StreamBox || {};
   var NS = 'streambox.v1.';
+  var PLAYER_PROGRESS_NS = NS + 'player.progress.';
 
   function load(key, fallback) {
     try {
@@ -53,12 +54,102 @@
     return next;
   }
 
+  function toNumber(value, fallback) {
+    var parsed = Number(value);
+    return isFinite(parsed) ? parsed : fallback;
+  }
+
+  function makeProgressPrefixes(contentIds) {
+    var prefixes = [];
+    var seen = {};
+    var source = Array.isArray(contentIds) ? contentIds : [];
+    for (var i = 0; i < source.length; i += 1) {
+      var id = String(source[i] || '');
+      if (!id || seen[id]) continue;
+      seen[id] = true;
+      prefixes.push({
+        id: id,
+        prefix: PLAYER_PROGRESS_NS + id + '.'
+      });
+    }
+    return prefixes;
+  }
+
+  function listContinueWatching(contentIds, limit) {
+    var prefixes = makeProgressPrefixes(contentIds);
+    var out = [];
+    if (!prefixes.length) return out;
+
+    var byId = {};
+    try {
+      for (var i = 0; i < global.localStorage.length; i += 1) {
+        var key = String(global.localStorage.key(i) || '');
+        if (key.indexOf(PLAYER_PROGRESS_NS) !== 0) continue;
+
+        var matchedId = '';
+        for (var p = 0; p < prefixes.length; p += 1) {
+          if (key.indexOf(prefixes[p].prefix) === 0) {
+            matchedId = prefixes[p].id;
+            break;
+          }
+        }
+        if (!matchedId) continue;
+
+        var raw = global.localStorage.getItem(key);
+        if (!raw) continue;
+
+        var parsed = null;
+        try {
+          parsed = JSON.parse(raw);
+        } catch (_) {
+          parsed = null;
+        }
+        if (!parsed || typeof parsed !== 'object') continue;
+
+        var position = Math.max(0, toNumber(parsed.position, 0));
+        var duration = Math.max(0, toNumber(parsed.duration, 0));
+        if (!position || !duration) continue;
+
+        var percent = Math.max(0, Math.min(100, (position / duration) * 100));
+        if (percent <= 0 || percent >= 99) continue;
+
+        var updatedAt = toNumber(parsed.updatedAt, 0);
+        var prev = byId[matchedId];
+        if (!prev || updatedAt >= prev.updatedAt) {
+          byId[matchedId] = {
+            id: matchedId,
+            percent: percent,
+            position: position,
+            duration: duration,
+            updatedAt: updatedAt
+          };
+        }
+      }
+    } catch (_) {
+      return out;
+    }
+
+    for (var id in byId) {
+      if (!Object.prototype.hasOwnProperty.call(byId, id)) continue;
+      out.push(byId[id]);
+    }
+
+    out.sort(function (a, b) {
+      return (b.updatedAt || 0) - (a.updatedAt || 0);
+    });
+
+    var max = Math.max(0, Number(limit) || 0);
+    if (max && out.length > max) return out.slice(0, max);
+    return out;
+  }
+
   StreamBox.storage = {
     load: load,
     save: save,
     remove: remove,
     toggleArrayItem: toggleArrayItem,
     pushHistory: pushHistory,
+    listContinueWatching: listContinueWatching,
     keys: {
       favorites: 'favorites',
       watchlist: 'watchlist',

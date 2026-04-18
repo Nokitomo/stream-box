@@ -108,6 +108,16 @@
   object-fit: cover;
   background: #1a1a1a;
 }
+.card-progress {
+  height: 4px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.card-progress-fill {
+  height: 100%;
+  width: 0;
+  background: #e50914;
+}
 .title-meta { padding: 10px; }
 .title-name {
   margin: 0 0 6px;

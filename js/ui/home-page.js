@@ -2,6 +2,7 @@
   var StreamBox = global.StreamBox = global.StreamBox || {};
   var utils = StreamBox.utils;
   var store = StreamBox.store;
+  var storage = StreamBox.storage;
   var data = StreamBox.data;
   var urlState = StreamBox.urlState;
   var templates = StreamBox.templates;
@@ -190,6 +191,31 @@
     return { id: rowId, title: title, items: unique };
   }
 
+  function copyWithProgress(item, percent) {
+    var clone = {};
+    var key;
+    for (key in item) {
+      if (!Object.prototype.hasOwnProperty.call(item, key)) continue;
+      clone[key] = item[key];
+    }
+    clone.progressPercent = Math.max(0, Math.min(100, Number(percent) || 0));
+    return clone;
+  }
+
+  function continueWatchingRow(ids, title, rowId) {
+    var progressItems = storage.listContinueWatching(ids, MAX_PERSONAL_ROW_CARDS);
+    if (!progressItems.length) return null;
+    var mapped = [];
+    for (var i = 0; i < progressItems.length; i += 1) {
+      var progress = progressItems[i] || {};
+      var summary = data.getSummaryById(progress.id);
+      if (!summary) continue;
+      mapped.push(copyWithProgress(summary, progress.percent));
+    }
+    if (!mapped.length) return null;
+    return { id: rowId, title: title, items: mapped };
+  }
+
   function chooseHero(rows) {
     var featured = data.getSummaryById(catalog.featuredId || '');
     if (!featured && rows.length && rows[0].items.length) featured = rows[0].items[0];
@@ -228,9 +254,9 @@
     }
     for (var i = 0; i < rows.length; i += 1) refs.rails.insertAdjacentHTML('beforeend', templates.rowSection(rows[i]));
     if (global.requestAnimationFrame) {
-      global.requestAnimationFrame(function () { tvNav.refreshRails(refs.rails, true); });
+      global.requestAnimationFrame(function () { tvNav.refreshRails(refs.rails, false); });
     } else {
-      setTimeout(function () { tvNav.refreshRails(refs.rails, true); }, 0);
+      setTimeout(function () { tvNav.refreshRails(refs.rails, false); }, 0);
     }
   }
 
@@ -238,12 +264,12 @@
     var payload = store.getRows();
     var rows = payload.rows.slice();
 
+    var continueRow = continueWatchingRow(store.getHistory(), 'Continua a guardare', 'continue-watching');
     var favRow = summaryByIds(store.getFavorites(), 'Preferiti', 'favorites');
     var watchRow = summaryByIds(store.getWatchlist(), 'Watchlist', 'watchlist');
-    var historyRow = summaryByIds(store.getHistory(), 'Cronologia visite', 'history');
-    if (historyRow) rows.unshift(historyRow);
     if (watchRow) rows.unshift(watchRow);
     if (favRow) rows.unshift(favRow);
+    if (continueRow) rows.unshift(continueRow);
     if (rows.length > MAX_HOME_ROWS) rows = rows.slice(0, MAX_HOME_ROWS);
 
     syncCategoryMenuState();

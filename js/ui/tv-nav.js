@@ -119,10 +119,28 @@
     if (!track) return;
     var direction = button.getAttribute('data-action') === 'rail-prev' ? -1 : 1;
     var item = track.querySelector('.rail-strip .title-card:not([data-clone="1"])');
+    var strip = track.querySelector('.rail-strip');
     var width = item ? item.getBoundingClientRect().width : 220;
     var gap = 12;
-    var amount = Math.max((width + gap) * 4, track.clientWidth * 0.8);
-    track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+    if (strip && global.getComputedStyle) {
+      var style = global.getComputedStyle(strip);
+      var gapValue = style ? (style.columnGap || style.gap) : '';
+      var parsedGap = Number(String(gapValue || '').replace('px', ''));
+      if (isFinite(parsedGap)) gap = parsedGap;
+    }
+    var amount = Math.max(40, width + gap);
+    if (track.scrollBy) {
+      try {
+        track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+        return;
+      } catch (_) {
+        try {
+          track.scrollBy(amount * direction, 0);
+          return;
+        } catch (__ignored) {}
+      }
+    }
+    track.scrollLeft += amount * direction;
   }
 
   function removeTvFocusOnClone(node) {
@@ -164,7 +182,9 @@
     var loopStart = firstReal.offsetLeft;
     var loopEnd = firstAfterReal.offsetLeft;
     var loopSpan = loopEnd - loopStart;
-    var currentOffset = keepOffset ? (track.scrollLeft - utils.toNumber(track.getAttribute('data-loop-start'), loopStart)) : 0;
+    var hadLoopStart = track.getAttribute('data-loop-start') !== null;
+    var previousLoopStart = hadLoopStart ? utils.toNumber(track.getAttribute('data-loop-start'), loopStart) : loopStart;
+    var currentOffset = (keepOffset && hadLoopStart) ? (track.scrollLeft - previousLoopStart) : 0;
     track.setAttribute('data-loop-start', String(loopStart));
     track.setAttribute('data-loop-end', String(loopEnd));
     track.setAttribute('data-loop-span', String(loopSpan));

@@ -20,6 +20,16 @@
     return '<span class="badge">' + utils.escapeHtml(text) + '</span>';
   }
 
+  function progressBar(item) {
+    var value = Number(item && item.progressPercent);
+    if (!isFinite(value) || value <= 0) return '';
+    var percent = Math.max(0, Math.min(100, Math.round(value)));
+    return '' +
+      '<div class="card-progress" aria-hidden="true">' +
+        '<div class="card-progress-fill" style="width:' + percent + '%"></div>' +
+      '</div>';
+  }
+
   function card(item, opts) {
     var options = opts || {};
     var rank = options.rank ? '<span class="badge">#' + options.rank + '</span>' : '';
@@ -29,6 +39,7 @@
       '<article class="title-card" data-rail-card="1">' +
         '<button class="card-action" type="button" data-tv-focus="1" data-action="open-modal" data-id="' + utils.escapeHtml(item.id) + '">' +
           '<img class="title-thumb" loading="lazy" src="' + utils.escapeHtml(poster(item.poster, item.backdrop)) + '" alt="' + utils.escapeHtml(item.title) + '">' +
+          progressBar(item) +
           '<div class="title-meta">' +
             '<h3 class="title-name">' + utils.escapeHtml(item.title) + '</h3>' +
             '<div class="title-info">' + rank + provider + meta + '</div>' +

@@ -57,7 +57,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
-  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 }
 .rail-track::-webkit-scrollbar { display: none; }
 .rail-strip {
@@ -67,6 +67,7 @@
 }
 .rail-strip > .title-card {
   flex: 0 0 clamp(150px, 14vw, 220px);
+  scroll-snap-align: start;
 }
 .page-panel {
   background: #111;
