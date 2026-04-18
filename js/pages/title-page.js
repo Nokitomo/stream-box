@@ -151,13 +151,25 @@
 
     refs.facts.innerHTML = '<h2 class="section-title">Dettagli tecnici</h2><ul class="kv-list">' + list.join('') + '</ul>';
 
+    if (Array.isArray(detail.seasons) && detail.seasons.length) {
+      var seasonRows = [];
+      for (var s = 0; s < detail.seasons.length; s += 1) {
+        var season = detail.seasons[s] || {};
+        var seasonNumber = season.number || (s + 1);
+        var seasonName = season.name || ('Stagione ' + seasonNumber);
+        var episodesLabel = season.episodesCount ? (' - ' + season.episodesCount + ' episodi') : '';
+        seasonRows.push(row('S' + seasonNumber + ': ' + seasonName + episodesLabel));
+      }
+      refs.facts.innerHTML += '<h3 class="section-title">Stagioni</h3><ul class="kv-list">' + seasonRows.join('') + '</ul>';
+    }
+
     if (detail.loadedSeason && detail.loadedSeason.episodes && detail.loadedSeason.episodes.length) {
       var episodes = detail.loadedSeason.episodes.slice(0, 30);
       var epRows = [];
       for (var i = 0; i < episodes.length; i += 1) {
         epRows.push(row('Ep ' + (episodes[i].number || (i + 1)) + ': ' + (episodes[i].name || 'Senza titolo')));
       }
-      refs.facts.innerHTML += '<h3 class="section-title">Episodi disponibili</h3><ul class="kv-list">' + epRows.join('') + '</ul>';
+      refs.facts.innerHTML += '<h3 class="section-title">Episodi disponibili (S' + (detail.loadedSeason.number || 1) + ')</h3><ul class="kv-list">' + epRows.join('') + '</ul>';
     }
   }
 

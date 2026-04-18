@@ -112,8 +112,11 @@
       if (normalizedEpisode) episodes.push(normalizedEpisode);
     }
     return {
+      seasonId: toText(season && (season.seasonId || season.id || '')),
       seasonNumber: toNumber(season && season.seasonNumber, seasonIndex + 1),
       title: toText(season && season.title) || ('Season ' + (seasonIndex + 1)),
+      episodesLink: toText(season && (season.episodesLink || season.link || season.episodes_url)),
+      episodesCount: toNumber(season && season.episodesCount, episodes.length || 0),
       episodes: episodes
     };
   }
@@ -143,8 +146,11 @@
         });
       }
       out.push({
+        seasonId: toText(source.id || source.seasonId || ''),
         seasonNumber: toNumber(source.seasonNumber || source.number, i + 1),
         title: pickSeasonTitle(source, i),
+        episodesLink: toText(source.episodesLink || source.link || source.episodes_url || ''),
+        episodesCount: toNumber(source.episodesCount || source.episodes_count, seasonEpisodes.length || 0),
         episodes: seasonEpisodes
       });
     }
@@ -162,16 +168,22 @@
         });
       }
       out.push({
+        seasonId: toText(detail.loadedSeason.id || ''),
         seasonNumber: toNumber(detail.loadedSeason.number, 1),
         title: 'Season ' + toNumber(detail.loadedSeason.number, 1),
+        episodesLink: '',
+        episodesCount: loadedEpisodes.length,
         episodes: loadedEpisodes
       });
     }
 
     if (!out.length) {
       out.push({
+        seasonId: '',
         seasonNumber: 1,
         title: 'Season 1',
+        episodesLink: '',
+        episodesCount: 1,
         episodes: [
           {
             episodeId: 'default-episode',
@@ -220,7 +232,8 @@
         title: toText(raw.content && raw.content.title) || toText(summary.title) || 'Untitled',
         poster: toText(raw.content && raw.content.poster) || toText(summary.poster),
         backdrop: toText(raw.content && raw.content.backdrop) || toText(summary.backdrop),
-        infoUrl: toText(raw.content && raw.content.infoUrl) || toText(detail && detail.links && detail.links.page) || toText(summary.sourceLink)
+        infoUrl: toText(raw.content && raw.content.infoUrl) || toText(detail && detail.links && detail.links.page) || toText(summary.sourceLink),
+        type: toText(raw.content && raw.content.type) || toText(summary.type || detail.type)
       },
       seasons: normalizedSeasons,
       defaults: {
@@ -234,6 +247,7 @@
 
   StreamBox.playerContract = {
     normalizePayload: normalizePayload,
+    normalizeEpisode: normalizeEpisode,
     normalizeStream: normalizeStream,
     normalizeSubtitle: normalizeSubtitle
   };

@@ -34,8 +34,10 @@
     }
     return [
       {
+        seasonId: toText(detail.loadedSeason.id || ''),
         seasonNumber: toInt(detail.loadedSeason.number, 1),
         title: 'Season ' + toInt(detail.loadedSeason.number, 1),
+        episodesCount: episodes.length,
         episodes: episodes
       }
     ];
@@ -50,8 +52,10 @@
     if (!seasons.length) {
       seasons = [
         {
+          seasonId: '',
           seasonNumber: 1,
           title: 'Season 1',
+          episodesCount: 1,
           episodes: [
             {
               episodeId: summary.id + '-default',
@@ -71,7 +75,8 @@
         title: summary.title,
         poster: summary.poster,
         backdrop: summary.backdrop,
-        infoUrl: detail && detail.links ? detail.links.page : summary.sourceLink
+        infoUrl: detail && detail.links ? detail.links.page : summary.sourceLink,
+        type: summary.type || detail.type || 'series'
       },
       seasons: seasons,
       defaults: {
@@ -104,18 +109,127 @@
     });
   }
 
+  function isProviderSupported(provider) {
+    var normalized = toText(provider).toLowerCase();
+    return normalized === 'animeunity' || normalized === 'streamingunity';
+  }
+
+  function resolveProviderLink(summary, detail) {
+    var byDetail = detail && detail.links ? toText(detail.links.page || detail.links.source || detail.links.watch) : '';
+    if (byDetail) return byDetail;
+    return toText(summary && summary.sourceLink);
+  }
+
+  function toQuery(params) {
+    var out = [];
+    var key;
+    for (key in params) {
+      if (!Object.prototype.hasOwnProperty.call(params, key)) continue;
+      var value = toText(params[key]);
+      if (!value) continue;
+      out.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    }
+    return out.join('&');
+  }
+
+  function requestApiJson(path, params) {
+    var query = toQuery(params || {});
+    var url = utils.resolvePath(path + (query ? ('?' + query) : ''));
+    return data.requestJson(url);
+  }
+
+  function fromApi(summary, detail) {
+    var provider = toText(summary && summary.provider).toLowerCase();
+    var link = resolveProviderLink(summary, detail);
+    if (!isProviderSupported(provider) || !link) {
+      return Promise.reject(new Error('Provider link/API non disponibile'));
+    }
+
+    return requestApiJson('/api/player/payload', {
+      provider: provider,
+      link: link,
+      contentId: summary && summary.id,
+      title: summary && summary.title,
+      poster: summary && summary.poster,
+      backdrop: summary && summary.backdrop,
+      infoUrl: detail && detail.links ? detail.links.page : ''
+    }).then(function (response) {
+      if (!response || response.ok !== true || !response.payload) {
+        throw new Error((response && response.error) || 'Payload API non valido');
+      }
+      return response.payload;
+    });
+  }
+
+  function normalizeEpisodes(rawEpisodes, seasonIndex) {
+    var source = Array.isArray(rawEpisodes) ? rawEpisodes : [];
+    var out = [];
+    for (var i = 0; i < source.length; i += 1) {
+      var normalized = contract.normalizeEpisode ? contract.normalizeEpisode(source[i], seasonIndex, i) : source[i];
+      if (normalized) out.push(normalized);
+    }
+    return out;
+  }
+
   function resolvePayload(summary, detail, query) {
     var useMock = String(query && query.mock || '') === '1';
-    var rawPromise = useMock ? fromMock(summary, detail) : Promise.resolve(fromProvider(summary, detail));
+    var rawPromise = null;
+
+    if (useMock) rawPromise = fromMock(summary, detail);
+    else if (isProviderSupported(summary && summary.provider) && resolveProviderLink(summary, detail)) rawPromise = fromApi(summary, detail).catch(function () {
+      return fromProvider(summary, detail);
+    });
+    else rawPromise = Promise.resolve(fromProvider(summary, detail));
+
     return rawPromise.then(function (raw) {
       return {
         payload: contract.normalizePayload(raw, { summary: summary, detail: detail, query: query }),
         links: {
           titlePage: makeTitleLink(summary),
-          providerWatch: detail && detail.links ? toText(detail.links.watch || detail.links.source) : toText(summary.sourceLink)
+          providerWatch: detail && detail.links ? toText(detail.links.watch || detail.links.source || detail.links.page) : toText(summary.sourceLink)
         }
       };
     });
+  }
+
+  function loadSeasonEpisodes(payload, seasonIndex, links) {
+    var safeSeason = toInt(seasonIndex, 0);
+    var season = payload && payload.seasons && payload.seasons[safeSeason];
+    if (!season) return Promise.resolve([]);
+    if (Array.isArray(season.episodes) && season.episodes.length) return Promise.resolve(season.episodes);
+
+    var provider = toText(payload && payload.content && payload.content.provider).toLowerCase();
+    if (!isProviderSupported(provider)) return Promise.resolve([]);
+
+    var seasonLink = toText(season.episodesLink || '');
+    var contentLink = toText(payload && payload.content && payload.content.infoUrl || '') || toText(links && links.providerWatch || '');
+    if (!seasonLink && !contentLink) return Promise.resolve([]);
+
+    return requestApiJson('/api/player/episodes', {
+      provider: provider,
+      seasonLink: seasonLink,
+      contentLink: contentLink
+    }).then(function (response) {
+      if (!response || response.ok !== true || !Array.isArray(response.episodes)) return [];
+      var normalized = normalizeEpisodes(response.episodes, safeSeason);
+      season.episodes = normalized;
+      if (!season.episodesCount || season.episodesCount < normalized.length) {
+        season.episodesCount = normalized.length;
+      }
+      return normalized;
+    }, function () {
+      return [];
+    });
+  }
+
+  function normalizeStreams(rawStreams) {
+    var source = Array.isArray(rawStreams) ? rawStreams : [];
+    var out = [];
+    for (var i = 0; i < source.length; i += 1) {
+      var normalized = contract.normalizeStream ? contract.normalizeStream(source[i], i) : source[i];
+      if (normalized) out.push(normalized);
+    }
+    return out;
   }
 
   function refreshStreams(payload, seasonIndex, episodeIndex) {
@@ -123,11 +237,28 @@
     var safeEpisode = toInt(episodeIndex, 0);
     var season = payload && payload.seasons && payload.seasons[safeSeason];
     var episode = season && season.episodes && season.episodes[safeEpisode];
-    return Promise.resolve(episode && episode.streams ? episode.streams : []);
+    var existing = episode && Array.isArray(episode.streams) ? episode.streams : [];
+
+    var provider = toText(payload && payload.content && payload.content.provider).toLowerCase();
+    if (!episode || !episode.link || !isProviderSupported(provider)) return Promise.resolve(existing);
+
+    return requestApiJson('/api/player/streams', {
+      provider: provider,
+      link: episode.link
+    }).then(function (response) {
+      if (!response || response.ok !== true || !Array.isArray(response.streams)) {
+        return existing;
+      }
+      var normalized = normalizeStreams(response.streams);
+      return normalized.length ? normalized : existing;
+    }, function () {
+      return existing;
+    });
   }
 
   StreamBox.playerAdapter = {
     resolvePayload: resolvePayload,
+    loadSeasonEpisodes: loadSeasonEpisodes,
     refreshStreams: refreshStreams
   };
 })(window);

@@ -63,6 +63,7 @@
     state.qualityOptions = [];
     state.subtitleOptions = [];
     state.locked = false;
+    state.seasonLoadQueue = {};
     state.engine = engineFactory.create(refs.ui.video);
     bindCoreButtons();
     bindTabs();
@@ -73,7 +74,7 @@
     bindTvNavigation();
     applyLockState(false);
     ui.setActiveTab(refs.ui, 'server');
-    loadCurrentEpisode(loadStoredPosition());
+    loadInitialEpisode();
   }
   function bindCoreButtons() {
     refs.ui.playPause.onclick = function () {
@@ -94,7 +95,10 @@
       if (!state.navigator.goNextEpisode()) return;
       state.panelSeasonIndex = state.navigator.toState().seasonIndex;
       state.activeStreamIndex = 0;
-      loadCurrentEpisode(0);
+      ensureSeasonLoaded(state.panelSeasonIndex, true).then(function () {
+        view.renderEpisodes(state, refs);
+        loadCurrentEpisode(0);
+      });
     };
     refs.ui.pip.onclick = function () {
       if (state.locked) return;
@@ -165,17 +169,21 @@
       var btn = event.target.closest('[data-item-id]');
       if (!btn) return;
       state.panelSeasonIndex = Number(btn.getAttribute('data-item-id').replace('season-', '')) || 0;
-      view.renderEpisodes(state, refs);
+      ensureSeasonLoaded(state.panelSeasonIndex).then(function () {
+        view.renderEpisodes(state, refs);
+      });
     };
     refs.ui.listEpisodes.onclick = function (event) {
       if (state.locked) return;
       var btn = event.target.closest('[data-item-id]');
       if (!btn) return;
       var episodeIndex = Number(btn.getAttribute('data-item-id').replace('episode-', '')) || 0;
-      state.navigator.setIndexes(state.panelSeasonIndex, episodeIndex);
-      state.activeStreamIndex = 0;
-      loadCurrentEpisode(loadStoredPosition());
-      view.renderEpisodes(state, refs);
+      ensureSeasonLoaded(state.panelSeasonIndex, true).then(function () {
+        state.navigator.setIndexes(state.panelSeasonIndex, episodeIndex);
+        state.activeStreamIndex = 0;
+        loadCurrentEpisode(loadStoredPosition());
+        view.renderEpisodes(state, refs);
+      });
     };
   }
   function bindSubtitleUpload() {
@@ -233,38 +241,42 @@
     var stored = storage.loadProgress(state.payload.content.id, episode.link);
     return stored && stored.position ? Number(stored.position) || 0 : 0;
   }
-  function loadCurrentEpisode(startTime) {
+  function loadInitialEpisode() {
+    var nav = state.navigator.toState();
+    ensureSeasonLoaded(nav.seasonIndex).then(function () { state.navigator.setIndexes(nav.seasonIndex, nav.episodeIndex); state.panelSeasonIndex = state.navigator.toState().seasonIndex; view.renderEpisodes(state, refs); loadCurrentEpisode(loadStoredPosition()); }, function () { view.renderEpisodes(state, refs); loadCurrentEpisode(0); });
+  }
+  function ensureSeasonLoaded(seasonIndex, silent) {
+    var safeSeason = Math.max(0, Number(seasonIndex) || 0);
+    var season = state.payload && state.payload.seasons ? state.payload.seasons[safeSeason] : null;
+    if (!season) return Promise.resolve([]);
+    if (season._episodesLoaded) return Promise.resolve(season.episodes || []);
+    if (Array.isArray(season.episodes) && season.episodes.length) { season._episodesLoaded = true; return Promise.resolve(season.episodes); }
+    if (!season.episodesLink) { season._episodesLoaded = true; return Promise.resolve([]); }
+    if (state.seasonLoadQueue[safeSeason]) return state.seasonLoadQueue[safeSeason];
+    if (!silent) ui.setRuntimeStatus(refs.ui, 'Caricamento episodi stagione...', 'warn');
+    state.seasonLoadQueue[safeSeason] = adapter.loadSeasonEpisodes(state.payload, safeSeason, state.links).then(function (episodes) { season._episodesLoaded = true; return episodes || []; }, function () { season._episodesLoaded = false; return []; }).then(function (episodes) { delete state.seasonLoadQueue[safeSeason]; return episodes; });
+    return state.seasonLoadQueue[safeSeason];
+  }
+  function loadCurrentEpisode(startTime, skipStreamFetch) {
     clearStartupGuard(false);
     var episode = state.navigator.getCurrentEpisode();
     if (!episode) return blockPlayback('Episodio non disponibile.');
-    if (!episode.streams || !episode.streams.length) return blockPlayback('Nessuno stream disponibile per questo episodio.');
+    if (!episode.streams || !episode.streams.length) {
+      if (skipStreamFetch) return blockPlayback('Nessuno stream disponibile per questo episodio.');
+      ui.setRuntimeStatus(refs.ui, 'Recupero stream episodio...', 'warn');
+      return adapter.refreshStreams(state.payload, state.navigator.toState().seasonIndex, state.navigator.toState().episodeIndex).then(function (streams) {
+        if (streams && streams.length) { episode.streams = streams; state.activeStreamIndex = 0; loadCurrentEpisode(startTime, true); return; }
+        blockPlayback('Nessuno stream disponibile per questo episodio.');
+      }, function () { blockPlayback('Impossibile recuperare stream per questo episodio.'); });
+    }
     if (state.activeStreamIndex >= episode.streams.length) state.activeStreamIndex = 0;
     var stream = episode.streams[state.activeStreamIndex];
-    ui.setOverlay(refs.ui, 'Caricamento stream in corso...');
-    ui.setRuntimeStatus(refs.ui, 'Caricamento stream...', 'warn');
-    armStartupGuard();
+    ui.setOverlay(refs.ui, 'Caricamento stream in corso...'); ui.setRuntimeStatus(refs.ui, 'Caricamento stream...', 'warn'); armStartupGuard();
     state.engine.setSource(stream, {
-      startTime: startTime || 0,
-      playbackRate: state.playbackRate,
-      onReady: function () {
-        clearStartupGuard(true);
-        ui.setOverlay(refs.ui, '');
-        ui.setRuntimeStatus(refs.ui, 'Riproduzione pronta', 'ok');
-        state.engine.setPlaybackRate(state.playbackRate);
-        refreshSubtitleTracks();
-        applySavedTrackPreferences();
-        view.renderAll(state, refs, SPEEDS);
-        if (state.payload.defaults.autoplay) state.engine.play().catch(function () {});
-      },
-      onProgress: function (progress) {
-        if (progress.currentTime >= 0.5) clearStartupGuard(true);
-        ui.setProgress(refs.ui, progress.currentTime, progress.duration);
-        persistProgress(false, progress.currentTime, progress.duration);
-      },
-      onEnded: function () {
-        ui.setPlayState(refs.ui, true);
-        ui.setRuntimeStatus(refs.ui, 'Episodio terminato', 'neutral');
-      },
+      startTime: startTime || 0, playbackRate: state.playbackRate,
+      onReady: function () { clearStartupGuard(true); ui.setOverlay(refs.ui, ''); ui.setRuntimeStatus(refs.ui, 'Riproduzione pronta', 'ok'); state.engine.setPlaybackRate(state.playbackRate); refreshSubtitleTracks(); applySavedTrackPreferences(); view.renderAll(state, refs, SPEEDS); if (state.payload.defaults.autoplay) state.engine.play().catch(function () {}); },
+      onProgress: function (progress) { if (progress.currentTime >= 0.5) clearStartupGuard(true); ui.setProgress(refs.ui, progress.currentTime, progress.duration); persistProgress(false, progress.currentTime, progress.duration); },
+      onEnded: function () { ui.setPlayState(refs.ui, true); ui.setRuntimeStatus(refs.ui, 'Episodio terminato', 'neutral'); },
       onTracksChanged: function () { view.renderTracks(state, refs, SPEEDS); },
       onError: handleEngineError
     });
@@ -317,27 +329,9 @@
     if (state.startupTimer) global.clearTimeout(state.startupTimer);
     state.startupTimer = null;
   }
-  function handleEngineError(error) {
-    clearStartupGuard(false);
-    var status = parseStatus(error);
-    if ((status === 403 || status === 503) && canRetryToken()) return retryCurrentStream();
-    switchToNextServer('Errore stream, provo server successivo.');
-  }
-  function parseStatus(error) {
-    var status = Number(error && error.status) || 0;
-    if (status) return status;
-    var text = utils.safeText(error && error.message || '');
-    var match = text.match(/\b(403|503)\b/);
-    return match ? Number(match[1]) : 0;
-  }
-  function canRetryToken() {
-    var episode = state.navigator.getCurrentEpisode();
-    var stream = episode.streams[state.activeStreamIndex];
-    var key = episode.link + '|' + stream.server;
-    var now = Date.now();
-    if (state.retryState.key !== key) state.retryState = { key: key, count: 0, lastAttempt: 0 };
-    return state.retryState.count < 1 && now - state.retryState.lastAttempt > 3000;
-  }
+  function handleEngineError(error) { clearStartupGuard(false); var status = parseStatus(error); if ((status === 403 || status === 503) && canRetryToken()) return retryCurrentStream(); switchToNextServer('Errore stream, provo server successivo.'); }
+  function parseStatus(error) { var status = Number(error && error.status) || 0; if (status) return status; var match = utils.safeText(error && error.message || '').match(/\b(403|503)\b/); return match ? Number(match[1]) : 0; }
+  function canRetryToken() { var episode = state.navigator.getCurrentEpisode(); if (!episode || !episode.streams || !episode.streams.length) return false; var stream = episode.streams[state.activeStreamIndex]; if (!stream) return false; var key = episode.link + '|' + stream.server; var now = Date.now(); if (state.retryState.key !== key) state.retryState = { key: key, count: 0, lastAttempt: 0 }; return state.retryState.count < 1 && now - state.retryState.lastAttempt > 3000; }
   function retryCurrentStream() {
     var navState = state.navigator.toState();
     state.retryState.count += 1;
@@ -345,55 +339,25 @@
     ui.setRuntimeStatus(refs.ui, 'Token stream scaduto: refresh in corso...', 'warn');
     adapter.refreshStreams(state.payload, navState.seasonIndex, navState.episodeIndex).then(function (streams) {
       var episode = state.navigator.getCurrentEpisode();
-      if (streams && streams.length) episode.streams = streams;
-      loadCurrentEpisode(state.engine.getCurrentTime());
+      if (episode && streams && streams.length) {
+        episode.streams = streams;
+        state.activeStreamIndex = 0;
+        loadCurrentEpisode(state.engine.getCurrentTime(), true);
+        return;
+      }
+      switchToNextServer('Refresh stream fallito.');
     }, function () {
       switchToNextServer('Refresh stream fallito.');
     });
   }
-  function switchToNextServer(message) {
-    var episode = state.navigator.getCurrentEpisode();
-    if (state.activeStreamIndex < episode.streams.length - 1) {
-      state.activeStreamIndex += 1;
-      ui.setRuntimeStatus(refs.ui, message || 'Cambio server...', 'warn');
-      loadCurrentEpisode(state.engine.getCurrentTime());
-      return;
-    }
-    blockPlayback('Riproduzione non disponibile. Nessun altro server valido.');
-  }
+  function switchToNextServer(message) { var episode = state.navigator.getCurrentEpisode(); if (!episode || !episode.streams || !episode.streams.length) return blockPlayback('Riproduzione non disponibile. Nessuno stream valido trovato.'); if (state.activeStreamIndex < episode.streams.length - 1) { state.activeStreamIndex += 1; ui.setRuntimeStatus(refs.ui, message || 'Cambio server...', 'warn'); loadCurrentEpisode(state.engine.getCurrentTime()); return; } blockPlayback('Riproduzione non disponibile. Nessun altro server valido.'); }
   function blockPlayback(message) {
     ui.setOverlay(refs.ui, message, 'Torna alla scheda', 'playerGoBackBtn');
     ui.setRuntimeStatus(refs.ui, 'Errore riproduzione', 'error');
     var backBtn = utils.byId('playerGoBackBtn');
     if (backBtn) backBtn.onclick = function () { global.location.href = state.links.titlePage || '../index.html'; };
   }
-  function persistProgress(force, current, duration) {
-    var now = Date.now();
-    if (!force && now - state.lastProgressSave < 5000) return;
-    state.lastProgressSave = now;
-    var episode = state.navigator.getCurrentEpisode();
-    if (!episode) return;
-    var position = typeof current === 'number' ? current : state.engine.getCurrentTime();
-    var total = typeof duration === 'number' ? duration : state.engine.getDuration();
-    storage.saveProgress(state.payload.content.id, episode.link, position, total);
-  }
-  function findQualityOption(btn) {
-    if (!btn) return null;
-    var id = btn.getAttribute('data-item-id');
-    for (var i = 0; i < state.qualityOptions.length; i += 1) if (state.qualityOptions[i].id === id) return state.qualityOptions[i];
-    return null;
-  }
-  function toggleFullscreen() {
-    var target = refs.ui.video;
-    var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || document.mozFullScreenElement;
-    if (!fsElement) {
-      var request = target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen || target.mozRequestFullScreen;
-      if (!request) return ui.setRuntimeStatus(refs.ui, 'Fullscreen non supportato', 'warn');
-      var result = request.call(target);
-      if (result && result.catch) result.catch(function () {});
-      return;
-    }
-    var exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen;
-    if (exit) exit.call(document);
-  }
+  function persistProgress(force, current, duration) { var now = Date.now(); if (!force && now - state.lastProgressSave < 5000) return; state.lastProgressSave = now; var episode = state.navigator.getCurrentEpisode(); if (!episode) return; var position = typeof current === 'number' ? current : state.engine.getCurrentTime(); var total = typeof duration === 'number' ? duration : state.engine.getDuration(); storage.saveProgress(state.payload.content.id, episode.link, position, total); }
+  function findQualityOption(btn) { if (!btn) return null; var id = btn.getAttribute('data-item-id'); for (var i = 0; i < state.qualityOptions.length; i += 1) if (state.qualityOptions[i].id === id) return state.qualityOptions[i]; return null; }
+  function toggleFullscreen() { var target = refs.ui.video; var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || document.mozFullScreenElement; if (!fsElement) { var request = target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen || target.mozRequestFullScreen; if (!request) return ui.setRuntimeStatus(refs.ui, 'Fullscreen non supportato', 'warn'); var result = request.call(target); if (result && result.catch) result.catch(function () {}); return; } var exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen; if (exit) exit.call(document); }
   StreamBox.playerPage = { init: init };})(window);

@@ -59,7 +59,12 @@
     var seasons = state.payload.seasons || [];
     var seasonRows = [];
     var i;
-    for (i = 0; i < seasons.length; i += 1) seasonRows.push({ id: 'season-' + i, label: seasons[i].title || ('Season ' + (i + 1)) });
+    for (i = 0; i < seasons.length; i += 1) {
+      var seasonLabel = seasons[i].title || ('Season ' + (i + 1));
+      var episodesCount = Number(seasons[i].episodesCount) || 0;
+      if (episodesCount > 0) seasonLabel += ' (' + episodesCount + ' ep)';
+      seasonRows.push({ id: 'season-' + i, label: seasonLabel });
+    }
     ui.renderChoiceList(refs.ui.listSeasons, seasonRows, 'season-' + state.panelSeasonIndex, 'player-choice');
     var season = seasons[state.panelSeasonIndex] || { episodes: [] };
     var navState = state.navigator.toState();
@@ -68,6 +73,10 @@
       var entry = season.episodes[i];
       var prefix = entry.episodeNumber ? ('E' + entry.episodeNumber + ' - ') : '';
       episodeRows.push({ id: 'episode-' + i, label: prefix + entry.title });
+    }
+    if (!episodeRows.length && season.episodesLink && (Number(season.episodesCount) || 0) > 0) {
+      refs.ui.listEpisodes.innerHTML = '<p class="player-empty">Episodi in caricamento. Seleziona la stagione per aggiornare.</p>';
+      return;
     }
     var selectedEpisodeId = navState.seasonIndex === state.panelSeasonIndex ? ('episode-' + navState.episodeIndex) : '';
     ui.renderChoiceList(refs.ui.listEpisodes, episodeRows, selectedEpisodeId, 'player-choice');
