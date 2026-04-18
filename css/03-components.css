@@ -58,6 +58,26 @@
   gap: 8px;
   margin-bottom: 12px;
 }
+.search-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.search-bar .input {
+  flex: 1 1 auto;
+  min-width: 220px;
+}
+.search-results {
+  min-height: 120px;
+}
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+.search-grid .title-card {
+  width: 100%;
+}
 .badge {
   display: inline-block;
   border: 1px solid #2f2f2f;

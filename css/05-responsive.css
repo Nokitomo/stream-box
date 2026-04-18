@@ -7,6 +7,8 @@
   .header-inner { flex-wrap: wrap; padding: 8px 0; }
   .brand { font-size: 1.35rem; }
   .category-menu-panel { right: auto; left: 0; }
+  .search-bar { flex-wrap: wrap; }
+  .search-bar .input { flex: 1 1 100%; }
   .rail-body { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 8px; }
   .rail-nav { width: 38px; height: 72px; font-size: 1.6rem; }
   .rail-strip > .title-card { flex-basis: clamp(132px, 38vw, 168px); }
