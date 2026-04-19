@@ -34,14 +34,16 @@
       startWithDetail(summary, {}, query);
     });
   }
-  function init(payload) {
-    boot(payload, {});
-  }
-  function mountInline(payload, options) {
-    boot(payload, options || {});
-  }
+  function init(payload) { boot(payload, {}); }
+  function mountInline(payload, options) { boot(payload, options || {}); }
   function writePageError(message) {
     if (refs.root) refs.root.innerHTML = '<p>' + utils.escapeHtml(message || 'Errore') + '</p>';
+  }
+  function getClosest(target, selector) {
+    var node = target;
+    while (node && node.nodeType !== 1) node = node.parentNode;
+    if (!node || !node.closest) return null;
+    return node.closest(selector);
   }
   function startWithDetail(summary, detail, query) {
     adapter.resolvePayload(summary, detail, query).then(function (result) {
@@ -73,6 +75,7 @@
     state.locked = false;
     state.seasonLoadQueue = {};
     state.engine = engineFactory.create(refs.ui.video);
+    if (refs.ui.video) refs.ui.video.controls = false;
     bindCoreButtons();
     bindTabs();
     bindLists();
@@ -82,6 +85,7 @@
     bindTvNavigation();
     applyLockState(false);
     ui.setActiveTab(refs.ui, 'server');
+    ui.setMenuOpen(refs.ui, false);
     loadInitialEpisode();
   }
   function bindCoreButtons() {
@@ -125,6 +129,15 @@
         ui.setMenuOpen(refs.ui, open);
       };
     }
+    if (refs.root && refs.root.addEventListener) {
+      refs.root.addEventListener('click', function (event) {
+        var open = refs.ui.menuDock && refs.ui.menuDock.className.indexOf('is-open') !== -1;
+        if (!open) return;
+        if (getClosest(event.target, '#playerMenuDock')) return;
+        if (getClosest(event.target, '#ctrlMenu')) return;
+        ui.setMenuOpen(refs.ui, false);
+      });
+    }
   }
   function bindTabs() {
     for (var i = 0; i < refs.ui.tabs.length; i += 1) {
@@ -134,31 +147,34 @@
   function bindLists() {
     refs.ui.listServers.onclick = function (event) {
       if (state.locked) return;
-      var btn = event.target.closest('[data-item-id]');
+      var btn = getClosest(event.target, '[data-item-id]');
       if (!btn) return;
       state.activeStreamIndex = Number(btn.getAttribute('data-item-id').replace('srv-', '')) || 0;
       loadCurrentEpisode(state.engine.getCurrentTime());
+      ui.setMenuOpen(refs.ui, false);
     };
     refs.ui.listQuality.onclick = function (event) {
       if (state.locked) return;
-      var option = findQualityOption(event.target.closest('[data-item-id]'));
+      var option = findQualityOption(getClosest(event.target, '[data-item-id]'));
       if (!option) return;
       state.engine.selectQuality(option.raw);
       persistPreference({ qualityId: option.id });
       view.renderTracks(state, refs, SPEEDS);
+      ui.setMenuOpen(refs.ui, false);
     };
     refs.ui.listAudio.onclick = function (event) {
       if (state.locked) return;
-      var btn = event.target.closest('[data-item-id]');
+      var btn = getClosest(event.target, '[data-item-id]');
       if (!btn) return;
       var index = Number(btn.getAttribute('data-item-id').replace('aud-', '')) || 0;
       state.engine.selectAudioTrack(index);
       persistPreference({ audioIndex: index });
       view.renderTracks(state, refs, SPEEDS);
+      ui.setMenuOpen(refs.ui, false);
     };
     refs.ui.listSubtitle.onclick = function (event) {
       if (state.locked) return;
-      var btn = event.target.closest('[data-item-id]');
+      var btn = getClosest(event.target, '[data-item-id]');
       if (!btn) return;
       var selectedId = btn.getAttribute('data-item-id');
       for (var i = 0; i < state.subtitleOptions.length; i += 1) {
@@ -169,19 +185,21 @@
         break;
       }
       view.renderTracks(state, refs, SPEEDS);
+      ui.setMenuOpen(refs.ui, false);
     };
     refs.ui.listSpeed.onclick = function (event) {
       if (state.locked) return;
-      var btn = event.target.closest('[data-item-id]');
+      var btn = getClosest(event.target, '[data-item-id]');
       if (!btn) return;
       state.playbackRate = Number(btn.getAttribute('data-item-id').replace('spd-', '')) || 1;
       state.engine.setPlaybackRate(state.playbackRate);
       persistPreference({ playbackRate: state.playbackRate });
       view.renderTracks(state, refs, SPEEDS);
+      ui.setMenuOpen(refs.ui, false);
     };
     refs.ui.listSeasons.onclick = function (event) {
       if (state.locked) return;
-      var btn = event.target.closest('[data-item-id]');
+      var btn = getClosest(event.target, '[data-item-id]');
       if (!btn) return;
       state.panelSeasonIndex = Number(btn.getAttribute('data-item-id').replace('season-', '')) || 0;
       ensureSeasonLoaded(state.panelSeasonIndex).then(function () {
@@ -190,7 +208,7 @@
     };
     refs.ui.listEpisodes.onclick = function (event) {
       if (state.locked) return;
-      var btn = event.target.closest('[data-item-id]');
+      var btn = getClosest(event.target, '[data-item-id]');
       if (!btn) return;
       var episodeIndex = Number(btn.getAttribute('data-item-id').replace('episode-', '')) || 0;
       ensureSeasonLoaded(state.panelSeasonIndex, true).then(function () {
@@ -198,6 +216,7 @@
         state.activeStreamIndex = 0;
         loadCurrentEpisode(loadStoredPosition());
         view.renderEpisodes(state, refs);
+        ui.setMenuOpen(refs.ui, false);
       });
     };
   }
@@ -290,7 +309,7 @@
     ui.setOverlay(refs.ui, 'Caricamento stream in corso...'); ui.setRuntimeStatus(refs.ui, 'Caricamento stream...', 'warn'); armStartupGuard();
     state.engine.setSource(stream, {
       startTime: startTime || 0, playbackRate: state.playbackRate,
-      onReady: function () { clearStartupGuard(true); ui.setOverlay(refs.ui, ''); ui.setRuntimeStatus(refs.ui, 'Riproduzione pronta', 'ok'); state.engine.setPlaybackRate(state.playbackRate); refreshSubtitleTracks(); applySavedTrackPreferences(); view.renderAll(state, refs, SPEEDS); if (state.payload.defaults.autoplay) state.engine.play().catch(function () {}); },
+      onReady: function () { clearStartupGuard(true); ui.setOverlay(refs.ui, ''); ui.setRuntimeStatus(refs.ui, 'Riproduzione pronta', 'ok'); state.engine.setPlaybackRate(state.playbackRate); refreshSubtitleTracks(); applySavedTrackPreferences(); view.renderAll(state, refs, SPEEDS); ui.setPlayState(refs.ui, true); },
       onProgress: function (progress) { if (progress.currentTime >= 0.5) clearStartupGuard(true); ui.setProgress(refs.ui, progress.currentTime, progress.duration); persistProgress(false, progress.currentTime, progress.duration); },
       onEnded: function () { ui.setPlayState(refs.ui, true); ui.setRuntimeStatus(refs.ui, 'Episodio terminato', 'neutral'); },
       onTracksChanged: function () { view.renderTracks(state, refs, SPEEDS); },

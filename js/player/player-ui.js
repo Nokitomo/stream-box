@@ -40,7 +40,7 @@
                 '<button data-tv-focus="1" id="ctrlMenu" class="btn btn-sm">Menu</button>' +
               '</div>' +
             '</div>' +
-            '<div id="playerMenuDock" class="player-menu-dock is-open">' +
+            '<div id="playerMenuDock" class="player-menu-dock">' +
               '<div class="player-tabs">' +
                 '<button data-tv-focus="1" class="btn btn-sm player-tab is-active" data-tab="server">Server</button>' +
                 '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="quality">Qualita</button>' +
@@ -173,7 +173,6 @@
       var panelId = refs.panels[i].id.replace('panel-', '');
       refs.panels[i].className = panelId === tabName ? 'player-panel is-active' : 'player-panel';
     }
-    setMenuOpen(refs, true);
   }
 
   function setMenuOpen(refs, open) {

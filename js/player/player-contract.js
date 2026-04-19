@@ -240,7 +240,7 @@
         seasonIndex: defaultSeason,
         episodeIndex: defaultEpisode,
         streamIndex: Math.max(0, defaultStream),
-        autoplay: raw.defaults && raw.defaults.autoplay !== false
+        autoplay: false
       }
     };
   }

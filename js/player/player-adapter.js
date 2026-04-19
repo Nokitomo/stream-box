@@ -83,7 +83,7 @@
         seasonIndex: 0,
         episodeIndex: 0,
         streamIndex: 0,
-        autoplay: true
+        autoplay: false
       }
     };
   }
