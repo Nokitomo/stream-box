@@ -59,6 +59,27 @@
     return isFinite(parsed) ? parsed : fallback;
   }
 
+  function cleanText(value) {
+    return String(value == null ? '' : value).replace(/\s+/g, ' ').trim();
+  }
+
+  function parseEpisodeHint(rawKey, prefix) {
+    var suffix = String(rawKey || '').replace(String(prefix || ''), '');
+    if (!suffix) return '';
+    var decoded = suffix;
+    try {
+      decoded = decodeURIComponent(suffix).replace(/\+/g, ' ');
+    } catch (_) {
+      decoded = suffix;
+    }
+    decoded = cleanText(decoded);
+    if (!decoded) return '';
+    if (/^\d+$/.test(decoded)) return 'Ep ' + decoded;
+    var match = decoded.match(/(?:ep(?:isodio)?|episode)[^\d]*(\d+)/i);
+    if (match && match[1]) return 'Ep ' + match[1];
+    return '';
+  }
+
   function makeProgressPrefixes(contentIds) {
     var prefixes = [];
     var seen = {};
@@ -87,9 +108,11 @@
         if (key.indexOf(PLAYER_PROGRESS_NS) !== 0) continue;
 
         var matchedId = '';
+        var matchedPrefix = '';
         for (var p = 0; p < prefixes.length; p += 1) {
           if (key.indexOf(prefixes[p].prefix) === 0) {
             matchedId = prefixes[p].id;
+            matchedPrefix = prefixes[p].prefix;
             break;
           }
         }
@@ -116,12 +139,29 @@
         var updatedAt = toNumber(parsed.updatedAt, 0);
         var prev = byId[matchedId];
         if (!prev || updatedAt >= prev.updatedAt) {
+          var episodeTitle = cleanText(parsed.episodeTitle || '');
+          var episodeNumber = toNumber(parsed.episodeNumber, NaN);
+          var seasonNumber = toNumber(parsed.seasonNumber, NaN);
+          var episodeLabel = '';
+          if (isFinite(episodeNumber) && episodeNumber > 0) {
+            episodeLabel = isFinite(seasonNumber) && seasonNumber > 0
+              ? ('S' + seasonNumber + ' Ep ' + episodeNumber)
+              : ('Ep ' + episodeNumber);
+          } else if (episodeTitle) {
+            episodeLabel = episodeTitle;
+          } else {
+            episodeLabel = parseEpisodeHint(key, matchedPrefix);
+          }
           byId[matchedId] = {
             id: matchedId,
             percent: percent,
             position: position,
             duration: duration,
-            updatedAt: updatedAt
+            updatedAt: updatedAt,
+            episodeLabel: episodeLabel,
+            episodeTitle: episodeTitle,
+            episodeNumber: isFinite(episodeNumber) ? episodeNumber : undefined,
+            seasonNumber: isFinite(seasonNumber) ? seasonNumber : undefined
           };
         }
       }

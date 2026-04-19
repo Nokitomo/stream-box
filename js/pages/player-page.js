@@ -14,11 +14,13 @@
   var SPEEDS = [0.25, 0.5, 1, 1.25, 1.35, 1.5, 1.75, 2];
   var refs = {};
   var state = {};
-  function init(payload) {
-    store.init(payload || {});
-    refs.root = utils.byId('playerPageRoot');
-    refs.meta = utils.byId('playerMeta');
-    var query = utils.parseQuery(global.location.search || '');
+  function boot(payload, options) {
+    var opts = options || {};
+    if (payload) store.init(payload);
+    refs.root = opts.root || utils.byId('playerPageRoot');
+    refs.meta = opts.meta || utils.byId('playerMeta');
+    if (!refs.root) return;
+    var query = opts.query || utils.parseQuery(global.location.search || '');
     var id = query.id;
     if (!id) return writePageError('ID titolo mancante.');
     var summary = data.getSummaryById(id);
@@ -31,6 +33,12 @@
     }, function () {
       startWithDetail(summary, {}, query);
     });
+  }
+  function init(payload) {
+    boot(payload, {});
+  }
+  function mountInline(payload, options) {
+    boot(payload, options || {});
   }
   function writePageError(message) {
     if (refs.root) refs.root.innerHTML = '<p>' + utils.escapeHtml(message || 'Errore') + '</p>';
@@ -110,6 +118,13 @@
       toggleFullscreen();
     };
     refs.ui.lock.onclick = function () { applyLockState(!state.locked); };
+    if (refs.ui.menuBtn) {
+      refs.ui.menuBtn.onclick = function () {
+        if (state.locked) return;
+        var open = !refs.ui.menuDock || refs.ui.menuDock.className.indexOf('is-open') === -1;
+        ui.setMenuOpen(refs.ui, open);
+      };
+    }
   }
   function bindTabs() {
     for (var i = 0; i < refs.ui.tabs.length; i += 1) {
@@ -212,6 +227,7 @@
     });
   }
   function bindFavoriteButtons() {
+    if (!refs.ui.favBtn || !refs.ui.watchBtn) return;
     refreshFavoriteButtons();
     refs.ui.favBtn.onclick = function () { store.toggleFavorite(state.summary.id); refreshFavoriteButtons(); };
     refs.ui.watchBtn.onclick = function () { store.toggleWatchlist(state.summary.id); refreshFavoriteButtons(); };
@@ -221,8 +237,8 @@
     tvNav.bindKeyboard({ bindKey: 'player', getFocusable: function () { return tvNav.getFocusable(document); } });
   }
   function refreshFavoriteButtons() {
-    refs.ui.favBtn.innerHTML = store.isFavorite(state.summary.id) ? 'Rimuovi preferito' : 'Aggiungi preferito';
-    refs.ui.watchBtn.innerHTML = store.isWatchlist(state.summary.id) ? 'Rimuovi watchlist' : 'Aggiungi watchlist';
+    if (refs.ui.favBtn) refs.ui.favBtn.innerHTML = store.isFavorite(state.summary.id) ? 'Rimuovi preferito' : 'Aggiungi preferito';
+    if (refs.ui.watchBtn) refs.ui.watchBtn.innerHTML = store.isWatchlist(state.summary.id) ? 'Rimuovi watchlist' : 'Aggiungi watchlist';
   }
   function applyLockState(locked) {
     state.locked = !!locked;
@@ -357,7 +373,7 @@
     var backBtn = utils.byId('playerGoBackBtn');
     if (backBtn) backBtn.onclick = function () { global.location.href = state.links.titlePage || '../index.html'; };
   }
-  function persistProgress(force, current, duration) { var now = Date.now(); if (!force && now - state.lastProgressSave < 5000) return; state.lastProgressSave = now; var episode = state.navigator.getCurrentEpisode(); if (!episode) return; var position = typeof current === 'number' ? current : state.engine.getCurrentTime(); var total = typeof duration === 'number' ? duration : state.engine.getDuration(); storage.saveProgress(state.payload.content.id, episode.link, position, total); }
+  function persistProgress(force, current, duration) { var now = Date.now(); if (!force && now - state.lastProgressSave < 5000) return; state.lastProgressSave = now; var episode = state.navigator.getCurrentEpisode(); if (!episode) return; var nav = state.navigator.toState(); var position = typeof current === 'number' ? current : state.engine.getCurrentTime(); var total = typeof duration === 'number' ? duration : state.engine.getDuration(); storage.saveProgress(state.payload.content.id, episode.link, position, total, { episodeTitle: episode.title, episodeNumber: episode.episodeNumber, seasonNumber: (Number(nav.seasonIndex) || 0) + 1 }); }
   function findQualityOption(btn) { if (!btn) return null; var id = btn.getAttribute('data-item-id'); for (var i = 0; i < state.qualityOptions.length; i += 1) if (state.qualityOptions[i].id === id) return state.qualityOptions[i]; return null; }
   function toggleFullscreen() { var target = refs.ui.video; var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || document.mozFullScreenElement; if (!fsElement) { var request = target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen || target.mozRequestFullScreen; if (!request) return ui.setRuntimeStatus(refs.ui, 'Fullscreen non supportato', 'warn'); var result = request.call(target); if (result && result.catch) result.catch(function () {}); return; } var exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen; if (exit) exit.call(document); }
-  StreamBox.playerPage = { init: init };})(window);
+  StreamBox.playerPage = { init: init, mountInline: mountInline };})(window);

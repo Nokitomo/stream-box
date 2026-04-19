@@ -30,6 +30,12 @@
       '</div>';
   }
 
+  function episodeLabel(item) {
+    var label = utils.safeText(item && item.progressEpisodeLabel);
+    if (!label) return '';
+    return '<p class="title-episode">' + utils.escapeHtml(label) + '</p>';
+  }
+
   function card(item, opts) {
     var options = opts || {};
     var rank = options.rank ? '<span class="badge">#' + options.rank + '</span>' : '';
@@ -38,10 +44,13 @@
     return '' +
       '<article class="title-card" data-rail-card="1">' +
         '<button class="card-action" type="button" data-tv-focus="1" data-action="open-modal" data-id="' + utils.escapeHtml(item.id) + '">' +
-          '<img class="title-thumb" loading="lazy" src="' + utils.escapeHtml(poster(item.poster, item.backdrop)) + '" alt="' + utils.escapeHtml(item.title) + '">' +
-          progressBar(item) +
+          '<div class="title-thumb-wrap">' +
+            '<img class="title-thumb" loading="lazy" src="' + utils.escapeHtml(poster(item.poster, item.backdrop)) + '" alt="' + utils.escapeHtml(item.title) + '">' +
+            progressBar(item) +
+          '</div>' +
           '<div class="title-meta">' +
             '<h3 class="title-name">' + utils.escapeHtml(item.title) + '</h3>' +
+            episodeLabel(item) +
             '<div class="title-info">' + rank + provider + meta + '</div>' +
           '</div>' +
         '</button>' +

@@ -24,55 +24,54 @@
           '<div class="player-video-wrap">' +
             '<video id="playerVideo" class="player-video" controls playsinline crossorigin="anonymous"></video>' +
             '<div id="playerOverlay" class="player-overlay hidden"></div>' +
-          '</div>' +
-          '<div class="player-timeline">' +
-            '<div class="player-progress"><div id="playerProgressFill" class="player-progress-fill"></div></div>' +
-            '<div class="player-times"><span id="playerCurrentTime">00:00</span><span id="playerDuration">00:00</span></div>' +
-          '</div>' +
-          '<div id="playerControlRow" class="player-controls">' +
-            '<button data-tv-focus="1" id="ctrlPlayPause" class="btn btn-sm">Play</button>' +
-            '<button data-tv-focus="1" id="ctrlSeekBack" class="btn btn-sm">-10s</button>' +
-            '<button data-tv-focus="1" id="ctrlSeekFwd" class="btn btn-sm">+10s</button>' +
-            '<button data-tv-focus="1" id="ctrlNextEpisode" class="btn btn-sm">Next</button>' +
-            '<button data-tv-focus="1" id="ctrlPip" class="btn btn-sm">PIP</button>' +
-            '<button data-tv-focus="1" id="ctrlFullscreen" class="btn btn-sm">Fullscreen</button>' +
-            '<button data-tv-focus="1" id="ctrlLock" class="btn btn-sm">Lock</button>' +
-          '</div>' +
-          '<div class="player-actions">' +
-            '<a data-tv-focus="1" class="btn btn-sm btn-primary" href="' + escape(links.titlePage || '#') + '">Pagina titolo</a>' +
-            (links.providerWatch ? '<a data-tv-focus="1" class="btn btn-sm" target="_blank" rel="noopener" href="' + escape(links.providerWatch) + '">Provider</a>' : '') +
-            '<button data-tv-focus="1" id="playerFavBtn" class="btn btn-sm">Preferito</button>' +
-            '<button data-tv-focus="1" id="playerWatchBtn" class="btn btn-sm">Watchlist</button>' +
-          '</div>' +
-          '<div class="player-tabs">' +
-            '<button data-tv-focus="1" class="btn btn-sm player-tab is-active" data-tab="server">Server</button>' +
-            '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="quality">Qualita</button>' +
-            '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="audio">Audio</button>' +
-            '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="subtitle">Subtitle</button>' +
-            '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="speed">Speed</button>' +
-            '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="episodes">Episodes</button>' +
-          '</div>' +
-          '<section id="panel-server" class="player-panel is-active"><div id="listServers" class="player-list"></div></section>' +
-          '<section id="panel-quality" class="player-panel"><div id="listQuality" class="player-list"></div></section>' +
-          '<section id="panel-audio" class="player-panel"><div id="listAudio" class="player-list"></div></section>' +
-          '<section id="panel-subtitle" class="player-panel">' +
-            '<div class="player-subtitle-tools">' +
-              '<label class="btn btn-sm" for="playerSubtitleFile">Aggiungi file subtitle</label>' +
-              '<input id="playerSubtitleFile" class="hidden" type="file" accept=".vtt,.srt,.ttml,.xml,text/vtt,application/x-subrip,application/ttml+xml">' +
+            '<div class="player-hud">' +
+              '<div class="player-timeline">' +
+                '<div class="player-progress"><div id="playerProgressFill" class="player-progress-fill"></div></div>' +
+                '<div class="player-times"><span id="playerCurrentTime">00:00</span><span id="playerDuration">00:00</span></div>' +
+              '</div>' +
+              '<div id="playerControlRow" class="player-controls">' +
+                '<button data-tv-focus="1" id="ctrlPlayPause" class="btn btn-sm">Play</button>' +
+                '<button data-tv-focus="1" id="ctrlSeekBack" class="btn btn-sm">-10s</button>' +
+                '<button data-tv-focus="1" id="ctrlSeekFwd" class="btn btn-sm">+10s</button>' +
+                '<button data-tv-focus="1" id="ctrlNextEpisode" class="btn btn-sm">Next</button>' +
+                '<button data-tv-focus="1" id="ctrlPip" class="btn btn-sm">PIP</button>' +
+                '<button data-tv-focus="1" id="ctrlFullscreen" class="btn btn-sm">Fullscreen</button>' +
+                '<button data-tv-focus="1" id="ctrlLock" class="btn btn-sm">Lock</button>' +
+                '<button data-tv-focus="1" id="ctrlMenu" class="btn btn-sm">Menu</button>' +
+              '</div>' +
             '</div>' +
-            '<div id="listSubtitle" class="player-list"></div>' +
-          '</section>' +
-          '<section id="panel-speed" class="player-panel"><div id="listSpeed" class="player-list"></div></section>' +
-          '<section id="panel-episodes" class="player-panel">' +
-            '<div class="player-episode-grid">' +
-              '<div><h3 class="section-title">Stagioni</h3><div id="listSeasons" class="player-list"></div></div>' +
-              '<div><h3 class="section-title">Episodi</h3><div id="listEpisodes" class="player-list"></div></div>' +
+            '<div id="playerMenuDock" class="player-menu-dock is-open">' +
+              '<div class="player-tabs">' +
+                '<button data-tv-focus="1" class="btn btn-sm player-tab is-active" data-tab="server">Server</button>' +
+                '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="quality">Qualita</button>' +
+                '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="audio">Audio</button>' +
+                '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="subtitle">Subtitle</button>' +
+                '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="speed">Speed</button>' +
+                '<button data-tv-focus="1" class="btn btn-sm player-tab" data-tab="episodes">Episodes</button>' +
+              '</div>' +
+              '<section id="panel-server" class="player-panel is-active"><div id="listServers" class="player-list"></div></section>' +
+              '<section id="panel-quality" class="player-panel"><div id="listQuality" class="player-list"></div></section>' +
+              '<section id="panel-audio" class="player-panel"><div id="listAudio" class="player-list"></div></section>' +
+              '<section id="panel-subtitle" class="player-panel">' +
+                '<div class="player-subtitle-tools">' +
+                  '<label class="btn btn-sm" for="playerSubtitleFile">Aggiungi file subtitle</label>' +
+                  '<input id="playerSubtitleFile" class="hidden" type="file" accept=".vtt,.srt,.ttml,.xml,text/vtt,application/x-subrip,application/ttml+xml">' +
+                '</div>' +
+                '<div id="listSubtitle" class="player-list"></div>' +
+              '</section>' +
+              '<section id="panel-speed" class="player-panel"><div id="listSpeed" class="player-list"></div></section>' +
+              '<section id="panel-episodes" class="player-panel">' +
+                '<div class="player-episode-grid">' +
+                  '<div><h3 class="section-title">Stagioni</h3><div id="listSeasons" class="player-list"></div></div>' +
+                  '<div><h3 class="section-title">Episodi</h3><div id="listEpisodes" class="player-list"></div></div>' +
+                '</div>' +
+              '</section>' +
             '</div>' +
-          '</section>' +
+          '</div>' +
         '</div>' +
       '</div>';
 
-    metaRoot.innerHTML = '<h2 class="section-title">Metadata player</h2><ul id="playerMetaList" class="kv-list"></ul>';
+    if (metaRoot) metaRoot.innerHTML = '<h2 class="section-title">Metadata player</h2><ul id="playerMetaList" class="kv-list"></ul>';
 
     return {
       video: utils.byId('playerVideo'),
@@ -89,6 +88,8 @@
       pip: utils.byId('ctrlPip'),
       fullscreen: utils.byId('ctrlFullscreen'),
       lock: utils.byId('ctrlLock'),
+      menuBtn: utils.byId('ctrlMenu'),
+      menuDock: utils.byId('playerMenuDock'),
       favBtn: utils.byId('playerFavBtn'),
       watchBtn: utils.byId('playerWatchBtn'),
       tabs: root.querySelectorAll('.player-tab'),
@@ -172,6 +173,12 @@
       var panelId = refs.panels[i].id.replace('panel-', '');
       refs.panels[i].className = panelId === tabName ? 'player-panel is-active' : 'player-panel';
     }
+    setMenuOpen(refs, true);
+  }
+
+  function setMenuOpen(refs, open) {
+    if (!refs || !refs.menuDock) return;
+    refs.menuDock.className = open ? 'player-menu-dock is-open' : 'player-menu-dock';
   }
 
   function renderChoiceList(container, items, selectedId, itemClass) {
@@ -205,6 +212,7 @@
     setOverlay: setOverlay,
     setPlayState: setPlayState,
     setLockState: setLockState,
+    setMenuOpen: setMenuOpen,
     setProgress: setProgress,
     setActiveTab: setActiveTab,
     renderChoiceList: renderChoiceList,

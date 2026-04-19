@@ -60,14 +60,12 @@
   function actionButtons(summary, detail) {
     var id = summary.id;
     var titleLink = utils.resolvePath('html/title.html') + '?id=' + encodeURIComponent(id) + '&provider=' + encodeURIComponent(summary.provider || '');
-    var playerLink = utils.resolvePath('html/player.html') + '?id=' + encodeURIComponent(id) + '&provider=' + encodeURIComponent(summary.provider || '');
     var source = summary.sourceLink || (detail && detail.links && detail.links.source) || '';
     var isFav = store.isFavorite(id);
     var isWatch = store.isWatchlist(id);
 
     var html = '';
     html += '<a class="btn btn-primary" data-modal-action="open-page" href="' + utils.escapeHtml(titleLink) + '">Pagina titolo</a>';
-    html += '<a class="btn" href="' + utils.escapeHtml(playerLink) + '">Apri player</a>';
     if (source) html += '<a class="btn" target="_blank" rel="noopener" href="' + utils.escapeHtml(source) + '">Apri provider</a>';
     html += '<button class="btn btn-ghost" data-modal-action="favorite" data-id="' + utils.escapeHtml(id) + '">' + (isFav ? 'Rimuovi preferito' : 'Aggiungi preferito') + '</button>';
     html += '<button class="btn btn-ghost" data-modal-action="watchlist" data-id="' + utils.escapeHtml(id) + '">' + (isWatch ? 'Rimuovi watchlist' : 'Aggiungi watchlist') + '</button>';

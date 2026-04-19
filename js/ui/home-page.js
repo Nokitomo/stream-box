@@ -191,14 +191,16 @@
     return { id: rowId, title: title, items: unique };
   }
 
-  function copyWithProgress(item, percent) {
+  function copyWithProgress(item, progress) {
+    var source = progress || {};
     var clone = {};
     var key;
     for (key in item) {
       if (!Object.prototype.hasOwnProperty.call(item, key)) continue;
       clone[key] = item[key];
     }
-    clone.progressPercent = Math.max(0, Math.min(100, Number(percent) || 0));
+    clone.progressPercent = Math.max(0, Math.min(100, Number(source.percent) || 0));
+    clone.progressEpisodeLabel = utils.safeText(source.episodeLabel || '');
     return clone;
   }
 
@@ -210,7 +212,7 @@
       var progress = progressItems[i] || {};
       var summary = data.getSummaryById(progress.id);
       if (!summary) continue;
-      mapped.push(copyWithProgress(summary, progress.percent));
+      mapped.push(copyWithProgress(summary, progress));
     }
     if (!mapped.length) return null;
     return { id: rowId, title: title, items: mapped };
@@ -229,7 +231,6 @@
     }
     var source = item.sourceLink ? '<a data-tv-focus="1" class="btn" target="_blank" rel="noopener" href="' + utils.escapeHtml(item.sourceLink) + '">Apri provider</a>' : '';
     var titleUrl = utils.resolvePath('html/title.html') + '?id=' + encodeURIComponent(item.id) + '&provider=' + encodeURIComponent(item.provider || '');
-    var playerUrl = utils.resolvePath('html/player.html') + '?id=' + encodeURIComponent(item.id) + '&provider=' + encodeURIComponent(item.provider || '');
     refs.hero.innerHTML = '' +
       '<div class="hero-wrap" style="background-image:url(' + utils.escapeHtml(templates.backdrop(item.backdrop)) + ')">' +
         '<div class="hero-overlay">' +
@@ -239,7 +240,6 @@
           '<div class="hero-actions">' +
             '<button data-tv-focus="1" class="btn btn-primary" data-action="open-modal" data-id="' + utils.escapeHtml(item.id) + '">Dettagli rapidi</button>' +
             '<a data-tv-focus="1" class="btn" href="' + utils.escapeHtml(titleUrl) + '">Pagina titolo</a>' +
-            '<a data-tv-focus="1" class="btn" href="' + utils.escapeHtml(playerUrl) + '">Player</a>' +
             source +
           '</div>' +
         '</div>' +

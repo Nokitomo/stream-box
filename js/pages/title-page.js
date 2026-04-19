@@ -5,6 +5,7 @@
   var store = StreamBox.store;
   var templates = StreamBox.templates;
   var tvNav = StreamBox.tvNav;
+  var playerPage = StreamBox.playerPage;
 
   var refs = {};
 
@@ -103,7 +104,6 @@
           '</div>' +
           '<p>' + utils.escapeHtml((detail.synopsis || summary.description || '').substring(0, 1200)) + '</p>' +
           '<div class="actions-row">' +
-            '<a data-tv-focus="1" class="btn btn-primary" href="' + utils.escapeHtml(utils.resolvePath('html/player.html') + '?id=' + encodeURIComponent(summary.id) + '&provider=' + encodeURIComponent(summary.provider || '')) + '">Apri player</a>' +
             (source ? '<a data-tv-focus="1" class="btn" target="_blank" rel="noopener" href="' + utils.escapeHtml(source) + '">Apri provider</a>' : '') +
           '</div>' +
           '<div class="detail-columns">' +
@@ -115,6 +115,7 @@
 
     bindActions(summary.id);
     renderFacts(detail, summary);
+    mountInlinePlayer(summary);
     renderRelated(detail, summary.provider || '');
   }
 
@@ -137,6 +138,7 @@
 
   function renderFacts(detail, summary) {
     var list = [];
+    var extra = '';
     list.push(row('Provider: ' + (summary.provider || '-')));
     list.push(row('Tipo: ' + (detail.type || summary.type || '-')));
     list.push(row('Anno: ' + (detail.year || summary.year || '-')));
@@ -149,8 +151,6 @@
     list.push(row('Lingua ITA sub: ' + (detail.subIta ? 'Si' : 'No')));
     list.push(row('ID esterni: ' + utils.safeText(JSON.stringify(detail.ids || {}))));
 
-    refs.facts.innerHTML = '<h2 class="section-title">Dettagli tecnici</h2><ul class="kv-list">' + list.join('') + '</ul>';
-
     if (Array.isArray(detail.seasons) && detail.seasons.length) {
       var seasonRows = [];
       for (var s = 0; s < detail.seasons.length; s += 1) {
@@ -160,7 +160,7 @@
         var episodesLabel = season.episodesCount ? (' - ' + season.episodesCount + ' episodi') : '';
         seasonRows.push(row('S' + seasonNumber + ': ' + seasonName + episodesLabel));
       }
-      refs.facts.innerHTML += '<h3 class="section-title">Stagioni</h3><ul class="kv-list">' + seasonRows.join('') + '</ul>';
+      extra += '<h3 class="section-title">Stagioni</h3><ul class="kv-list">' + seasonRows.join('') + '</ul>';
     }
 
     if (detail.loadedSeason && detail.loadedSeason.episodes && detail.loadedSeason.episodes.length) {
@@ -169,8 +169,36 @@
       for (var i = 0; i < episodes.length; i += 1) {
         epRows.push(row('Ep ' + (episodes[i].number || (i + 1)) + ': ' + (episodes[i].name || 'Senza titolo')));
       }
-      refs.facts.innerHTML += '<h3 class="section-title">Episodi disponibili (S' + (detail.loadedSeason.number || 1) + ')</h3><ul class="kv-list">' + epRows.join('') + '</ul>';
+      extra += '<h3 class="section-title">Episodi disponibili (S' + (detail.loadedSeason.number || 1) + ')</h3><ul class="kv-list">' + epRows.join('') + '</ul>';
     }
+
+    refs.facts.innerHTML = '' +
+      '<div class="title-facts-layout">' +
+        '<div class="title-facts-pane">' +
+          '<h2 class="section-title">Dettagli tecnici</h2>' +
+          '<ul class="kv-list">' + list.join('') + '</ul>' +
+          extra +
+        '</div>' +
+        '<div class="title-facts-pane title-facts-player">' +
+          '<div id="titleInlinePlayerRoot"></div>' +
+          '<div id="titleInlinePlayerMeta" class="hidden"></div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function mountInlinePlayer(summary) {
+    if (!playerPage || !playerPage.mountInline) return;
+    var root = utils.byId('titleInlinePlayerRoot');
+    if (!root) return;
+    var meta = utils.byId('titleInlinePlayerMeta');
+    playerPage.mountInline(null, {
+      root: root,
+      meta: meta,
+      query: {
+        id: summary.id,
+        provider: summary.provider || ''
+      }
+    });
   }
 
   function renderRelated(detail, providerHint) {

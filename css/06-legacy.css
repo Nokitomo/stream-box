@@ -17,7 +17,8 @@
 .header-tools { -ms-flex-pack: end; justify-content: flex-end; }
 .title-layout,
 .detail-columns,
-.player-episode-grid {
+.player-episode-grid,
+.title-facts-layout {
   display: -ms-grid;
 }
 @media (min-width: 961px) {
@@ -36,6 +37,11 @@
   }
   .player-episode-grid > :first-child { -ms-grid-column: 1; }
   .player-episode-grid > :last-child { -ms-grid-column: 3; }
+  .title-facts-layout {
+    -ms-grid-columns: minmax(280px, 0.9fr) 14px minmax(0, 1.6fr);
+  }
+  .title-facts-layout > :first-child { -ms-grid-column: 1; }
+  .title-facts-layout > :last-child { -ms-grid-column: 3; }
 }
 input::-ms-clear,
 input::-ms-reveal { display: none; }

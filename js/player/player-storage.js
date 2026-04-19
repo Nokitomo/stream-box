@@ -32,13 +32,17 @@
     }
   }
 
-  function saveProgress(contentId, episodeLink, position, duration) {
+  function saveProgress(contentId, episodeLink, position, duration, meta) {
     if (!contentId || !episodeLink) return false;
+    var extras = meta && typeof meta === 'object' ? meta : {};
     var payload = {
       position: Number(position) || 0,
       duration: Number(duration) || 0,
       updatedAt: Date.now()
     };
+    if (extras.episodeTitle) payload.episodeTitle = String(extras.episodeTitle);
+    if (isFinite(Number(extras.episodeNumber))) payload.episodeNumber = Number(extras.episodeNumber);
+    if (isFinite(Number(extras.seasonNumber))) payload.seasonNumber = Number(extras.seasonNumber);
     try {
       global.localStorage.setItem(makeProgressKey(contentId, episodeLink), JSON.stringify(payload));
       return true;
