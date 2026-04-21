@@ -21,6 +21,10 @@
     var doc = global.document;
     return !!(doc.fullscreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement || doc.mozFullScreenElement);
   }
+  function fullscreenElement() {
+    var doc = global.document;
+    return doc.fullscreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement || doc.mozFullScreenElement || null;
+  }
 
   function create(options) {
     var opts = options || {};
@@ -31,6 +35,27 @@
     var onToggleFullscreen = typeof opts.onToggleFullscreen === 'function' ? opts.onToggleFullscreen : function () {};
     var hideTimer = null;
     var tapTimer = null;
+    function isPlayerFullscreen() {
+      var wrap = refs.videoWrap;
+      var fs = fullscreenElement();
+      if (!wrap || !fs) return false;
+      if (fs === wrap) return true;
+      if (wrap.contains && wrap.contains(fs)) return true;
+      return false;
+    }
+    function syncFullscreenClasses() {
+      var wrap = refs.videoWrap;
+      var root = global.document && global.document.documentElement;
+      var active = isPlayerFullscreen();
+      if (wrap) {
+        if (active) addClass(wrap, 'player-fullscreen-active');
+        else removeClass(wrap, 'player-fullscreen-active');
+      }
+      if (root) {
+        if (active) addClass(root, 'player-page-fullscreen-active');
+        else removeClass(root, 'player-page-fullscreen-active');
+      }
+    }
 
     function setChromeHidden(hidden) {
       if (!refs.videoWrap) return;
@@ -50,7 +75,8 @@
 
     function scheduleHide() {
       clearHideTimer();
-      if (!isFullscreenActive()) return setChromeHidden(false);
+      syncFullscreenClasses();
+      if (!isPlayerFullscreen()) return setChromeHidden(false);
       if (!refs.video || state.locked) return setChromeHidden(false);
       hideTimer = global.setTimeout(function () { setChromeHidden(true); }, 2400);
     }
@@ -84,7 +110,7 @@
       clearTapTimer();
       if (event && event.preventDefault) event.preventDefault();
       onToggleFullscreen();
-      onActivity();
+      global.setTimeout(onActivity, 50);
     }
 
     function onPause() { setChromeHidden(false); clearHideTimer(); }
@@ -106,6 +132,7 @@
     global.document.addEventListener('webkitfullscreenchange', onActivity);
     global.document.addEventListener('MSFullscreenChange', onActivity);
     global.document.addEventListener('mozfullscreenchange', onActivity);
+    syncFullscreenClasses();
     scheduleHide();
 
     return {
@@ -124,7 +151,10 @@
           refs.videoWrap.removeEventListener('keydown', onActivity);
           refs.videoWrap.removeEventListener('click', onActivity);
           removeClass(refs.videoWrap, 'player-chrome-hidden');
+          removeClass(refs.videoWrap, 'player-fullscreen-active');
         }
+        var root = global.document && global.document.documentElement;
+        if (root) removeClass(root, 'player-page-fullscreen-active');
         global.document.removeEventListener('fullscreenchange', onActivity);
         global.document.removeEventListener('webkitfullscreenchange', onActivity);
         global.document.removeEventListener('MSFullscreenChange', onActivity);
