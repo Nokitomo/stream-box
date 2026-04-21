@@ -9,6 +9,7 @@
   var engineFactory = StreamBox.playerEngine;
   var episodesLib = StreamBox.playerEpisodes;
   var tracksLib = StreamBox.playerTracks;
+  var seekbarLib = StreamBox.playerSeekbar;
   var storage = StreamBox.playerStorage;
   var view = StreamBox.playerView;
   var SPEEDS = [0.25, 0.5, 1, 1.25, 1.35, 1.5, 1.75, 2];
@@ -73,10 +74,11 @@
     state.qualityOptions = [];
     state.subtitleOptions = [];
     state.locked = false;
-    state.seasonLoadQueue = {};
+    state.seasonLoadQueue = {}; state.seekbar = null;
     state.engine = engineFactory.create(refs.ui.video);
     if (refs.ui.video) refs.ui.video.controls = false;
     bindCoreButtons();
+    bindSeekbar();
     bindTabs();
     bindLists();
     bindSubtitleUpload();
@@ -144,6 +146,7 @@
       refs.ui.tabs[i].onclick = function () { ui.setActiveTab(refs.ui, this.getAttribute('data-tab') || 'server'); };
     }
   }
+  function bindSeekbar() { if (state.seekbar && state.seekbar.destroy) state.seekbar.destroy(); if (!seekbarLib || !seekbarLib.create) return; state.seekbar = seekbarLib.create({ refs: refs.ui, engine: state.engine, ui: ui, isLocked: function () { return !!state.locked; } }); }
   function bindLists() {
     refs.ui.listServers.onclick = function (event) {
       if (state.locked) return;
@@ -240,10 +243,7 @@
   function bindVideoState() {
     refs.ui.video.addEventListener('pause', function () { ui.setPlayState(refs.ui, true); persistProgress(true); });
     refs.ui.video.addEventListener('play', function () { ui.setPlayState(refs.ui, false); });
-    global.addEventListener('beforeunload', function () {
-      persistProgress(true);
-      if (state.engine) state.engine.destroy();
-    });
+    global.addEventListener('beforeunload', function () { persistProgress(true); if (state.seekbar && state.seekbar.destroy) state.seekbar.destroy(); if (state.engine) state.engine.destroy(); });
   }
   function bindFavoriteButtons() {
     if (!refs.ui.favBtn || !refs.ui.watchBtn) return;

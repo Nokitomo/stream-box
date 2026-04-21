@@ -138,46 +138,21 @@
 
   function renderFacts(detail, summary) {
     var list = [];
-    var extra = '';
     list.push(row('Provider: ' + (summary.provider || '-')));
     list.push(row('Tipo: ' + (detail.type || summary.type || '-')));
     list.push(row('Anno: ' + (detail.year || summary.year || '-')));
     list.push(row('Qualita: ' + (detail.quality || '-')));
     list.push(row('Studio: ' + (detail.studio || '-')));
     list.push(row('Stato: ' + (detail.status || '-')));
-    list.push(row('Episodi: ' + (detail.episodesCount || '-')));
-    list.push(row('Stagioni: ' + (detail.seasonsCount || (detail.seasons || []).length || '-')));
     list.push(row('Lingua ITA dub: ' + (detail.dubIta || detail.dubbed ? 'Si' : 'No')));
     list.push(row('Lingua ITA sub: ' + (detail.subIta ? 'Si' : 'No')));
     list.push(row('ID esterni: ' + utils.safeText(JSON.stringify(detail.ids || {}))));
-
-    if (Array.isArray(detail.seasons) && detail.seasons.length) {
-      var seasonRows = [];
-      for (var s = 0; s < detail.seasons.length; s += 1) {
-        var season = detail.seasons[s] || {};
-        var seasonNumber = season.number || (s + 1);
-        var seasonName = season.name || ('Stagione ' + seasonNumber);
-        var episodesLabel = season.episodesCount ? (' - ' + season.episodesCount + ' episodi') : '';
-        seasonRows.push(row('S' + seasonNumber + ': ' + seasonName + episodesLabel));
-      }
-      extra += '<h3 class="section-title">Stagioni</h3><ul class="kv-list">' + seasonRows.join('') + '</ul>';
-    }
-
-    if (detail.loadedSeason && detail.loadedSeason.episodes && detail.loadedSeason.episodes.length) {
-      var episodes = detail.loadedSeason.episodes.slice(0, 30);
-      var epRows = [];
-      for (var i = 0; i < episodes.length; i += 1) {
-        epRows.push(row('Ep ' + (episodes[i].number || (i + 1)) + ': ' + (episodes[i].name || 'Senza titolo')));
-      }
-      extra += '<h3 class="section-title">Episodi disponibili (S' + (detail.loadedSeason.number || 1) + ')</h3><ul class="kv-list">' + epRows.join('') + '</ul>';
-    }
 
     refs.facts.innerHTML = '' +
       '<div class="title-facts-layout">' +
         '<div class="title-facts-pane">' +
           '<h2 class="section-title">Dettagli tecnici</h2>' +
           '<ul class="kv-list">' + list.join('') + '</ul>' +
-          extra +
         '</div>' +
         '<div class="title-facts-pane title-facts-player">' +
           '<div id="titleInlinePlayerRoot"></div>' +

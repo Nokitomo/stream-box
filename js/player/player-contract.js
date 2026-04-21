@@ -210,7 +210,7 @@
     if (!seasonsSource.length) seasonsSource = buildFallbackSeasons(raw, detail);
     for (i = 0; i < seasonsSource.length; i += 1) {
       var normalizedSeason = normalizeSeason(seasonsSource[i], i);
-      if (normalizedSeason.episodes.length) normalizedSeasons.push(normalizedSeason);
+      if (normalizedSeason.episodes.length || normalizedSeason.episodesLink || normalizedSeason.episodesCount > 0) normalizedSeasons.push(normalizedSeason);
     }
     if (!normalizedSeasons.length) normalizedSeasons = buildFallbackSeasons({}, detail);
 
