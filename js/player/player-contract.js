@@ -15,6 +15,15 @@
     return isFinite(parsed) ? parsed : fallback;
   }
 
+  function toProxyUrl(rawUrl) {
+    var source = toText(rawUrl);
+    if (!source) return '';
+    if (!/^https?:\/\//i.test(source)) return source;
+    if (source.indexOf('/api/player/proxy?') !== -1) return source;
+    var query = 'url=' + encodeURIComponent(source);
+    return '/api/player/proxy?' + query;
+  }
+
   function guessStreamType(url, declaredType) {
     var type = toText(declaredType).toLowerCase();
     var clean = toText(url).split('?')[0].split('#')[0].toLowerCase();
@@ -60,18 +69,24 @@
   function normalizeStream(stream, index) {
     var url = toText(stream && (stream.url || stream.link || stream.src));
     if (!url) return null;
+    var headers = normalizeHeaders(stream && stream.headers);
     var subtitles = [];
     var rawSubtitles = toArray(stream && (stream.subtitles || stream.textTracks));
     for (var i = 0; i < rawSubtitles.length; i += 1) {
       var normalized = normalizeSubtitle(rawSubtitles[i], i);
       if (normalized) subtitles.push(normalized);
     }
+    var proxiedUrl = toProxyUrl(url);
+    for (var s = 0; s < subtitles.length; s += 1) {
+      if (!subtitles[s] || !subtitles[s].url) continue;
+      subtitles[s].url = toProxyUrl(subtitles[s].url);
+    }
     return {
       server: toText(stream && stream.server) || ('Server ' + (index + 1)),
-      url: url,
+      url: proxiedUrl,
       type: guessStreamType(url, stream && stream.type),
       quality: toText(stream && stream.quality),
-      headers: normalizeHeaders(stream && stream.headers),
+      headers: headers,
       subtitles: subtitles
     };
   }

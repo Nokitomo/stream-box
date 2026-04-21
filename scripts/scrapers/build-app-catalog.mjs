@@ -406,7 +406,10 @@ function buildSummaryAndDetail(item, provider) {
   const poster = normalizeText(item?.poster || item?.image || item?.cover || item?.background || "");
   const backdrop = normalizeText(item?.background || item?.cover || item?.image || item?.poster || "");
   const synopsis = normalizeText(item?.synopsis || "");
-  const sourceLink = normalizeText(item?.watchLink || item?.link || "");
+  const sourceLink =
+    provider === "streamingunity"
+      ? normalizeText(item?.link || item?.watchLink || "")
+      : normalizeText(item?.watchLink || item?.link || "");
 
   const summary = {
     id,

@@ -19,7 +19,85 @@
       '&provider=' + encodeURIComponent(summary.provider || '');
   }
 
-  function mapLoadedSeason(detail) {
+  function extractTitleIdFromLink(link) {
+    var source = toText(link);
+    if (!source) return '';
+    var match = source.match(/\/(?:titles|watch|iframe)\/(\d+)/i);
+    if (match && match[1]) return match[1];
+    return '';
+  }
+
+  function buildStreamingunitySeasonLink(basePageLink, seasonNumber) {
+    var base = toText(basePageLink);
+    var number = Number(seasonNumber);
+    if (!base || !isFinite(number) || number <= 0) return '';
+    if (!/\/titles\//i.test(base)) return '';
+    var clean = base.split('?')[0].split('#')[0].replace(/\/+$/, '');
+    clean = clean.replace(/\/season-\d+$/i, '');
+    return clean + '/season-' + Math.floor(number);
+  }
+
+  function buildEpisodeLink(summary, detail, rawEpisode, index) {
+    var episode = rawEpisode || {};
+    var provider = toText(summary && summary.provider).toLowerCase();
+    var rawLink = toText(episode.link || episode.episodeLink || episode.url || episode.src);
+    if (rawLink) return rawLink;
+
+    var episodeId = toText(episode.id || episode.episodeId);
+    if (!episodeId) return 'loaded-' + (index + 1);
+
+    if (provider === 'streamingunity') {
+      var baseLink = toText(detail && detail.links && (detail.links.page || detail.links.watch || detail.links.source)) || toText(summary && summary.sourceLink);
+      var titleId = extractTitleIdFromLink(baseLink);
+      if (titleId) return titleId + '::' + episodeId;
+      return episodeId;
+    }
+    return episodeId;
+  }
+
+  function mapDetailSeasons(summary, detail) {
+    var source = detail && Array.isArray(detail.seasons) ? detail.seasons : [];
+    if (!source.length) return [];
+
+    var out = [];
+    var provider = toText(summary && summary.provider).toLowerCase();
+    var pageLink = toText(detail && detail.links && detail.links.page);
+
+    for (var i = 0; i < source.length; i += 1) {
+      var rawSeason = source[i] || {};
+      var number = toInt(rawSeason.seasonNumber || rawSeason.number, i + 1);
+      var episodesLink =
+        toText(rawSeason.episodesLink || rawSeason.link || rawSeason.episodes_url) ||
+        (provider === 'streamingunity' ? buildStreamingunitySeasonLink(pageLink, number) : '');
+
+      var rawEpisodes = Array.isArray(rawSeason.episodes) ? rawSeason.episodes : [];
+      var episodes = [];
+      for (var j = 0; j < rawEpisodes.length; j += 1) {
+        var episode = rawEpisodes[j] || {};
+        episodes.push({
+          episodeId: toText(episode.id || episode.episodeId || ('season-' + number + '-ep-' + (j + 1))),
+          title: toText(episode.title || episode.name) || ('Episode ' + (j + 1)),
+          episodeNumber: toInt(episode.episodeNumber || episode.number, j + 1),
+          link: buildEpisodeLink(summary, detail, episode, j),
+          streams: Array.isArray(episode.streams) ? episode.streams : []
+        });
+      }
+
+      if (!episodes.length && !episodesLink) continue;
+      out.push({
+        seasonId: toText(rawSeason.id || rawSeason.seasonId || ''),
+        seasonNumber: number,
+        title: toText(rawSeason.title || rawSeason.name) || ('Season ' + number),
+        episodesCount: toInt(rawSeason.episodesCount || rawSeason.episodes_count, episodes.length),
+        episodesLink: episodesLink,
+        episodes: episodes
+      });
+    }
+
+    return out;
+  }
+
+  function mapLoadedSeason(summary, detail) {
     if (!detail || !detail.loadedSeason || !Array.isArray(detail.loadedSeason.episodes)) return [];
     var episodes = [];
     for (var i = 0; i < detail.loadedSeason.episodes.length; i += 1) {
@@ -28,16 +106,25 @@
         episodeId: toText(raw.id || ('loaded-' + i)),
         title: toText(raw.name) || ('Episode ' + (i + 1)),
         episodeNumber: toInt(raw.number, i + 1),
-        link: 'loaded-' + (i + 1),
+        link: buildEpisodeLink(summary, detail, raw, i),
         streams: []
       });
+    }
+    var seasonNumber = toInt(detail.loadedSeason.number, 1);
+    var episodesLink = '';
+    if (toText(summary && summary.provider).toLowerCase() === 'streamingunity') {
+      episodesLink = buildStreamingunitySeasonLink(
+        detail && detail.links ? detail.links.page : '',
+        seasonNumber
+      );
     }
     return [
       {
         seasonId: toText(detail.loadedSeason.id || ''),
-        seasonNumber: toInt(detail.loadedSeason.number, 1),
-        title: 'Season ' + toInt(detail.loadedSeason.number, 1),
+        seasonNumber: seasonNumber,
+        title: 'Season ' + seasonNumber,
         episodesCount: episodes.length,
+        episodesLink: episodesLink,
         episodes: episodes
       }
     ];
@@ -48,7 +135,8 @@
       return detail.playerPayload;
     }
     var directStreams = Array.isArray(detail && detail.streams) ? detail.streams : [];
-    var seasons = mapLoadedSeason(detail);
+    var seasons = mapDetailSeasons(summary, detail);
+    if (!seasons.length) seasons = mapLoadedSeason(summary, detail);
     if (!seasons.length) {
       seasons = [
         {
@@ -136,6 +224,14 @@
     var query = toQuery(params || {});
     var url = utils.resolvePath(path + (query ? ('?' + query) : ''));
     return data.requestJson(url);
+  }
+
+  function toProxyUrl(rawUrl) {
+    var source = toText(rawUrl);
+    if (!source) return '';
+    if (/\/api\/player\/proxy\?/i.test(source)) return source;
+    var params = { url: source };
+    return utils.resolvePath('/api/player/proxy') + '?' + toQuery(params);
   }
 
   function fromApi(summary, detail) {
@@ -227,6 +323,16 @@
     var out = [];
     for (var i = 0; i < source.length; i += 1) {
       var normalized = contract.normalizeStream ? contract.normalizeStream(source[i], i) : source[i];
+      if (normalized && normalized.url) {
+        normalized.url = toProxyUrl(normalized.url);
+      }
+      if (normalized && Array.isArray(normalized.subtitles)) {
+        for (var j = 0; j < normalized.subtitles.length; j += 1) {
+          var subtitle = normalized.subtitles[j];
+          if (!subtitle || !subtitle.url) continue;
+          subtitle.url = toProxyUrl(subtitle.url);
+        }
+      }
       if (normalized) out.push(normalized);
     }
     return out;

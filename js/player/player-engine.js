@@ -15,6 +15,16 @@
     return 'auto';
   }
 
+  function isForbiddenHeader(name) {
+    var key = toText(name).toLowerCase();
+    if (!key) return true;
+    if (key === 'accept-charset' || key === 'accept-encoding' || key === 'access-control-request-headers' || key === 'access-control-request-method' || key === 'connection' || key === 'content-length' || key === 'cookie' || key === 'cookie2' || key === 'date' || key === 'dnt' || key === 'expect' || key === 'host' || key === 'keep-alive' || key === 'origin' || key === 'referer' || key === 'te' || key === 'trailer' || key === 'transfer-encoding' || key === 'upgrade' || key === 'via' || key === 'user-agent') {
+      return true;
+    }
+    if (key.indexOf('proxy-') === 0 || key.indexOf('sec-') === 0) return true;
+    return false;
+  }
+
   function create(videoEl) {
     var video = videoEl;
     var mode = 'none';
@@ -161,7 +171,10 @@
             var normKey = toText(key);
             var normValue = toText(headers[key]);
             if (!normKey || !normValue) continue;
-            xhr.setRequestHeader(normKey, normValue);
+            if (isForbiddenHeader(normKey)) continue;
+            try {
+              xhr.setRequestHeader(normKey, normValue);
+            } catch (_) {}
           }
         }
       });
@@ -232,8 +245,9 @@
 
       var type = detectType(stream);
       if (type === 'hls') {
-        if (supportsNativeHls()) applyNativeSource(url);
-        else applyHlsSource(stream);
+        if (global.Hls && global.Hls.isSupported && global.Hls.isSupported()) applyHlsSource(stream);
+        else if (supportsNativeHls()) applyNativeSource(url);
+        else emitError({ message: 'HLS non supportato (hls.js non disponibile e player nativo assente)', fatal: true });
       } else if (type === 'dash') {
         if (supportsNativeDash()) applyNativeSource(url);
         else applyDashSource(stream);

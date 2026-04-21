@@ -50,10 +50,30 @@
         var filename = safeText(parts[parts.length - 1]);
         if (filename) return 'https://img.animeunity.so/anime/' + filename;
       }
-      return text;
+      return proxyMediaUrl(text);
     } catch (_) {
-      return text;
+      return proxyMediaUrl(text);
     }
+  }
+
+  function shouldProxyMediaUrl(value) {
+    var text = safeText(value);
+    if (!/^https?:\/\//i.test(text)) return false;
+    try {
+      var parsed = new URL(text);
+      var host = String(parsed.hostname || '').toLowerCase();
+      return host.indexOf('streamingunity') !== -1 || host.indexOf('vixcloud') !== -1;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function proxyMediaUrl(value) {
+    var text = safeText(value);
+    if (!text) return '';
+    if (!shouldProxyMediaUrl(text)) return text;
+    if (text.indexOf('/api/player/proxy?') !== -1) return text;
+    return '/api/player/proxy?url=' + encodeURIComponent(text);
   }
 
   function isPlaceholderImage(input) {
@@ -158,6 +178,7 @@
     basePath: basePath,
     normalizeImageUrl: normalizeImageUrl,
     isPlaceholderImage: isPlaceholderImage,
-    pickImage: pickImage
+    pickImage: pickImage,
+    proxyMediaUrl: proxyMediaUrl
   };
 })(window);

@@ -218,25 +218,57 @@ function extractEmbedUrl(watchHtml, baseUrl) {
 }
 
 async function fetchTitlePage(baseUrl, titleId, slug, inputLink) {
+  const queue = [];
+  const seen = new Set();
   const preferredUrl = normalizeText(inputLink || "");
-  const candidates = [];
-  if (preferredUrl) candidates.push(resolveUrl(baseUrl, preferredUrl));
-  candidates.push(buildLocaleUrl(buildTitlePath(titleId, slug), baseUrl));
-  candidates.push(buildLocaleUrl(`/titles/${titleId}`, baseUrl));
 
+  function enqueue(url) {
+    const normalized = normalizeText(url || "");
+    if (!normalized || seen.has(normalized)) return;
+    seen.add(normalized);
+    queue.push(normalized);
+  }
+
+  if (preferredUrl) enqueue(resolveUrl(baseUrl, preferredUrl));
+  enqueue(buildLocaleUrl(buildTitlePath(titleId, slug), baseUrl));
+  enqueue(buildLocaleUrl(`/titles/${titleId}`, baseUrl));
+  enqueue(buildLocaleUrl(`/watch/${titleId}`, baseUrl));
+
+  let fallbackPage = null;
   let lastError = null;
-  for (const url of candidates) {
+
+  while (queue.length) {
+    const url = queue.shift();
     if (!url) continue;
+
     try {
       const html = await fetchHtml(url, buildLocaleUrl("/archive", baseUrl));
       const page = extractDataPage(html);
-      if (page && page.props && page.props.title) {
-        return { html, page, url };
+      const title = page && page.props ? page.props.title : null;
+      if (!title) continue;
+
+      const isTv = String(title.type || "").toLowerCase() === "tv";
+      const hasSeasons = Array.isArray(title.seasons) && title.seasons.length > 0;
+      const loadedSeasonEpisodes = page && page.props && page.props.loadedSeason
+        ? page.props.loadedSeason.episodes
+        : null;
+      const hasLoadedEpisodes = Array.isArray(loadedSeasonEpisodes) && loadedSeasonEpisodes.length > 0;
+      const looksComplete = !isTv || hasSeasons || hasLoadedEpisodes;
+
+      if (looksComplete) return { html, page, url };
+
+      if (!fallbackPage) fallbackPage = { html, page, url };
+
+      const derivedSlug = resolveTitleSlug(title);
+      if (derivedSlug) {
+        enqueue(buildLocaleUrl(buildTitlePath(titleId, derivedSlug), baseUrl));
       }
     } catch (error) {
       lastError = error;
     }
   }
+
+  if (fallbackPage) return fallbackPage;
   throw lastError || new Error("StreamingUnity title page not found");
 }
 
