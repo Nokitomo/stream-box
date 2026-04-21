@@ -110,8 +110,19 @@
 
   function setRuntimeStatus(refs, message, tone) {
     if (!refs.runtimeStatus) return;
-    refs.runtimeStatus.className = 'badge badge-' + (tone || 'neutral');
+    if (refs.runtimeStatusTimer) {
+      global.clearTimeout(refs.runtimeStatusTimer);
+      refs.runtimeStatusTimer = null;
+    }
+    var safeTone = tone || 'neutral';
+    refs.runtimeStatus.className = 'badge badge-' + safeTone;
     refs.runtimeStatus.innerHTML = escape(message || '');
+    if (safeTone !== 'error' && message) {
+      refs.runtimeStatusTimer = global.setTimeout(function () {
+        if (!refs.runtimeStatus) return;
+        refs.runtimeStatus.className = 'badge badge-' + safeTone + ' is-hidden';
+      }, safeTone === 'warn' ? 2600 : 1800);
+    }
   }
 
   function setOverlay(refs, message, actionLabel, actionId) {

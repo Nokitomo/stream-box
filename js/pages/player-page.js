@@ -9,6 +9,7 @@
   var engineFactory = StreamBox.playerEngine;
   var episodesLib = StreamBox.playerEpisodes;
   var tracksLib = StreamBox.playerTracks;
+  var shellFxLib = StreamBox.playerShellFx;
   var seekbarLib = StreamBox.playerSeekbar;
   var storage = StreamBox.playerStorage;
   var view = StreamBox.playerView;
@@ -74,11 +75,12 @@
     state.qualityOptions = [];
     state.subtitleOptions = [];
     state.locked = false;
-    state.seasonLoadQueue = {}; state.seekbar = null; state.videoTapTimer = null;
+    state.seasonLoadQueue = {}; state.seekbar = null; state.shellFx = null;
     state.engine = engineFactory.create(refs.ui.video);
     if (refs.ui.video) refs.ui.video.controls = false;
     bindCoreButtons();
     bindSeekbar();
+    bindShellFx();
     bindTabs();
     bindLists();
     bindSubtitleUpload();
@@ -142,6 +144,7 @@
     }
   }
   function bindTabs() { for (var i = 0; i < refs.ui.tabs.length; i += 1) refs.ui.tabs[i].onclick = function () { ui.setActiveTab(refs.ui, this.getAttribute('data-tab') || 'server'); }; }
+  function bindShellFx() { if (state.shellFx && state.shellFx.destroy) state.shellFx.destroy(); if (!shellFxLib || !shellFxLib.create) return; state.shellFx = shellFxLib.create({ refs: refs.ui, state: state, ui: ui, engine: state.engine, onToggleFullscreen: toggleFullscreen }); }
   function bindSeekbar() { if (state.seekbar && state.seekbar.destroy) state.seekbar.destroy(); if (!seekbarLib || !seekbarLib.create) return; state.seekbar = seekbarLib.create({ refs: refs.ui, engine: state.engine, ui: ui, isLocked: function () { return !!state.locked; } }); }
   function bindLists() {
     refs.ui.listServers.onclick = function (event) {
@@ -239,9 +242,7 @@
   function bindVideoState() {
     refs.ui.video.addEventListener('pause', function () { ui.setPlayState(refs.ui, true); persistProgress(true); });
     refs.ui.video.addEventListener('play', function () { ui.setPlayState(refs.ui, false); });
-    refs.ui.video.addEventListener('click', function () { if (state.locked) return; if (state.videoTapTimer) global.clearTimeout(state.videoTapTimer); state.videoTapTimer = global.setTimeout(function () { state.videoTapTimer = null; state.engine.togglePlayPause(); ui.setPlayState(refs.ui, state.engine.isPaused()); }, 210); });
-    refs.ui.video.addEventListener('dblclick', function (event) { if (state.locked) return; if (state.videoTapTimer) { global.clearTimeout(state.videoTapTimer); state.videoTapTimer = null; } if (event && event.preventDefault) event.preventDefault(); toggleFullscreen(); });
-    global.addEventListener('beforeunload', function () { persistProgress(true); if (state.videoTapTimer) { global.clearTimeout(state.videoTapTimer); state.videoTapTimer = null; } if (state.seekbar && state.seekbar.destroy) state.seekbar.destroy(); if (state.engine) state.engine.destroy(); });
+    global.addEventListener('beforeunload', function () { persistProgress(true); if (state.shellFx && state.shellFx.destroy) state.shellFx.destroy(); if (state.seekbar && state.seekbar.destroy) state.seekbar.destroy(); if (state.engine) state.engine.destroy(); });
   }
   function bindFavoriteButtons() {
     if (!refs.ui.favBtn || !refs.ui.watchBtn) return;
