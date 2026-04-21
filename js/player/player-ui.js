@@ -73,6 +73,7 @@
     if (metaRoot) metaRoot.innerHTML = '<h2 class="section-title">Metadata player</h2><ul id="playerMetaList" class="kv-list"></ul>';
 
     return {
+      videoWrap: root.querySelector('.player-video-wrap'),
       video: utils.byId('playerVideo'),
       overlay: utils.byId('playerOverlay'),
       runtimeStatus: utils.byId('playerRuntimeStatus'),
