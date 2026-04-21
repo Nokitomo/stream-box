@@ -39,6 +39,98 @@ async function resolveBaseUrl() {
   return normalizeBaseUrl(resolved || DEFAULT_BASE_URL) || DEFAULT_BASE_URL;
 }
 
+function mediaTypeFromUrl(url) {
+  const clean = normalizeText(url || "").split("?")[0].split("#")[0].toLowerCase();
+  if (!clean) return "";
+  if (clean.endsWith(".m3u8")) return "m3u8";
+  if (clean.endsWith(".mpd")) return "mpd";
+  if (clean.endsWith(".mp4")) return "mp4";
+  return "";
+}
+
+function mediaTypeFromContentType(contentType) {
+  const value = normalizeText(contentType || "").toLowerCase();
+  if (!value) return "";
+  if (
+    value.includes("application/vnd.apple.mpegurl") ||
+    value.includes("application/x-mpegurl") ||
+    value.includes("audio/mpegurl")
+  ) {
+    return "m3u8";
+  }
+  if (value.includes("application/dash+xml")) return "mpd";
+  if (value.includes("video/") || value.includes("application/octet-stream")) return "mp4";
+  return "";
+}
+
+function inferMediaType(url, contentType) {
+  return mediaTypeFromUrl(url) || mediaTypeFromContentType(contentType) || "";
+}
+
+function buildProbeHeaders(referer) {
+  const headers = {
+    accept: "*/*",
+  };
+  const safeReferer = normalizeText(referer || "");
+  if (safeReferer) {
+    headers.referer = safeReferer;
+    try {
+      headers.origin = new URL(safeReferer).origin;
+    } catch {
+      // ignore invalid URL
+    }
+  }
+  return headers;
+}
+
+async function resolvePlayableDownloadStream(rawUrl, referer) {
+  const candidate = normalizeUrl(rawUrl || "");
+  if (!candidate || !/^https?:\/\//i.test(candidate)) return null;
+
+  const directType = mediaTypeFromUrl(candidate);
+  if (directType) {
+    return {
+      link: candidate,
+      type: directType,
+    };
+  }
+
+  const probeHeaders = buildProbeHeaders(referer || candidate);
+  const probes = [
+    { method: "HEAD", extraHeaders: {} },
+    { method: "GET", extraHeaders: { range: "bytes=0-1" } },
+  ];
+
+  for (const probe of probes) {
+    try {
+      const response = await client.request({
+        url: candidate,
+        method: probe.method,
+        headers: {
+          ...probeHeaders,
+          ...probe.extraHeaders,
+        },
+        timeout: 12000,
+      });
+      const status = Number(response.statusCode) || 0;
+      if (status < 200 || status >= 400) continue;
+
+      const finalUrl = normalizeUrl(response.url || candidate);
+      const type = inferMediaType(finalUrl, response.headers && response.headers["content-type"]);
+      if (!type) continue;
+
+      return {
+        link: finalUrl || candidate,
+        type,
+      };
+    } catch {
+      // try next probe
+    }
+  }
+
+  return null;
+}
+
 function extractAnimeId(link, contentId) {
   const source = normalizeText(link || "");
   if (source) {
@@ -374,15 +466,17 @@ export async function getAnimeunityStreams({ link }) {
       serverPrefix: "AnimeUnity",
     });
     const downloadUrl = extractDownloadUrl(pageHtml);
-    if (downloadUrl) {
-      const type = downloadUrl.toLowerCase().includes(".m3u8") ? "m3u8" : "mp4";
+    const downloadStreamInfo = downloadUrl
+      ? await resolvePlayableDownloadStream(downloadUrl, embedUrl)
+      : null;
+    if (downloadStreamInfo) {
       const downloadStream = {
         server: "AnimeUnity Download",
-        link: downloadUrl,
-        type,
+        link: downloadStreamInfo.link,
+        type: downloadStreamInfo.type,
         headers: buildStreamHeaders(embedUrl, USER_AGENT),
       };
-      if (streams.length && !streams.find((entry) => entry.link === downloadUrl)) {
+      if (streams.length && !streams.find((entry) => entry.link === downloadStreamInfo.link)) {
         return [...streams, downloadStream];
       }
       return streams.length ? streams : [downloadStream];
@@ -391,12 +485,15 @@ export async function getAnimeunityStreams({ link }) {
   }
 
   const directUrl = extractDownloadUrl(pageHtml);
-  if (!directUrl) return [];
+  const directStreamInfo = directUrl
+    ? await resolvePlayableDownloadStream(directUrl, embedUrl)
+    : null;
+  if (!directStreamInfo) return [];
   return [
     {
       server: "AnimeUnity",
-      link: directUrl,
-      type: directUrl.toLowerCase().includes(".m3u8") ? "m3u8" : "mp4",
+      link: directStreamInfo.link,
+      type: directStreamInfo.type,
       headers: buildStreamHeaders(embedUrl, USER_AGENT),
     },
   ];

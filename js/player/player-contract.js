@@ -15,12 +15,33 @@
     return isFinite(parsed) ? parsed : fallback;
   }
 
-  function toProxyUrl(rawUrl) {
+  function encodeProxyHeaders(headers) {
+    if (!headers || typeof headers !== 'object') return '';
+    var payload = {};
+    var key;
+    for (key in headers) {
+      if (!Object.prototype.hasOwnProperty.call(headers, key)) continue;
+      var normKey = toText(key);
+      var normValue = toText(headers[key]);
+      if (!normKey || !normValue) continue;
+      payload[normKey] = normValue;
+    }
+    if (!Object.keys(payload).length) return '';
+    try {
+      return JSON.stringify(payload);
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function toProxyUrl(rawUrl, headers) {
     var source = toText(rawUrl);
     if (!source) return '';
     if (!/^https?:\/\//i.test(source)) return source;
     if (source.indexOf('/api/player/proxy?') !== -1) return source;
     var query = 'url=' + encodeURIComponent(source);
+    var encodedHeaders = encodeProxyHeaders(headers);
+    if (encodedHeaders) query += '&headers=' + encodeURIComponent(encodedHeaders);
     return '/api/player/proxy?' + query;
   }
 
@@ -76,10 +97,10 @@
       var normalized = normalizeSubtitle(rawSubtitles[i], i);
       if (normalized) subtitles.push(normalized);
     }
-    var proxiedUrl = toProxyUrl(url);
+    var proxiedUrl = toProxyUrl(url, headers);
     for (var s = 0; s < subtitles.length; s += 1) {
       if (!subtitles[s] || !subtitles[s].url) continue;
-      subtitles[s].url = toProxyUrl(subtitles[s].url);
+      subtitles[s].url = toProxyUrl(subtitles[s].url, headers);
     }
     return {
       server: toText(stream && stream.server) || ('Server ' + (index + 1)),

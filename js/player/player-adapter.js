@@ -226,11 +226,32 @@
     return data.requestJson(url);
   }
 
-  function toProxyUrl(rawUrl) {
+  function encodeProxyHeaders(headers) {
+    if (!headers || typeof headers !== 'object') return '';
+    var payload = {};
+    var key;
+    for (key in headers) {
+      if (!Object.prototype.hasOwnProperty.call(headers, key)) continue;
+      var normKey = toText(key);
+      var normValue = toText(headers[key]);
+      if (!normKey || !normValue) continue;
+      payload[normKey] = normValue;
+    }
+    if (!Object.keys(payload).length) return '';
+    try {
+      return JSON.stringify(payload);
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function toProxyUrl(rawUrl, headers) {
     var source = toText(rawUrl);
     if (!source) return '';
     if (/\/api\/player\/proxy\?/i.test(source)) return source;
     var params = { url: source };
+    var encodedHeaders = encodeProxyHeaders(headers);
+    if (encodedHeaders) params.headers = encodedHeaders;
     return utils.resolvePath('/api/player/proxy') + '?' + toQuery(params);
   }
 
@@ -324,13 +345,13 @@
     for (var i = 0; i < source.length; i += 1) {
       var normalized = contract.normalizeStream ? contract.normalizeStream(source[i], i) : source[i];
       if (normalized && normalized.url) {
-        normalized.url = toProxyUrl(normalized.url);
+        normalized.url = toProxyUrl(normalized.url, normalized.headers);
       }
       if (normalized && Array.isArray(normalized.subtitles)) {
         for (var j = 0; j < normalized.subtitles.length; j += 1) {
           var subtitle = normalized.subtitles[j];
           if (!subtitle || !subtitle.url) continue;
-          subtitle.url = toProxyUrl(subtitle.url);
+          subtitle.url = toProxyUrl(subtitle.url, normalized.headers);
         }
       }
       if (normalized) out.push(normalized);
