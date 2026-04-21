@@ -45,6 +45,10 @@
     return '/api/player/proxy?' + query;
   }
 
+  function shouldBypassProxy(server) {
+    return /download/i.test(toText(server));
+  }
+
   function guessStreamType(url, declaredType) {
     var type = toText(declaredType).toLowerCase();
     var clean = toText(url).split('?')[0].split('#')[0].toLowerCase();
@@ -97,13 +101,15 @@
       var normalized = normalizeSubtitle(rawSubtitles[i], i);
       if (normalized) subtitles.push(normalized);
     }
-    var proxiedUrl = toProxyUrl(url, headers);
+    var serverName = toText(stream && stream.server) || ('Server ' + (index + 1));
+    var bypassProxy = shouldBypassProxy(serverName);
+    var proxiedUrl = bypassProxy ? url : toProxyUrl(url, headers);
     for (var s = 0; s < subtitles.length; s += 1) {
       if (!subtitles[s] || !subtitles[s].url) continue;
-      subtitles[s].url = toProxyUrl(subtitles[s].url, headers);
+      subtitles[s].url = bypassProxy ? subtitles[s].url : toProxyUrl(subtitles[s].url, headers);
     }
     return {
-      server: toText(stream && stream.server) || ('Server ' + (index + 1)),
+      server: serverName,
       url: proxiedUrl,
       type: guessStreamType(url, stream && stream.type),
       quality: toText(stream && stream.quality),
