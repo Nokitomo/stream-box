@@ -2,7 +2,8 @@ import http from "node:http";
 import https from "node:https";
 import dns from "node:dns";
 import { URL } from "node:url";
-import { badRequest, json } from "../_lib/common.mjs";
+import { badRequest, getClientIp, json, logEvent } from "../_lib/common.mjs";
+import { consumeRateLimit } from "../_lib/rate-limit.mjs";
 
 const DNS_SERVERS = ["1.1.1.1", "1.0.0.1"];
 const MAX_REDIRECTS = 5;
@@ -269,6 +270,30 @@ export default async function handler(req, res) {
     return json(res, 405, { ok: false, error: "Method not allowed" });
   }
 
+  const startedAt = Date.now();
+  const clientIp = getClientIp(req);
+  const rate = consumeRateLimit({
+    scope: "player-proxy",
+    identity: clientIp,
+    limit: 90,
+    windowMs: 60_000,
+  });
+  res.setHeader("X-RateLimit-Limit", String(rate.limit));
+  res.setHeader("X-RateLimit-Remaining", String(rate.remaining));
+  res.setHeader("X-RateLimit-Reset", String(rate.resetAt));
+  if (!rate.allowed) {
+    logEvent("player_proxy_rate_limited", {
+      ip: clientIp,
+      path: req.url || "",
+    });
+    return json(
+      res,
+      429,
+      { ok: false, error: "Too many requests" },
+      { cacheControl: "no-store" }
+    );
+  }
+
   const urlObj = new URL(req.url || "/", "http://localhost");
   const targetUrl = normalizeText(urlObj.searchParams.get("url"));
   if (!targetUrl) return badRequest(res, "Parametro url mancante");
@@ -298,6 +323,12 @@ export default async function handler(req, res) {
     if (!shouldHandleAsManifest) {
       res.statusCode = statusCode;
       copyHeadersToClient(response.headers, res, false);
+      logEvent("player_proxy_passthrough", {
+        ip: clientIp,
+        statusCode,
+        elapsedMs: Date.now() - startedAt,
+        targetHost: new URL(finalUrl).hostname,
+      });
       response.pipe(res);
       return;
     }
@@ -312,15 +343,33 @@ export default async function handler(req, res) {
       if (!res.getHeader("content-type")) {
         res.setHeader("content-type", "application/vnd.apple.mpegurl; charset=utf-8");
       }
+      logEvent("player_proxy_manifest_rewrite", {
+        ip: clientIp,
+        statusCode,
+        elapsedMs: Date.now() - startedAt,
+        targetHost: new URL(finalUrl).hostname,
+        bytesIn: Buffer.byteLength(raw, "utf8"),
+        bytesOut: Buffer.byteLength(rewritten, "utf8"),
+      });
       res.end(rewritten);
     });
     response.on("error", (error) => {
+      logEvent("player_proxy_upstream_stream_error", {
+        ip: clientIp,
+        elapsedMs: Date.now() - startedAt,
+        message: normalizeText(error?.message || error),
+      });
       json(res, 502, {
         ok: false,
         error: normalizeText(error && (error.message || error)) || "Upstream stream error",
       });
     });
   } catch (error) {
+    logEvent("player_proxy_error", {
+      ip: clientIp,
+      elapsedMs: Date.now() - startedAt,
+      message: normalizeText(error?.message || error),
+    });
     json(res, 502, {
       ok: false,
       error: normalizeText(error && (error.message || error)) || "Proxy stream error",

@@ -91,10 +91,10 @@ export function getQueryParam(req, key) {
   }
 }
 
-export function json(res, statusCode, payload) {
+export function json(res, statusCode, payload, options = {}) {
   res.statusCode = statusCode;
   res.setHeader("Content-Type", "application/json; charset=utf-8");
-  res.setHeader("Cache-Control", "no-store");
+  res.setHeader("Cache-Control", options.cacheControl || "no-store");
   res.end(`${JSON.stringify(payload)}\n`);
 }
 
@@ -111,4 +111,27 @@ export function internalError(res, error) {
     ok: false,
     error: message,
   });
+}
+
+export function getClientIp(req) {
+  const headers = req && req.headers ? req.headers : {};
+  const xff = headers["x-forwarded-for"];
+  if (typeof xff === "string" && xff.trim()) {
+    return xff.split(",")[0].trim();
+  }
+  const realIp = headers["x-real-ip"];
+  if (typeof realIp === "string" && realIp.trim()) {
+    return realIp.trim();
+  }
+  const socketAddress = req && req.socket ? req.socket.remoteAddress : "";
+  return normalizeText(socketAddress || "unknown");
+}
+
+export function logEvent(name, payload = {}) {
+  const record = {
+    ts: new Date().toISOString(),
+    event: normalizeText(name || "event"),
+    ...payload,
+  };
+  console.log(JSON.stringify(record));
 }
