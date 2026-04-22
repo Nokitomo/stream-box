@@ -1,58 +1,12 @@
 <!doctype html>
 <html lang="it">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>StreamBox Catalog</title>
-  <meta name="description" content="Catalogo streaming personale basato su StreamingUnity e AnimeUnity.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/app.css">
-</head>
-<body>
-  <div class="app-shell">
-    <header class="page-header">
-      <div class="container header-inner">
-        <a class="brand" href="index.html">STREAMBOX</a>
-        <div class="category-menu" id="categoryMenuWrap">
-          <button data-tv-focus="1" class="btn btn-sm" id="categoryMenuToggle" type="button" aria-haspopup="true" aria-expanded="false">Categorie</button>
-          <div class="category-menu-panel hidden" id="categoryMenuPanel" role="menu" aria-label="Categorie home"></div>
-        </div>
-        <a data-tv-focus="1" class="btn btn-sm" href="html/search.html">Cerca</a>
-      </div>
-    </header>
-
-    <main class="container main-content">
-      <p id="homeStatus" class="badge hidden" aria-live="polite"></p>
-
-      <section id="heroMount" class="hero" aria-live="polite"></section>
-
-      <section class="rails" id="railsMount" aria-live="polite"></section>
-    </main>
-  </div>
-
-  <div id="titleModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Dettagli titolo">
-    <div id="titleModalMask" class="modal-mask"></div>
-    <div class="modal-body">
-      <div id="titleModalContent" class="modal-content"></div>
-    </div>
-  </div>
-
-  <script src="js/compat/polyfills.js"></script>
-  <script src="js/core/utils.js"></script>
-  <script src="js/state/storage.js"></script>
-  <script src="js/state/url-state.js"></script>
-  <script src="js/data/catalog-loader.js"></script>
-  <script src="js/state/category-taxonomy.js"></script>
-  <script src="js/state/home-sections.js"></script>
-  <script src="js/state/catalog-engine.js"></script>
-  <script src="js/state/store.js"></script>
-  <script src="js/ui/templates.js"></script>
-  <script src="js/ui/tv-nav.js"></script>
-  <script src="js/ui/modal.js"></script>
-  <script src="js/ui/home-page.js"></script>
-  <script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vega Web Clone</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
