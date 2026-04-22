@@ -9,6 +9,17 @@ import {
 import { consumeRateLimit } from "../_lib/rate-limit.mjs";
 import { loadCatalogIndex, loadDetailById } from "../_lib/data-catalog.mjs";
 
+function requestOrigin(req) {
+  const proto =
+    String(req?.headers?.["x-forwarded-proto"] || "").split(",")[0].trim() || "https";
+  const host =
+    String(req?.headers?.["x-forwarded-host"] || req?.headers?.host || "")
+      .split(",")[0]
+      .trim();
+  if (!host) return "";
+  return `${proto}://${host}`;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     return json(res, 405, { ok: false, error: "Method not allowed" });
@@ -38,7 +49,15 @@ export default async function handler(req, res) {
   if (!contentId) return badRequest(res, "Parametro contentId mancante");
 
   try {
-    const [detail, index] = await Promise.all([loadDetailById(contentId), loadCatalogIndex()]);
+    const origin = requestOrigin(req);
+    if (!origin) {
+      return json(res, 500, { ok: false, error: "Origin non disponibile" }, { cacheControl: "no-store" });
+    }
+
+    const [detail, index] = await Promise.all([
+      loadDetailById(contentId, origin),
+      loadCatalogIndex(origin),
+    ]);
     if (!detail) {
       return json(res, 404, { ok: false, error: "Contenuto non trovato" }, { cacheControl: "no-store" });
     }

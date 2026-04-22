@@ -9,6 +9,17 @@ import {
 import { consumeRateLimit } from "../_lib/rate-limit.mjs";
 import { loadEpisodesBySeason } from "../_lib/data-catalog.mjs";
 
+function requestOrigin(req) {
+  const proto =
+    String(req?.headers?.["x-forwarded-proto"] || "").split(",")[0].trim() || "https";
+  const host =
+    String(req?.headers?.["x-forwarded-host"] || req?.headers?.host || "")
+      .split(",")[0]
+      .trim();
+  if (!host) return "";
+  return `${proto}://${host}`;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     return json(res, 405, { ok: false, error: "Method not allowed" });
@@ -40,7 +51,12 @@ export default async function handler(req, res) {
   if (!seasonKey) return badRequest(res, "Parametro seasonKey mancante");
 
   try {
-    const season = await loadEpisodesBySeason(contentId, seasonKey);
+    const origin = requestOrigin(req);
+    if (!origin) {
+      return json(res, 500, { ok: false, error: "Origin non disponibile" }, { cacheControl: "no-store" });
+    }
+
+    const season = await loadEpisodesBySeason(contentId, seasonKey, origin);
     if (!season) {
       return json(
         res,
