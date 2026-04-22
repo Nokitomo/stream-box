@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "version": "20260422152327",
+  "generatedAt": "2026-04-22T15:23:27.185Z",
+  "datasets": {
+    "catalogIndex": "data/app/catalog-index.json",
+    "searchIndex": "data/app/search-index.json",
+    "episodesIndex": "data/app/episodes-index.json"
+  },
+  "counts": {
+    "totalItems": 23648,
+    "detailChunks": 79,
+    "searchEntries": 23648,
+    "episodeSeasons": 28861
+  }
+}

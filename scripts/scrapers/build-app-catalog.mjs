@@ -1,7 +1,15 @@
 #!/usr/bin/env node
 import fs from "node:fs/promises";
 import path from "node:path";
-import { parseCliArgs, toInt, normalizeText, toFloat, writeJsonAtomic } from "./shared.mjs";
+import {
+  parseCliArgs,
+  toInt,
+  normalizeText,
+  toFloat,
+  uniqueBy,
+  writeJsonAtomic,
+  writeShardedJson,
+} from "./shared.mjs";
 
 const args = parseCliArgs(process.argv.slice(2));
 const nowYear = new Date().getFullYear();
@@ -37,6 +45,7 @@ const config = {
   ],
   outDir: path.resolve(process.cwd(), String(args["out-dir"] || "data/app")),
   detailShardSize: Math.max(50, toInt(args["detail-shard-size"], 300)),
+  episodesShardSize: Math.max(50, toInt(args["episodes-shard-size"], 240)),
   maxItemsPerRow: Math.max(20, toInt(args["max-items-row"], 120)),
 };
 
@@ -369,6 +378,89 @@ function computeRows(type, genres, isNew, provider) {
   return [...rows];
 }
 
+function splitProviderLocalId(contentId) {
+  const text = normalizeText(contentId || "");
+  const dash = text.indexOf("-");
+  if (dash <= 0) {
+    return { provider: "", localId: text };
+  }
+  return {
+    provider: text.slice(0, dash),
+    localId: text.slice(dash + 1),
+  };
+}
+
+function buildAnimeUnityPlayback(item, detailId) {
+  const { localId } = splitProviderLocalId(detailId);
+  const episodesCount = Number(item?.episodesCount) || 0;
+  const linkList = [];
+  const rangeSize = 120;
+  if (episodesCount > 0 && localId) {
+    let start = 1;
+    let seasonNumber = 1;
+    while (start <= episodesCount) {
+      const end = Math.min(start + rangeSize - 1, episodesCount);
+      linkList.push({
+        title: `Episodes ${start}-${end}`,
+        seasonNumber,
+        seasonKey: `range-${start}-${end}`,
+        availabilityStatus: "available",
+        episodesLink: `${localId}|${start}|${end}`,
+      });
+      seasonNumber += 1;
+      start = end + 1;
+    }
+  } else if (localId) {
+    linkList.push({
+      title: "Episodes",
+      seasonNumber: 1,
+      seasonKey: "default",
+      availabilityStatus: "available",
+      episodesLink: localId,
+    });
+  }
+  return {
+    linkList,
+    defaultSeasonKey: linkList[0]?.seasonKey || undefined,
+  };
+}
+
+function buildStreamingUnityPlayback(item, pageLink, watchLink) {
+  const linkList = [];
+  const seasons = Array.isArray(item?.seasons) ? item.seasons : [];
+  const sorted = [...seasons].sort((a, b) => Number(a?.number || 0) - Number(b?.number || 0));
+  for (const season of sorted) {
+    const seasonNumber = Number(season?.number || 0);
+    if (!seasonNumber || !pageLink) continue;
+    const seasonName = normalizeText(season?.name || "") || `Season ${seasonNumber}`;
+    linkList.push({
+      title: seasonName,
+      seasonNumber,
+      seasonKey: `season-${seasonNumber}`,
+      availabilityStatus: "available",
+      episodesLink: `${pageLink}/season-${seasonNumber}`,
+    });
+  }
+  if (linkList.length === 0) {
+    linkList.push({
+      title: "Play",
+      seasonKey: "movie",
+      availabilityStatus: "available",
+      directLinks: [
+        {
+          title: "Play",
+          link: watchLink || pageLink || "",
+          type: "movie",
+        },
+      ],
+    });
+  }
+  return {
+    linkList,
+    defaultSeasonKey: linkList[0]?.seasonKey || undefined,
+  };
+}
+
 function buildSummaryAndDetail(item, provider) {
   const title = normalizeText(item?.title || "");
   if (!title) return null;
@@ -428,8 +520,8 @@ function buildSummaryAndDetail(item, provider) {
     rank: 0,
     progress: 0,
     rows,
-    poster: poster || "assets/poster-fallback.svg",
-    backdrop: backdrop || "assets/backdrop-fallback.svg",
+    poster: poster || "",
+    backdrop: backdrop || "",
     score,
     views,
     dailyViews,
@@ -437,6 +529,13 @@ function buildSummaryAndDetail(item, provider) {
     sourceLink,
     detailChunk: "",
   };
+
+  const pageLink = normalizeText(item?.link || "");
+  const watchLink = normalizeText(item?.watchLink || "");
+  const playback =
+    provider === "animeunity"
+      ? buildAnimeUnityPlayback(item, id)
+      : buildStreamingUnityPlayback(item, pageLink, watchLink);
 
   const detail = {
     id,
@@ -475,18 +574,110 @@ function buildSummaryAndDetail(item, provider) {
       logo: normalizeText(item?.logo || "") || undefined,
     },
     links: {
-      page: normalizeText(item?.link || "") || undefined,
-      watch: normalizeText(item?.watchLink || "") || undefined,
+      page: pageLink || undefined,
+      watch: watchLink || undefined,
       source: sourceLink || undefined,
     },
     related: Array.isArray(item?.related) ? item.related : [],
     seasons: Array.isArray(item?.seasons) ? item.seasons : [],
     loadedSeason:
       item?.loadedSeason && typeof item.loadedSeason === "object" ? item.loadedSeason : undefined,
+    playback,
     raw: item?.raw,
   };
 
   return { summary, detail };
+}
+
+function buildEpisodesSeasonItems(detail) {
+  const out = [];
+  const playbackLinks = Array.isArray(detail?.playback?.linkList) ? detail.playback.linkList : [];
+  const localId = splitProviderLocalId(detail.id).localId;
+  const loadedSeason = detail?.loadedSeason && typeof detail.loadedSeason === "object" ? detail.loadedSeason : null;
+  const loadedNumber = Number(loadedSeason?.number || 0) || undefined;
+  const loadedEpisodes = Array.isArray(loadedSeason?.episodes) ? loadedSeason.episodes : [];
+
+  for (const link of playbackLinks) {
+    const seasonNumber = Number(link?.seasonNumber || 0) || undefined;
+    const seasonKey = normalizeText(link?.seasonKey || link?.episodesLink || link?.title || "");
+    if (!seasonKey) continue;
+
+    let episodes = [];
+    if (Array.isArray(link?.directLinks) && link.directLinks.length > 0) {
+      episodes = link.directLinks.map((episode, index) => ({
+        title: normalizeText(episode?.title || `Episode ${index + 1}`),
+        episodeNumber: Number(episode?.episodeNumber || index + 1) || index + 1,
+        seasonNumber,
+        link: normalizeText(episode?.link || ""),
+      }));
+    } else if (
+      detail.provider === "streamingunity" &&
+      loadedNumber &&
+      seasonNumber &&
+      loadedNumber === seasonNumber &&
+      loadedEpisodes.length > 0
+    ) {
+      episodes = loadedEpisodes
+        .map((episode, index) => {
+          const episodeId = normalizeText(episode?.id || "");
+          if (!episodeId || !localId) return null;
+          const episodeTitle = normalizeText(episode?.name || "") || `Episode ${episode?.number || index + 1}`;
+          return {
+            title: episodeTitle,
+            episodeNumber: Number(episode?.number || index + 1) || index + 1,
+            seasonNumber,
+            link: `${localId}::${episodeId}`,
+          };
+        })
+        .filter(Boolean);
+    }
+
+    out.push({
+      contentId: detail.id,
+      provider: detail.provider,
+      seasonKey,
+      seasonNumber,
+      seasonTitle: normalizeText(link?.title || "") || "Season",
+      episodesLink: normalizeText(link?.episodesLink || "") || undefined,
+      episodes,
+    });
+  }
+
+  return out;
+}
+
+function tokenizeText(value) {
+  return normalizeToken(value)
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+function buildSearchIndexEntry(summary, detail) {
+  const aliases = uniqueBy(
+    [
+      summary.title,
+      ...(detail?.genres || []),
+      ...(detail?.tags || []),
+      ...(detail?.keywords || []),
+      ...(detail?.cast || []),
+      ...(detail?.directors || []),
+      ...(Array.isArray(detail?.related) ? detail.related.map((item) => normalizeText(item?.title || "")) : []),
+    ].filter(Boolean),
+    (value) => normalizeText(value).toLowerCase()
+  ).slice(0, 80);
+
+  const tokenSource = `${summary.title} ${aliases.join(" ")} ${summary.year} ${summary.provider} ${summary.type}`;
+  const tokens = uniqueBy(tokenizeText(tokenSource), (value) => value).slice(0, 180);
+
+  return {
+    id: summary.id,
+    provider: summary.provider,
+    title: summary.title,
+    type: summary.type,
+    year: summary.year,
+    aliases,
+    tokens,
+  };
 }
 
 async function readProviderCatalog(providerDir) {
@@ -533,7 +724,7 @@ function rowConfigs() {
 async function run() {
   console.log("[app-catalog] start");
   console.log(
-    `[app-catalog] config outDir=${config.outDir} detailShardSize=${config.detailShardSize} maxItemsPerRow=${config.maxItemsPerRow}`
+    `[app-catalog] config outDir=${config.outDir} detailShardSize=${config.detailShardSize} episodesShardSize=${config.episodesShardSize} maxItemsPerRow=${config.maxItemsPerRow}`
   );
 
   const providerPayloads = [];
@@ -598,7 +789,7 @@ async function run() {
     await writeJsonAtomic(
       path.join(config.outDir, relFile),
       {
-        schemaVersion: 1,
+        schemaVersion: 2,
         generatedAt: new Date().toISOString(),
         chunk: chunkIndex + 1,
         count: chunkItems.length,
@@ -613,9 +804,32 @@ async function run() {
     detailChunks.push({ file: relFile, count: chunkItems.length, chunk: chunkIndex + 1 });
   }
 
+  const episodesSeasonItems = detailsOrdered
+    .flatMap((detail) => buildEpisodesSeasonItems(detail))
+    .filter(Boolean);
+  const episodesShardResult = await writeShardedJson({
+    outDir: config.outDir,
+    indexFileName: "episodes-index.json",
+    chunksDirName: "episodes-chunks",
+    shardSize: config.episodesShardSize,
+    items: episodesSeasonItems,
+    indexPayload: {
+      schemaVersion: 1,
+      generatedAt: new Date().toISOString(),
+      kind: "episodes-season-index",
+    },
+    pretty: true,
+  });
+
+  const searchIndex = summaries
+    .map((summary) => buildSearchIndexEntry(summary, detailsById.get(summary.id)))
+    .filter(Boolean);
+  await writeJsonAtomic(path.join(config.outDir, "search-index.json"), searchIndex, true);
+
+  const generatedAt = new Date().toISOString();
   const indexPayload = {
-    schemaVersion: 1,
-    generatedAt: new Date().toISOString(),
+    schemaVersion: 2,
+    generatedAt,
     totalItems: summaries.length,
     featuredId: summaries[0]?.id || "",
     maxItemsPerRow: config.maxItemsPerRow,
@@ -629,12 +843,34 @@ async function run() {
       includeRaw: payload.index.includeRaw === true,
     })),
     detailChunks,
+    searchIndex: "search-index.json",
+    episodesIndex: "episodes-index.json",
     items: summaries,
   };
 
   await writeJsonAtomic(path.join(config.outDir, "catalog-index.json"), indexPayload, true);
+
+  const version = generatedAt.replace(/[^0-9]/g, "").slice(0, 14);
+  const manifestPayload = {
+    schemaVersion: 1,
+    version,
+    generatedAt,
+    datasets: {
+      catalogIndex: "data/app/catalog-index.json",
+      searchIndex: "data/app/search-index.json",
+      episodesIndex: "data/app/episodes-index.json",
+    },
+    counts: {
+      totalItems: summaries.length,
+      detailChunks: detailChunks.length,
+      searchEntries: searchIndex.length,
+      episodeSeasons: episodesSeasonItems.length,
+    },
+  };
+  await writeJsonAtomic(path.join(config.outDir, "manifest.json"), manifestPayload, true);
+
   console.log(
-    `[app-catalog] done -> ${path.join(config.outDir, "catalog-index.json")} (items=${summaries.length}, detailChunks=${detailChunks.length})`
+    `[app-catalog] done -> ${path.join(config.outDir, "catalog-index.json")} (items=${summaries.length}, detailChunks=${detailChunks.length}, episodes=${episodesShardResult.count}, search=${searchIndex.length})`
   );
 }
 

@@ -1,0 +1,5261 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-04-22T15:23:24.048Z",
+  "kind": "episodes-season-index",
+  "chunk": 13,
+  "shardSize": 240,
+  "count": 240,
+  "items": [
+    {
+      "contentId": "streamingunity-1957",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Season 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/1957-una-mamma-per-amica/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1957",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Season 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/1957-una-mamma-per-amica/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1957",
+      "provider": "streamingunity",
+      "seasonKey": "season-7",
+      "seasonNumber": 7,
+      "seasonTitle": "Season 7",
+      "episodesLink": "https://streamingunity.biz/it/titles/1957-una-mamma-per-amica/season-7",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1849",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/1849"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-6062",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "6062|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-305",
+      "provider": "animeunity",
+      "seasonKey": "range-1-11",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-11",
+      "episodesLink": "305|1|11",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8348",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/8348"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-9444",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/9444"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-7529",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/7529-vuoi-sposare-mio-marito/season-1",
+      "episodes": [
+        {
+          "title": "Episodio 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "7529::50520"
+        },
+        {
+          "title": "Episodio 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "7529::50521"
+        },
+        {
+          "title": "Episodio 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "7529::50523"
+        },
+        {
+          "title": "Episodio 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "7529::50519"
+        },
+        {
+          "title": "Episodio 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "7529::50524"
+        },
+        {
+          "title": "Episodio 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "7529::50522"
+        },
+        {
+          "title": "Episodio 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "7529::54055"
+        },
+        {
+          "title": "Episodio 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "7529::53957"
+        },
+        {
+          "title": "Episodio 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "7529::54013"
+        },
+        {
+          "title": "Episodio 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "7529::53959"
+        },
+        {
+          "title": "Episodio 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "7529::54017"
+        },
+        {
+          "title": "Episodio 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "7529::53960"
+        },
+        {
+          "title": "Episodio 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "7529::54023"
+        },
+        {
+          "title": "Episodio 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "7529::55109"
+        },
+        {
+          "title": "Episodio 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "7529::55110"
+        },
+        {
+          "title": "Episodio 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "7529::55111"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-4750",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "4750|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-12115",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/12115-wakfu/season-1",
+      "episodes": [
+        {
+          "title": "Il bambino della nebbia",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "12115::89179"
+        },
+        {
+          "title": "Yugo l'Elatrop",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "12115::89178"
+        },
+        {
+          "title": "Il corvo nero",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "12115::89181"
+        },
+        {
+          "title": "Miss brutta",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "12115::89180"
+        },
+        {
+          "title": "I magnifici 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "12115::89182"
+        },
+        {
+          "title": "Vampyro",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "12115::89183"
+        },
+        {
+          "title": "Velenosa",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "12115::89184"
+        },
+        {
+          "title": "Xav il panettiere",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "12115::89185"
+        },
+        {
+          "title": "Lo zaino di Ruel",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "12115::89186"
+        },
+        {
+          "title": "L'inferno del Pappaball: Parte 1",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "12115::89187"
+        },
+        {
+          "title": "L'inferno del Pappaball: Parte 2",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "12115::89188"
+        },
+        {
+          "title": "L'inferno del Pappaball: Parte 3",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "12115::89189"
+        },
+        {
+          "title": "Calma blu",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "12115::89190"
+        },
+        {
+          "title": "L'isola di Moon",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "12115::89191"
+        },
+        {
+          "title": "Adamai",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "12115::89193"
+        },
+        {
+          "title": "L'Elacubo",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "12115::89192"
+        },
+        {
+          "title": "Grougaloragran l'Eterno",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "12115::89195"
+        },
+        {
+          "title": "La confraternita del Tofu",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "12115::89194"
+        },
+        {
+          "title": "Il regno Sadida",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "12115::89196"
+        },
+        {
+          "title": "L'albero di vita",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "12115::89197"
+        },
+        {
+          "title": "Igol",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "12115::89198"
+        },
+        {
+          "title": "Rubilax",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "12115::89199"
+        },
+        {
+          "title": "La ricerca del Dofus",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "12115::89200"
+        },
+        {
+          "title": "Ritrovarsi",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "12115::89201"
+        },
+        {
+          "title": "Entro nella leggenda",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "12115::89202"
+        },
+        {
+          "title": "Il monte Zinit",
+          "episodeNumber": 26,
+          "seasonNumber": 1,
+          "link": "12115::89203"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-12115",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Stagione 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/12115-wakfu/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-12115",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Stagione 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/12115-wakfu/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3746",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "3746|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3356",
+      "provider": "animeunity",
+      "seasonKey": "range-1-2",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-2",
+      "episodesLink": "3356|1|2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-33039",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/33039-when-the-camellia-blooms/season-1",
+      "episodes": [
+        {
+          "title": "Episodio 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "33039::187257"
+        },
+        {
+          "title": "Episodio 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "33039::187267"
+        },
+        {
+          "title": "Episodio 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "33039::187266"
+        },
+        {
+          "title": "Episodio 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "33039::187259"
+        },
+        {
+          "title": "Episodio 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "33039::187261"
+        },
+        {
+          "title": "Episodio 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "33039::187263"
+        },
+        {
+          "title": "Episodio 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "33039::187268"
+        },
+        {
+          "title": "Episodio 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "33039::187269"
+        },
+        {
+          "title": "Episodio 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "33039::187264"
+        },
+        {
+          "title": "Episodio 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "33039::187265"
+        },
+        {
+          "title": "Episodio 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "33039::187278"
+        },
+        {
+          "title": "Episodio 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "33039::187275"
+        },
+        {
+          "title": "Episodio 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "33039::187270"
+        },
+        {
+          "title": "Episodio 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "33039::187271"
+        },
+        {
+          "title": "Episodio 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "33039::187279"
+        },
+        {
+          "title": "Episodio 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "33039::187280"
+        },
+        {
+          "title": "Episodio 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "33039::187272"
+        },
+        {
+          "title": "Episodio 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "33039::187273"
+        },
+        {
+          "title": "Episodio 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "33039::187294"
+        },
+        {
+          "title": "Episodio 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "33039::187295"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-17769",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/17769"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-6856",
+      "provider": "animeunity",
+      "seasonKey": "range-1-13",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-13",
+      "episodesLink": "6856|1|13",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-5387",
+      "provider": "animeunity",
+      "seasonKey": "range-1-12",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-12",
+      "episodesLink": "5387|1|12",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-4606",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "4606|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-5412",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/5412"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-51798",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/51798"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-3992",
+      "provider": "animeunity",
+      "seasonKey": "range-1-26",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-26",
+      "episodesLink": "3992|1|26",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-973",
+      "provider": "animeunity",
+      "seasonKey": "range-1-2",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-2",
+      "episodesLink": "973|1|2",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-6991",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "6991|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-7371",
+      "provider": "animeunity",
+      "seasonKey": "range-1-3",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-3",
+      "episodesLink": "7371|1|3",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-6717",
+      "provider": "animeunity",
+      "seasonKey": "range-1-2",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-2",
+      "episodesLink": "6717|1|2",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-6274",
+      "provider": "animeunity",
+      "seasonKey": "range-1-24",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-24",
+      "episodesLink": "6274|1|24",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3451",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "3451|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-33359",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/33359"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-4958",
+      "provider": "animeunity",
+      "seasonKey": "range-1-112",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-112",
+      "episodesLink": "4958|1|112",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-266",
+      "provider": "animeunity",
+      "seasonKey": "range-1-120",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-120",
+      "episodesLink": "266|1|120",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-266",
+      "provider": "animeunity",
+      "seasonKey": "range-121-224",
+      "seasonNumber": 2,
+      "seasonTitle": "Episodes 121-224",
+      "episodesLink": "266|121|224",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-589",
+      "provider": "animeunity",
+      "seasonKey": "range-1-120",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-120",
+      "episodesLink": "589|1|120",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-589",
+      "provider": "animeunity",
+      "seasonKey": "range-121-146",
+      "seasonNumber": 2,
+      "seasonTitle": "Episodes 121-146",
+      "episodesLink": "589|121|146",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-4949",
+      "provider": "animeunity",
+      "seasonKey": "range-1-50",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-50",
+      "episodesLink": "4949|1|50",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-4950",
+      "provider": "animeunity",
+      "seasonKey": "range-1-13",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-13",
+      "episodesLink": "4950|1|13",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-5751",
+      "provider": "animeunity",
+      "seasonKey": "range-1-3",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-3",
+      "episodesLink": "5751|1|3",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-7365",
+      "provider": "animeunity",
+      "seasonKey": "range-1-6",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-6",
+      "episodesLink": "7365|1|6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1705",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/1705-zerozerozero/season-1",
+      "episodes": [
+        {
+          "title": "Il carico",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "1705::15785"
+        },
+        {
+          "title": "I cieli su Tampico",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "1705::15786"
+        },
+        {
+          "title": "Miranda",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "1705::15787"
+        },
+        {
+          "title": "Il trasbordo",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "1705::15788"
+        },
+        {
+          "title": "Sharia",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "1705::15789"
+        },
+        {
+          "title": "Salvezza",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "1705::15790"
+        },
+        {
+          "title": "Famiglia",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "1705::15791"
+        },
+        {
+          "title": "Stesso sangue",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "1705::15792"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-34385",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/34385-kata-katara/season-1",
+      "episodes": [
+        {
+          "title": "Episodio 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "34385::193005"
+        },
+        {
+          "title": "Episodio 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "34385::193007"
+        },
+        {
+          "title": "Episodio 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "34385::193014"
+        },
+        {
+          "title": "Episodio 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "34385::193008"
+        },
+        {
+          "title": "Episodio 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "34385::193009"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-34385",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Stagione 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/34385-kata-katara/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-41193",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/41193-perfect-glow/season-1",
+      "episodes": [
+        {
+          "title": "Episodio 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "41193::220451"
+        },
+        {
+          "title": "Episodio 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "41193::220638"
+        },
+        {
+          "title": "Episodio 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "41193::220639"
+        },
+        {
+          "title": "Episodio 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "41193::278686"
+        },
+        {
+          "title": "Episodio 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "41193::278689"
+        },
+        {
+          "title": "Episodio 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "41193::278692"
+        },
+        {
+          "title": "Episodio 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "41193::278690"
+        },
+        {
+          "title": "Episodio 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "41193::278691"
+        },
+        {
+          "title": "Episodio 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "41193::278702"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-41564",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/41564-i-like-you-you-know/season-1",
+      "episodes": [
+        {
+          "title": "Episodio 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "41564::222191"
+        },
+        {
+          "title": "Episodio 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "41564::222192"
+        },
+        {
+          "title": "Episodio 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "41564::222193"
+        },
+        {
+          "title": "Episodio 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "41564::222194"
+        },
+        {
+          "title": "Episodio 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "41564::222195"
+        },
+        {
+          "title": "Episodio 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "41564::222197"
+        },
+        {
+          "title": "Episodio 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "41564::222198"
+        },
+        {
+          "title": "Episodio 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "41564::222196"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-10784",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/10784-30-rock/season-1",
+      "episodes": [
+        {
+          "title": "L'arrivo di Jack",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "10784::82512"
+        },
+        {
+          "title": "Conseguenze spiacevoli",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "10784::82511"
+        },
+        {
+          "title": "Appuntamento al buio",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "10784::82514"
+        },
+        {
+          "title": "Jack, l'autore",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "10784::82513"
+        },
+        {
+          "title": "Jack attore",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "10784::82516"
+        },
+        {
+          "title": "Jack conosce Dennis",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "10784::82515"
+        },
+        {
+          "title": "Tracy fa Conan",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "10784::82518"
+        },
+        {
+          "title": "Pro e contro",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "10784::82517"
+        },
+        {
+          "title": "Kenneth il saggio",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "10784::82520"
+        },
+        {
+          "title": "Il giurato rurale",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "10784::82519"
+        },
+        {
+          "title": "Una giornata sottosopra",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "10784::82522"
+        },
+        {
+          "title": "Una festa elegante",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "10784::82521"
+        },
+        {
+          "title": "Straordinari",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "10784::82524"
+        },
+        {
+          "title": "La parola misteriosa",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "10784::82523"
+        },
+        {
+          "title": "Saluta le truppe",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "10784::82526"
+        },
+        {
+          "title": "Il premio «The Source»",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "10784::82525"
+        },
+        {
+          "title": "Potere assoluto",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "10784::82531"
+        },
+        {
+          "title": "Fuochi d'artificio",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "10784::82527"
+        },
+        {
+          "title": "Il terzo incomodo",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "10784::82532"
+        },
+        {
+          "title": "Cleveland",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "10784::82528"
+        },
+        {
+          "title": "La macchina della verità",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "10784::82534"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-10784",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Stagione 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/10784-30-rock/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-10784",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Stagione 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/10784-30-rock/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-10784",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Stagione 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/10784-30-rock/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-10784",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Stagione 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/10784-30-rock/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-10784",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Stagione 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/10784-30-rock/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-10784",
+      "provider": "streamingunity",
+      "seasonKey": "season-7",
+      "seasonNumber": 7,
+      "seasonTitle": "Season 7",
+      "episodesLink": "https://streamingunity.biz/it/titles/10784-30-rock/season-7",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7183",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/7183"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-2220",
+      "provider": "animeunity",
+      "seasonKey": "range-1-13",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-13",
+      "episodesLink": "2220|1|13",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9671",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/9671"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-6365",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/6365-a-small-light/season-1",
+      "episodes": [
+        {
+          "title": "Pilot",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "6365::40424"
+        },
+        {
+          "title": "Welcome to Switzerland",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "6365::40425"
+        },
+        {
+          "title": "Motherland",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "6365::40426"
+        },
+        {
+          "title": "The Butterfly",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "6365::40427"
+        },
+        {
+          "title": "Scheissfeld",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "6365::40428"
+        },
+        {
+          "title": "Boiling Point",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "6365::40429"
+        },
+        {
+          "title": "What Can Be Saved",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "6365::40430"
+        },
+        {
+          "title": "Legacy",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "6365::40431"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-6509",
+      "provider": "animeunity",
+      "seasonKey": "range-1-30",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-30",
+      "episodesLink": "6509|1|30",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-489",
+      "provider": "animeunity",
+      "seasonKey": "range-1-75",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-75",
+      "episodesLink": "489|1|75",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-5523",
+      "provider": "animeunity",
+      "seasonKey": "range-1-39",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-39",
+      "episodesLink": "5523|1|39",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7324",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/7324-airport-security-animali/season-1",
+      "episodes": [
+        {
+          "title": "Episodio 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "7324::47162"
+        },
+        {
+          "title": "Episodio 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "7324::47163"
+        },
+        {
+          "title": "Episodio 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "7324::47164"
+        },
+        {
+          "title": "Episodio 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "7324::47166"
+        },
+        {
+          "title": "Episodio 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "7324::47167"
+        },
+        {
+          "title": "Episodio 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "7324::47168"
+        },
+        {
+          "title": "Episodio 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "7324::47169"
+        },
+        {
+          "title": "Episodio 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "7324::47170"
+        },
+        {
+          "title": "Episodio 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "7324::47171"
+        },
+        {
+          "title": "Episodio 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "7324::47173"
+        },
+        {
+          "title": "Episodio 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "7324::47172"
+        },
+        {
+          "title": "Episodio 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "7324::47174"
+        },
+        {
+          "title": "Episodio 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "7324::47176"
+        },
+        {
+          "title": "Episodio 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "7324::47175"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-54",
+      "provider": "animeunity",
+      "seasonKey": "range-1-24",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-24",
+      "episodesLink": "54|1|24",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-2266",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/2266"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-2747",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/2747-all-american/season-1",
+      "episodes": [
+        {
+          "title": "Beverly Hills",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "2747::19969"
+        },
+        {
+          "title": "99 problemi",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "2747::19970"
+        },
+        {
+          "title": "Tutti per uno",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "2747::19971"
+        },
+        {
+          "title": "Il bonifico",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "2747::19972"
+        },
+        {
+          "title": "Tutto ciò che abbiamo",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "2747::19973"
+        },
+        {
+          "title": "La scelta è tua",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "2747::19974"
+        },
+        {
+          "title": "Una serata indimenticabile",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "2747::19975"
+        },
+        {
+          "title": "Il raduno",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "2747::19976"
+        },
+        {
+          "title": "A testa alta",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "2747::19977"
+        },
+        {
+          "title": "La petizione",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "2747::19978"
+        },
+        {
+          "title": "Osservati speciali",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "2747::19979"
+        },
+        {
+          "title": "Tanto tempo fa",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "2747::19980"
+        },
+        {
+          "title": "Sotto pressione",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "2747::19981"
+        },
+        {
+          "title": "La verità",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "2747::19982"
+        },
+        {
+          "title": "Un segreto ben custodito",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "2747::19983"
+        },
+        {
+          "title": "Championship",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "2747::19984"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-2747",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/2747-all-american/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-2747",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/2747-all-american/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-2747",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/2747-all-american/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-2747",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Season 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/2747-all-american/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-2747",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Season 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/2747-all-american/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-2747",
+      "provider": "streamingunity",
+      "seasonKey": "season-7",
+      "seasonNumber": 7,
+      "seasonTitle": "Stagione 7",
+      "episodesLink": "https://streamingunity.biz/it/titles/2747-all-american/season-7",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9665",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/9665"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-7283",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/7283"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-1",
+      "episodes": [
+        {
+          "title": "La nuova casa",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "8::217"
+        },
+        {
+          "title": "Il passato ritorna",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "8::218"
+        },
+        {
+          "title": "Vecchi rancori",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "8::219"
+        },
+        {
+          "title": "Halloween (1ª parte)",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "8::220"
+        },
+        {
+          "title": "Halloween (2ª parte)",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "8::221"
+        },
+        {
+          "title": "Leggende metropolitane",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "8::222"
+        },
+        {
+          "title": "Casa in vendita",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "8::223"
+        },
+        {
+          "title": "L'uomo di gomma",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "8::224"
+        },
+        {
+          "title": "La Dalia Nera",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "8::225"
+        },
+        {
+          "title": "Giù la maschera",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "8::226"
+        },
+        {
+          "title": "Nascita",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "8::227"
+        },
+        {
+          "title": "Rinascita",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "8::228"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Season 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Season 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-7",
+      "seasonNumber": 7,
+      "seasonTitle": "Season 7",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-7",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-8",
+      "seasonNumber": 8,
+      "seasonTitle": "Season 8",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-8",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-9",
+      "seasonNumber": 9,
+      "seasonTitle": "Season 9",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-9",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-10",
+      "seasonNumber": 10,
+      "seasonTitle": "Season 10",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-10",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-11",
+      "seasonNumber": 11,
+      "seasonTitle": "Season 11",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-11",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8",
+      "provider": "streamingunity",
+      "seasonKey": "season-12",
+      "seasonNumber": 12,
+      "seasonTitle": "Stagione 12",
+      "episodesLink": "https://streamingunity.biz/it/titles/8-american-horror-story/season-12",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-5290",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/5290-animal-kingdom/season-1",
+      "episodes": [
+        {
+          "title": "Senza regole",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "5290::33158"
+        },
+        {
+          "title": "Danni collaterali",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "5290::33159"
+        },
+        {
+          "title": "State vicini, restate insieme",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "5290::33160"
+        },
+        {
+          "title": "Per me è morto",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "5290::33161"
+        },
+        {
+          "title": "La carne è debole",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "5290::33162"
+        },
+        {
+          "title": "Le cure di una madre",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "5290::33163"
+        },
+        {
+          "title": "Maledetti animali",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "5290::33164"
+        },
+        {
+          "title": "Con loro o contro di loro",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "5290::33165"
+        },
+        {
+          "title": "Tradire la famiglia",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "5290::33166"
+        },
+        {
+          "title": "Che hai fatto?",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "5290::33167"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-5290",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/5290-animal-kingdom/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-5290",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/5290-animal-kingdom/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-5290",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/5290-animal-kingdom/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-5290",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Season 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/5290-animal-kingdom/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-5290",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Season 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/5290-animal-kingdom/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-597",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/597"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-3057",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "3057|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-7451",
+      "provider": "animeunity",
+      "seasonKey": "range-1-3",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-3",
+      "episodesLink": "7451|1|3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-962",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/962"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-63",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/63-atypical/season-1",
+      "episodes": [
+        {
+          "title": "Antartide",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "63::1330"
+        },
+        {
+          "title": "Una femmina di umano",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "63::1331"
+        },
+        {
+          "title": "Julia dice che...",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "63::1332"
+        },
+        {
+          "title": "Un odore buono e neutro",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "63::1333"
+        },
+        {
+          "title": "Quella è la mia felpa",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "63::1334"
+        },
+        {
+          "title": "Il direttissimo per la Città del sesso",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "63::1335"
+        },
+        {
+          "title": "La mia povera polpetta",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "63::1336"
+        },
+        {
+          "title": "La neve assorbe i suoni",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "63::1337"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-63",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/63-atypical/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-63",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/63-atypical/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-63",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/63-atypical/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-4741",
+      "provider": "animeunity",
+      "seasonKey": "range-1-27",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-27",
+      "episodesLink": "4741|1|27",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-2035",
+      "provider": "animeunity",
+      "seasonKey": "range-1-13",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-13",
+      "episodesLink": "2035|1|13",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-7417",
+      "provider": "animeunity",
+      "seasonKey": "range-1-12",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-12",
+      "episodesLink": "7417|1|12",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-6728",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/6728-beckham/season-1",
+      "episodes": [
+        {
+          "title": "Il calcio",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "6728::43077"
+        },
+        {
+          "title": "Rosso di rabbia",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "6728::43078"
+        },
+        {
+          "title": "Golden Balls",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "6728::43079"
+        },
+        {
+          "title": "Mai fermarsi",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "6728::43080"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-5275",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "5275|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-536",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/536"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-7139",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/7139-benvenuti-a-samdal-ri/season-1",
+      "episodes": [
+        {
+          "title": "Le lacrime del drago",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "7139::45630"
+        },
+        {
+          "title": "La storia delle anime gemelle",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "7139::45631"
+        },
+        {
+          "title": "Come uccelli selvaggi che si librano, sognano, scendono",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "7139::45632"
+        },
+        {
+          "title": "Folle luce dei miei occhi",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "7139::45633"
+        },
+        {
+          "title": "Ti vedo",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "7139::45634"
+        },
+        {
+          "title": "\"I sogni\" di Cho Yong-pil",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "7139::45654"
+        },
+        {
+          "title": "Lasciarsi, con amore",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "7139::46565"
+        },
+        {
+          "title": "La stagione dei monsoni a Jeju",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "7139::48170"
+        },
+        {
+          "title": "La storia delle due Mi-ja",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "7139::48270"
+        },
+        {
+          "title": "Le variabili che non potevamo prevedere",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "7139::49180"
+        },
+        {
+          "title": "Ciò che non ti uccide ti rende più forte",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "7139::49181"
+        },
+        {
+          "title": "Bentornata a casa",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "7139::49182"
+        },
+        {
+          "title": "Quel maledetto amore non corrisposto",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "7139::50738"
+        },
+        {
+          "title": "Quando le lacrime finiscono",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "7139::50739"
+        },
+        {
+          "title": "Ci vuole un villaggio per crescere un drago",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "7139::58765"
+        },
+        {
+          "title": "Benvenuti a Samdalri",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "7139::58764"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-4168",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "4168|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-2373",
+      "provider": "animeunity",
+      "seasonKey": "range-1-51",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-51",
+      "episodesLink": "2373|1|51",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-2630",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/2630-big-little-lies-piccole-grandi-bugie/season-1",
+      "episodes": [
+        {
+          "title": "Schieramenti",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "2630::19601"
+        },
+        {
+          "title": "Forte istinto materno",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "2630::19602"
+        },
+        {
+          "title": "Vivere un sogno",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "2630::19603"
+        },
+        {
+          "title": "Momento critico",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "2630::19604"
+        },
+        {
+          "title": "Confronti",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "2630::19605"
+        },
+        {
+          "title": "Burning love",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "2630::19606"
+        },
+        {
+          "title": "Prendi ciò di cui hai bisogno",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "2630::19607"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-2630",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/2630-big-little-lies-piccole-grandi-bugie/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-847",
+      "provider": "animeunity",
+      "seasonKey": "range-1-2",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-2",
+      "episodesLink": "847|1|2",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-4657",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "4657|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-2514",
+      "provider": "animeunity",
+      "seasonKey": "range-1-12",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-12",
+      "episodesLink": "2514|1|12",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-2065",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "2065|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-4447",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/4447"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-12379",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/12379-bravo-ragazzo/season-1",
+      "episodes": [
+        {
+          "title": "Il nostro piccolo eroe sbeffeggiato",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "12379::90894"
+        },
+        {
+          "title": "Più veloce, più lontano, più forte",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "12379::90907"
+        },
+        {
+          "title": "Million Dollar Baby",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "12379::91153"
+        },
+        {
+          "title": "Vola come una farfalla",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "12379::91255"
+        },
+        {
+          "title": "Ubriaco d'amore",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "12379::91443"
+        },
+        {
+          "title": "Colpo di rimessa",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "12379::91507"
+        },
+        {
+          "title": "Par terre Par terre",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "12379::91852"
+        },
+        {
+          "title": "Il proiettile vagante",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "12379::91860"
+        },
+        {
+          "title": "Allez",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "12379::92060"
+        },
+        {
+          "title": "Time-out",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "12379::92062"
+        },
+        {
+          "title": "Conto alla rovescia",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "12379::92291"
+        },
+        {
+          "title": "Fallo",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "12379::92450"
+        },
+        {
+          "title": "Carica, via… non fermarti",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "12379::92578"
+        },
+        {
+          "title": "Un re non muore mai",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "12379::92606"
+        },
+        {
+          "title": "Messi alle corde",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "12379::92704"
+        },
+        {
+          "title": "We Are The Champions",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "12379::92732"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-55372",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/55372"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-3717",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "3717|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9433",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/9433"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-3518",
+      "provider": "animeunity",
+      "seasonKey": "range-1-115",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-115",
+      "episodesLink": "3518|1|115",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-10731",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/10731"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-6037",
+      "provider": "animeunity",
+      "seasonKey": "range-1-52",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-52",
+      "episodesLink": "6037|1|52",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3212",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "3212|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8409",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/8409-carnivale/season-1",
+      "episodes": [
+        {
+          "title": "Il dono",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "8409::61101"
+        },
+        {
+          "title": "Ombre dal passato",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "8409::61102"
+        },
+        {
+          "title": "L'uomo dei miracoli",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "8409::61123"
+        },
+        {
+          "title": "Tempesta",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "8409::61137"
+        },
+        {
+          "title": "Babilonia",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "8409::61131"
+        },
+        {
+          "title": "La giustizia del circo",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "8409::61136"
+        },
+        {
+          "title": "La fede e il coraggio",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "8409::61133"
+        },
+        {
+          "title": "Fallimenti",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "8409::61151"
+        },
+        {
+          "title": "Tra il sonno e la veglia",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "8409::61134"
+        },
+        {
+          "title": "Il ritorno di padre Justin",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "8409::61155"
+        },
+        {
+          "title": "Le sofferenze dell'amore",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "8409::61135"
+        },
+        {
+          "title": "Il mistero del Bene, il mistero del Male",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "8409::61156"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-8409",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/8409-carnivale/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-1626",
+      "provider": "animeunity",
+      "seasonKey": "range-1-24",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-24",
+      "episodesLink": "1626|1|24",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-6448",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/6448"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-5897",
+      "provider": "animeunity",
+      "seasonKey": "range-1-8",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-8",
+      "episodesLink": "5897|1|8",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-2326",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/2326-cercando-alaska/season-1",
+      "episodes": [
+        {
+          "title": "Le ultime Parole Famose",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "2326::18845"
+        },
+        {
+          "title": "\"Raccontate che ho detto qualcosa...\"",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "2326::18846"
+        },
+        {
+          "title": "\"Non mi sono mai sentito meglio...\"",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "2326::18847"
+        },
+        {
+          "title": "\"Delizioso e alquanto abbondante\"",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "2326::18848"
+        },
+        {
+          "title": "\"Vi dimostrerò che non spara\"",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "2326::18849"
+        },
+        {
+          "title": "\"Ce ne andremo tutti\"",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "2326::18850"
+        },
+        {
+          "title": "\"Ora arriva il mistero\"",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "2326::18851"
+        },
+        {
+          "title": "\"Com'è bello laggiù\"",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "2326::18852"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-7022",
+      "provider": "animeunity",
+      "seasonKey": "range-1-2",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-2",
+      "episodesLink": "7022|1|2",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-26",
+      "provider": "animeunity",
+      "seasonKey": "range-1-13",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-13",
+      "episodesLink": "26|1|13",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-5508",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "5508|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-383",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "383|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-622",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "622|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-15630",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/15630-come-lacqua-per-il-cioccolato/season-1",
+      "episodes": [
+        {
+          "title": "Episodio 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "15630::108757"
+        },
+        {
+          "title": "Episodio 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "15630::108760"
+        },
+        {
+          "title": "Episodio 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "15630::108758"
+        },
+        {
+          "title": "Episodio 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "15630::108761"
+        },
+        {
+          "title": "Episodio 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "15630::108759"
+        },
+        {
+          "title": "Episodio 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "15630::316758"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-15630",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Stagione 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/15630-come-lacqua-per-il-cioccolato/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8649",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/8649-connessioni-di-sangue/season-1",
+      "episodes": [
+        {
+          "title": "Le Sirene Cantano",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "8649::63471"
+        },
+        {
+          "title": "Ombra Sorgere",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "8649::63473"
+        },
+        {
+          "title": "Giustizia Verniciata",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "8649::63477"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-8649",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/8649-connessioni-di-sangue/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8649",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/8649-connessioni-di-sangue/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8649",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/8649-connessioni-di-sangue/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8649",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Season 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/8649-connessioni-di-sangue/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8649",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Season 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/8649-connessioni-di-sangue/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3605",
+      "provider": "animeunity",
+      "seasonKey": "range-1-43",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-43",
+      "episodesLink": "3605|1|43",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-11351",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Court of Gold: il basket alle Olimpiadi di Parigi",
+      "episodesLink": "https://streamingunity.biz/it/titles/11351-court-of-gold-il-basket-alle-olimpiadi-di-parigi/season-1",
+      "episodes": [
+        {
+          "title": "Episodio 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "11351::85808"
+        },
+        {
+          "title": "Episodio 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "11351::85794"
+        },
+        {
+          "title": "Episodio 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "11351::85809"
+        },
+        {
+          "title": "Episodio 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "11351::85797"
+        },
+        {
+          "title": "Episodio 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "11351::85813"
+        },
+        {
+          "title": "Episodio 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "11351::85801"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-1",
+      "episodes": [
+        {
+          "title": "Una serata da dimenticare",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "9307::71974"
+        },
+        {
+          "title": "Ted e Mary",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "9307::71942"
+        },
+        {
+          "title": "Incubo porno",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "9307::71978"
+        },
+        {
+          "title": "Il braccialetto",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "9307::71971"
+        },
+        {
+          "title": "L'arredatrice d'interni",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "9307::71979"
+        },
+        {
+          "title": "Il filo dell'alta tensione",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "9307::71980"
+        },
+        {
+          "title": "La Chevrolet del '57",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "9307::71981"
+        },
+        {
+          "title": "Il necrologio",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "9307::71940"
+        },
+        {
+          "title": "La prescrizione",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "9307::71986"
+        },
+        {
+          "title": "I monologhi della vagina",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "9307::71961"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Season 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Stagione 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-7",
+      "seasonNumber": 7,
+      "seasonTitle": "Stagione 7",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-7",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-8",
+      "seasonNumber": 8,
+      "seasonTitle": "Stagione 8",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-8",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-9",
+      "seasonNumber": 9,
+      "seasonTitle": "Stagione 9",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-9",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-10",
+      "seasonNumber": 10,
+      "seasonTitle": "Stagione 10",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-10",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-11",
+      "seasonNumber": 11,
+      "seasonTitle": "Stagione 11",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-11",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9307",
+      "provider": "streamingunity",
+      "seasonKey": "season-12",
+      "seasonNumber": 12,
+      "seasonTitle": "Stagione 12",
+      "episodesLink": "https://streamingunity.biz/it/titles/9307-curb-your-enthusiasm/season-12",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-5365",
+      "provider": "animeunity",
+      "seasonKey": "range-1-50",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-50",
+      "episodesLink": "5365|1|50",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7081",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/7081-daisy-jones-and-the-six/season-1",
+      "episodes": [
+        {
+          "title": "Daisy Jones & the Six: Nella serie",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "7081::45484"
+        },
+        {
+          "title": "Traccia 1: Come and Get It",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "7081::45494"
+        },
+        {
+          "title": "Traccia 2: I'll Take You There",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "7081::45498"
+        },
+        {
+          "title": "Traccia 3: Someone Saved My Life Tonight",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "7081::45499"
+        },
+        {
+          "title": "Traccia 4: I Saw The Light",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "7081::45500"
+        },
+        {
+          "title": "Traccia 5: Fire",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "7081::45501"
+        },
+        {
+          "title": "Traccia 6: Whatever Gets You Thru The Night",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "7081::45502"
+        },
+        {
+          "title": "Traccia 7: She's Gone",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "7081::45503"
+        },
+        {
+          "title": "Traccia 8: Looks Like We Made It",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "7081::45504"
+        },
+        {
+          "title": "Traccia 9: Feels Like the First Time",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "7081::45505"
+        },
+        {
+          "title": "Traccia 10: Rock 'n' Roll Suicide",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "7081::45506"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-6200",
+      "provider": "animeunity",
+      "seasonKey": "range-1-47",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-47",
+      "episodesLink": "6200|1|47",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3723",
+      "provider": "animeunity",
+      "seasonKey": "range-1-12",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-12",
+      "episodesLink": "3723|1|12",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3831",
+      "provider": "animeunity",
+      "seasonKey": "range-1-11",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-11",
+      "episodesLink": "3831|1|11",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-4356",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/4356-dark-crystal-la-resistenza/season-1",
+      "episodes": [
+        {
+          "title": "Fine, inizio, è la stessa cosa",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "4356::25821"
+        },
+        {
+          "title": "Niente è semplice come una volta",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "4356::25822"
+        },
+        {
+          "title": "Ciò che fu disgiunto e disfatto",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "4356::25823"
+        },
+        {
+          "title": "La prima cosa che mi ricordo è il fuoco",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "4356::25824"
+        },
+        {
+          "title": "Scruta tutti i segreti",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "4356::25825"
+        },
+        {
+          "title": "Per mano di Gelfling...",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "4356::25826"
+        },
+        {
+          "title": "È ora di fare... la mia mossa",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "4356::25827"
+        },
+        {
+          "title": "I profeti non sanno tutto",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "4356::25828"
+        },
+        {
+          "title": "Il Cristallo ci chiama",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "4356::25829"
+        },
+        {
+          "title": "Un singolo pezzo è stato perduto",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "4356::25830"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-29",
+      "provider": "animeunity",
+      "seasonKey": "range-1-24",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-24",
+      "episodesLink": "29|1|24",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-2887",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "2887|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3647",
+      "provider": "animeunity",
+      "seasonKey": "range-1-12",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-12",
+      "episodesLink": "3647|1|12",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7737",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/7737-desperate-housewives/season-1",
+      "episodes": [
+        {
+          "title": "Pilota",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "7737::54442"
+        },
+        {
+          "title": "La verità è sfuggevole",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "7737::54444"
+        },
+        {
+          "title": "Ritratto di famiglia",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "7737::54443"
+        },
+        {
+          "title": "Conoscevamo quella donna?",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "7737::54446"
+        },
+        {
+          "title": "Inquietanti intrusioni",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "7737::54445"
+        },
+        {
+          "title": "Inutile affannarsi",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "7737::54448"
+        },
+        {
+          "title": "Competizione",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "7737::54447"
+        },
+        {
+          "title": "Sensi di colpa",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "7737::54450"
+        },
+        {
+          "title": "Il tarlo del sospetto",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "7737::54449"
+        },
+        {
+          "title": "Ritorna da me",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "7737::54452"
+        },
+        {
+          "title": "Muoviti",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "7737::54451"
+        },
+        {
+          "title": "Si muore un po' ogni giorno",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "7737::54454"
+        },
+        {
+          "title": "Colpa tua",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "7737::54453"
+        },
+        {
+          "title": "L'amore è nell'aria",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "7737::54456"
+        },
+        {
+          "title": "Impossibile",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "7737::54455"
+        },
+        {
+          "title": "Solidarietà Femminile",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "7737::54458"
+        },
+        {
+          "title": "Eroi",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "7737::54457"
+        },
+        {
+          "title": "Figli",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "7737::54460"
+        },
+        {
+          "title": "Il piacere della solitudine",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "7737::54459"
+        },
+        {
+          "title": "Senza più paura",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "7737::54462"
+        },
+        {
+          "title": "Domenica al parco con George",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "7737::54461"
+        },
+        {
+          "title": "Addio, per ora",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "7737::54464"
+        },
+        {
+          "title": "Un giorno meraviglioso",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "7737::54463"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-7737",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/7737-desperate-housewives/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7737",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/7737-desperate-housewives/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7737",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/7737-desperate-housewives/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7737",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Season 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/7737-desperate-housewives/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7737",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Season 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/7737-desperate-housewives/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7737",
+      "provider": "streamingunity",
+      "seasonKey": "season-7",
+      "seasonNumber": 7,
+      "seasonTitle": "Season 7",
+      "episodesLink": "https://streamingunity.biz/it/titles/7737-desperate-housewives/season-7",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-7737",
+      "provider": "streamingunity",
+      "seasonKey": "season-8",
+      "seasonNumber": 8,
+      "seasonTitle": "Season 8",
+      "episodesLink": "https://streamingunity.biz/it/titles/7737-desperate-housewives/season-8",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-769",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "769|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-780",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "780|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-789",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "789|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-776",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "776|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8236",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/8236-detective-monk/season-1",
+      "episodes": [
+        {
+          "title": "Il signor Monk torna al lavoro (prima parte)",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "8236::60228"
+        },
+        {
+          "title": "Il signor Monk torna al lavoro (seconda parte)",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "8236::60229"
+        },
+        {
+          "title": "Il signor Monk e la medium",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "8236::60231"
+        },
+        {
+          "title": "Il signor Monk e Dale la \"Balena\"",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "8236::60230"
+        },
+        {
+          "title": "Il signor Monk e la ruota panoramica",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "8236::60233"
+        },
+        {
+          "title": "Il signor Monk va in manicomio",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "8236::60232"
+        },
+        {
+          "title": "Il signor Monk e il rapinatore miliardario",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "8236::60234"
+        },
+        {
+          "title": "Il signor Monk e la donna perfetta",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "8236::60240"
+        },
+        {
+          "title": "Il signor Monk e il maratoneta",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "8236::60235"
+        },
+        {
+          "title": "Il signor Monk va in vacanza",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "8236::60239"
+        },
+        {
+          "title": "Il signor Monk e il terremoto",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "8236::60236"
+        },
+        {
+          "title": "Il signor Monk e il cantante country",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "8236::60241"
+        },
+        {
+          "title": "Il signor Monk e l'aeroplano",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "8236::60237"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-8236",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/8236-detective-monk/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8236",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/8236-detective-monk/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8236",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/8236-detective-monk/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8236",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Season 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/8236-detective-monk/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8236",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Season 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/8236-detective-monk/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8236",
+      "provider": "streamingunity",
+      "seasonKey": "season-7",
+      "seasonNumber": 7,
+      "seasonTitle": "Season 7",
+      "episodesLink": "https://streamingunity.biz/it/titles/8236-detective-monk/season-7",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8236",
+      "provider": "streamingunity",
+      "seasonKey": "season-8",
+      "seasonNumber": 8,
+      "seasonTitle": "Season 8",
+      "episodesLink": "https://streamingunity.biz/it/titles/8236-detective-monk/season-8",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-6491",
+      "provider": "animeunity",
+      "seasonKey": "range-1-8",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-8",
+      "episodesLink": "6491|1|8",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-6489",
+      "provider": "animeunity",
+      "seasonKey": "range-1-8",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-8",
+      "episodesLink": "6489|1|8",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-11167",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/11167-dirty-money/season-1",
+      "episodes": [
+        {
+          "title": "NOx nocivo",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "11167::84419"
+        },
+        {
+          "title": "Prestiti a breve termine",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "11167::84418"
+        },
+        {
+          "title": "Vendita allo scoperto",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "11167::84421"
+        },
+        {
+          "title": "La banca del cartello",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "11167::84420"
+        },
+        {
+          "title": "Il furto di sciroppo d'acero",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "11167::84422"
+        },
+        {
+          "title": "L'imbroglione",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "11167::84423"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-11167",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Stagione 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/11167-dirty-money/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-5290",
+      "provider": "animeunity",
+      "seasonKey": "range-1-24",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-24",
+      "episodesLink": "5290|1|24",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-5647",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "5647|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-7497",
+      "provider": "animeunity",
+      "seasonKey": "range-1-5",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-5",
+      "episodesLink": "7497|1|5",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3878",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "3878|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-4759",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "4759|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-4010",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "4010|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-4468",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "4468|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-6210",
+      "provider": "animeunity",
+      "seasonKey": "range-1-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-1",
+      "episodesLink": "6210|1|1",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-10710",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/10710-dragons-i-cavalieri-di-berk/season-1",
+      "episodes": [
+        {
+          "title": "L’accademia dei draghi",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "10710::82191"
+        },
+        {
+          "title": "Un vichingo da… assumere",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "10710::82190"
+        },
+        {
+          "title": "Un caldo rifugio",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "10710::82193"
+        },
+        {
+          "title": "La gelosia di Sdentato",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "10710::82192"
+        },
+        {
+          "title": "Ci fidiamo dei draghi",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "10710::82195"
+        },
+        {
+          "title": "Alvin e i suoi guerrieri",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "10710::82194"
+        },
+        {
+          "title": "A ognuno il suo drago",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "10710::82196"
+        },
+        {
+          "title": "Caccia al tesoro",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "10710::82197"
+        },
+        {
+          "title": "Un fiore mortale",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "10710::82198"
+        },
+        {
+          "title": "La sconosciuta (prima parte)",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "10710::82199"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-10710",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/10710-dragons-i-cavalieri-di-berk/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-10710",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/10710-dragons-i-cavalieri-di-berk/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-10710",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/10710-dragons-i-cavalieri-di-berk/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-52158",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/52158-drawn-together/season-1",
+      "episodes": [
+        {
+          "title": "Vasca idromassaggio",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "52158::296596"
+        },
+        {
+          "title": "Il piccolo sudicio segreto di Clara",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "52158::296597"
+        },
+        {
+          "title": "Omofobi",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "52158::296598"
+        },
+        {
+          "title": "Requiem per un reality show",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "52158::296599"
+        },
+        {
+          "title": "L'altra cugina",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "52158::296600"
+        },
+        {
+          "title": "Sporche balordie n°2",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "52158::296601"
+        },
+        {
+          "title": "Quello con il grande colpo di scena (prima parte)",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "52158::296602"
+        },
+        {
+          "title": "Colpo di scena finale",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "52158::316861"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-52158",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Stagione 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/52158-drawn-together/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-52158",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Stagione 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/52158-drawn-together/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9547",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/9547-ducktales/season-1",
+      "episodes": [
+        {
+          "title": "DuckTales",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "9547::73990"
+        },
+        {
+          "title": "In cerca di Atlantide",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "9547::73991"
+        },
+        {
+          "title": "Una giornata da incubo",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "9547::73998"
+        },
+        {
+          "title": "L’impossibile vetta del Monte Maiverest",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "9547::74000"
+        },
+        {
+          "title": "Caccia alla Numero Uno",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "9547::74005"
+        },
+        {
+          "title": "Il compleanno di Mamma Bass",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "9547::74002"
+        },
+        {
+          "title": "La casa di Gastone il fortunato",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "9547::74007"
+        },
+        {
+          "title": "Il neomiliardario",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "9547::74008"
+        },
+        {
+          "title": "Le mummie viventi di Toth-Ra",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "9547::74011"
+        },
+        {
+          "title": "Avventure nel sottosuolo",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "9547::74013"
+        },
+        {
+          "title": "Mistero alla villa De’ Paperoni",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "9547::74022"
+        },
+        {
+          "title": "Gli Anelli Mancanti del Moorshire",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "9547::74016"
+        },
+        {
+          "title": "La Lancia di Selene",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "9547::74014"
+        },
+        {
+          "title": "Il giorno del figlio unico",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "9547::74021"
+        },
+        {
+          "title": "Un robot pericoloso",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "9547::74019"
+        },
+        {
+          "title": "Il mistero della Laguna Dorata",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "9547::74045"
+        },
+        {
+          "title": "Lo $qualo",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "9547::74015"
+        },
+        {
+          "title": "Dai dossier segreti dell’Agente 22!",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "9547::74023"
+        },
+        {
+          "title": "I pirati dell'aria",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "9547::74030"
+        },
+        {
+          "title": "I segreti del Castello de Paperoni",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "9547::74010"
+        },
+        {
+          "title": "Chi è Robopap!?",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "9547::74032"
+        },
+        {
+          "title": "L’altro deposito di Paperone",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "9547::73993"
+        },
+        {
+          "title": "L'ultimo schianto del Sunchaser",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "9547::74038"
+        },
+        {
+          "title": "La guerra delle ombre - Prima parte: La notte dell'incantesimo",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "9547::74004"
+        },
+        {
+          "title": "La guerra delle ombre - Seconda parte: Il giorno dei paperi",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "9547::74042"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-9547",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/9547-ducktales/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9547",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/9547-ducktales/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9548",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/9548-ducktales-avventure-di-paperi/season-1",
+      "episodes": [
+        {
+          "title": "Non Abbandonare la Nave",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "9548::74080"
+        },
+        {
+          "title": "Viaggio nel Ronguay",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "9548::74081"
+        },
+        {
+          "title": "I Tre Paperi del Condor",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "9548::74083"
+        },
+        {
+          "title": "Paperi a Sangue Freddo",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "9548::74086"
+        },
+        {
+          "title": "La Febbre dell'Oro",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "9548::74087"
+        },
+        {
+          "title": "Caccia alla Numero Uno",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "9548::74088"
+        },
+        {
+          "title": "Viaggio nel Paperspazio",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "9548::74089"
+        },
+        {
+          "title": "Armstrong, il Robot",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "9548::74090"
+        },
+        {
+          "title": "I Robot Costruttori",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "9548::74093"
+        },
+        {
+          "title": "La Guerra delle Ombre",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "9548::74094"
+        },
+        {
+          "title": "Il Genio della Lampada",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "9548::74095"
+        },
+        {
+          "title": "Il Mistero del Fantasma",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "9548::74096"
+        },
+        {
+          "title": "La Corona Perduta di Gengis Khan",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "9548::74091"
+        },
+        {
+          "title": "Fuga da Aquatraz",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "9548::74100"
+        },
+        {
+          "title": "È Sparito il Denaro",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "9548::74097"
+        },
+        {
+          "title": "Sir Archimede Pitagorico",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "9548::74098"
+        },
+        {
+          "title": "Dinosauropaperi",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "9548::74101"
+        },
+        {
+          "title": "Un Eroe a Noleggio",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "9548::74102"
+        },
+        {
+          "title": "La Gemma dei Superpoteri",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "9548::74103"
+        },
+        {
+          "title": "I Vichinghi all'Opera",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "9548::74104"
+        },
+        {
+          "title": "Su e Giù per Paperopoli",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "9548::74105"
+        },
+        {
+          "title": "Molto Rumore per Nulla",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "9548::74106"
+        },
+        {
+          "title": "Top Jet",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "9548::74110"
+        },
+        {
+          "title": "La Perla del Potere",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "9548::74107"
+        },
+        {
+          "title": "La Maledizione del Castello di zio Paperone",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "9548::74188"
+        },
+        {
+          "title": "Le Dolci Piume della Giovinezza",
+          "episodeNumber": 26,
+          "seasonNumber": 1,
+          "link": "9548::74109"
+        },
+        {
+          "title": "Paperremoto",
+          "episodeNumber": 27,
+          "seasonNumber": 1,
+          "link": "9548::74099"
+        },
+        {
+          "title": "Ritorno a Itaquack",
+          "episodeNumber": 28,
+          "seasonNumber": 1,
+          "link": "9548::74187"
+        },
+        {
+          "title": "Il Triangolo delle Bermude",
+          "episodeNumber": 29,
+          "seasonNumber": 1,
+          "link": "9548::74108"
+        },
+        {
+          "title": "Micro-Paperi di un'altra Dimensione",
+          "episodeNumber": 30,
+          "seasonNumber": 1,
+          "link": "9548::74082"
+        },
+        {
+          "title": "Ritorno al Klondike",
+          "episodeNumber": 31,
+          "seasonNumber": 1,
+          "link": "9548::74085"
+        },
+        {
+          "title": "Sfida all'Ultimo Derby",
+          "episodeNumber": 32,
+          "seasonNumber": 1,
+          "link": "9548::74111"
+        },
+        {
+          "title": "Il Cucciolo di Paperone",
+          "episodeNumber": 33,
+          "seasonNumber": 1,
+          "link": "9548::74191"
+        },
+        {
+          "title": "I Bassotti all'Attacco",
+          "episodeNumber": 34,
+          "seasonNumber": 1,
+          "link": "9548::74092"
+        },
+        {
+          "title": "La Balena Pirata",
+          "episodeNumber": 35,
+          "seasonNumber": 1,
+          "link": "9548::74193"
+        },
+        {
+          "title": "Paperi Marini",
+          "episodeNumber": 36,
+          "seasonNumber": 1,
+          "link": "9548::74190"
+        },
+        {
+          "title": "Chi è il Papero più Ricco?",
+          "episodeNumber": 37,
+          "seasonNumber": 1,
+          "link": "9548::74196"
+        },
+        {
+          "title": "Avventure sui Mari",
+          "episodeNumber": 38,
+          "seasonNumber": 1,
+          "link": "9548::74195"
+        },
+        {
+          "title": "Il Vello D'Oro",
+          "episodeNumber": 39,
+          "seasonNumber": 1,
+          "link": "9548::74200"
+        },
+        {
+          "title": "Zio Paperone e il Petrolio Scomparso",
+          "episodeNumber": 40,
+          "seasonNumber": 1,
+          "link": "9548::74197"
+        },
+        {
+          "title": "Fuga nel Tempo",
+          "episodeNumber": 41,
+          "seasonNumber": 1,
+          "link": "9548::74201"
+        },
+        {
+          "title": "Zio Paperone e i Dischi Rotanti",
+          "episodeNumber": 42,
+          "seasonNumber": 1,
+          "link": "9548::74199"
+        },
+        {
+          "title": "I Predatori dell'Arpa Perduta",
+          "episodeNumber": 43,
+          "seasonNumber": 1,
+          "link": "9548::74203"
+        },
+        {
+          "title": "Jet nello Spazio",
+          "episodeNumber": 44,
+          "seasonNumber": 1,
+          "link": "9548::74204"
+        },
+        {
+          "title": "Cenerentolo",
+          "episodeNumber": 45,
+          "seasonNumber": 1,
+          "link": "9548::74205"
+        },
+        {
+          "title": "00-Jet",
+          "episodeNumber": 46,
+          "seasonNumber": 1,
+          "link": "9548::74202"
+        },
+        {
+          "title": "La Fortuna dei De' Paperoni",
+          "episodeNumber": 47,
+          "seasonNumber": 1,
+          "link": "9548::74189"
+        },
+        {
+          "title": "Verdure Stellari",
+          "episodeNumber": 48,
+          "seasonNumber": 1,
+          "link": "9548::74192"
+        },
+        {
+          "title": "Lo Specchio Magico / I Bassotti in Fuorigioco",
+          "episodeNumber": 49,
+          "seasonNumber": 1,
+          "link": "9548::74209"
+        },
+        {
+          "title": "Un Papero nel Futuro",
+          "episodeNumber": 50,
+          "seasonNumber": 1,
+          "link": "9548::74206"
+        },
+        {
+          "title": "Piume della Giungla",
+          "episodeNumber": 51,
+          "seasonNumber": 1,
+          "link": "9548::74211"
+        },
+        {
+          "title": "Atterraggio alla Jet",
+          "episodeNumber": 52,
+          "seasonNumber": 1,
+          "link": "9548::74207"
+        },
+        {
+          "title": "La (S)Fortuna di Gastone",
+          "episodeNumber": 53,
+          "seasonNumber": 1,
+          "link": "9548::74213"
+        },
+        {
+          "title": "La Maschera di Ferro",
+          "episodeNumber": 54,
+          "seasonNumber": 1,
+          "link": "9548::74194"
+        },
+        {
+          "title": "L'Indistruttibile Hindentanic",
+          "episodeNumber": 55,
+          "seasonNumber": 1,
+          "link": "9548::74198"
+        },
+        {
+          "title": "Zio Paperone e la Maschera di Kutu Lulu",
+          "episodeNumber": 56,
+          "seasonNumber": 1,
+          "link": "9548::74084"
+        },
+        {
+          "title": "Niente Paura",
+          "episodeNumber": 57,
+          "seasonNumber": 1,
+          "link": "9548::74215"
+        },
+        {
+          "title": "Dottor Jekyll e Mister De' Paperoni",
+          "episodeNumber": 58,
+          "seasonNumber": 1,
+          "link": "9548::74210"
+        },
+        {
+          "title": "C'Era Una Volta la Numero Uno",
+          "episodeNumber": 59,
+          "seasonNumber": 1,
+          "link": "9548::74216"
+        },
+        {
+          "title": "A Me Gli Occhi, Spia",
+          "episodeNumber": 60,
+          "seasonNumber": 1,
+          "link": "9548::74212"
+        },
+        {
+          "title": "Macchia Nera e l'Aereo Invisibile",
+          "episodeNumber": 61,
+          "seasonNumber": 1,
+          "link": "9548::74219"
+        },
+        {
+          "title": "Paper Horror Picture Show",
+          "episodeNumber": 62,
+          "seasonNumber": 1,
+          "link": "9548::74214"
+        },
+        {
+          "title": "Le Nozze di Zio Paperone",
+          "episodeNumber": 63,
+          "seasonNumber": 1,
+          "link": "9548::74208"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-9548",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/9548-ducktales-avventure-di-paperi/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-9548",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/9548-ducktales-avventure-di-paperi/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-3492",
+      "provider": "animeunity",
+      "seasonKey": "range-1-10",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-10",
+      "episodesLink": "3492|1|10",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-573",
+      "provider": "animeunity",
+      "seasonKey": "range-1-12",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-12",
+      "episodesLink": "573|1|12",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-8769",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/8769-ed-sheeran-oltre-la-musica/season-1",
+      "episodes": [
+        {
+          "title": "Amore",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "8769::64812"
+        },
+        {
+          "title": "Perdita",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "8769::64815"
+        },
+        {
+          "title": "Concentrazione",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "8769::64814"
+        },
+        {
+          "title": "Liberazione",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "8769::64816"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-1992",
+      "provider": "animeunity",
+      "seasonKey": "range-1-12",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-12",
+      "episodesLink": "1992|1|12",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1251",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Season 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/1251-el-internado-laguna-nera/season-1",
+      "episodes": [
+        {
+          "title": "Los monstruos no hacen cosquillas",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "1251::10904"
+        },
+        {
+          "title": "Todo el mundo tiene un secreto",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "1251::10905"
+        },
+        {
+          "title": "Ojos que no ven",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "1251::10906"
+        },
+        {
+          "title": "Un Mensaje en una Botella",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "1251::10907"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "1251::10908"
+        },
+        {
+          "title": "La noche de Santa Isabel",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "1251::10909"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-1251",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Season 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/1251-el-internado-laguna-nera/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1251",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Season 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/1251-el-internado-laguna-nera/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1251",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Season 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/1251-el-internado-laguna-nera/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1251",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Season 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/1251-el-internado-laguna-nera/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1251",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Season 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/1251-el-internado-laguna-nera/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-1251",
+      "provider": "streamingunity",
+      "seasonKey": "season-7",
+      "seasonNumber": 7,
+      "seasonTitle": "Season 7",
+      "episodesLink": "https://streamingunity.biz/it/titles/1251-el-internado-laguna-nera/season-7",
+      "episodes": []
+    },
+    {
+      "contentId": "animeunity-2444",
+      "provider": "animeunity",
+      "seasonKey": "range-1-24",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-24",
+      "episodesLink": "2444|1|24",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-1",
+      "episodes": [
+        {
+          "title": "Episodio pilota",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "53687::308389"
+        },
+        {
+          "title": "Primo giorno",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "53687::308378"
+        },
+        {
+          "title": "Un tranquillo lunedì",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "53687::308380"
+        },
+        {
+          "title": "Incidente mortale",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "53687::308379"
+        },
+        {
+          "title": "Tutto in una notte",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "53687::308381"
+        },
+        {
+          "title": "Caldo e violenza",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "53687::308382"
+        },
+        {
+          "title": "Una giornata particolare",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "53687::308384"
+        },
+        {
+          "title": "Vinca il migliore",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "53687::308383"
+        },
+        {
+          "title": "La signora Rena",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "53687::308385"
+        },
+        {
+          "title": "Bufera di neve",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "53687::308386"
+        },
+        {
+          "title": "Buon Natale Susan!",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "53687::308387"
+        },
+        {
+          "title": "Buon anno",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "53687::308393"
+        },
+        {
+          "title": "La data delle nozze",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "53687::308388"
+        },
+        {
+          "title": "Lungo viaggio nel giorno",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "53687::308392"
+        },
+        {
+          "title": "Una vipera in corsia",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "53687::308390"
+        },
+        {
+          "title": "San Valentino",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "53687::308398"
+        },
+        {
+          "title": "Festa di compleanno",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "53687::308391"
+        },
+        {
+          "title": "Notte, dottor Benton",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "53687::308400"
+        },
+        {
+          "title": "Tragico errore",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "53687::308395"
+        },
+        {
+          "title": "Un sabato sera di luna piena",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "53687::308394"
+        },
+        {
+          "title": "Inquisizione",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "53687::308396"
+        },
+        {
+          "title": "L'uomo propone, Dio dispone",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "53687::308397"
+        },
+        {
+          "title": "Un nababbo tra noi",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "53687::308399"
+        },
+        {
+          "title": "Maternità",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "53687::308401"
+        },
+        {
+          "title": "Ci vediamo in autunno",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "53687::308403"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Stagione 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Stagione 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Stagione 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-4",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-5",
+      "seasonNumber": 5,
+      "seasonTitle": "Stagione 5",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-5",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-6",
+      "seasonNumber": 6,
+      "seasonTitle": "Stagione 6",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-6",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-7",
+      "seasonNumber": 7,
+      "seasonTitle": "Stagione 7",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-7",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-8",
+      "seasonNumber": 8,
+      "seasonTitle": "Stagione 8",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-8",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-9",
+      "seasonNumber": 9,
+      "seasonTitle": "Stagione 9",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-9",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-10",
+      "seasonNumber": 10,
+      "seasonTitle": "Stagione 10",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-10",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-11",
+      "seasonNumber": 11,
+      "seasonTitle": "Stagione 11",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-11",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-12",
+      "seasonNumber": 12,
+      "seasonTitle": "Stagione 12",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-12",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-13",
+      "seasonNumber": 13,
+      "seasonTitle": "Stagione 13",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-13",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-14",
+      "seasonNumber": 14,
+      "seasonTitle": "Stagione 14",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-14",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-53687",
+      "provider": "streamingunity",
+      "seasonKey": "season-15",
+      "seasonNumber": 15,
+      "seasonTitle": "Stagione 15",
+      "episodesLink": "https://streamingunity.biz/it/titles/53687-er/season-15",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-26777",
+      "provider": "streamingunity",
+      "seasonKey": "movie",
+      "seasonTitle": "Play",
+      "episodes": [
+        {
+          "title": "Play",
+          "episodeNumber": 1,
+          "link": "https://streamingunity.biz/it/watch/26777"
+        }
+      ]
+    },
+    {
+      "contentId": "animeunity-5447",
+      "provider": "animeunity",
+      "seasonKey": "range-1-102",
+      "seasonNumber": 1,
+      "seasonTitle": "Episodes 1-102",
+      "episodesLink": "5447|1|102",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-12721",
+      "provider": "streamingunity",
+      "seasonKey": "season-1",
+      "seasonNumber": 1,
+      "seasonTitle": "Stagione 1",
+      "episodesLink": "https://streamingunity.biz/it/titles/12721-farscape/season-1",
+      "episodes": [
+        {
+          "title": "Premiere",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "12721::92595"
+        },
+        {
+          "title": "Exodus from Genesis",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "12721::92596"
+        },
+        {
+          "title": "Back and Back and Back to the Future",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "12721::92597"
+        },
+        {
+          "title": "Throne for a Loss",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "12721::92598"
+        },
+        {
+          "title": "PK Tech Girl",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "12721::92599"
+        },
+        {
+          "title": "Thank God It's Friday, Again",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "12721::92600"
+        },
+        {
+          "title": "I, E.T.",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "12721::92601"
+        },
+        {
+          "title": "That Old Black Magic",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "12721::92602"
+        },
+        {
+          "title": "DNA Mad Scientist",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "12721::92603"
+        },
+        {
+          "title": "They've Got a Secret",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "12721::92604"
+        },
+        {
+          "title": "Till the Blood Runs Clear",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "12721::92605"
+        },
+        {
+          "title": "The Flax",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "12721::94253"
+        },
+        {
+          "title": "Rhapsody in Blue",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "12721::94252"
+        },
+        {
+          "title": "Jeremiah Crichton",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "12721::94254"
+        },
+        {
+          "title": "Durka Returns",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "12721::94255"
+        },
+        {
+          "title": "A Human Reaction",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "12721::94256"
+        },
+        {
+          "title": "Through the Looking Glass",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "12721::94257"
+        },
+        {
+          "title": "A Bug's Life",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "12721::94258"
+        },
+        {
+          "title": "Nerve (1)",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "12721::94259"
+        },
+        {
+          "title": "The Hidden Memory (2)",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "12721::94260"
+        },
+        {
+          "title": "Bone to Be Wild",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "12721::94261"
+        },
+        {
+          "title": "Family Ties",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "12721::94262"
+        }
+      ]
+    },
+    {
+      "contentId": "streamingunity-12721",
+      "provider": "streamingunity",
+      "seasonKey": "season-2",
+      "seasonNumber": 2,
+      "seasonTitle": "Stagione 2",
+      "episodesLink": "https://streamingunity.biz/it/titles/12721-farscape/season-2",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-12721",
+      "provider": "streamingunity",
+      "seasonKey": "season-3",
+      "seasonNumber": 3,
+      "seasonTitle": "Stagione 3",
+      "episodesLink": "https://streamingunity.biz/it/titles/12721-farscape/season-3",
+      "episodes": []
+    },
+    {
+      "contentId": "streamingunity-12721",
+      "provider": "streamingunity",
+      "seasonKey": "season-4",
+      "seasonNumber": 4,
+      "seasonTitle": "Stagione 4",
+      "episodesLink": "https://streamingunity.biz/it/titles/12721-farscape/season-4",
+      "episodes": []
+    }
+  ]
+}
