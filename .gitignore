@@ -3,6 +3,9 @@ dist/
 .DS_Store
 Thumbs.db
 .vscode/
+.env
+.env.*
+!.env.example
 
 # local generated test catalogs
 data/providers/**/*.test.json
