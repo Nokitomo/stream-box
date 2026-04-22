@@ -8,10 +8,7 @@ import {
 } from "../common.mjs";
 import { resolveProviderBaseUrl } from "../base-url.mjs";
 import {
-  extractDownloadUrl,
   extractVixCloudStreams,
-  normalizeUrl,
-  buildStreamHeaders,
 } from "../vixcloud.mjs";
 
 const USER_AGENT =
@@ -480,24 +477,10 @@ export async function getStreamingunityStreams({ link }) {
   const parsedStreams = extractVixCloudStreams(vixHtml, iframeSrc, USER_AGENT, {
     serverPrefix: "StreamingUnity",
   });
-  const downloadUrl = extractDownloadUrl(vixHtml);
   const normalizedStreams = parsedStreams.map((stream) => ({
     ...stream,
     server: normalizeServerName(stream.server),
   }));
-
-  if (downloadUrl) {
-    const downloadStream = {
-      server: "StreamingUnity Download",
-      link: downloadUrl,
-      type: downloadUrl.toLowerCase().includes(".m3u8") ? "m3u8" : "mp4",
-      headers: buildStreamHeaders(iframeSrc, USER_AGENT),
-    };
-    if (normalizedStreams.length && !normalizedStreams.find((entry) => entry.link === downloadUrl)) {
-      return [...normalizedStreams, downloadStream];
-    }
-    return normalizedStreams.length ? normalizedStreams : [downloadStream];
-  }
 
   return normalizedStreams;
 }

@@ -92,6 +92,23 @@ function decodeHeaders(rawHeaders) {
   }
 }
 
+function encodeHeaders(headers) {
+  const input = headers && typeof headers === "object" ? headers : {};
+  const out = {};
+  for (const key of Object.keys(input)) {
+    const normalizedKey = normalizeText(key);
+    const normalizedValue = normalizeText(input[key]);
+    if (!normalizedKey || !normalizedValue) continue;
+    out[normalizedKey] = normalizedValue;
+  }
+  if (!Object.keys(out).length) return "";
+  try {
+    return JSON.stringify(out);
+  } catch {
+    return "";
+  }
+}
+
 function sanitizeUpstreamHeaders(source, reqHeaders = {}) {
   const allowed = new Set([
     "accept",
@@ -137,13 +154,15 @@ function isLikelyManifest(contentType, url, body) {
   return text.startsWith("#EXTM3U");
 }
 
-function buildProxyUrl(targetUrl) {
+function buildProxyUrl(targetUrl, headers) {
   const query = new URLSearchParams();
   query.set("url", targetUrl);
+  const encodedHeaders = encodeHeaders(headers);
+  if (encodedHeaders) query.set("headers", encodedHeaders);
   return `/api/player/proxy?${query.toString()}`;
 }
 
-function rewriteManifest(manifestText, baseUrl) {
+function rewriteManifest(manifestText, baseUrl, headers) {
   const lines = String(manifestText || "").split(/\r?\n/);
   const out = [];
 
@@ -161,7 +180,7 @@ function rewriteManifest(manifestText, baseUrl) {
         line.replace(/URI="([^"]+)"/g, (_, uriValue) => {
           try {
             const resolved = new URL(uriValue, baseUrl).href;
-            return `URI="${buildProxyUrl(resolved)}"`;
+            return `URI="${buildProxyUrl(resolved, headers)}"`;
           } catch {
             return `URI="${uriValue}"`;
           }
@@ -172,7 +191,7 @@ function rewriteManifest(manifestText, baseUrl) {
 
     try {
       const resolved = new URL(trimmed, baseUrl).href;
-      out.push(buildProxyUrl(resolved));
+      out.push(buildProxyUrl(resolved, headers));
     } catch {
       out.push(line);
     }
@@ -287,7 +306,7 @@ export default async function handler(req, res) {
     response.on("data", (chunk) => chunks.push(chunk));
     response.on("end", () => {
       const raw = Buffer.concat(chunks).toString("utf8");
-      const rewritten = rewriteManifest(raw, finalUrl);
+      const rewritten = rewriteManifest(raw, finalUrl, requestedHeaders);
       res.statusCode = statusCode;
       copyHeadersToClient(response.headers, res, true);
       if (!res.getHeader("content-type")) {

@@ -149,15 +149,7 @@
   function bindShellFx() { if (state.shellFx && state.shellFx.destroy) state.shellFx.destroy(); if (!shellFxLib || !shellFxLib.create) return; state.shellFx = shellFxLib.create({ refs: refs.ui, state: state, ui: ui, engine: state.engine, onToggleFullscreen: toggleFullscreen }); }
   function bindSeekbar() { if (state.seekbar && state.seekbar.destroy) state.seekbar.destroy(); if (!seekbarLib || !seekbarLib.create) return; state.seekbar = seekbarLib.create({ refs: refs.ui, engine: state.engine, ui: ui, isLocked: function () { return !!state.locked; } }); }
   function bindLists() {
-    refs.ui.listServers.onclick = function (event) {
-      if (state.locked) return;
-      var btn = getClosest(event.target, '[data-item-id]');
-      if (!btn) return;
-      state.activeStreamIndex = Number(btn.getAttribute('data-item-id').replace('srv-', '')) || 0;
-      resetServerSwitch('');
-      loadCurrentEpisode(state.engine.getCurrentTime());
-      ui.setMenuOpen(refs.ui, false);
-    };
+    refs.ui.listServers.onclick = function (event) { if (state.locked) return; var btn = getClosest(event.target, '[data-item-id]'); if (!btn) return; var selectedIndex = Number(btn.getAttribute('data-item-id').replace('srv-', '')) || 0; var nav = state.navigator.toState(); var episode = state.navigator.getCurrentEpisode(); var selectedStream = episode && episode.streams ? episode.streams[selectedIndex] : null; var selectedServerName = utils.safeText(selectedStream && selectedStream.server || ''); state.activeStreamIndex = selectedIndex; resetServerSwitch(''); if (/download/i.test(selectedServerName)) { ui.setRuntimeStatus(refs.ui, 'Aggiorno token server download...', 'warn'); adapter.refreshStreams(state.payload, nav.seasonIndex, nav.episodeIndex).then(function (streams) { var currentEpisode = state.navigator.getCurrentEpisode(); if (currentEpisode && streams && streams.length) { currentEpisode.streams = streams; for (var i = 0; i < streams.length; i += 1) { if (utils.safeText(streams[i] && streams[i].server || '') !== selectedServerName) continue; state.activeStreamIndex = i; break; } } loadCurrentEpisode(state.engine.getCurrentTime(), true); }, function () { loadCurrentEpisode(state.engine.getCurrentTime()); }); } else loadCurrentEpisode(state.engine.getCurrentTime()); ui.setMenuOpen(refs.ui, false); };
     refs.ui.listQuality.onclick = function (event) {
       if (state.locked) return;
       var option = findQualityOption(getClosest(event.target, '[data-item-id]'));
@@ -368,27 +360,10 @@
     if (state.startupTimer) global.clearTimeout(state.startupTimer);
     state.startupTimer = null;
   }
-  function handleEngineError(error) { clearStartupGuard(false); var status = parseStatus(error); if ((status === 403 || status === 503) && canRetryToken()) return retryCurrentStream(); switchToNextServer('Errore stream, provo server successivo.'); }
+  function handleEngineError(error) { clearStartupGuard(false); var status = parseStatus(error); var lastSeekAt = state.engine && state.engine.getLastSeekAt ? Number(state.engine.getLastSeekAt()) || 0 : 0; var seekDistance = lastSeekAt ? (Date.now() - lastSeekAt) : 9007199254740991; if (seekDistance >= 0 && seekDistance < 2000 && status === 0) { ui.setRuntimeStatus(refs.ui, 'Ri-buffering dopo seek: attendo senza cambiare server.', 'warn'); return; } var fatal = !(error && error.fatal === false); if (!fatal && status !== 403 && status !== 503) { ui.setRuntimeStatus(refs.ui, 'Errore temporaneo stream: ritento senza cambiare server.', 'warn'); return; } if ((status === 403 || status === 503) && canRetryToken()) return retryCurrentStream(); switchToNextServer('Errore stream, provo server successivo.'); }
   function parseStatus(error) { var status = Number(error && error.status) || 0; if (status) return status; var match = utils.safeText(error && error.message || '').match(/\b(403|503)\b/); return match ? Number(match[1]) : 0; }
   function canRetryToken() { var episode = state.navigator.getCurrentEpisode(); if (!episode || !episode.streams || !episode.streams.length) return false; var stream = episode.streams[state.activeStreamIndex]; if (!stream) return false; var key = episode.link + '|' + stream.server; var now = Date.now(); if (state.retryState.key !== key) state.retryState = { key: key, count: 0, lastAttempt: 0 }; return state.retryState.count < 1 && now - state.retryState.lastAttempt > 3000; }
-  function retryCurrentStream() {
-    var navState = state.navigator.toState();
-    state.retryState.count += 1;
-    state.retryState.lastAttempt = Date.now();
-    ui.setRuntimeStatus(refs.ui, 'Token stream scaduto: refresh in corso...', 'warn');
-    adapter.refreshStreams(state.payload, navState.seasonIndex, navState.episodeIndex).then(function (streams) {
-      var episode = state.navigator.getCurrentEpisode();
-      if (episode && streams && streams.length) {
-        episode.streams = streams;
-        state.activeStreamIndex = 0;
-        loadCurrentEpisode(state.engine.getCurrentTime(), true);
-        return;
-      }
-      switchToNextServer('Refresh stream fallito.');
-    }, function () {
-      switchToNextServer('Refresh stream fallito.');
-    });
-  }
+  function retryCurrentStream() { var navState = state.navigator.toState(); var episode = state.navigator.getCurrentEpisode(); var previousStream = episode && episode.streams ? episode.streams[state.activeStreamIndex] : null; var previousServerName = utils.safeText(previousStream && previousStream.server || ''); state.retryState.count += 1; state.retryState.lastAttempt = Date.now(); ui.setRuntimeStatus(refs.ui, 'Token stream scaduto: refresh in corso...', 'warn'); adapter.refreshStreams(state.payload, navState.seasonIndex, navState.episodeIndex).then(function (streams) { var currentEpisode = state.navigator.getCurrentEpisode(); if (currentEpisode && streams && streams.length) { currentEpisode.streams = streams; state.activeStreamIndex = 0; if (previousServerName) { for (var i = 0; i < streams.length; i += 1) { if (utils.safeText(streams[i] && streams[i].server || '') !== previousServerName) continue; state.activeStreamIndex = i; break; } } loadCurrentEpisode(state.engine.getCurrentTime(), true); return; } switchToNextServer('Refresh stream fallito.'); }, function () { switchToNextServer('Refresh stream fallito.'); }); }
   function switchToNextServer(message) { var episode = state.navigator.getCurrentEpisode(); if (!episode || !episode.streams || !episode.streams.length) return blockPlayback('Riproduzione non disponibile. Nessuno stream valido trovato.'); var total = episode.streams.length; if (state.serverSwitch.episodeLink !== episode.link) resetServerSwitch(episode.link); state.serverSwitch.attempts += 1; if (state.serverSwitch.attempts >= total) { ui.setOverlay(refs.ui, ''); ui.setRuntimeStatus(refs.ui, 'Riproduzione non disponibile. Seleziona un altro server dal menu.', 'error'); ui.setMenuOpen(refs.ui, true); return; } state.activeStreamIndex = (state.activeStreamIndex + 1) % total; ui.setRuntimeStatus(refs.ui, message || 'Cambio server...', 'warn'); loadCurrentEpisode(state.engine.getCurrentTime(), true); }
   function blockPlayback(message) { ui.setOverlay(refs.ui, ''); ui.setRuntimeStatus(refs.ui, message || 'Errore riproduzione', 'error'); ui.setMenuOpen(refs.ui, true); }
   function persistProgress(force, current, duration) { var now = Date.now(); if (!force && now - state.lastProgressSave < 5000) return; state.lastProgressSave = now; var episode = state.navigator.getCurrentEpisode(); if (!episode) return; var nav = state.navigator.toState(); var position = typeof current === 'number' ? current : state.engine.getCurrentTime(); var total = typeof duration === 'number' ? duration : state.engine.getDuration(); storage.saveProgress(state.payload.content.id, episode.link, position, total, { episodeTitle: episode.title, episodeNumber: episode.episodeNumber, seasonNumber: (Number(nav.seasonIndex) || 0) + 1 }); }

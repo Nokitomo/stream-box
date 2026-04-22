@@ -1,11 +1,9 @@
 (function (global) {
   var StreamBox = global.StreamBox = global.StreamBox || {};
   var utils = StreamBox.utils;
-
   function toText(value) {
     return utils.safeText(value || '');
   }
-
   function detectType(stream) {
     var declared = toText(stream && stream.type).toLowerCase();
     var url = toText(stream && stream.url).split('?')[0].split('#')[0].toLowerCase();
@@ -14,7 +12,6 @@
     if (declared === 'mp4' || /\.mp4$/.test(url)) return 'mp4';
     return 'auto';
   }
-
   function isForbiddenHeader(name) {
     var key = toText(name).toLowerCase();
     if (!key) return true;
@@ -24,7 +21,6 @@
     if (key.indexOf('proxy-') === 0 || key.indexOf('sec-') === 0) return true;
     return false;
   }
-
   function create(videoEl) {
     var video = videoEl;
     var mode = 'none';
@@ -37,7 +33,8 @@
     var hlsHandlers = [];
     var dashHandlers = [];
     var currentStream = null;
-
+    var hlsMediaRecoveryCount = 0;
+    var lastSeekAt = 0;
     function destroyHls() {
       if (!hls) return;
       try {
@@ -47,7 +44,6 @@
       } catch (_) {}
       hls = null;
     }
-
     function destroyDash() {
       if (!dash) return;
       try {
@@ -57,7 +53,6 @@
       } catch (_) {}
       dash = null;
     }
-
     function clearVideoListeners() {
       for (var i = 0; i < videoHandlers.length; i += 1) {
         try {
@@ -66,16 +61,13 @@
       }
       videoHandlers = [];
     }
-
     function bindVideoEvent(event, fn) {
       video.addEventListener(event, fn);
       videoHandlers.push({ event: event, fn: fn });
     }
-
     function emitError(payload) {
       if (callbacks.onError) callbacks.onError(payload || {});
     }
-
     function emitProgress() {
       if (!callbacks.onProgress) return;
       callbacks.onProgress({
@@ -83,7 +75,6 @@
         duration: Number(video.duration) || 0
       });
     }
-
     function emitTracksChanged() {
       if (!callbacks.onTracksChanged) return;
       callbacks.onTracksChanged({
@@ -91,7 +82,6 @@
         qualityOptions: listQualityOptions()
       });
     }
-
     function clearSubtitleTracks() {
       for (var i = 0; i < trackElements.length; i += 1) {
         try {
@@ -101,10 +91,8 @@
       trackElements = [];
       selectedSubtitleIndex = -1;
     }
-
     function bindBaseVideoEvents() {
       clearVideoListeners();
-
       bindVideoEvent('loadedmetadata', function () {
         var startTime = Number(callbacks.startTime) || 0;
         if (startTime > 0 && startTime < (video.duration || Number.MAX_SAFE_INTEGER)) {
@@ -114,7 +102,6 @@
         if (callbacks.onReady) callbacks.onReady();
         emitTracksChanged();
       });
-
       bindVideoEvent('timeupdate', emitProgress);
       bindVideoEvent('ended', function () {
         if (callbacks.onEnded) callbacks.onEnded();
@@ -128,7 +115,6 @@
         });
       });
     }
-
     function applyNativeSource(url) {
       mode = 'native';
       try {
@@ -138,25 +124,20 @@
         emitError({ message: 'Cannot load source: ' + String(error && error.message || error), fatal: true });
       }
     }
-
     function supportsNativeHls() {
       return !!(video && video.canPlayType && (video.canPlayType('application/vnd.apple.mpegurl') || video.canPlayType('application/x-mpegURL')));
     }
-
     function supportsNativeDash() {
       return !!(video && video.canPlayType && video.canPlayType('application/dash+xml'));
     }
-
     function bindHlsEvent(event, fn) {
       hls.on(event, fn);
       hlsHandlers.push({ event: event, fn: fn });
     }
-
     function bindDashEvent(event, fn) {
       dash.on(event, fn);
       dashHandlers.push({ event: event, fn: fn });
     }
-
     function applyHlsSource(stream) {
       if (!global.Hls || !global.Hls.isSupported()) {
         emitError({ message: 'HLS not supported in this browser', fatal: true });
@@ -178,7 +159,6 @@
           }
         }
       });
-
       bindHlsEvent(global.Hls.Events.MANIFEST_PARSED, function () {
         if (callbacks.onReady) callbacks.onReady();
         emitTracksChanged();
@@ -187,17 +167,17 @@
       bindHlsEvent(global.Hls.Events.AUDIO_TRACK_SWITCHED, emitTracksChanged);
       bindHlsEvent(global.Hls.Events.ERROR, function (_, data) {
         var status = data && data.response ? Number(data.response.code) || 0 : 0;
-        emitError({
-          status: status,
-          message: toText(data && data.details) || 'HLS error',
-          fatal: !!(data && data.fatal)
-        });
+        var errorType = toText(data && data.type);
+        var isFatal = !!(data && data.fatal);
+        if (isFatal && (errorType === 'mediaerror' || errorType === 'media_error') && hls && hls.recoverMediaError && hlsMediaRecoveryCount < 1) {
+          hlsMediaRecoveryCount += 1;
+          try { hls.recoverMediaError(); emitError({ status: status, message: 'HLS media error recover in corso', fatal: false }); return; } catch (_) {}
+        }
+        emitError({ status: status, message: toText(data && data.details) || 'HLS error', fatal: isFatal });
       });
-
       hls.loadSource(stream.url);
       hls.attachMedia(video);
     }
-
     function applyDashSource(stream) {
       if (!global.dashjs || !global.dashjs.MediaPlayer) {
         emitError({ message: 'DASH not supported in this browser', fatal: true });
@@ -207,7 +187,6 @@
       dash = global.dashjs.MediaPlayer().create();
       dash.initialize(video, stream.url, false);
       if (callbacks.playbackRate && isFinite(callbacks.playbackRate)) video.playbackRate = callbacks.playbackRate;
-
       var events = global.dashjs.MediaPlayer.events || {};
       if (events.STREAM_INITIALIZED) {
         bindDashEvent(events.STREAM_INITIALIZED, function () {
@@ -228,21 +207,19 @@
         });
       }
     }
-
     function setSource(stream, opts) {
       callbacks = opts || {};
       currentStream = stream || null;
+      hlsMediaRecoveryCount = 0;
       destroyHls();
       destroyDash();
       clearSubtitleTracks();
       bindBaseVideoEvents();
-
       var url = toText(stream && stream.url);
       if (!url) {
         emitError({ message: 'Empty stream URL', fatal: true });
         return;
       }
-
       var type = detectType(stream);
       if (type === 'hls') {
         if (global.Hls && global.Hls.isSupported && global.Hls.isSupported()) applyHlsSource(stream);
@@ -255,7 +232,6 @@
         applyNativeSource(url);
       }
     }
-
     function listAudioTracks() {
       if (mode === 'hls' && hls && Array.isArray(hls.audioTracks)) {
         var hlsTracks = [];
@@ -272,14 +248,12 @@
       }
       return [];
     }
-
     function selectAudioTrack(index) {
       if (mode === 'hls' && hls && hls.audioTracks && hls.audioTracks.length) {
         hls.audioTrack = Number(index) || 0;
       }
       emitTracksChanged();
     }
-
     function listQualityOptions() {
       if (mode === 'hls' && hls && Array.isArray(hls.levels) && hls.levels.length) {
         var out = [{ index: -1, auto: true, selected: hls.autoLevelEnabled, label: 'Auto' }];
@@ -314,7 +288,6 @@
       }
       return [{ index: -1, auto: true, selected: true, label: 'Auto' }];
     }
-
     function selectQuality(option) {
       if (mode === 'hls' && hls) {
         if (option && option.auto) hls.currentLevel = -1;
@@ -326,7 +299,6 @@
       }
       emitTracksChanged();
     }
-
     function setSubtitleTracks(tracks, selectedIndex) {
       clearSubtitleTracks();
       var source = Array.isArray(tracks) ? tracks : [];
@@ -346,7 +318,6 @@
         selectSubtitle(typeof selectedIndex === 'number' ? selectedIndex : -1);
       }, 50);
     }
-
     function selectSubtitle(index) {
       selectedSubtitleIndex = Number(index);
       var textTracks = video.textTracks || [];
@@ -354,7 +325,6 @@
       for (i = 0; i < textTracks.length; i += 1) textTracks[i].mode = 'disabled';
       if (selectedSubtitleIndex >= 0 && textTracks[selectedSubtitleIndex]) textTracks[selectedSubtitleIndex].mode = 'showing';
     }
-
     function destroy() {
       destroyHls();
       destroyDash();
@@ -366,15 +336,14 @@
         video.load();
       } catch (_) {}
     }
-
     return {
       setSource: setSource,
       destroy: destroy,
       play: function () { return video.play(); },
       pause: function () { video.pause(); },
       togglePlayPause: function () { if (video.paused) video.play(); else video.pause(); },
-      seekBy: function (offset) { video.currentTime = Math.max(0, (Number(video.currentTime) || 0) + (Number(offset) || 0)); },
-      seekTo: function (value) { video.currentTime = Math.max(0, Number(value) || 0); },
+      seekBy: function (offset) { lastSeekAt = Date.now(); video.currentTime = Math.max(0, (Number(video.currentTime) || 0) + (Number(offset) || 0)); },
+      seekTo: function (value) { lastSeekAt = Date.now(); video.currentTime = Math.max(0, Number(value) || 0); },
       setPlaybackRate: function (rate) { video.playbackRate = Number(rate) || 1; },
       getPlaybackRate: function () { return Number(video.playbackRate) || 1; },
       getCurrentTime: function () { return Number(video.currentTime) || 0; },
@@ -388,10 +357,10 @@
       canPictureInPicture: function () { return !!(video && video.requestPictureInPicture && document.pictureInPictureEnabled); },
       enterPictureInPicture: function () { if (video.requestPictureInPicture) return video.requestPictureInPicture(); return Promise.reject(new Error('PIP unsupported')); },
       isPaused: function () { return !!video.paused; },
-      getCurrentStream: function () { return currentStream; }
+      getCurrentStream: function () { return currentStream; },
+      getLastSeekAt: function () { return Number(lastSeekAt) || 0; }
     };
   }
-
   StreamBox.playerEngine = {
     create: create
   };

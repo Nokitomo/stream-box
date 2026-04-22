@@ -255,10 +255,6 @@
     return utils.resolvePath('/api/player/proxy') + '?' + toQuery(params);
   }
 
-  function shouldBypassProxy(server) {
-    return /download/i.test(toText(server));
-  }
-
   function fromApi(summary, detail) {
     var provider = toText(summary && summary.provider).toLowerCase();
     var link = resolveProviderLink(summary, detail);
@@ -348,15 +344,15 @@
     var out = [];
     for (var i = 0; i < source.length; i += 1) {
       var normalized = contract.normalizeStream ? contract.normalizeStream(source[i], i) : source[i];
-      var bypassProxy = normalized && shouldBypassProxy(normalized.server);
+      var useProxyHeaders = normalized && !/download/i.test(toText(normalized.server));
       if (normalized && normalized.url) {
-        normalized.url = bypassProxy ? normalized.url : toProxyUrl(normalized.url, normalized.headers);
+        normalized.url = toProxyUrl(normalized.url, useProxyHeaders ? normalized.headers : null);
       }
       if (normalized && Array.isArray(normalized.subtitles)) {
         for (var j = 0; j < normalized.subtitles.length; j += 1) {
           var subtitle = normalized.subtitles[j];
           if (!subtitle || !subtitle.url) continue;
-          subtitle.url = bypassProxy ? subtitle.url : toProxyUrl(subtitle.url, normalized.headers);
+          subtitle.url = toProxyUrl(subtitle.url, useProxyHeaders ? normalized.headers : null);
         }
       }
       if (normalized) out.push(normalized);
