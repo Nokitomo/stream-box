@@ -51,7 +51,7 @@ function buildAnimeUnityPlaybackFallback(detail: CatalogDetailItem): CatalogDeta
     while (start <= episodesCount) {
       const end = Math.min(start + chunk - 1, episodesCount);
       linkList.linkList.push({
-        title: `Episodes ${start}-${end}`,
+        title: `Episodi ${start}-${end}`,
         seasonNumber,
         seasonKey: `range-${start}-${end}`,
         episodesLink: `${localId}|${start}|${end}`,
@@ -62,7 +62,7 @@ function buildAnimeUnityPlaybackFallback(detail: CatalogDetailItem): CatalogDeta
     }
   } else if (localId) {
     linkList.linkList.push({
-      title: "Episodes",
+      title: "Episodi",
       seasonNumber: 1,
       seasonKey: "default",
       episodesLink: localId,
@@ -85,7 +85,7 @@ function buildStreamingUnityPlaybackFallback(detail: CatalogDetailItem): Catalog
       const seasonNumber = Number(season.number || 0) || undefined;
       if (!seasonNumber) continue;
       linkList.linkList.push({
-        title: season.name || `Season ${seasonNumber}`,
+        title: season.name || `Stagione ${seasonNumber}`,
         seasonNumber,
         seasonKey: `season-${seasonNumber}`,
         episodesLink: `${page}/season-${seasonNumber}`,
@@ -94,12 +94,12 @@ function buildStreamingUnityPlaybackFallback(detail: CatalogDetailItem): Catalog
     }
   } else if (detail.links?.watch || detail.links?.source) {
     linkList.linkList.push({
-      title: "Play",
+      title: "Riproduci",
       seasonKey: "movie",
       availabilityStatus: "available",
       directLinks: [
         {
-          title: "Play",
+          title: "Riproduci",
           link: detail.links.watch || detail.links.source || "",
           type: "movie",
         },

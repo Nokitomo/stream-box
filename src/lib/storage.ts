@@ -5,7 +5,7 @@ import type {
   WatchlistItem,
 } from "../types";
 
-const NAMESPACE = "vega_web_clone_v1";
+const NAMESPACE = "vega_web_v1";
 
 const DEFAULT_SETTINGS: AppSettings = {
   preferProxyPlayback: false,

@@ -22,11 +22,11 @@ import {
   upsertProgress,
   upsertWatchlist,
 } from "./lib/storage";
-import { getCurrentSession, signInWithEmail, signOut } from "./lib/supabase";
+import { getCurrentSession, getSupabaseClient, signInWithEmail, signOut } from "./lib/supabase";
 import { runInitialSync } from "./lib/sync";
 
 const appElement = document.querySelector<HTMLDivElement>("#app");
-if (!appElement) throw new Error("Missing app root");
+if (!appElement) throw new Error("Elemento radice dell'app non trovato");
 const app = appElement;
 
 const catalog = new CatalogClient();
@@ -83,22 +83,43 @@ function parseRoute(): Route {
 
 function nav(): string {
   return `<header class="topbar">
-    <a href="#/home" class="brand">Vega Web Clone</a>
+    <a href="#/home" class="brand">Vega</a>
     <nav class="menu">
       <a href="#/home">Home</a>
-      <a href="#/search">Search</a>
-      <a href="#/watchlist">Watchlist</a>
-      <a href="#/history">History</a>
-      <a href="#/settings">Settings</a>
+      <a href="#/search">Cerca</a>
+      <a href="#/watchlist">La mia lista</a>
+      <a href="#/history">Cronologia</a>
+      <a href="#/settings">Impostazioni</a>
     </nav>
   </header>`;
+}
+
+function toProviderLabel(provider: Provider): string {
+  return provider === "animeunity" ? "AnimeUnity" : "StreamingUnity";
+}
+
+function toTypeLabel(type: "movie" | "series"): string {
+  return type === "movie" ? "Film" : "Serie";
+}
+
+function toPlaybackLabel(title: string): string {
+  const text = String(title || "").trim();
+  const episodesRange = text.match(/^Episodes\s+(\d+)-(\d+)$/i);
+  if (episodesRange) {
+    return `Episodi ${episodesRange[1]}-${episodesRange[2]}`;
+  }
+  if (/^Episodes$/i.test(text)) return "Episodi";
+  const season = text.match(/^Season\s+(\d+)$/i);
+  if (season) return `Stagione ${season[1]}`;
+  if (/^Play$/i.test(text)) return "Riproduci";
+  return text;
 }
 
 function poster(summary: CatalogSummaryItem): string {
   const image = summary.poster || summary.backdrop;
   const safeImage = escapeHtml(image || "");
   const safeTitle = escapeHtml(summary.title);
-  const meta = `${summary.year} · ${summary.provider} · ${summary.type}`;
+  const meta = `${summary.year} · ${toProviderLabel(summary.provider)} · ${toTypeLabel(summary.type)}`;
   return `<article class="card">
     <a href="#/info/${encodeURIComponent(summary.id)}" class="card-link">
       <div class="card-poster" style="background-image:url('${safeImage}')"></div>
@@ -237,7 +258,7 @@ async function renderSearch(query: string, token: number): Promise<void> {
 
   app.innerHTML = `${nav()}<main class="container">
     <section class="section">
-      <h2>Search</h2>
+      <h2>Cerca</h2>
       <form id="search-form" class="search-form">
         <input name="q" value="${escapeHtml(query)}" placeholder="Cerca per titolo, tag, cast..." />
         <button type="submit">Cerca</button>
@@ -269,7 +290,7 @@ function renderSeasonButtons(detail: CatalogDetailItem, selectedSeasonKey?: stri
         : `#/info/${encodeURIComponent(detail.id)}?season=${encodeURIComponent(seasonKey)}`;
       return `<a class="pill ${active} ${upcoming ? "disabled" : ""}" href="${href}" data-season-key="${escapeHtml(
         seasonKey
-      )}">${escapeHtml(item.title)}</a>`;
+      )}">${escapeHtml(toPlaybackLabel(item.title))}</a>`;
     })
     .join("");
 }
@@ -316,17 +337,17 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
         <h1>${escapeHtml(detail.title)}</h1>
         <p>${escapeHtml(description)}</p>
         <p class="muted">${escapeHtml(
-          `${detail.provider} · ${detail.type} · ${detail.year} · ${detail.maturity}`
+          `${toProviderLabel(detail.provider)} · ${toTypeLabel(detail.type)} · ${detail.year} · ${detail.maturity}`
         )}</p>
         <div class="actions">
-          <button id="watchlist-toggle">${inWatchlist ? "Rimuovi da Watchlist" : "Aggiungi a Watchlist"}</button>
+          <button id="watchlist-toggle">${inWatchlist ? "Rimuovi dalla Lista" : "Aggiungi alla Lista"}</button>
           ${
             selected && episodes.length > 0
               ? `<a class="button-link" href="#/player/${encodeURIComponent(detail.id)}?provider=${encodeURIComponent(
                   detail.provider
                 )}&link=${encodeURIComponent(episodes[0].link)}&season=${encodeURIComponent(
                   selectedKey || ""
-                )}&episodeTitle=${encodeURIComponent(episodes[0].title)}">Play</a>`
+                )}&episodeTitle=${encodeURIComponent(episodes[0].title)}">Riproduci</a>`
               : ""
           }
         </div>
@@ -334,7 +355,7 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
     </section>
 
     <section class="section">
-      <h2>Stagioni / Fonti</h2>
+      <h2>Stagioni / Sorgenti</h2>
       <div class="pill-wrap">${renderSeasonButtons(detail, selectedKey)}</div>
       ${selected?.availabilityStatus === "upcoming" ? `<p class="muted">Disponibile in futuro</p>` : episodesHtml}
     </section>
@@ -342,7 +363,7 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
       <h2>Dettagli</h2>
       <p><strong>Generi:</strong> ${escapeHtml((detail.genres || []).join(", ") || "N/D")}</p>
       <p><strong>Cast:</strong> ${escapeHtml((detail.cast || []).join(", ") || "N/D")}</p>
-      <p><strong>Score:</strong> ${escapeHtml(String(detail.score || summary.score || "N/D"))}</p>
+      <p><strong>Valutazione:</strong> ${escapeHtml(String(detail.score || summary.score || "N/D"))}</p>
       <p><strong>Qualità:</strong> ${escapeHtml(String(detail.quality || "N/D"))}</p>
     </section>
   </main>`;
@@ -351,7 +372,7 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
   if (watchlistButton) {
     watchlistButton.onclick = () => {
       const nowInWatchlist = toggleWatchlist(summary);
-      watchlistButton.textContent = nowInWatchlist ? "Rimuovi da Watchlist" : "Aggiungi a Watchlist";
+      watchlistButton.textContent = nowInWatchlist ? "Rimuovi dalla Lista" : "Aggiungi alla Lista";
     };
   }
 }
@@ -507,7 +528,7 @@ function renderWatchlist(): void {
   const list = getWatchlist();
   app.innerHTML = `${nav()}<main class="container">
     <section class="section">
-      <h2>Watchlist</h2>
+      <h2>La mia lista</h2>
       <div class="grid">
         ${
           list.length
@@ -517,12 +538,12 @@ function renderWatchlist(): void {
                     `<article class="card">
                       <a href="#/info/${encodeURIComponent(item.id)}">
                         <div class="card-poster" style="background-image:url('${escapeHtml(item.poster)}')"></div>
-                        <div class="card-body"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.provider)}</p></div>
+                        <div class="card-body"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(toProviderLabel(item.provider))}</p></div>
                       </a>
                     </article>`
                 )
                 .join("")
-            : "<p>Nessun elemento in watchlist.</p>"
+            : "<p>Nessun contenuto nella tua lista.</p>"
         }
       </div>
     </section>
@@ -533,7 +554,7 @@ function renderHistory(): void {
   const history = getHistory();
   app.innerHTML = `${nav()}<main class="container">
     <section class="section">
-      <h2>History</h2>
+      <h2>Cronologia</h2>
       <ul class="history-list">
         ${
           history.length
@@ -555,28 +576,37 @@ function renderHistory(): void {
 
 async function renderSettings(token: number): Promise<void> {
   const settings = getSettings();
+  const accountEnabled = Boolean(getSupabaseClient());
   const session = await getCurrentSession();
   if (token !== renderToken) return;
 
   app.innerHTML = `${nav()}<main class="container">
     <section class="section">
-      <h2>Settings</h2>
+      <h2>Impostazioni</h2>
       <form id="settings-form" class="settings-form">
-        <label><input type="checkbox" name="preferProxyPlayback" ${settings.preferProxyPlayback ? "checked" : ""}/> Prefer proxy playback</label>
-        <label><input type="checkbox" name="preferDirectPlayback" ${settings.preferDirectPlayback ? "checked" : ""}/> Prefer direct playback</label>
+        <label><input type="checkbox" name="preferProxyPlayback" ${settings.preferProxyPlayback ? "checked" : ""}/> Preferisci riproduzione tramite proxy</label>
+        <label><input type="checkbox" name="preferDirectPlayback" ${settings.preferDirectPlayback ? "checked" : ""}/> Preferisci riproduzione diretta</label>
         <label><input type="checkbox" name="subtitlesEnabled" ${settings.subtitlesEnabled ? "checked" : ""}/> Sottotitoli abilitati</label>
-        <label><input type="checkbox" name="autoSyncOnLogin" ${settings.autoSyncOnLogin ? "checked" : ""}/> Sync cloud automatico al login</label>
+        <label><input type="checkbox" name="autoSyncOnLogin" ${settings.autoSyncOnLogin ? "checked" : ""}/> Sincronizza automaticamente al login</label>
         <button type="submit">Salva impostazioni</button>
       </form>
       <hr />
-      <h3>Supabase</h3>
-      <p class="muted">${session ? `Loggato come ${escapeHtml(session.user.email || session.user.id)}` : "Guest mode attivo"}</p>
+      <h3>Account</h3>
+      <p class="muted">${
+        accountEnabled
+          ? session
+            ? `Accesso effettuato come ${escapeHtml(session.user.email || session.user.id)}`
+            : "Accedi per sincronizzare lista, cronologia e progresso su più dispositivi."
+          : "Accesso account non disponibile al momento."
+      }</p>
       ${
-        session
-          ? `<button id="logout-button">Logout</button>`
-          : `<form id="login-form" class="settings-form">
+        !accountEnabled
+          ? ""
+          : session
+            ? `<button id="logout-button">Esci</button>`
+            : `<form id="login-form" class="settings-form">
               <input name="email" type="email" placeholder="email@domain.com" required />
-              <button type="submit">Invia magic link</button>
+              <button type="submit">Invia link di accesso</button>
             </form>`
       }
     </section>
@@ -603,8 +633,12 @@ async function renderSettings(token: number): Promise<void> {
       event.preventDefault();
       const email = String(new FormData(loginForm).get("email") || "").trim();
       if (!email) return;
-      await signInWithEmail(email);
-      alert("Magic link inviato. Controlla la tua email.");
+      try {
+        await signInWithEmail(email);
+        alert("Link di accesso inviato. Controlla la tua email.");
+      } catch (error) {
+        alert(error instanceof Error ? error.message : "Impossibile avviare l'accesso.");
+      }
     };
   }
 

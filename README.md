@@ -1,6 +1,6 @@
-# Vega Web Clone (Blueprint V1)
+# Vega Web (Blueprint V1)
 
-Static-first web clone for AU + SU with minimal backend runtime.
+App web static-first per AU + SU con backend runtime minimo.
 
 ## Stack
 

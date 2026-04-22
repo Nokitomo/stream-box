@@ -26,7 +26,7 @@ export async function getCurrentSession(): Promise<Session | null> {
 
 export async function signInWithEmail(email: string): Promise<void> {
   const supabase = getSupabaseClient();
-  if (!supabase) throw new Error("Supabase non configurato");
+  if (!supabase) throw new Error("Servizio account non configurato.");
   const { error } = await supabase.auth.signInWithOtp({ email });
   if (error) throw error;
 }
