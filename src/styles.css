@@ -94,6 +94,25 @@ a {
   gap: 14px;
 }
 
+.row-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.row-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+}
+
+.row-card {
+  width: 190px;
+  flex: 0 0 auto;
+}
+
 .card {
   background: var(--surface);
   border: 1px solid rgba(255, 255, 255, 0.07);
@@ -154,6 +173,10 @@ button,
   background: linear-gradient(135deg, var(--accent), #f38a2a);
   border: none;
   font-weight: 600;
+}
+
+.button-link.secondary-link {
+  background: linear-gradient(135deg, #2e3e67, #314d7f);
 }
 
 .hero {

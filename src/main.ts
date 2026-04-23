@@ -41,6 +41,13 @@ type Route =
   | { name: "settings" };
 
 let renderToken = 0;
+const HOME_CATEGORY_LIMIT = 30;
+
+type HomeCategory = {
+  id: string;
+  title: string;
+  items: CatalogSummaryItem[];
+};
 
 function escapeHtml(value: string): string {
   return String(value || "")
@@ -115,13 +122,17 @@ function toPlaybackLabel(title: string): string {
   return text;
 }
 
-function poster(summary: CatalogSummaryItem): string {
+function poster(summary: CatalogSummaryItem, options?: { row?: boolean; clone?: boolean }): string {
+  const row = options?.row === true;
+  const clone = options?.clone === true;
   const image = summary.poster || summary.backdrop;
   const safeImage = escapeHtml(image || "");
   const safeTitle = escapeHtml(summary.title);
   const meta = `${summary.year} · ${toProviderLabel(summary.provider)} · ${toTypeLabel(summary.type)}`;
-  return `<article class="card">
-    <a href="#/info/${encodeURIComponent(summary.id)}" class="card-link">
+  const cardClass = row ? "card row-card" : "card";
+  const cloneAttrs = clone ? `aria-hidden="true" tabindex="-1"` : "";
+  return `<article class="${cardClass}">
+    <a href="#/info/${encodeURIComponent(summary.id)}" class="card-link" ${cloneAttrs}>
       <div class="card-poster" style="background-image:url('${safeImage}')"></div>
       <div class="card-body">
         <h3>${safeTitle}</h3>
@@ -140,14 +151,124 @@ function normalizeTokens(text: string): string[] {
     .filter(Boolean);
 }
 
-function resolveStreamUrl(stream: Stream, forceProxy: boolean): string {
+function hasAnyTag(item: CatalogSummaryItem, tags: string[]): boolean {
+  const source = new Set((item.categoryTags || []).map((entry) => String(entry || "").toLowerCase()));
+  return tags.some((tag) => source.has(tag));
+}
+
+function hasAnyGenre(item: CatalogSummaryItem, terms: string[]): boolean {
+  const source = new Set((item.genres || []).map((entry) => normalizeTokens(entry).join(" ")).filter(Boolean));
+  return terms.some((term) => source.has(normalizeTokens(term).join(" ")));
+}
+
+function scoreForHome(item: CatalogSummaryItem): number {
+  const viewsScore = Math.min(item.views || 0, 5_000_000) / 20_000;
+  const dailyScore = (item.dailyViews || 0) * 3;
+  const scoreBoost = (item.score || 0) * 22;
+  const matchBoost = item.match || 0;
+  const freshnessBoost = item.isNew ? 90 : 0;
+  return Math.round(viewsScore + dailyScore + scoreBoost + matchBoost + freshnessBoost);
+}
+
+function sortForHome(items: CatalogSummaryItem[]): CatalogSummaryItem[] {
+  return [...items].sort((a, b) => {
+    const delta = scoreForHome(b) - scoreForHome(a);
+    if (delta !== 0) return delta;
+    return a.title.localeCompare(b.title, "it");
+  });
+}
+
+function uniqueById(items: CatalogSummaryItem[]): CatalogSummaryItem[] {
+  const map = new Map<string, CatalogSummaryItem>();
+  for (const item of items) {
+    if (!map.has(item.id)) map.set(item.id, item);
+  }
+  return [...map.values()];
+}
+
+function toHomeCategory(
+  id: string,
+  title: string,
+  source: CatalogSummaryItem[],
+  predicate: (item: CatalogSummaryItem) => boolean
+): HomeCategory | null {
+  const items = uniqueById(sortForHome(source.filter(predicate))).slice(0, HOME_CATEGORY_LIMIT);
+  if (items.length === 0) return null;
+  return { id, title, items };
+}
+
+function buildHomeCategories(items: CatalogSummaryItem[]): HomeCategory[] {
+  const categories: Array<HomeCategory | null> = [
+    toHomeCategory("in-evidenza", "In evidenza", items, () => true),
+    toHomeCategory("nuove-uscite", "Nuove uscite", items, (item) => item.isNew || item.year >= new Date().getFullYear() - 1),
+    toHomeCategory("film", "Film", items, (item) => item.type === "movie"),
+    toHomeCategory("serie-tv", "Serie TV", items, (item) => item.type === "series"),
+    toHomeCategory("anime", "Anime", items, (item) => item.provider === "animeunity" || hasAnyTag(item, ["anime"])),
+    toHomeCategory("azione", "Azione", items, (item) =>
+      hasAnyTag(item, ["azione"]) || hasAnyGenre(item, ["action", "azione", "adventure", "avventura"])
+    ),
+    toHomeCategory("crime-thriller", "Crime e Thriller", items, (item) =>
+      hasAnyTag(item, ["crime", "thriller"]) || hasAnyGenre(item, ["crime", "thriller", "mystery", "mistero"])
+    ),
+    toHomeCategory("fantasy-scifi", "Fantasy e Fantascienza", items, (item) =>
+      hasAnyTag(item, ["fantasy", "fantascienza"]) || hasAnyGenre(item, ["fantasy", "science fiction", "sci fi", "sci-fi"])
+    ),
+    toHomeCategory("commedie", "Commedie", items, (item) =>
+      hasAnyTag(item, ["commedie"]) || hasAnyGenre(item, ["comedy", "commedia", "sitcom"])
+    ),
+    toHomeCategory("documentari", "Documentari", items, (item) =>
+      hasAnyTag(item, ["documentari"]) || hasAnyGenre(item, ["documentary", "documentario"])
+    ),
+  ];
+  return categories.filter((item): item is HomeCategory => Boolean(item));
+}
+
+function setupHomeInfiniteRows(): void {
+  const rows = app.querySelectorAll<HTMLElement>(".row-scroll[data-infinite='1']");
+  rows.forEach((row) => {
+    const track = row.querySelector<HTMLElement>(".row-track");
+    if (!track) return;
+    const loopWidth = track.scrollWidth / 2;
+    if (!Number.isFinite(loopWidth) || loopWidth <= 0) return;
+    row.scrollLeft = loopWidth;
+
+    row.addEventListener(
+      "wheel",
+      (event) => {
+        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+        event.preventDefault();
+        row.scrollLeft += event.deltaY;
+      },
+      { passive: false }
+    );
+
+    row.addEventListener("scroll", () => {
+      if (row.scrollLeft <= 0) {
+        row.scrollLeft += loopWidth;
+        return;
+      }
+      const maxBeforeReset = loopWidth * 2 - row.clientWidth;
+      if (row.scrollLeft >= maxBeforeReset) {
+        row.scrollLeft -= loopWidth;
+      }
+    });
+  });
+}
+
+function resolveStreamUrl(provider: Provider, stream: Stream, forceProxy: boolean): string {
+  const settings = getSettings();
+  if (provider === "animeunity") {
+    if (forceProxy || settings.preferProxyPlayback) {
+      return buildProxyUrl(stream.link, stream.headers);
+    }
+    return stream.link;
+  }
   if (forceProxy) return buildProxyUrl(stream.link, stream.headers);
   const isManifest = /\.m3u8($|\?)/i.test(stream.link) || String(stream.type || "").toLowerCase() === "m3u8";
   if (stream.headers && Object.keys(stream.headers).length > 0) {
     return buildProxyUrl(stream.link, stream.headers);
   }
   if (isManifest) {
-    const settings = getSettings();
     if (!settings.preferDirectPlayback || settings.preferProxyPlayback) {
       return buildProxyUrl(stream.link, stream.headers);
     }
@@ -215,18 +336,24 @@ function toggleWatchlist(summary: CatalogSummaryItem): boolean {
 async function renderHome(token: number): Promise<void> {
   const index = await catalog.getIndex();
   if (token !== renderToken) return;
-  const sections = index.rowConfigs
-    .map((row) => {
-      const items = index.items.filter((item) => item.rows.includes(row.id)).slice(0, index.maxItemsPerRow || 24);
-      if (items.length === 0) return "";
-      return `<section class="section">
-        <h2>${escapeHtml(row.title)}</h2>
-        <div class="grid">${items.map(poster).join("")}</div>
+  const categories = buildHomeCategories(index.items);
+  const sections = categories
+    .map((category) => {
+      const baseItems = category.items.slice(0, HOME_CATEGORY_LIMIT);
+      const loopItems = baseItems.length > 1 ? [...baseItems, ...baseItems] : baseItems;
+      const cards = loopItems
+        .map((item, idx) => poster(item, { row: true, clone: idx >= baseItems.length }))
+        .join("");
+      return `<section class="section category-section">
+        <h2>${escapeHtml(category.title)}</h2>
+        <div class="row-scroll" data-infinite="${baseItems.length > 1 ? "1" : "0"}">
+          <div class="row-track">${cards}</div>
+        </div>
       </section>`;
     })
-    .filter(Boolean)
     .join("");
   app.innerHTML = `${nav()}<main class="container">${sections}</main>`;
+  setupHomeInfiniteRows();
 }
 
 async function renderSearch(query: string, token: number): Promise<void> {
@@ -253,7 +380,7 @@ async function renderSearch(query: string, token: number): Promise<void> {
   const cards = scored
     .map((item) => byId.get(item.entry.id))
     .filter((item): item is CatalogSummaryItem => Boolean(item))
-    .map(poster)
+    .map((item) => poster(item))
     .join("");
 
   app.innerHTML = `${nav()}<main class="container">
@@ -316,6 +443,8 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
   const inWatchlist = watchlist.some((item) => item.id === summary.id);
   const description = detail.synopsis || summary.description || "Sinossi non disponibile.";
   const image = detail.images.background || detail.images.image || summary.backdrop || summary.poster;
+  const externalProviderLink = detail.links.page || detail.links.source || summary.sourceLink || "";
+  const animeUnityRuntimeBlocked = detail.provider === "animeunity" && episodes.length === 0 && Boolean(selected);
 
   const episodesHtml =
     episodes.length > 0
@@ -329,7 +458,16 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
             return `<li><a href="${playerHref}">${escapeHtml(episode.title)}</a></li>`;
           })
           .join("")}</ol>`
-      : `<p class="muted">Nessun episodio statico disponibile per questa stagione.</p>`;
+      : animeUnityRuntimeBlocked
+        ? `<p class="muted">AnimeUnity blocca la risoluzione runtime dai datacenter cloud. Per ora usa l'apertura diretta sul provider.</p>
+           ${
+             externalProviderLink
+               ? `<p><a class="button-link secondary-link" href="${escapeHtml(
+                   externalProviderLink
+                 )}" target="_blank" rel="noopener noreferrer">Apri su AnimeUnity</a></p>`
+               : ""
+           }`
+        : `<p class="muted">Nessun episodio statico disponibile per questa stagione.</p>`;
 
   app.innerHTML = `${nav()}<main class="container">
     <section class="hero" style="background-image:url('${escapeHtml(image || "")}')">
@@ -348,6 +486,13 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
                 )}&link=${encodeURIComponent(episodes[0].link)}&season=${encodeURIComponent(
                   selectedKey || ""
                 )}&episodeTitle=${encodeURIComponent(episodes[0].title)}">Riproduci</a>`
+              : ""
+          }
+          ${
+            detail.provider === "animeunity" && externalProviderLink
+              ? `<a class="button-link secondary-link" href="${escapeHtml(
+                  externalProviderLink
+                )}" target="_blank" rel="noopener noreferrer">Apri su AnimeUnity</a>`
               : ""
           }
         </div>
@@ -415,7 +560,7 @@ function setupPlayerBehavior(
   }
 
   function setSource(stream: Stream): void {
-    const url = resolveStreamUrl(stream, forceProxy);
+    const url = resolveStreamUrl(route.provider, stream, forceProxy);
     videoElement.src = url;
     setTracks(stream);
     videoElement.play().catch(() => {
@@ -493,6 +638,14 @@ function setupPlayerBehavior(
   });
 
   videoElement.addEventListener("error", () => {
+    if (route.provider === "animeunity") {
+      if (!hasFallbackAttempt && !forceProxy && settings.preferProxyPlayback) {
+        hasFallbackAttempt = true;
+        forceProxy = true;
+        setSource(currentStream);
+      }
+      return;
+    }
     if (!hasFallbackAttempt && !forceProxy) {
       hasFallbackAttempt = true;
       forceProxy = true;
@@ -512,6 +665,29 @@ async function renderPlayer(route: Extract<Route, { name: "player" }>, token: nu
   const detail = await catalog.getDetail(route.id);
   const streams = await fetchStreams(route.provider, route.link);
   if (token !== renderToken) return;
+
+  if (!Array.isArray(streams) || streams.length === 0) {
+    const fallbackLink = detail?.links.page || detail?.links.source || "";
+    const isAnimeUnity = route.provider === "animeunity";
+    app.innerHTML = `${nav()}<main class="container">
+      <section class="section">
+        <h2>${escapeHtml(detail?.title || route.id)}</h2>
+        <p class="muted">${
+          isAnimeUnity
+            ? "Non riesco a risolvere lo stream AnimeUnity da infrastruttura cloud (Cloudflare 1005)."
+            : "Nessuno stream disponibile per questo episodio."
+        }</p>
+        ${
+          isAnimeUnity && fallbackLink
+            ? `<p><a class="button-link secondary-link" href="${escapeHtml(
+                fallbackLink
+              )}" target="_blank" rel="noopener noreferrer">Apri episodio su AnimeUnity</a></p>`
+            : ""
+        }
+      </section>
+    </main>`;
+    return;
+  }
 
   app.innerHTML = `${nav()}<main class="container">
     <section class="section">
