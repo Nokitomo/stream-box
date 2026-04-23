@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-22T15:23:24.048Z",
+  "generatedAt": "2026-04-23T16:57:03.988Z",
   "kind": "episodes-season-index",
   "chunk": 67,
   "shardSize": 240,
@@ -52,7 +52,20 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-2",
       "episodesLink": "2261|1|2",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/AmagamiSSOVA_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/AmagamiSSOVA_Ep_02_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-3928",
@@ -61,7 +74,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "3928|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/Amanchu/Amanchu_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-239",
@@ -193,7 +279,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "7255|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "103392"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "103514"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "103777"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "103988"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "104081"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "104280"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "105059"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "105424"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "105638"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "105845"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "105936"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "106077"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-40846",
@@ -306,7 +465,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "1530|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/AnneHappy/AnneHappy_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-12576",
@@ -341,7 +573,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "7258|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "103408"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "103658"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "103850"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "104006"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "104187"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "104301"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "105217"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "105478"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "105742"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "105865"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "105960"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "106131"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-9845",
@@ -363,7 +668,86 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-13",
       "episodesLink": "1905|1|13",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/ArakawaUnderTheBridge2/ArakawaUnderTheBridge2_Ep_13_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-951",
@@ -372,7 +756,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "951|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.tamakomarket.it/DDL/ANIME/SounanDesuKa/SounanDesuKa_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-39035",
@@ -439,7 +896,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "1467|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver102.cloud/DDL/Anime/HidanNoAria/HidanNoAria_Ep_13_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-389",
@@ -520,7 +984,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "4680|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server21.cherrycloud.net/DDL/ANIME/RyzaNoAtelier/RyzaNoAtelier_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-1540",
@@ -641,7 +1178,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "5091|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "76801"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "76802"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "76803"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "76804"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "76805"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "76806"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "76807"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "76808"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "76809"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "76810"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "76811"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "76812"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-10104",
@@ -663,7 +1273,68 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-10",
       "episodesLink": "1379|1|10",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_01_ITA_Full_HD.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_02_ITA_Full_HD.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_03_ITA_Full_HD.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_04_ITA_Full_HD.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_05_ITA_Full_HD.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_06_ITA_Full_HD.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_07_ITA_Full_HD.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_08_ITA_Full_HD.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_09_ITA_Full_HD.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server61.streamingaw.online/DDL/ANIME/BackStreetGirlsITA/BackStreetGirls_Ep_10_ITA_Full_HD.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-6833",
@@ -672,7 +1343,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "6833|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "98711"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "99535"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "99608"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "99690"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "99829"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "100045"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "100168"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "100360"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "100658"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "100997"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "101202"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "101384"
+        }
+      ]
     },
     {
       "contentId": "animeunity-5899",
@@ -681,7 +1425,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "5899|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "87986"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-7904",
@@ -791,7 +1542,20 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-2",
       "episodesLink": "1157|1|2",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SeikainoSenki3_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SeikainoSenki3_Ep_02_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-2143",
@@ -1019,7 +1783,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "5819|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "87761"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "87762"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "87966"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "87985"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "89777"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.windsofresub.cloud/Anime/BeheNeko/%5BWOR-DRIF%5D%20BeheNeko%20-%20S01E06%20sub%20ita%20HardSub.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.windsofresub.cloud/Anime/BeheNeko/%5BWOR-DRIF%5D%20BeheNeko%20-%20S01E07%20sub%20ita%20HardSub.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "91158"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.windsofresub.cloud/Anime/BeheNeko/%5BWOR-DRIF%5D%20BeheNeko%20-%20S01E09%20sub%20ita%20HardSub.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "91878"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "92267"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "94139"
+        }
+      ]
     },
     {
       "contentId": "animeunity-2885",
@@ -1028,7 +1865,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "2885|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.goblinslayer.it/DLL/ANIME/BEM/BEMBecomeHuman_Movie_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-55061",
@@ -1050,7 +1894,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "1065|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://srv20-reina.sweetpixel.org/DDL/ANIME/BenTo/BenTo_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-6455",
@@ -1137,7 +2054,32 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-4",
       "episodesLink": "1295|1|4",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/BlackRockShooter/BlackRockShooter_OAV_Parte_1_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/BlackRockShooter/BlackRockShooter_OAV_Parte_2_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/BlackRockShooter/BlackRockShooter_OAV_Parte_3_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/BlackRockShooter/BlackRockShooter_OAV_Parte_4_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-2776",
@@ -1146,7 +2088,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "2776|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/BlackFoxMovie/BlackFox_Movie_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-6673",
@@ -1201,7 +2150,20 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-2",
       "episodesLink": "2420|1|2",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "http://www.monstermusumenooishasan.cloud/DLL/ANIME/Youma/Youma_OVA_01_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "http://www.monstermusumenooishasan.cloud/DLL/ANIME/Youma/Youma_OVA_02_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-933",
@@ -1210,7 +2172,308 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-50",
       "episodesLink": "933|1|50",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_13_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_14_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_15_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_16_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_17_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_18_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_19_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_20_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_21_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_22_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_23_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_24_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 25",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_25_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 26",
+          "episodeNumber": 26,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_26_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 27",
+          "episodeNumber": 27,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_27_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 28",
+          "episodeNumber": 28,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_28_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 29",
+          "episodeNumber": 29,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_29_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 30",
+          "episodeNumber": 30,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_30_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 31",
+          "episodeNumber": 31,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_31_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 32",
+          "episodeNumber": 32,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_32_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 33",
+          "episodeNumber": 33,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_33_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 34",
+          "episodeNumber": 34,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_34_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 35",
+          "episodeNumber": 35,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_35_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 36",
+          "episodeNumber": 36,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_36_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 37",
+          "episodeNumber": 37,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_37_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 38",
+          "episodeNumber": 38,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_38_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 39",
+          "episodeNumber": 39,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_39_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 40",
+          "episodeNumber": 40,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_40_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 41",
+          "episodeNumber": 41,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_41_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 42",
+          "episodeNumber": 42,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_42_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 43",
+          "episodeNumber": 43,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_43_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 44",
+          "episodeNumber": 44,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_44_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 45",
+          "episodeNumber": 45,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_45_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 46",
+          "episodeNumber": 46,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_46_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 47",
+          "episodeNumber": 47,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_47_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 48",
+          "episodeNumber": 48,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_48_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 49",
+          "episodeNumber": 49,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_49_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 50",
+          "episodeNumber": 50,
+          "seasonNumber": 1,
+          "link": "https://server48.streamingaw.online/DDL/ANIME/Blood/Blood_Ep_50_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-10591",
@@ -1271,7 +2534,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "4271|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/BokuWaTomodachiGaSukunai/BokuWaTomodachiGaSukunai_Ep_13_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-2164",
@@ -1280,7 +2550,152 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-24",
       "episodesLink": "2164|1|24",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_13_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_14_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_15_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_16_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_17_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_18_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_19_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_20_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_21_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_22_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_23_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "https://server44.streamingaw.online/DDL/ANIME/BonjourKoiajiPatisserie/BonjourKoiajiPatisserie_Ep_24_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-39296",
@@ -1315,7 +2730,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "2124|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server10.streamingaw.online/DDL/ANIME/BrothersConflict/BrothersConflict_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-29527",
@@ -1637,7 +3125,38 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-5",
       "episodesLink": "6789|1|5",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "100327"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "100552"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "100929"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "101175"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "101359"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-19709",
@@ -1698,7 +3217,152 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-24",
       "episodesLink": "1219|1|24",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_13_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_14_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_15_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_16_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_17_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_18_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_19_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_20_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_21_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_22_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_23_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/CasshernSins_Ep_24_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-9220",
@@ -1805,7 +3469,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "443|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/ChainChronicle/ChainChronicle_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-12240",
@@ -1978,7 +3715,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "7071|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv17-geisha.sweetpixel.org/DDL/ANIME/Chocotan/Chocotan_Special_01_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-7307",
@@ -1987,7 +3731,56 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-8",
       "episodesLink": "7307|1|8",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "103495"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "103496"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "103497"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "103498"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "103499"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "103500"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "103501"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "103502"
+        }
+      ]
     },
     {
       "contentId": "animeunity-3217",
@@ -1996,7 +3789,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "3217|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/HachigatsuNoCinderellaNine/HachigatsuNoCinderellaNine_Ep_13_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-8229",
@@ -2187,7 +3987,86 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-13",
       "episodesLink": "820|1|13",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://server29.streamingaw.online/DDL/ANIME/CodeBreaker/CodeBreaker_Ep_13_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-11998",
@@ -2658,7 +4537,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "3886|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DFrag_Ep_13_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-47907",
@@ -2680,7 +4566,86 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-13",
       "episodesLink": "2282|1|13",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://server4.streamingaw.online/DDL/ANIME/DaCapoIII/DaCapoIII_Ep_13_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-1542",
@@ -2689,7 +4654,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "1542|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.animeunityserver103.cloud/DDL/Anime/DagashiKashi2/DagashiKashi2_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-7999",
@@ -2711,7 +4749,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "2328|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://srv13-hana.candypixel.net/DDL/ANIME/DanceWithDevils/DanceWithDevils_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-3302",
@@ -2885,7 +4996,164 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-26",
       "episodesLink": "5327|1|26",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "80909"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "80910"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "80911"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "80912"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "80913"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "80914"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "80915"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "80916"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "80917"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "80918"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "80919"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "80920"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "80921"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "80922"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "80923"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "80925"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "80926"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "80927"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "80928"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "80929"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "80930"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "80931"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "80932"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "80933"
+        },
+        {
+          "title": "Episode 25",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "80934"
+        },
+        {
+          "title": "Episode 26",
+          "episodeNumber": 26,
+          "seasonNumber": 1,
+          "link": "80935"
+        }
+      ]
     },
     {
       "contentId": "animeunity-1377",
@@ -2894,7 +5162,86 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-13",
       "episodesLink": "1377|1|13",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/DevilSurvivor2TheAnimation/DevilSurvivor2TheAnimation_Ep_13_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-2042",
@@ -2903,7 +5250,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "2042|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.zombielandsaga.it/DLL/ANIME/DevilsAndRealist/DevilsAndRealist_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-1936",
@@ -2912,7 +5332,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "1936|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server30.streamingaw.online/DDL/ANIME/DiabolikLovers/DiabolikLovers_OAV_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-8643",
@@ -2934,7 +5361,44 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-6",
       "episodesLink": "453|1|6",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/DiesIrae/DiesIrae_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/DiesIrae/DiesIrae_Ep_13_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/DiesIrae/DiesIrae_Ep_14_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/DiesIrae/DiesIrae_Ep_15_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/DiesIrae/DiesIrae_Ep_16_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server20.streamingaw.online/DDL/ANIME/DiesIrae/DiesIrae_Ep_17_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-1456",
@@ -2943,7 +5407,308 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-50",
       "episodesLink": "1456|1|50",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_01_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_02_ITA.mp4.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_03_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_04_ITA.mp4.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_05_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_06_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_07_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_08_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_09_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_10_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_11_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_12_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_13_ITA.mp4"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_14_ITA.mp4"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_15_ITA.mp4"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_16_ITA.mp4"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_17_ITA.mp4"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_18_ITA.mp4"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_19_ITA.mp4"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_20_ITA.mp4"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_21_ITA.mp4"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_22_ITA.mp4"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_23_ITA.mp4"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_24_ITA.mp4"
+        },
+        {
+          "title": "Episode 25",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_25_ITA.mp4"
+        },
+        {
+          "title": "Episode 26",
+          "episodeNumber": 26,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_26_ITA.mp4"
+        },
+        {
+          "title": "Episode 27",
+          "episodeNumber": 27,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_27_ITA.mp4"
+        },
+        {
+          "title": "Episode 28",
+          "episodeNumber": 28,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_28_ITA.mp4"
+        },
+        {
+          "title": "Episode 29",
+          "episodeNumber": 29,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_29_ITA.mp4"
+        },
+        {
+          "title": "Episode 30",
+          "episodeNumber": 30,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_30_ITA.mp4"
+        },
+        {
+          "title": "Episode 31",
+          "episodeNumber": 31,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_31_ITA.mp4"
+        },
+        {
+          "title": "Episode 32",
+          "episodeNumber": 32,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_32_ITA.mp4"
+        },
+        {
+          "title": "Episode 33",
+          "episodeNumber": 33,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_33_ITA.mp4"
+        },
+        {
+          "title": "Episode 34",
+          "episodeNumber": 34,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_34_ITA.mp4"
+        },
+        {
+          "title": "Episode 35",
+          "episodeNumber": 35,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_35_ITA.mp4"
+        },
+        {
+          "title": "Episode 36",
+          "episodeNumber": 36,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_36_ITA.mp4"
+        },
+        {
+          "title": "Episode 37",
+          "episodeNumber": 37,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_37_ITA.mp4"
+        },
+        {
+          "title": "Episode 38",
+          "episodeNumber": 38,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_38_ITA.mp4"
+        },
+        {
+          "title": "Episode 39",
+          "episodeNumber": 39,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_39_ITA.mp4"
+        },
+        {
+          "title": "Episode 40",
+          "episodeNumber": 40,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_40_ITA.mp4"
+        },
+        {
+          "title": "Episode 41",
+          "episodeNumber": 41,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_41_ITA.mp4"
+        },
+        {
+          "title": "Episode 42",
+          "episodeNumber": 42,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_42_ITA.mp4"
+        },
+        {
+          "title": "Episode 43",
+          "episodeNumber": 43,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_43_ITA.mp4"
+        },
+        {
+          "title": "Episode 44",
+          "episodeNumber": 44,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_44_ITA.mp4"
+        },
+        {
+          "title": "Episode 45",
+          "episodeNumber": 45,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_45_ITA.mp4"
+        },
+        {
+          "title": "Episode 46",
+          "episodeNumber": 46,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_46_ITA.mp4"
+        },
+        {
+          "title": "Episode 47",
+          "episodeNumber": 47,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_47_ITA.mp4"
+        },
+        {
+          "title": "Episode 48",
+          "episodeNumber": 48,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_48_ITA.mp4"
+        },
+        {
+          "title": "Episode 49",
+          "episodeNumber": 49,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_49_ITA.mp4"
+        },
+        {
+          "title": "Episode 50",
+          "episodeNumber": 50,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/DigimonFrontiers_Ep_50_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-2926",
@@ -2965,7 +5730,56 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-8",
       "episodesLink": "7300|1|8",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "103421"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "103714"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "103898"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "104021"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "104316"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "104317"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "105226"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "105495"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-11951",
@@ -2987,7 +5801,32 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-4",
       "episodesLink": "6698|1|4",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv21-airbus.sweetpixel.org/DDL/ANIME/DogsBulletsCarnage/DogsBulletsCarnage_OVA_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv21-airbus.sweetpixel.org/DDL/ANIME/DogsBulletsCarnage/DogsBulletsCarnage_OVA_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv21-airbus.sweetpixel.org/DDL/ANIME/DogsBulletsCarnage/DogsBulletsCarnage_OVA_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv21-airbus.sweetpixel.org/DDL/ANIME/DogsBulletsCarnage/DogsBulletsCarnage_OVA_04_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-3496",
@@ -3220,7 +6059,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "2090|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.swordartonline.it/DLL/ANIME/DramaticalMurder/DramaticalMurder_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-3145",
@@ -3398,7 +6310,32 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-4",
       "episodesLink": "3078|1|4",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server18.cherrycloud.net/DDL/ANIME/EdenITA/Eden_Ep_01_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server18.cherrycloud.net/DDL/ANIME/EdenITA/Eden_Ep_02_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server18.cherrycloud.net/DDL/ANIME/EdenITA/Eden_Ep_03_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server18.cherrycloud.net/DDL/ANIME/EdenITA/Eden_Ep_04_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-3725",
@@ -3639,7 +6576,86 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-13",
       "episodesLink": "3670|1|13",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "60126"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "60285"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "60402"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "60582"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "60725"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "61505"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "61624"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "61705"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "62064"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "62175"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "62265"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "62547"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "62786"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-5759",
@@ -3712,7 +6728,68 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-10",
       "episodesLink": "533|1|10",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/FateKaleid/FateKaleid_Ep_10_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-4613",
@@ -3721,7 +6798,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "4613|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/FateKaleidLinerPrismaIllyaLichtNamaenoNaiShoujo_Movie_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-26816",
@@ -3911,7 +6995,44 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-6",
       "episodesLink": "2499|1|6",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "43658"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "43659"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "43660"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "43661"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "43662"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "43663"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-6724",
@@ -3985,7 +7106,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "2222|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server21.streamingaw.online/DDL/ANIME/Fortune-Arterial/FortuneArterial_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-2850",
@@ -4020,7 +7214,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "3375|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Fragtime/Fragtime_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-10725",
@@ -4055,7 +7256,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "1061|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/Freezing/Freezing_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-1062",
@@ -4064,7 +7338,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "1062|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.jujutsukaisenanime.com/DLL/ANIME/FreezingVibration/FreezingVibration_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-4854",
@@ -4295,7 +7642,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "1118|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "22039"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "22038"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "22043"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "22040"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "22042"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "22041"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "22044"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "22045"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "22047"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "22046"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "22048"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "22049"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-1899",
@@ -4421,7 +7841,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "346|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://srv23-yama.sweetpixel.org/DDL/ANIME/GirlyAirForce/GirlyAirForce_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-10535",
@@ -4579,7 +8072,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "882|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://server26.streamingaw.online/DDL/ANIME/OreTwintailniNarimasu/OreTwintailsNiNarimasu_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-12844",

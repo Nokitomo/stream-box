@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-22T15:23:24.048Z",
+  "generatedAt": "2026-04-23T16:57:03.988Z",
   "kind": "episodes-season-index",
   "chunk": 117,
   "shardSize": 240,
@@ -291,7 +291,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "3348|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.haikyuu-anime.org/DDL/ANIME/ValkyriaChroniclesOVA/ValkyriaChronicles_OVA_01_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-4318",
@@ -727,7 +734,164 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-26",
       "episodesLink": "7041|1|26",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "101288"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "101289"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "101290"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "101291"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "101292"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "101293"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "101294"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "101295"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "101296"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "101297"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "101298"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "101299"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "101300"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "101301"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "101302"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "101303"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "101304"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "101305"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "101306"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "101307"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "101308"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "101309"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "101310"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "101311"
+        },
+        {
+          "title": "Episode 25",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "101312"
+        },
+        {
+          "title": "Episode 26",
+          "episodeNumber": 26,
+          "seasonNumber": 1,
+          "link": "101313"
+        }
+      ]
     },
     {
       "contentId": "animeunity-3945",
@@ -736,7 +900,86 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-13",
       "episodesLink": "3945|1|13",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://www.spyxfamily.info/DLL/ANIME/Narutaru/Narutaru_Ep_13_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-33407",
@@ -1083,7 +1326,32 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-4",
       "episodesLink": "5904|1|4",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv30-emiko.sweetpixel.org/DDL/ANIME/HitsujinoUta/HitsujinoUta_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv30-emiko.sweetpixel.org/DDL/ANIME/HitsujinoUta/HitsujinoUta_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv30-emiko.sweetpixel.org/DDL/ANIME/HitsujinoUta/HitsujinoUta_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv30-emiko.sweetpixel.org/DDL/ANIME/HitsujinoUta/HitsujinoUta_Ep_04_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-32990",
@@ -1431,7 +1699,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "6965|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "100357"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-30493",
@@ -1785,7 +2060,56 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-8",
       "episodesLink": "3764|1|8",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.koisuruasteroid.cloud/DDL/ANIME/HitoNerae/HitoNeraeSmashHit_Ep_01.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.koisuruasteroid.cloud/DDL/ANIME/HitoNerae/HitoNeraeSmashHit_Ep_02.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.koisuruasteroid.cloud/DDL/ANIME/HitoNerae/HitoNeraeSmashHit_Ep_03.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.koisuruasteroid.cloud/DDL/ANIME/HitoNerae/HitoNeraeSmashHit_Ep_04.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.koisuruasteroid.cloud/DDL/ANIME/HitoNerae/HitoNeraeSmashHit_Ep_05.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.koisuruasteroid.cloud/DDL/ANIME/HitoNerae/HitoNeraeSmashHit_Ep_06.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.koisuruasteroid.cloud/DDL/ANIME/HitoNerae/HitoNeraeSmashHit_Ep_07.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.koisuruasteroid.cloud/DDL/ANIME/HitoNerae/HitoNeraeSmashHit_Ep_08.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-24219",
@@ -2715,7 +3039,80 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-12",
       "episodesLink": "282|1|12",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://srv28-kokeshi.sweetpixel.org/DDL/ANIME/SoraToUmiNoAida/SoraToUmiNoAida_Ep_12_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "animeunity-3633",
@@ -2724,7 +3121,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "3633|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.dragonballheroes.eu/DLL/ANIME/SoreGaSeiyuuSUBITA/SoreGaSeiyuu_OVA_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-9811",
@@ -2850,7 +3254,164 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-26",
       "episodesLink": "2774|1|26",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_13_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_14_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_15_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_16_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_17_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_18_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_19_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_20_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_21_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_22_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_23_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_24_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 25",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_25_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 26",
+          "episodeNumber": 26,
+          "seasonNumber": 1,
+          "link": "https://www.forbiddenlol.cloud/DDL/ANIME/SenkaidenHoushinEngi_Ep_26_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-34386",
@@ -3105,7 +3666,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "6845|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv12-thunder.sweetpixel.org/DDL/ANIME/SpelunkerSensei/SpelunkerSensei_OVA_01_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-10076",
@@ -3287,7 +3855,158 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-25",
       "episodesLink": "5329|1|25",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_13_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_14_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_15_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_16_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_17_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_18_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_19_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_20_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_21_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_22_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_23_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_24_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 25",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "https://srv19-tomoko.sweetpixel.org/DDL/ANIME/SpiralSuiriNoKizuna/SpiralSuiriNoKizuna_Ep_25_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-8421",
@@ -3361,7 +4080,14 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-1",
       "episodesLink": "6689|1|1",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv17-geisha.sweetpixel.org/DDL/ANIME/KenjiNoHaru/KenjiNoHaru_Movie_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-1674",
@@ -3999,7 +4725,164 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-26",
       "episodesLink": "5299|1|26",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_01_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_02_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_03_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_04_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_05_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_06_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_07_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_08_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_09_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_10_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_11_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_12_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_13_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_14_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_15_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_16_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_17_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_18_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_19_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_20_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_21_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_22_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_23_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_24_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 25",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_25_SUB_ITA.mp4"
+        },
+        {
+          "title": "Episode 26",
+          "episodeNumber": 26,
+          "seasonNumber": 1,
+          "link": "https://srv12-terebi.sweetpixel.org/DDL/ANIME/StarshipGirlYamamotoYohko/StarshipGirlYamamotoYohko_Ep_26_SUB_ITA.mp4"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-9248",
@@ -4327,7 +5210,182 @@
       "seasonNumber": 1,
       "seasonTitle": "Episodes 1-29",
       "episodesLink": "6365|1|29",
-      "episodes": []
+      "episodes": [
+        {
+          "title": "Episode 1",
+          "episodeNumber": 1,
+          "seasonNumber": 1,
+          "link": "93258"
+        },
+        {
+          "title": "Episode 2",
+          "episodeNumber": 2,
+          "seasonNumber": 1,
+          "link": "93259"
+        },
+        {
+          "title": "Episode 3",
+          "episodeNumber": 3,
+          "seasonNumber": 1,
+          "link": "93260"
+        },
+        {
+          "title": "Episode 4",
+          "episodeNumber": 4,
+          "seasonNumber": 1,
+          "link": "93261"
+        },
+        {
+          "title": "Episode 5",
+          "episodeNumber": 5,
+          "seasonNumber": 1,
+          "link": "93262"
+        },
+        {
+          "title": "Episode 6",
+          "episodeNumber": 6,
+          "seasonNumber": 1,
+          "link": "93263"
+        },
+        {
+          "title": "Episode 7",
+          "episodeNumber": 7,
+          "seasonNumber": 1,
+          "link": "93264"
+        },
+        {
+          "title": "Episode 8",
+          "episodeNumber": 8,
+          "seasonNumber": 1,
+          "link": "93265"
+        },
+        {
+          "title": "Episode 9",
+          "episodeNumber": 9,
+          "seasonNumber": 1,
+          "link": "93266"
+        },
+        {
+          "title": "Episode 10",
+          "episodeNumber": 10,
+          "seasonNumber": 1,
+          "link": "93268"
+        },
+        {
+          "title": "Episode 11",
+          "episodeNumber": 11,
+          "seasonNumber": 1,
+          "link": "93267"
+        },
+        {
+          "title": "Episode 12",
+          "episodeNumber": 12,
+          "seasonNumber": 1,
+          "link": "93270"
+        },
+        {
+          "title": "Episode 13",
+          "episodeNumber": 13,
+          "seasonNumber": 1,
+          "link": "93269"
+        },
+        {
+          "title": "Episode 14",
+          "episodeNumber": 14,
+          "seasonNumber": 1,
+          "link": "93271"
+        },
+        {
+          "title": "Episode 15",
+          "episodeNumber": 15,
+          "seasonNumber": 1,
+          "link": "93272"
+        },
+        {
+          "title": "Episode 16",
+          "episodeNumber": 16,
+          "seasonNumber": 1,
+          "link": "93273"
+        },
+        {
+          "title": "Episode 17",
+          "episodeNumber": 17,
+          "seasonNumber": 1,
+          "link": "93274"
+        },
+        {
+          "title": "Episode 18",
+          "episodeNumber": 18,
+          "seasonNumber": 1,
+          "link": "93275"
+        },
+        {
+          "title": "Episode 19",
+          "episodeNumber": 19,
+          "seasonNumber": 1,
+          "link": "93276"
+        },
+        {
+          "title": "Episode 20",
+          "episodeNumber": 20,
+          "seasonNumber": 1,
+          "link": "93278"
+        },
+        {
+          "title": "Episode 21",
+          "episodeNumber": 21,
+          "seasonNumber": 1,
+          "link": "93277"
+        },
+        {
+          "title": "Episode 22",
+          "episodeNumber": 22,
+          "seasonNumber": 1,
+          "link": "93280"
+        },
+        {
+          "title": "Episode 23",
+          "episodeNumber": 23,
+          "seasonNumber": 1,
+          "link": "93279"
+        },
+        {
+          "title": "Episode 24",
+          "episodeNumber": 24,
+          "seasonNumber": 1,
+          "link": "93282"
+        },
+        {
+          "title": "Episode 25",
+          "episodeNumber": 25,
+          "seasonNumber": 1,
+          "link": "93281"
+        },
+        {
+          "title": "Episode 26",
+          "episodeNumber": 26,
+          "seasonNumber": 1,
+          "link": "93284"
+        },
+        {
+          "title": "Episode 27",
+          "episodeNumber": 27,
+          "seasonNumber": 1,
+          "link": "93283"
+        },
+        {
+          "title": "Episode 28",
+          "episodeNumber": 28,
+          "seasonNumber": 1,
+          "link": "93285"
+        },
+        {
+          "title": "Episode 29",
+          "episodeNumber": 29,
+          "seasonNumber": 1,
+          "link": "93286"
+        }
+      ]
     },
     {
       "contentId": "streamingunity-8648",
