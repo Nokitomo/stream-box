@@ -121,11 +121,21 @@ a {
 }
 
 .card-poster {
+  position: relative;
   width: 100%;
   aspect-ratio: 2 / 3;
   background-color: #131927;
-  background-size: cover;
-  background-position: center;
+}
+
+.card-poster-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-load-failed {
+  opacity: 0;
 }
 
 .card-body {
@@ -180,15 +190,25 @@ button,
 }
 
 .hero {
+  position: relative;
   border-radius: 16px;
   overflow: hidden;
-  background-size: cover;
-  background-position: center;
   min-height: 320px;
   border: 1px solid rgba(255, 255, 255, 0.09);
+  background: #111726;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .overlay {
+  position: relative;
+  z-index: 1;
   min-height: 320px;
   padding: 24px;
   background: linear-gradient(90deg, rgba(7, 10, 18, 0.9) 0%, rgba(7, 10, 18, 0.55) 40%, rgba(7, 10, 18, 0.2) 100%);

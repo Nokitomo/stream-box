@@ -149,12 +149,13 @@ function mapEpisodeEntry(episode, index) {
   if (!id) return null;
   const numberText = normalizeText(episode && episode.number);
   const parsedNumber = normalizeEpisodeNumber(numberText);
+  const directLink = normalizeText(episode && episode.link);
   const title = numberText ? `Episode ${numberText}` : `Episode ${index + 1}`;
   return {
     episodeId: id,
     title,
     episodeNumber: parsedNumber != null ? parsedNumber : index + 1,
-    link: id,
+    link: /^https?:\/\//i.test(directLink) ? directLink : id,
     streams: [],
   };
 }

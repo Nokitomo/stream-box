@@ -42,11 +42,19 @@ type Route =
 
 let renderToken = 0;
 const HOME_CATEGORY_LIMIT = 30;
+const STREAMINGUNITY_FALLBACK_REFERER = "https://streamingunity.biz/";
+const BROWSER_SUPPORTS_WEBP = detectWebpSupport();
 
 type HomeCategory = {
   id: string;
   title: string;
   items: CatalogSummaryItem[];
+};
+
+type ImageFallbackPlan = {
+  primary: string;
+  fallback1?: string;
+  fallback2?: string;
 };
 
 function escapeHtml(value: string): string {
@@ -122,18 +130,112 @@ function toPlaybackLabel(title: string): string {
   return text;
 }
 
+function detectWebpSupport(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    if (!canvas.getContext) return false;
+    return canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0;
+  } catch {
+    return false;
+  }
+}
+
+function parseHostFromUrl(value: string): string {
+  try {
+    const parsed = new URL(value);
+    return parsed.origin;
+  } catch {
+    return "";
+  }
+}
+
+function toWeservJpegUrl(sourceUrl: string): string {
+  const normalized = String(sourceUrl || "").replace(/^https?:\/\//i, "");
+  return `https://images.weserv.nl/?url=${encodeURIComponent(normalized)}&output=jpg&q=82`;
+}
+
+function getImageFallbackPlan(
+  provider: Provider,
+  sourceUrl: string,
+  providerPageUrl = ""
+): ImageFallbackPlan | null {
+  const image = String(sourceUrl || "").trim();
+  if (!image) return null;
+  if (provider !== "streamingunity") {
+    return { primary: image };
+  }
+  const referer = parseHostFromUrl(providerPageUrl) || STREAMINGUNITY_FALLBACK_REFERER;
+  const proxy = buildProxyUrl(image, {
+    referer,
+    origin: referer,
+  });
+  const weserv = toWeservJpegUrl(image);
+  if (BROWSER_SUPPORTS_WEBP) {
+    return { primary: image, fallback1: proxy, fallback2: weserv };
+  }
+  return { primary: weserv, fallback1: proxy, fallback2: image };
+}
+
+function renderImageMarkup(
+  plan: ImageFallbackPlan | null,
+  className: string,
+  alt: string,
+  loading: "lazy" | "eager" = "lazy"
+): string {
+  const attrs = [
+    `class="${escapeHtml(className)}"`,
+    `alt="${escapeHtml(alt)}"`,
+    `loading="${loading}"`,
+    "decoding=\"async\"",
+  ];
+  if (!plan || !plan.primary) {
+    attrs.push("src=\"\"");
+    return `<img ${attrs.join(" ")} />`;
+  }
+  attrs.push(`src="${escapeHtml(plan.primary)}"`);
+  if (plan.fallback1) attrs.push(`data-fallback-1="${escapeHtml(plan.fallback1)}"`);
+  if (plan.fallback2) attrs.push(`data-fallback-2="${escapeHtml(plan.fallback2)}"`);
+  return `<img ${attrs.join(" ")} />`;
+}
+
+function setupAdaptiveImages(): void {
+  const images = app.querySelectorAll<HTMLImageElement>("img[data-fallback-1], img[data-fallback-2]");
+  images.forEach((image) => {
+    if (image.getAttribute("data-fallback-bound") === "1") return;
+    image.setAttribute("data-fallback-bound", "1");
+    image.addEventListener("error", () => {
+      const fallback1 = image.getAttribute("data-fallback-1") || "";
+      const fallback2 = image.getAttribute("data-fallback-2") || "";
+      const exhausted = image.getAttribute("data-fallback-exhausted") === "1";
+      if (!exhausted && fallback1 && image.src !== fallback1) {
+        image.setAttribute("data-fallback-exhausted", "1");
+        image.src = fallback1;
+        return;
+      }
+      if (fallback2 && image.src !== fallback2) {
+        image.setAttribute("data-fallback-2", "");
+        image.src = fallback2;
+        return;
+      }
+      image.classList.add("image-load-failed");
+    });
+  });
+}
+
 function poster(summary: CatalogSummaryItem, options?: { row?: boolean; clone?: boolean }): string {
   const row = options?.row === true;
   const clone = options?.clone === true;
   const image = summary.poster || summary.backdrop;
-  const safeImage = escapeHtml(image || "");
   const safeTitle = escapeHtml(summary.title);
   const meta = `${summary.year} · ${toProviderLabel(summary.provider)} · ${toTypeLabel(summary.type)}`;
   const cardClass = row ? "card row-card" : "card";
   const cloneAttrs = clone ? `aria-hidden="true" tabindex="-1"` : "";
+  const imagePlan = getImageFallbackPlan(summary.provider, image, summary.sourceLink);
   return `<article class="${cardClass}">
     <a href="#/info/${encodeURIComponent(summary.id)}" class="card-link" ${cloneAttrs}>
-      <div class="card-poster" style="background-image:url('${safeImage}')"></div>
+      <div class="card-poster">
+        ${renderImageMarkup(imagePlan, "card-poster-image", summary.title)}
+      </div>
       <div class="card-body">
         <h3>${safeTitle}</h3>
         <p>${escapeHtml(meta)}</p>
@@ -276,6 +378,23 @@ function resolveStreamUrl(provider: Provider, stream: Stream, forceProxy: boolea
   return stream.link;
 }
 
+function isDirectMediaLink(link: string): boolean {
+  const value = String(link || "").trim();
+  if (!/^https?:\/\//i.test(value)) return false;
+  if (/\.(mp4|m3u8|mpd|webm)(\?|$)/i.test(value)) return true;
+  return /\/DDL\//i.test(value);
+}
+
+function streamFromDirectLink(provider: Provider, link: string): Stream | null {
+  if (!isDirectMediaLink(link)) return null;
+  const type = /\.m3u8(\?|$)/i.test(link) ? "m3u8" : "mp4";
+  return {
+    server: provider === "animeunity" ? "AnimeUnity Diretto" : "Diretto",
+    link,
+    type,
+  };
+}
+
 function splitProviderLocalId(contentId: string): { provider: Provider; localId: string } {
   const dash = contentId.indexOf("-");
   if (dash <= 0) return { provider: "animeunity", localId: contentId };
@@ -354,6 +473,7 @@ async function renderHome(token: number): Promise<void> {
     .join("");
   app.innerHTML = `${nav()}<main class="container">${sections}</main>`;
   setupHomeInfiniteRows();
+  setupAdaptiveImages();
 }
 
 async function renderSearch(query: string, token: number): Promise<void> {
@@ -396,6 +516,7 @@ async function renderSearch(query: string, token: number): Promise<void> {
   </main>`;
 
   const form = document.querySelector<HTMLFormElement>("#search-form");
+  setupAdaptiveImages();
   if (form) {
     form.onsubmit = (event) => {
       event.preventDefault();
@@ -443,8 +564,11 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
   const inWatchlist = watchlist.some((item) => item.id === summary.id);
   const description = detail.synopsis || summary.description || "Sinossi non disponibile.";
   const image = detail.images.background || detail.images.image || summary.backdrop || summary.poster;
-  const externalProviderLink = detail.links.page || detail.links.source || summary.sourceLink || "";
-  const animeUnityRuntimeBlocked = detail.provider === "animeunity" && episodes.length === 0 && Boolean(selected);
+  const heroImagePlan = getImageFallbackPlan(
+    detail.provider,
+    image,
+    detail.links.page || detail.links.source || summary.sourceLink || ""
+  );
 
   const episodesHtml =
     episodes.length > 0
@@ -458,19 +582,11 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
             return `<li><a href="${playerHref}">${escapeHtml(episode.title)}</a></li>`;
           })
           .join("")}</ol>`
-      : animeUnityRuntimeBlocked
-        ? `<p class="muted">AnimeUnity blocca la risoluzione runtime dai datacenter cloud. Per ora usa l'apertura diretta sul provider.</p>
-           ${
-             externalProviderLink
-               ? `<p><a class="button-link secondary-link" href="${escapeHtml(
-                   externalProviderLink
-                 )}" target="_blank" rel="noopener noreferrer">Apri su AnimeUnity</a></p>`
-               : ""
-           }`
-        : `<p class="muted">Nessun episodio statico disponibile per questa stagione.</p>`;
+      : `<p class="muted">Episodi non disponibili al momento.</p>`;
 
   app.innerHTML = `${nav()}<main class="container">
-    <section class="hero" style="background-image:url('${escapeHtml(image || "")}')">
+    <section class="hero">
+      ${renderImageMarkup(heroImagePlan, "hero-image", detail.title, "eager")}
       <div class="overlay">
         <h1>${escapeHtml(detail.title)}</h1>
         <p>${escapeHtml(description)}</p>
@@ -486,13 +602,6 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
                 )}&link=${encodeURIComponent(episodes[0].link)}&season=${encodeURIComponent(
                   selectedKey || ""
                 )}&episodeTitle=${encodeURIComponent(episodes[0].title)}">Riproduci</a>`
-              : ""
-          }
-          ${
-            detail.provider === "animeunity" && externalProviderLink
-              ? `<a class="button-link secondary-link" href="${escapeHtml(
-                  externalProviderLink
-                )}" target="_blank" rel="noopener noreferrer">Apri su AnimeUnity</a>`
               : ""
           }
         </div>
@@ -520,6 +629,7 @@ async function renderInfo(id: string, seasonKey: string | undefined, token: numb
       watchlistButton.textContent = nowInWatchlist ? "Rimuovi dalla Lista" : "Aggiungi alla Lista";
     };
   }
+  setupAdaptiveImages();
 }
 
 function setupPlayerBehavior(
@@ -639,7 +749,7 @@ function setupPlayerBehavior(
 
   videoElement.addEventListener("error", () => {
     if (route.provider === "animeunity") {
-      if (!hasFallbackAttempt && !forceProxy && settings.preferProxyPlayback) {
+      if (!hasFallbackAttempt && !forceProxy) {
         hasFallbackAttempt = true;
         forceProxy = true;
         setSource(currentStream);
@@ -663,27 +773,15 @@ async function renderPlayer(route: Extract<Route, { name: "player" }>, token: nu
     return;
   }
   const detail = await catalog.getDetail(route.id);
-  const streams = await fetchStreams(route.provider, route.link);
+  const directStream = streamFromDirectLink(route.provider, route.link);
+  const streams = directStream ? [directStream] : await fetchStreams(route.provider, route.link);
   if (token !== renderToken) return;
 
   if (!Array.isArray(streams) || streams.length === 0) {
-    const fallbackLink = detail?.links.page || detail?.links.source || "";
-    const isAnimeUnity = route.provider === "animeunity";
     app.innerHTML = `${nav()}<main class="container">
       <section class="section">
         <h2>${escapeHtml(detail?.title || route.id)}</h2>
-        <p class="muted">${
-          isAnimeUnity
-            ? "Non riesco a risolvere lo stream AnimeUnity da infrastruttura cloud (Cloudflare 1005)."
-            : "Nessuno stream disponibile per questo episodio."
-        }</p>
-        ${
-          isAnimeUnity && fallbackLink
-            ? `<p><a class="button-link secondary-link" href="${escapeHtml(
-                fallbackLink
-              )}" target="_blank" rel="noopener noreferrer">Apri episodio su AnimeUnity</a></p>`
-            : ""
-        }
+        <p class="muted">Nessuno stream disponibile per questo episodio.</p>
       </section>
     </main>`;
     return;
@@ -710,13 +808,17 @@ function renderWatchlist(): void {
           list.length
             ? list
                 .map(
-                  (item) =>
+                  (item) => {
+                    const imagePlan = getImageFallbackPlan(item.provider, item.poster, item.sourceLink);
+                    return (
                     `<article class="card">
                       <a href="#/info/${encodeURIComponent(item.id)}">
-                        <div class="card-poster" style="background-image:url('${escapeHtml(item.poster)}')"></div>
+                        <div class="card-poster">${renderImageMarkup(imagePlan, "card-poster-image", item.title)}</div>
                         <div class="card-body"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(toProviderLabel(item.provider))}</p></div>
                       </a>
                     </article>`
+                    );
+                  }
                 )
                 .join("")
             : "<p>Nessun contenuto nella tua lista.</p>"
@@ -724,6 +826,7 @@ function renderWatchlist(): void {
       </div>
     </section>
   </main>`;
+  setupAdaptiveImages();
 }
 
 function renderHistory(): void {

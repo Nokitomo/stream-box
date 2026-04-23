@@ -9,6 +9,8 @@ import {
   uniqueBy,
   writeJsonAtomic,
   writeShardedJson,
+  asyncMapLimit,
+  createHttpClient,
 } from "./shared.mjs";
 
 const args = parseCliArgs(process.argv.slice(2));
@@ -47,7 +49,24 @@ const config = {
   detailShardSize: Math.max(50, toInt(args["detail-shard-size"], 300)),
   episodesShardSize: Math.max(50, toInt(args["episodes-shard-size"], 240)),
   maxItemsPerRow: Math.max(20, toInt(args["max-items-row"], 120)),
+  animeEpisodesEnabled: String(args["anime-episodes"] || "1") !== "0",
+  animeEpisodesConcurrency: Math.max(1, toInt(args["anime-episodes-concurrency"], 10)),
+  animeEpisodesTimeoutMs: Math.max(5000, toInt(args["anime-episodes-timeout"], 25000)),
+  animeEpisodesRetries: Math.max(0, toInt(args["anime-episodes-retries"], 2)),
 };
+
+const ANIMEUNITY_DEFAULT_BASE_URL = "https://www.animeunity.so";
+const ANIMEUNITY_USER_AGENT =
+  "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148";
+
+const animeEpisodesHttp = createHttpClient({
+  timeoutMs: config.animeEpisodesTimeoutMs,
+  retries: config.animeEpisodesRetries,
+  defaultHeaders: {
+    "user-agent": ANIMEUNITY_USER_AGENT,
+    "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7",
+  },
+});
 
 function slugify(value) {
   return normalizeText(value)
@@ -390,6 +409,151 @@ function splitProviderLocalId(contentId) {
   };
 }
 
+function parseAnimeEpisodesLink(rawLink, fallbackAnimeId) {
+  const raw = normalizeText(rawLink || "");
+  if (!raw) {
+    const fallback = normalizeText(fallbackAnimeId || "");
+    return fallback ? { animeId: fallback, start: 1, end: 0 } : null;
+  }
+
+  if (raw.includes("|")) {
+    const [idPart, startPart, endPart] = raw.split("|");
+    const animeId = normalizeText(idPart || "");
+    if (!animeId) return null;
+    const start = Number.parseInt(String(startPart || ""), 10);
+    const end = Number.parseInt(String(endPart || ""), 10);
+    return {
+      animeId,
+      start: Number.isFinite(start) && start > 0 ? start : 1,
+      end: Number.isFinite(end) && end > 0 ? end : 0,
+    };
+  }
+
+  const numeric = Number.parseInt(raw, 10);
+  if (Number.isFinite(numeric) && numeric > 0) {
+    return { animeId: String(numeric), start: 1, end: 0 };
+  }
+  return null;
+}
+
+function normalizeEpisodeNumber(value, fallbackNumber) {
+  const text = normalizeText(value || "");
+  if (!text) return fallbackNumber;
+  const parsed = Number.parseFloat(text.replace(",", "."));
+  if (!Number.isFinite(parsed)) return fallbackNumber;
+  return parsed;
+}
+
+function mapAnimeEpisode(episode, index, seasonNumber) {
+  const episodeId = normalizeText(episode?.id || "");
+  if (!episodeId) return null;
+  const episodeNumber = normalizeEpisodeNumber(episode?.number, index + 1);
+  const directLink = normalizeText(episode?.link || "");
+  return {
+    title: `Episode ${String(episode?.number || index + 1)}`,
+    episodeNumber,
+    seasonNumber,
+    link: /^https?:\/\//i.test(directLink) ? directLink : episodeId,
+  };
+}
+
+function buildAnimeEpisodeTasks(details) {
+  const tasks = [];
+  const seen = new Set();
+  for (const detail of details) {
+    if (detail?.provider !== "animeunity") continue;
+    const playbackLinks = Array.isArray(detail?.playback?.linkList) ? detail.playback.linkList : [];
+    const localId = splitProviderLocalId(detail.id).localId;
+    for (const link of playbackLinks) {
+      const seasonKey = normalizeText(link?.seasonKey || link?.episodesLink || link?.title || "");
+      if (!seasonKey) continue;
+      const parsed = parseAnimeEpisodesLink(link?.episodesLink, localId);
+      if (!parsed?.animeId) continue;
+      const taskKey = `${detail.id}::${seasonKey}`;
+      if (seen.has(taskKey)) continue;
+      seen.add(taskKey);
+      tasks.push({
+        key: taskKey,
+        animeId: parsed.animeId,
+        start: parsed.start,
+        end: parsed.end,
+        seasonNumber: Number(link?.seasonNumber || 0) || undefined,
+      });
+    }
+  }
+  return tasks;
+}
+
+async function fetchAnimeEpisodesForTask(task, baseUrl) {
+  const safeBaseUrl = String(baseUrl || "").replace(/\/+$/, "") || ANIMEUNITY_DEFAULT_BASE_URL;
+  const startRange = task.start <= 1 ? 0 : task.start;
+  const endRange = task.end > 0 ? task.end : Math.max(startRange + 119, 120);
+  const response = await animeEpisodesHttp.requestJson({
+    url: `${safeBaseUrl}/info_api/${task.animeId}/1?start_range=${startRange}&end_range=${endRange}`,
+    headers: {
+      accept: "application/json",
+      referer: `${safeBaseUrl}/`,
+    },
+  });
+  if (response.statusCode < 200 || response.statusCode >= 400) return [];
+  const list = Array.isArray(response.data?.episodes) ? response.data.episodes : [];
+  const episodes = list
+    .map((entry, index) => mapAnimeEpisode(entry, index, task.seasonNumber))
+    .filter(Boolean);
+  if (task.end > 0) {
+    return episodes
+      .filter((episode) => {
+        const number = Number(episode?.episodeNumber);
+        if (!Number.isFinite(number)) return true;
+        return number >= task.start && number <= task.end + 0.001;
+      })
+      .sort((a, b) => Number(a.episodeNumber || 0) - Number(b.episodeNumber || 0));
+  }
+  return episodes.sort((a, b) => Number(a.episodeNumber || 0) - Number(b.episodeNumber || 0));
+}
+
+async function buildAnimeEpisodesMap(details, animeBaseUrl) {
+  const tasks = buildAnimeEpisodeTasks(details);
+  const out = new Map();
+  if (!tasks.length) {
+    return {
+      map: out,
+      totalTasks: 0,
+      completed: 0,
+      withEpisodes: 0,
+      failures: 0,
+    };
+  }
+
+  let completed = 0;
+  let withEpisodes = 0;
+  let failures = 0;
+  await asyncMapLimit(tasks, config.animeEpisodesConcurrency, async (task) => {
+    try {
+      const episodes = await fetchAnimeEpisodesForTask(task, animeBaseUrl);
+      out.set(task.key, episodes);
+      if (episodes.length > 0) withEpisodes += 1;
+    } catch {
+      out.set(task.key, []);
+      failures += 1;
+    }
+    completed += 1;
+    if (completed % 250 === 0 || completed === tasks.length) {
+      console.log(
+        `[app-catalog] anime episodes ${completed}/${tasks.length} (withEpisodes=${withEpisodes}, failures=${failures})`
+      );
+    }
+  });
+
+  return {
+    map: out,
+    totalTasks: tasks.length,
+    completed,
+    withEpisodes,
+    failures,
+  };
+}
+
 function buildAnimeUnityPlayback(item, detailId) {
   const { localId } = splitProviderLocalId(detailId);
   const episodesCount = Number(item?.episodesCount) || 0;
@@ -589,7 +753,7 @@ function buildSummaryAndDetail(item, provider) {
   return { summary, detail };
 }
 
-function buildEpisodesSeasonItems(detail) {
+function buildEpisodesSeasonItems(detail, animeEpisodesMap = null) {
   const out = [];
   const playbackLinks = Array.isArray(detail?.playback?.linkList) ? detail.playback.linkList : [];
   const localId = splitProviderLocalId(detail.id).localId;
@@ -610,6 +774,12 @@ function buildEpisodesSeasonItems(detail) {
         seasonNumber,
         link: normalizeText(episode?.link || ""),
       }));
+    } else if (detail.provider === "animeunity" && animeEpisodesMap) {
+      const key = `${detail.id}::${seasonKey}`;
+      const staticEpisodes = animeEpisodesMap.get(key);
+      if (Array.isArray(staticEpisodes) && staticEpisodes.length > 0) {
+        episodes = staticEpisodes;
+      }
     } else if (
       detail.provider === "streamingunity" &&
       loadedNumber &&
@@ -804,8 +974,28 @@ async function run() {
     detailChunks.push({ file: relFile, count: chunkItems.length, chunk: chunkIndex + 1 });
   }
 
+  const animeProviderPayload = providerPayloads.find(
+    (payload) => normalizeText(payload?.index?.provider || "") === "animeunity"
+  );
+  const animeBaseUrl =
+    normalizeText(animeProviderPayload?.index?.source?.baseUrl || "") || ANIMEUNITY_DEFAULT_BASE_URL;
+  const animeEpisodesMeta = config.animeEpisodesEnabled
+    ? await buildAnimeEpisodesMap(detailsOrdered, animeBaseUrl)
+    : {
+        map: new Map(),
+        totalTasks: 0,
+        completed: 0,
+        withEpisodes: 0,
+        failures: 0,
+      };
+  if (config.animeEpisodesEnabled) {
+    console.log(
+      `[app-catalog] anime episodes map built (tasks=${animeEpisodesMeta.totalTasks}, withEpisodes=${animeEpisodesMeta.withEpisodes}, failures=${animeEpisodesMeta.failures}, baseUrl=${animeBaseUrl})`
+    );
+  }
+
   const episodesSeasonItems = detailsOrdered
-    .flatMap((detail) => buildEpisodesSeasonItems(detail))
+    .flatMap((detail) => buildEpisodesSeasonItems(detail, animeEpisodesMeta.map))
     .filter(Boolean);
   const episodesShardResult = await writeShardedJson({
     outDir: config.outDir,
