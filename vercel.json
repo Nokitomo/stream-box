@@ -12,7 +12,8 @@
   ],
   "functions": {
     "api/**/*.mjs": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "regions": ["fra1"]
     }
   }
 }
