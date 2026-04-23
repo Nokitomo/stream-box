@@ -4,8 +4,8 @@ let client: SupabaseClient | null = null;
 
 export function getSupabaseClient(): SupabaseClient | null {
   if (client) return client;
-  const url = import.meta.env.VITE_SUPABASE_URL;
-  const anon = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  const url = String(import.meta.env.VITE_SUPABASE_URL || "").trim();
+  const anon = String(import.meta.env.VITE_SUPABASE_ANON_KEY || "").trim();
   if (!url || !anon) return null;
   client = createClient(url, anon, {
     auth: {

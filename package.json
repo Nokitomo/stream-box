@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/copy-static-data.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "dev:vercel": "vercel dev --listen 3000",
